@@ -93,6 +93,46 @@ FRICCION = [
       ("2026-07", "Gendarmería cierra un paso ilegal en una finca privada de Aguas Blancas.", "https://www.todojujuy.com/politica/gendarmeria-nacional-cerro-el-paso-ilegal-finca-karina-n277352"),
       ("2026-09", "Enfrentamiento entre Prefectura y bagayeros.", "https://www.perfil.com/noticias/policia/detonaciones-corridas-y-caos-violento-choque-entre-prefectura-y-contrabandistas-en-la-frontera-con-bolivia.phtml")],
      [("MercoPress: el Plan Güemes", "https://en.mercopress.com/2025/01/28/argentina-to-build-fence-along-bolivian-border")]),
+
+    ("dock_sud", "Puerto de Dock Sud", "Infraestructura", "06", None, -58.345, -34.648, 2, "Activa; obra frenada por la Justicia",
+     ["gob_pba", "milei"], [],
+     "Principal puerto bonaerense, administrado por un consorcio de la provincia y operado por Exolgan, que mueve más del 40% de los contenedores del país. La ampliación del muelle por iniciativa privada enfrenta a la provincia con municipios vecinos y con la Nación, que reclama la deuda por el dragado de los canales de acceso.",
+     [("2026", "La Nación reclama judicialmente a la provincia la deuda por el dragado de los canales del Río de la Plata.", "https://www.letrap.com.ar/economia/javier-milei-le-apunta-otro-puerto-provincial-ahora-axel-kicillof-n5421859/amp"),
+      ("2026", "El municipio de Lanús demanda a Exolgan y a las empresas del puerto por el daño del tránsito pesado.", "https://www.letrap.com.ar/economia/puertos-bonaerenses-festival-denuncias-y-reclamos-deudas-dock-sud-n5422064"),
+      ("2026", "La Justicia bonaerense ordena paralizar la obra de ensanche del canal y del muelle.", "https://www.letrap.com.ar/economia/puertos-bonaerenses-la-justicia-freno-una-obra-dock-sud-y-habilito-el-reclamo-lanus-las-empresas-n5422305")],
+     [("Letra P: la Justicia frenó una obra en Dock Sud", "https://www.letrap.com.ar/economia/puertos-bonaerenses-la-justicia-freno-una-obra-dock-sud-y-habilito-el-reclamo-lanus-las-empresas-n5422305"),
+      ("Letra P: Exolgan concentra más del 40% de los contenedores", "https://www.letrap.com.ar/economia/puertos-monica-litza-mantiene-frenada-la-definicion-el-dragado-dock-sud-n5421098/amp")]),
+
+    ("andalgala_mara", "Andalgalá y el proyecto MARA", "Socioambiental", "10", "andalgala", -66.3154, -27.583, 3, "Activa",
+     ["gob_catamarca"], ["Canadá y Australia"],
+     "Conflicto entre asambleas ambientalistas y vecinos de Choya, por un lado, y el proyecto de cobre Minera Agua Rica-Alumbrera (MARA, de capital canadiense) y el gobierno provincial, por el otro. En 2026 hubo cortes en el camino al proyecto e incidentes con heridos entre manifestantes y la policía; el intendente pidió frenar tareas y más control ambiental.",
+     [("2026", "Incidentes con heridos entre la policía y ambientalistas en el camino al proyecto.", "https://www.elancasti.com.ar/edicion-impresa/violentos-incidentes-la-policia-y-ambientalistas-un-camino-andalgala-n496853"),
+      ("2026", "El intendente de Andalgalá exige por carta documento el cese de tareas en Agua Rica.", "https://www.elancasti.com.ar/edicion-impresa/conflicto-minero-intendente-andalgala-exigio-al-cese-tareas-agua-rica-n494945"),
+      ("2026", "La Justicia rechaza desalojar el acampe de vecinos de Choya.", "https://www.elancasti.com.ar/edicion-impresa/justicia-no-hizo-lugar-pedido-desalojo-vecinos-choya-n496584")],
+     [("El Ancasti: Eduardo Córdoba y las garantías ambientales", "https://www.elancasti.com.ar/politica-y-economia/eduardo-cordoba-hoy-la-provincia-carece-garantias-ambientales-n495920"),
+      ("Pan American Silver adquirió el accionista principal de MARA", "https://nuevaregion.com/la-megamineria-ha-demostrado-el-fracaso-en-toda-la-argentina")]),
+
+    ("aceiteros_gr", "Paros aceiteros en el Gran Rosario", "Laboral", "82", "san-lorenzo", -60.7369, -32.7448, 2, "Acuerdo salarial vigente; conflicto latente",
+     ["soea_sl", "ciara", "cgt_arg"], ["China", "EE.UU."],
+     "Los gremios aceiteros pueden detener las terminales del cordón San Lorenzo-Timbúes, que despachan más de la mitad de las exportaciones agroindustriales del país (entre ellas las de Cofco, Cargill y Bunge). En mayo de 2026 lanzaron un paro por tiempo indeterminado y la Nación dictó la conciliación obligatoria.",
+     [("2026-05", "Paro nacional aceitero y conciliación obligatoria.", "https://www.lacapital.com.ar/economia/paro-y-conciliacion-obligatoria-aceiteros-san-lorenzo-afirman-que-la-lucha-continua-n10261593.html/amp"),
+      ("2026-06", "Acuerdo de aumento del 29,5% para todo el año.", "https://www.infocampo.com.ar/tag/soea/")],
+     [("BCR: récord de embarques de 2025 por puerto", "https://www.bcr.com.ar/es/print/pdf/node/114028"),
+      ("La Capital: aceiteros frenan los puertos", "https://www.lacapital.com.ar/aceiteros-lanzan-un-paro-y-se-frenan-los-puertos-del-gran-rosario-n10261479.html/amp")]),
+
+    ("vaca_muerta_trabajo", "Salarios y tarifas en Vaca Muerta", "Laboral", "58", "anelo", -68.788, -38.354, 1, "Latente",
+     ["petroleros_nqn", "ypf", "gob_neuquen"], ["EE.UU."],
+     "El sindicato petrolero negocia con las operadoras y las empresas de servicios en cada paritaria bajo amenaza de paro. En septiembre de 2026 rechazó el pedido de Halliburton de bajar 23% las tarifas a sus proveedores locales.",
+     [("2026-01", "Aumento salarial y bono; alerta por la reforma laboral.", "https://www.noticiasnqn.com.ar/noticias/2026/01/23/327062-rucci-anuncio-aumentos-salariales-un-bono-de-500000-y-alerto-por-una-posible-reforma-laboral"),
+      ("2026-09", "Rechazo al recorte de tarifas de Halliburton a las pymes.", "https://www.noticiasnqn.com.ar/amp/noticias/2026/09/08/351608-rucci-rechazo-el-ajuste-de-halliburton-a-las-pymes-de-vaca-muerta")],
+     [("LM Neuquén: Rucci y las paritarias", "https://mase.lmneuquen.com/marcelo-rucci-a9825/2")]),
+
+    ("acindar_vc", "Acindar en Villa Constitución", "Industrial", "82", "villa-constitucion", -60.3297, -33.2273, 1, "Latente",
+     ["uom_vc"], ["Unión Europea"],
+     "La planta principal de Acindar (ArcelorMittal, con sede en Luxemburgo) produce la mitad que en 2024; la empresa alterna paradas y suspensiones y el gremio local negocia salarios con amenazas de paro.",
+     [("2026-05", "La UOM cierra un aumento y levanta el paro.", "https://www.iprofesional.com/economia/454009-aumento-salarial-en-acindar-y-suspension-del-paro-a-cuanto-se-fue-el-sueldo-promedio"),
+      ("2026-06", "Acindar frena la producción por falta de ventas.", "https://www.lacapital.com.ar/economia/acindar-decidio-frenar-la-produccion-villa-constitucion-falta-ventas-n10263980.html")],
+     [("La Capital: Acindar frena la producción", "https://www.lacapital.com.ar/economia/acindar-decidio-frenar-la-produccion-villa-constitucion-falta-ventas-n10263980.html")]),
 ]
 
 # (id, nombre, provincia, ciudad, lon, lat, estado, texto, fuentes)

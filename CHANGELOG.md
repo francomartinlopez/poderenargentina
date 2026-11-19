@@ -1,5 +1,14 @@
 # Cambios
 
+## 2026-11-19 (g) · Pendientes y mejoras: intendentes, censo, departamentos, actores locales y más fricción
+
+- Intendentes: 39 confirmados con fuente de 2026 o reciente (92 en total con «V»); nuevos Paso de los Libres (Miguel Arias) y Perito Moreno (Matías Trepo); se suman Calingasta, Susques (comisión municipal; municipio desde junio de 2026) y Aguas Blancas (intervenida, a confirmar). Quedan cuatro «a confirmar» (Villa Mercedes, Orán, Salvador Mazza, Aguas Blancas) y dos sin dato (Timbúes, San Antonio de los Cobres).
+- Censo 2022 de localidades: Susques (1.374) y Calingasta (2.722) dejan la proyección. San Antonio de los Cobres, Antofagasta de la Sierra, San José de Jáchal y Salvador Mazza siguen proyectadas: el INDEC no publica la localidad o no se encontró el dato.
+- Fichas de departamento (`fuente/departamentos.py`): 18 partidos y departamentos relevantes (La Matanza, Lomas de Zamora, Quilmes, Lanús, Avellaneda, Almirante Brown, Florencio Varela, Ezeiza, Merlo, Moreno, San Martín, Tres de Febrero, Tigre, Pilar, Rosario, San Lorenzo, Confluencia y Añelo), con cabecera, quién gobierna (incluidos los interinatos de Quilmes, Almirante Brown y Avellaneda), actividad, actores y fricción, con fuentes.
+- Actores locales: Sindicato de Petroleros Privados (Neuquén), aceiteros de San Lorenzo (SOEA), UOM Villa Constitución, SMATA Córdoba, Gas y Petróleo del Neuquén y JEMSE (Jujuy). 71 actores y 82 relaciones.
+- Fricción: cinco puntos nuevos con cronología y fuentes: puerto de Dock Sud, Andalgalá y el proyecto MARA, paros aceiteros en el Gran Rosario, salarios y tarifas en Vaca Muerta y Acindar en Villa Constitución (14 en total). No se sumaron zonas liberadas: ninguna nueva tiene fuente oficial.
+- Validador: ahora frena de verdad ante fricción sin fuente (antes avisaba después de cerrar) y revisa las fichas de departamento.
+
 ## 2026-11-19 (f) · Paso 5: actores locales, fricción y zonas liberadas
 
 - Cierre del paso 4: 93 ciudades con intendente (51 confirmados con fuente de 2026, 42 «a confirmar»). Nuevos confirmados: Córdoba, Santiago del Estero (Benavente), Puerto Madryn, Bariloche, Villa María, Antofagasta de la Sierra, La Banda, Libertador General San Martín, La Quiaca y Puerto Piray; Salvador Mazza, a confirmar. Siguen sin dato Timbúes, Susques, San Antonio de los Cobres, Calingasta y Aguas Blancas (intervenido).

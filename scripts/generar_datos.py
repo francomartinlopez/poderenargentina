@@ -148,11 +148,22 @@ def main():
     for (i, n, prov, cs, lon, lat, est, x, fu) in friccion.ZONAS:
         assert prov in ign and (cs is None or cs in slugs) and fu, f"Zona {i}: datos o fuente faltantes"
         zonas.append(dict(id=i, n=n, prov=prov, cs=cs, lon=lon, lat=lat, est=est, x=x, fu=[dict(t=t, u=u) for t, u in fu]))
+    import departamentos
+    frids = {f["id"] for f in fr}
+    deps = {}
+    for did, d in departamentos.DEPARTAMENTOS.items():
+        assert did in poblacion.DEPARTAMENTO, f"Departamento {did}: no existe"
+        assert all(a in ids for a in d["act_ids"]), f"Departamento {did}: actor desconocido"
+        assert all(f in frids for f in d["fr"]), f"Departamento {did}: punto de fricción desconocido"
+        assert d["gob"] is None or d["gob"][3].startswith("http"), f"Departamento {did}: gobierno sin fuente"
+        g = d["gob"]
+        deps[did] = dict(cab=d["cab"], act=d["act"], gob=g and dict(n=g[0], par=g[1], nota=g[2], u=g[3]),
+                         ai=d["act_ids"], fr=d["fr"], fu=[dict(t=t, u=u) for t, u in d["fu"]])
     out = dict(corte=CORTE, proxima=PROXIMA, meta=meta, pais=pais, provincias=provincias, ciudades=ciudades,
-               deppob=poblacion.DEPARTAMENTO, actores=actores, relaciones=relaciones, friccion=fr, zonas=zonas)
+               deppob=poblacion.DEPARTAMENTO, deps=deps, actores=actores, relaciones=relaciones, friccion=fr, zonas=zonas)
     with open(os.path.join(RAIZ, "data", "territorio.json"), "w") as f:
         json.dump(out, f, ensure_ascii=False, separators=(",", ":"))
-    print(f"data/territorio.json: {len(provincias)} provincias, {sum(ndep.values())} departamentos, {len(ciudades)} ciudades, {len(actores)} actores y {len(relaciones)} relaciones, {len(fr)} puntos de fricción y {len(zonas)} zona(s) liberada(s). Corte {CORTE}.")
+    print(f"data/territorio.json: {len(provincias)} provincias, {sum(ndep.values())} departamentos, {len(ciudades)} ciudades, {len(actores)} actores y {len(relaciones)} relaciones, {len(fr)} puntos de fricción, {len(zonas)} zona(s) liberada(s) y {len(deps)} fichas de departamento. Corte {CORTE}.")
 
 
 if __name__ == "__main__":

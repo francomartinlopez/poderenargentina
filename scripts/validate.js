@@ -57,11 +57,16 @@ if (T.proxima < hoy) err.push(`El corte venció: la próxima revisión era el ${
 
 const noFuente = av.filter(a => a.endsWith("sin fuente")).length, noPob = av.length - noFuente;
 if (av.length) console.log(`Avisos: ${noFuente} ciudades sin fuente y ${noPob} ciudades grandes sin población (pendientes del paso 2 y 4).`);
-if (err.length) { console.error("ERRORES:\n- " + err.join("\n- ")); process.exit(1); }
 for (const f of [...(T.friccion || []), ...(T.zonas || [])]) {
   if (!f.fu || !f.fu.length) err.push(`${f.n}: sin fuente.`);
   for (const h of f.hit || []) if (!h.u) err.push(`${f.n}: hito sin fuente (${h.f}).`);
   for (const a of f.act || []) if (!AID.has(a) && !EXT[a]) err.push(`${f.n}: actor desconocido ${a}.`);
 }
 if (!(T.friccion || []).length) err.push("Faltan los puntos de fricción.");
-console.log(`OK: ${T.provincias.length} jurisdicciones, ${Object.keys(deps).length} departamentos, ${T.ciudades.length} ciudades, ${A.length} actores, ${(T.relaciones || []).length} relaciones, ${(T.friccion || []).length} puntos de fricción, ${(T.zonas || []).length} zona(s) liberada(s). Corte ${T.corte}, próxima revisión ${T.proxima}.`);
+for (const [id, d] of Object.entries(T.deps || {})) {
+  if (d.gob && !d.gob.u) err.push(`Departamento ${id}: gobierno sin fuente.`);
+  if (!d.gob && !d.fu.length) err.push(`Departamento ${id}: sin fuente.`);
+  for (const a of d.ai) if (!AID.has(a) && !EXT[a]) err.push(`Departamento ${id}: actor desconocido ${a}.`);
+}
+if (err.length) { console.error("ERRORES:\n- " + err.join("\n- ")); process.exit(1); }
+console.log(`OK: ${T.provincias.length} jurisdicciones, ${Object.keys(deps).length} departamentos, ${T.ciudades.length} ciudades, ${A.length} actores, ${(T.relaciones || []).length} relaciones, ${(T.friccion || []).length} puntos de fricción, ${(T.zonas || []).length} zona(s) liberada(s), ${Object.keys(T.deps || {}).length} fichas de departamento. Corte ${T.corte}, próxima revisión ${T.proxima}.`);

@@ -19,7 +19,7 @@ Entra una ciudad si cumple al menos un criterio, con el motivo escrito y una fue
 Motivos en `fuente/ciudades.py`: cap, pob, emp, pue, ene, min, fro, def. Población en `fuente/poblacion_ciudades.py`: aglomerado (Censo 2022 y 2010) y localidad con su año; si el aglomerado une varias localidades, la cifra es la del conjunto y se dice. Coordenadas y departamento: `python3 scripts/ubicar_ciudad.py "<nombre>" "<provincia>"`.
 
 ## Departamentos
-Panel corto (población, cabecera, actividad, intendente o comisionado, actores con sede); ficha propia solo para los relevantes, como los partidos del conurbano, Rosario o Vaca Muerta (decisión de Franco, 19/11/2026).
+Panel corto (población, cabecera, actividad, intendente o comisionado, actores con sede); ficha propia solo para los relevantes, como los partidos del conurbano, Rosario o Vaca Muerta (decisión de Franco, 19/11/2026). Las fichas van en `fuente/departamentos.py` (cabecera, actividad, gobierno con fuente o None si el departamento reúne varios municipios, actores y fricción); en cada corte se revisan los intendentes y los interinatos.
 
 ## Influencias mundiales (paso 2)
 Potencias de `fuente/influencias.py` (lista aprobada por Franco el 19/11/2026: EE.UU., China, Unión Europea, Reino Unido, Brasil, Rusia, Israel, Golfo, Canadá y Australia, Japón y Corea, y FMI, BM y BID) puntuadas de 0 a 3 en cinco canales (comercio, inversión, deuda, presencia física o de seguridad, influencia política y cultural), con fuente, por país, provincia, departamento y ciudad. En las ciudades de empresa, la influencia sale sobre todo de los mercados y socios de esa empresa. El nivel país suma los vínculos del Estado nacional (FMI, Tesoro de EE.UU., swap chino).
