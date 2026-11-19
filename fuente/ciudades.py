@@ -88,7 +88,7 @@ CIUDADES = [
     ('Antofagasta de la Sierra', '10', '10028', -67.4066, -26.0593, 'min', 'Litio del salar del Hombre Muerto.', "https://es.wikipedia.org/wiki/Salar_del_Hombre_Muerto", None),
     ('Fiambalá', '10', '10105', -67.6191, -27.6895, 'min', 'Litio (Tres Quebradas).', "https://es.wikipedia.org/wiki/Fiambalá", None),
     ('Andalgalá', '10', '10021', -66.3154, -27.583, 'min', 'Cobre (MARA, ex Alumbrera y Agua Rica).', "https://es.wikipedia.org/wiki/Minera_Alumbrera", None),
-    ('San José de Jáchal', '70', '70056', -68.7465, -30.2417, 'min', 'Oro (Veladero).', "https://es.wikipedia.org/wiki/Veladero_(mina)", None),
+    ('San José de Jáchal', '70', '70056', -68.7465, -30.2417, 'min', 'Cabecera del norte sanjuanino, sobre la cuenca del río Jáchal, aguas abajo de la mina de oro Veladero (departamento Iglesia).', "https://es.wikipedia.org/wiki/Veladero_(mina)", None),
     ('Calingasta', '70', '70021', -69.4207, -31.3345, 'min', 'Cobre (Los Azules, El Pachón).', "https://es.wikipedia.org/wiki/Calingasta", None),
     ('Perito Moreno', '78', '78035', -70.9299, -46.5938, 'min', 'Oro y plata del macizo del Deseado.', "https://es.wikipedia.org/wiki/Perito_Moreno_(Santa_Cruz)", None),
     ('Malargüe', '50', '50077', -69.5847, -35.4684, 'def min', 'Antena de espacio profundo de la Agencia Espacial Europea.', "https://es.wikipedia.org/wiki/Malargüe", None),

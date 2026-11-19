@@ -2,6 +2,8 @@
 # aglo / aglo_pob: aglomerado urbano del INDEC al que pertenece la ciudad y su población (Censo 2022; aglo_pob10 = Censo 2010).
 #   Varias ciudades comparten aglomerado (por ejemplo Neuquén-Plottier-Cipolletti o Reconquista-Avellaneda): el número es el del conjunto.
 # pob / anio: población de la localidad sola, cuando se conoce, con el año del censo. Fuente: INDEC vía Wikipedia o citypopulation.de.
+# proy / proy_anio: cuando el último dato de la localidad es de 2001 o 2010, proyección propia a 2026 con el crecimiento
+#   del departamento entre censos (INDEC); se muestra como proyección, nunca como dato censal.
 # El criterio «ciudad grande» (más de 100.000 habitantes) se mide sobre el aglomerado.
 
 CIUDADES = {
@@ -67,7 +69,7 @@ CIUDADES = {
     'Pergamino': {'aglo': 'Pergamino', 'aglo_pob': 102182, 'aglo_pob10': 91399, 'fuente_aglo': 'https://es.wikipedia.org/wiki/Anexo:%C3%81reas_urbanas_de_Argentina_con_m%C3%A1s_de_30_000_habitantes'},
     'General Pacheco': {'aglo': 'Aglomerado Gran Buenos Aires', 'aglo_pob': 16223380, 'aglo_pob10': 13594848, 'fuente_aglo': 'https://es.wikipedia.org/wiki/Anexo:%C3%81reas_urbanas_de_Argentina_con_m%C3%A1s_de_30_000_habitantes'},
     'Libertador General San Martín': {'aglo': 'Libertador General San Martín', 'aglo_pob': 47209, 'aglo_pob10': 46642, 'fuente_aglo': 'https://es.wikipedia.org/wiki/Anexo:%C3%81reas_urbanas_de_Argentina_con_m%C3%A1s_de_30_000_habitantes'},
-    'Puerto Piray': {'pob': 9985, 'anio': 2010, 'fuente_pob': 'https://es.wikipedia.org/wiki/Puerto_Piray'},
+    'Puerto Piray': {'pob': 8541, 'anio': 2022, 'fuente_pob': 'https://www.citypopulation.de/en/argentina/misiones/montecarlo/54084050__puerto_piray'},
     'Marcos Juárez': {'pob': 28485, 'anio': 2022, 'fuente_pob': 'https://es.wikipedia.org/wiki/Marcos_Juárez'},
     'San Lorenzo': {'aglo': 'Gran Rosario', 'aglo_pob': 1429292, 'aglo_pob10': 1236089, 'pob': 50719, 'anio': 2022, 'fuente_pob': 'https://es.wikipedia.org/wiki/San_Lorenzo_(Santa_Fe)', 'fuente_aglo': 'https://es.wikipedia.org/wiki/Anexo:%C3%81reas_urbanas_de_Argentina_con_m%C3%A1s_de_30_000_habitantes'},
     'Puerto General San Martín': {'aglo': 'Gran Rosario', 'aglo_pob': 1429292, 'aglo_pob10': 1236089, 'pob': 17965, 'anio': 2022, 'fuente_pob': 'https://es.wikipedia.org/wiki/Puerto_General_San_Martín', 'fuente_aglo': 'https://es.wikipedia.org/wiki/Anexo:%C3%81reas_urbanas_de_Argentina_con_m%C3%A1s_de_30_000_habitantes'},
@@ -83,18 +85,18 @@ CIUDADES = {
     'Embalse': {'pob': 9660, 'anio': 2022, 'fuente_pob': 'https://es.wikipedia.org/wiki/Embalse_(Córdoba)'},
     'Ituzaingó': {'pob': 27417, 'anio': 2022, 'fuente_pob': 'https://es.wikipedia.org/wiki/Ituzaingó_(Corrientes)'},
     'Villa El Chocón': {'pob': 1572, 'anio': 2022, 'fuente_pob': 'https://es.wikipedia.org/wiki/Villa_El_Chocón'},
-    'Susques': {'pob': 1140, 'anio': 2001, 'fuente_pob': 'https://es.wikipedia.org/wiki/Susques'},
-    'San Antonio de los Cobres': {'pob': 5482, 'anio': 2001, 'fuente_pob': 'https://es.wikipedia.org/wiki/San_Antonio_de_los_Cobres'},
-    'Antofagasta de la Sierra': {'pob': 730, 'anio': 2010, 'fuente_pob': 'https://es.wikipedia.org/wiki/Antofagasta_de_la_Sierra'},
-    'Fiambalá': {'pob': 4693, 'anio': 2010, 'fuente_pob': 'https://es.wikipedia.org/wiki/Fiambalá'},
+    'Susques': {'pob': 1611, 'anio': 2010, 'fuente_pob': 'https://www.citypopulation.de/en/argentina/jujuy/susques/38084100__susques', 'proy': 1800, 'proy_anio': 2026, 'fuente_proy': 'https://www.citypopulation.de/en/argentina/jujuy/38084__susques/', 'proy_nota': 'Proyección propia: dato del Censo 2010 llevado a 2026 con el crecimiento del departamento entre censos (INDEC: 3.791 en 2010. 4.098 en 2022; 0.7% anual desde 2022).'},
+    'San Antonio de los Cobres': {'pob': 5482, 'anio': 2001, 'fuente_pob': 'https://es.wikipedia.org/wiki/San_Antonio_de_los_Cobres', 'proy': 7480, 'proy_anio': 2026, 'fuente_proy': 'https://citypopulation.de/en/argentina/admin/salta/66105__los_andes/', 'proy_nota': 'Proyección propia: dato del Censo 2001 llevado a 2026 con el crecimiento del departamento entre censos (INDEC: 5.630 en 2001. 7.182 en 2022; 1.5% anual desde 2022).'},
+    'Antofagasta de la Sierra': {'pob': 730, 'anio': 2010, 'fuente_pob': 'https://es.wikipedia.org/wiki/Antofagasta_de_la_Sierra', 'proy': 1170, 'proy_anio': 2026, 'fuente_proy': 'https://citypopulation.de/en/argentina/admin/catamarca/10028__antofagasta_de_la_sierra', 'proy_nota': 'Proyección propia: dato del Censo 2010 llevado a 2026 con el crecimiento del departamento entre censos (INDEC: 1.436 en 2010. 2.022 en 2022; 3.0% anual desde 2022).'},
+    'Fiambalá': {'pob': 5510, 'anio': 2022, 'fuente_pob': 'https://www.citypopulation.de/en/argentina/catamarca/10105__tinogasta'},
     'Andalgalá': {'pob': 19678, 'anio': 2022, 'fuente_pob': 'https://es.wikipedia.org/wiki/Andalgalá'},
-    'San José de Jáchal': {'pob': 10940, 'anio': 2010, 'fuente_pob': 'https://www.citypopulation.de/en/argentina/sanjuan/j%C3%A1chal/70056080__san_jos%C3%A9_de_j%C3%A1chal/'},
-    'Calingasta': {'pob': 2039, 'anio': 2001, 'fuente_pob': 'https://es.wikipedia.org/wiki/Calingasta'},
+    'San José de Jáchal': {'pob': 10940, 'anio': 2010, 'fuente_pob': 'https://www.citypopulation.de/en/argentina/sanjuan/j%C3%A1chal/70056080__san_jos%C3%A9_de_j%C3%A1chal/', 'proy': 13510, 'proy_anio': 2026, 'fuente_proy': 'https://citypopulation.de/en/argentina/admin/san_juan/70056__j%C3%A1chal/', 'proy_nota': 'Proyección propia: dato del Censo 2010 llevado a 2026 con el crecimiento del departamento entre censos (INDEC: 21.730 en 2010. 25.297 en 2022; 1.3% anual desde 2022).'},
+    'Calingasta': {'pob': 2198, 'anio': 2010, 'fuente_pob': 'https://citypopulation.de/en/argentina/sanjuan/70021__calingasta', 'proy': 3110, 'proy_anio': 2026, 'fuente_proy': 'https://citypopulation.de/en/argentina/admin/san_juan/70021__calingasta/', 'proy_nota': 'Proyección propia: dato del Censo 2010 llevado a 2026 con el crecimiento del departamento entre censos (INDEC: 8.588 en 2010. 11.034 en 2022; 2.2% anual desde 2022).'},
     'Perito Moreno': {'pob': 7808, 'anio': 2022, 'fuente_pob': 'https://es.wikipedia.org/wiki/Perito_Moreno_(Santa_Cruz)'},
     'Malargüe': {'pob': 27660, 'anio': 2022, 'fuente_pob': 'https://es.wikipedia.org/wiki/Malargüe'},
     'Puerto Iguazú': {'aglo': 'Puerto Iguazú', 'aglo_pob': 53786, 'aglo_pob10': 41062, 'fuente_aglo': 'https://es.wikipedia.org/wiki/Anexo:%C3%81reas_urbanas_de_Argentina_con_m%C3%A1s_de_30_000_habitantes'},
     'Clorinda': {'aglo': 'Clorinda', 'aglo_pob': 56528, 'aglo_pob10': 52837, 'fuente_aglo': 'https://es.wikipedia.org/wiki/Anexo:%C3%81reas_urbanas_de_Argentina_con_m%C3%A1s_de_30_000_habitantes'},
-    'Salvador Mazza': {'pob': 20670, 'anio': 2010, 'fuente_pob': 'https://en.wikipedia.org/wiki/Salvador_Mazza,_Salta'},
+    'Salvador Mazza': {'pob': 20670, 'anio': 2010, 'fuente_pob': 'https://en.wikipedia.org/wiki/Salvador_Mazza,_Salta', 'proy': 24630, 'proy_anio': 2026, 'fuente_proy': 'https://www.citypopulation.de/en/argentina/admin/66__salta/', 'proy_nota': 'Proyección propia: dato del Censo 2010 llevado a 2026 con el crecimiento del departamento entre censos (INDEC: 156.910 en 2010. 178.004 en 2022; 1.1% anual desde 2022).'},
     'Aguas Blancas': {'pob': 3648, 'anio': 2022, 'fuente_pob': 'https://es.wikipedia.org/wiki/Aguas_Blancas_(Argentina)'},
     'La Quiaca': {'pob': 22078, 'anio': 2022, 'fuente_pob': 'https://www.citypopulation.de/en/argentina/jujuy/38112__yavi'},
     'Paso de los Libres': {'aglo': 'Paso de los Libres', 'aglo_pob': 51442, 'aglo_pob10': 43251, 'fuente_aglo': 'https://es.wikipedia.org/wiki/Anexo:%C3%81reas_urbanas_de_Argentina_con_m%C3%A1s_de_30_000_habitantes'},
@@ -104,4 +106,3 @@ CIUDADES = {
     'Punta Alta': {'aglo': 'Punta Alta', 'aglo_pob': 64244, 'aglo_pob10': 58315, 'fuente_aglo': 'https://es.wikipedia.org/wiki/Anexo:%C3%81reas_urbanas_de_Argentina_con_m%C3%A1s_de_30_000_habitantes'},
     'Campana': {'aglo': 'Campana', 'aglo_pob': 104235, 'aglo_pob10': 86860, 'fuente_aglo': 'https://es.wikipedia.org/wiki/Anexo:%C3%81reas_urbanas_de_Argentina_con_m%C3%A1s_de_30_000_habitantes'},
 }
-# Con dato de 2001 todavía: Susques, San Antonio de los Cobres y Calingasta (falta el Censo 2022 de la localidad).

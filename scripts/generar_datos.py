@@ -11,7 +11,7 @@ sys.path.insert(0, os.path.join(RAIZ, "fuente"))
 sys.path.insert(0, os.path.join(RAIZ, "scripts"))
 from provincias import PROVINCIAS  # noqa: E402
 from ciudades import CIUDADES, EXCEPCIONES  # noqa: E402
-import poblacion, poblacion_ciudades, economia, alineamiento, influencias  # noqa: E402
+import poblacion, poblacion_ciudades, economia, alineamiento, influencias, ciudades_fichas  # noqa: E402
 
 # Corte trimestral: subir en cada actualización (CORTE = hoy, PROXIMA = dentro de tres meses).
 CORTE = "2026-11-19"
@@ -50,6 +50,8 @@ def main():
                 c["est"] = True
             if pc.get("fuente_pob"):
                 c["fpob"] = pc["fuente_pob"]
+            if pc.get("proy"):
+                c.update(proy=pc["proy"], proya=pc["proy_anio"], proyn=pc["proy_nota"], fproy=pc["fuente_proy"])
         if pc.get("aglo"):
             c.update(ag=pc["aglo"], agpob=pc["aglo_pob"], agpob10=pc.get("aglo_pob10"), fag=pc.get("fuente_aglo"))
         ciudades.append(c)
@@ -101,6 +103,28 @@ def main():
             emp=[q for q in POT if dominante(inf.get(pid, []))[1] and dominante(inf.get(pid, []))[1].get(q) == max(dominante(inf.get(pid, []))[1].values())],
         ))
     provincias.sort(key=lambda p: p["n"])
+
+    # Fichas de ciudades (paso 4)
+    nombres = {c["n"] for c in ciudades}
+    for k in list(ciudades_fichas.INTENDENTES) + list(ciudades_fichas.MANDA) + [x[0] for x in ciudades_fichas.CONFLICTOS]:
+        assert k in nombres, f"Ficha de ciudad inexistente: {k}"
+    for c in ciudades:
+        it = ciudades_fichas.INTENDENTES.get(c["n"])
+        if it:
+            c["int"] = dict(n=it[0], par=it[1], fam=it[2], ver=it[3], u=it[4], nota=it[5])
+        if ciudades_fichas.MANDA.get(c["n"]):
+            c["manda"] = ciudades_fichas.MANDA[c["n"]]
+        cf = [dict(t=t, x=x, u=u) for n, t, x, u in ciudades_fichas.CONFLICTOS if n == c["n"]]
+        if cf:
+            c["conf"] = cf
+        li = inf.get("c:" + c["s"], [])
+        if li:
+            d, tot = dominante(li)
+            c.update(inf=sorted(li, key=lambda i: (-i["n"], POT.index(i["p"]))), dom=d, tot=tot,
+                     emp=[q for q in POT if tot.get(q) == max(tot.values())])
+    for k in inf:
+        if k.startswith("c:"):
+            assert any("c:" + c["s"] == k for c in ciudades), f"Influencia para una ciudad inexistente: {k}"
 
     pais = dict(pob=sum(poblacion.PROVINCIA.values()), inf=sorted(inf.get("AR", []), key=lambda i: (-i["n"], POT.index(i["p"]))))
     meta = dict(potencias=POT, canales=influencias.CANALES, alineamiento=alineamiento.ALINEAMIENTO,

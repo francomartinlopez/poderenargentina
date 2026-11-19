@@ -40,5 +40,8 @@ En escritorio, el panel lateral mide lo mismo que el mapa y lleva lo principal; 
 ## Actores (paso 3)
 `fuente/actores.py` (actores, fichas y relaciones) y `fuente/ejes.py` (ejes con anclas a escala nacional, pesos, categorías, alcance); el puntaje lo calcula `scripts/puntaje.py` con la fórmula del mapa global. Un actor que ya está en el mapa global usa el mismo id. El Estado no figura como bloque formal: figuran quienes ejercen el poder. Cada actor lleva ficha y fuentes; cada relación, una fuente. Las relaciones con actores del mapa global usan sus ids (`EXTERNOS`). Excepciones al criterio de ciudades: `EXCEPCIONES` en `fuente/ciudades.py` (Junín y Goya, decisión de Franco del 19/11/2026).
 
+## Ciudades: fichas (paso 4)
+`fuente/ciudades_fichas.py`: INTENDENTES (a cargo, partido, familia, V = confirmado con fuente del año / W = Wikipedia, a confirmar), MANDA (empresa o enclave dominante) y CONFLICTOS (con fuente). Las influencias de una ciudad van en `fuente/influencias.py` con la clave `c:<slug>`. Poblaciones con último dato de 2001 o 2010: proyección propia a la fecha del corte con el crecimiento del departamento, siempre marcada como proyección. En cada corte se confirman los intendentes «W».
+
 ## Actualización trimestral
 23 de febrero, mayo, agosto y noviembre (una semana después del mapa global). Subir `CORTE` y `PROXIMA` en `scripts/generar_datos.py`, subir el sufijo `?v=` de index.html, registrar en CHANGELOG.md y etiquetar el commit (`corte-AAAA-MM`). En 2027 conviene una revisión extra después de las elecciones de octubre y otra después de las asunciones del 10 de diciembre.

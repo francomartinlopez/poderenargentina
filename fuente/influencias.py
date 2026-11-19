@@ -149,3 +149,27 @@ INFLUENCIAS = [
     ("94", "Reino Unido", "pre", 3, "Las Islas Malvinas, parte de la provincia según la ley argentina, están ocupadas por el Reino Unido, con presencia militar permanente.",
      "https://www.canal26.com/internacionales/2026/01/22/el-reino-unido-desafia-a-argentina-reafirma-la-defensa-de-su-soberania-en-las-islas-malvinas-al-desplegar-cazas-eurofighter/"),
 ]
+
+# --- Ciudades (paso 4): influencias que llegan por las empresas y proyectos de cada ciudad. Clave "c:<slug>".
+INFLUENCIAS += [
+    ("c:zarate", "Japón y Corea", "inv", 3, "Toyota produce en Zárate desde 1997 (Hilux, SW4, Hiace), con la mayor producción y exportación automotriz del país; en 2026 anunció otra planta por 1.341 millones de dólares.", "https://www.noticiasnqn.com.ar/noticias/2026/11/16/361038-toyota-fabricara-la-tacoma-hibrida-en-argentina-producira-50000-unidades"),
+    ("c:general-pacheco", "EE.UU.", "inv", 3, "Planta de Ford en General Pacheco, su principal centro industrial en el país.", "https://es.wikipedia.org/wiki/Ford_Argentina"),
+    ("c:villa-constitucion", "Unión Europea", "inv", 3, "Acindar, la mayor siderúrgica de aceros largos del país, pertenece a ArcelorMittal, con sede en Luxemburgo.", "https://es.wikipedia.org/wiki/Acindar"),
+    ("c:timbues", "China", "inv", 2, "Terminal y planta de COFCO, una de las mayores del Gran Rosario.", "https://www.magyp.gob.ar/sitio/areas/ss_mercados_agropecuarios/infraestructura/_archivos/000010_Puertos/_capacidad_almacenaje.php"),
+    ("c:timbues", "Unión Europea", "inv", 2, "Complejo portuario e industrial de Louis Dreyfus Company, de origen francés y sede en Países Bajos.", "https://bcr.com.ar/es/print/pdf/node/73051"),
+    ("c:puerto-general-san-martin", "EE.UU.", "inv", 2, "Terminales de Cargill (Quebracho), Bunge (Pampa y Dempa) y ADM (El Tránsito).", "https://bcr.com.ar/es/print/pdf/node/73051"),
+    ("c:puerto-general-san-martin", "China", "inv", 2, "Terminal de COFCO (ex Nidera).", "https://bcr.com.ar/es/print/pdf/node/73051"),
+    ("c:malargue", "Unión Europea", "pre", 3, "Estación de espacio profundo DSA 3 de la Agencia Espacial Europea.", "https://es.wikipedia.org/wiki/Malarg%C3%BCe"),
+    ("c:estacion-de-espacio-lejano-quintuco", "China", "pre", 3, "Estación operada por la CLTC, que depende del Ejército Popular de Liberación, en un predio cedido por 50 años.", "https://www.a24.com/politica/el-gobierno-analiza-pedir-una-inspeccion-tecnica-la-base-espacial-china-neuquen-n1308479/amp"),
+    ("c:susques", "China", "inv", 2, "Ganfeng Lithium tiene el 46,7 % de Cauchari-Olaroz.", "https://www.iprofesional.com/negocios/415286-litio-tras-la-fusion-de-rio-tinto-chinos-mueven-las-piezas-y-anticipan-mas-inversiones"),
+    ("c:susques", "Reino Unido", "inv", 2, "Rio Tinto, anglo-australiana, opera Olaroz tras comprar Arcadium Lithium.", "https://mase.lmneuquen.com/mineria/litio-el-rigi-destraba-la-mayor-expansion-rio-tinto-fenix-n1233035"),
+    ("c:fiambala", "China", "inv", 3, "Zijin Mining opera Tres Quebradas y su planta de carbonato de litio, aprobada en el RIGI por 709 millones de dólares.", "https://www.infobae.com/economia/2026/07/29/el-gobierno-aprobo-un-nuevo-proyecto-rigi-que-invertira-usd-709-millones-para-producir-litio-en-catamarca/"),
+    ("c:antofagasta-de-la-sierra", "Reino Unido", "inv", 3, "Rio Tinto, anglo-australiana, opera Fénix y desarrolla Sal de Vida en el salar del Hombre Muerto.", "https://www.iprofesional.com/energia/451115-la-provincia-argentina-que-se-consolida-como-nuevo-polo-del-litio"),
+    ("c:antofagasta-de-la-sierra", "Canadá y Australia", "inv", 2, "La australiana Galan Lithium opera la planta Hombre Muerto Oeste desde abril de 2026.", "https://www.infobae.com/economia/2026/07/29/el-gobierno-aprobo-un-nuevo-proyecto-rigi-que-invertira-usd-709-millones-para-producir-litio-en-catamarca/"),
+    ("c:calingasta", "Canadá y Australia", "inv", 2, "La canadiense McEwen Copper desarrolla Los Azules, aprobado en el RIGI en 2025.", "https://www.mining-technology.com/news/argentina-approves-mcewens-2-7bn-copper-project-rigi/"),
+    ("c:calingasta", "Reino Unido", "inv", 1, "Rio Tinto, por su firma Nuton, tiene el 17,2 % de Los Azules.", "https://skillings.net/mining-news-rio-tinto-explores-increased-stake-in-los-azules-copper-project"),
+    ("c:anelo", "EE.UU.", "inv", 2, "Chevron, socia de YPF en Loma Campana, y otras petroleras estadounidenses en Vaca Muerta.", "https://es.wikipedia.org/wiki/Yacimiento_petrol%C3%ADfero_Vaca_Muerta"),
+    ("c:anelo", "Reino Unido", "inv", 1, "Shell opera áreas en Vaca Muerta.", "https://es.wikipedia.org/wiki/Yacimiento_petrol%C3%ADfero_Vaca_Muerta"),
+    ("c:anelo", "Unión Europea", "inv", 1, "TotalEnergies opera áreas en Vaca Muerta.", "https://es.wikipedia.org/wiki/Yacimiento_petrol%C3%ADfero_Vaca_Muerta"),
+    ("c:embalse", "Canadá y Australia", "inv", 1, "La central nuclear usa un reactor CANDU de diseño canadiense.", "https://es.wikipedia.org/wiki/Central_nuclear_Embalse"),
+]

@@ -1,5 +1,14 @@
 # Cambios
 
+## 2026-11-19 (e) · Paso 4: fichas de ciudades
+
+- Quién gobierna (`fuente/ciudades_fichas.py`): intendente de 89 ciudades. Las capitales y los partidos bonaerenses, confirmados con fuentes de 2026 (incluidos los interinatos de Mar del Plata, San Nicolás y Junín); el resto, tomado de Wikipedia y marcado «a confirmar». Nueve localidades siguen sin dato.
+- Quién manda en las ciudades de empresa (General Deheza, Arroyito, Villa Constitución, Zárate, Fiambalá, Antofagasta de la Sierra y otras).
+- Influencias mundiales propias de 13 ciudades, por las empresas y proyectos con sede en ellas (Toyota en Zárate, Ford en Pacheco, COFCO y Dreyfus en Timbúes, Zijin en Fiambalá, Rio Tinto en el Hombre Muerto, la ESA en Malargüe, la estación china, entre otras), con fuente.
+- Conflictos documentados: Rosario, Fiambalá, Jáchal y Gualeguaychú.
+- Población: las seis localidades con último dato de 2001 o 2010 muestran una proyección propia a 2026 con el crecimiento del departamento (INDEC), marcada como proyección. Puerto Piray y Fiambalá pasan al Censo 2022.
+- Sitio: ficha de ciudad con quién gobierna, influencias y conflictos; columna de intendente en la tabla de Ciudades.
+
 ## 2026-11-19 (d) · Paso 3: actores núcleo nacionales
 
 - 42 actores nacionales (`fuente/actores.py`) medidos en los 21 ejes con la fórmula del mapa global (`fuente/ejes.py`, `scripts/puntaje.py`): conducción del Ejecutivo, Economía, BCRA, ARCA, Banco Nación, SIDE, Fuerzas Armadas, fuerzas federales, Corte, Comodoro Py, Congreso, los cuatro gobiernos provinciales de mayor peso nacional, partidos, Cristina Fernández de Kirchner, grandes grupos, cámaras empresarias, CGT, Camioneros, UTEP, Iglesia, AFA y Los Monos. Como en el mapa global, el Estado no figura como bloque formal sino a través de quienes ejercen el poder.
