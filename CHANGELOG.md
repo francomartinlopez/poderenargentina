@@ -1,5 +1,11 @@
 # Cambios
 
+## 2026-11-19 (c) · Población de ciudades y estación china
+
+- Población de cada ciudad (`fuente/poblacion_ciudades.py`): la del aglomerado urbano del INDEC cuando la ciudad forma parte de uno (Censo 2022, con el dato de 2010), y la de la localidad sola para las ciudades chicas, con el año del dato (2022, 2010, 2001 o estimación). Cuando un aglomerado une varias localidades (Neuquén-Plottier-Cipolletti, Gran Rosario, Santiago del Estero-La Banda y otros), la cifra es la del conjunto. Faltan Timbúes y Salvador Mazza.
+- El criterio «más de 100.000 habitantes» se mide sobre el aglomerado y el validador lo controla. Siete ciudades no llegaban: Puerto Madryn, Gualeguaychú, Venado Tuerto, Orán, Río Grande, Oberá y Sáenz Peña siguen por otro motivo (empresa o cluster, puerto o frontera); Junín y Goya, que solo entraban por población, salen del mapa. Quedan 97 ciudades.
+- Estación de Espacio Lejano de China: ubicada en la Pampa de Pilmatué, paraje Quintuco, al norte de Bajada del Agrio (departamento Loncopué, −38,1914; −70,1495). Reemplaza el punto provisorio en Bajada del Agrio.
+
 ## 2026-11-19 (b) · Paso 2: las 24 provincias
 
 - Población del Censo 2022 (INDEC, resultados definitivos) por provincia y por departamento: 45.892.285 habitantes. `fuente/poblacion.py` se genera con `scripts/importar_censo.py`.

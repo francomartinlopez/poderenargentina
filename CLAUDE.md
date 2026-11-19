@@ -13,10 +13,10 @@ Responsable editorial: Franco Martín López. Proyecto hermano de El mapa del po
 ## Ciudades
 Entra una ciudad si cumple al menos un criterio, con el motivo escrito y una fuente:
 1. Capital de provincia (y CABA).
-2. Más de 100.000 habitantes (Censo 2022).
+2. Más de 100.000 habitantes (Censo 2022), medido sobre el aglomerado urbano del INDEC cuando la ciudad forma parte de uno.
 3. Sede de poder económico aunque sea chica (criterio de Franco: Armstrong, General Deheza): sede o planta principal de un actor del mapa, cluster productivo de peso nacional, o «ciudad de una empresa» donde una firma domina el empleo y la vida local.
 4. Relevancia estratégica: puerto, energía, minería, frontera, defensa.
-Motivos en `fuente/ciudades.py`: cap, pob, emp, pue, ene, min, fro, def. Coordenadas y departamento: `python3 scripts/ubicar_ciudad.py "<nombre>" "<provincia>"`.
+Motivos en `fuente/ciudades.py`: cap, pob, emp, pue, ene, min, fro, def. Población en `fuente/poblacion_ciudades.py`: aglomerado (Censo 2022 y 2010) y localidad con su año; si el aglomerado une varias localidades, la cifra es la del conjunto y se dice. Coordenadas y departamento: `python3 scripts/ubicar_ciudad.py "<nombre>" "<provincia>"`.
 
 ## Departamentos
 Panel corto (población, cabecera, actividad, intendente o comisionado, actores con sede); ficha propia solo para los relevantes, como los partidos del conurbano, Rosario o Vaca Muerta (decisión de Franco, 19/11/2026).

@@ -32,7 +32,9 @@ for (const c of T.ciudades) {
   if (!c.mot.length || c.mot.some(m => !MOT.includes(m))) err.push(`${c.n}: motivos inválidos (${c.mot})`);
   if (!c.nota) err.push(`${c.n}: falta el motivo escrito`);
   if (!c.fuente && !c.mot.every(m => m === "cap" || m === "pob")) av.push(`${c.n}: sin fuente`);
-  if (c.mot.includes("pob") && !c.pob) av.push(`${c.n}: falta la población del Censo 2022`);
+  if (c.mot.includes("pob") && !(c.agpob || c.pob)) av.push(`${c.n}: falta la población del Censo 2022`);
+  if (c.mot.includes("pob") && Math.max(c.agpob || 0, c.pob || 0) < 100000) err.push(`${c.n}: motivo pob pero menos de 100.000 habitantes (ni la localidad ni su aglomerado)`);
+  if ((c.pob && !c.anio) || (c.agpob && !c.fag)) err.push(`${c.n}: población sin año o sin fuente`);
 }
 const hoy = new Date().toISOString().slice(0, 10);
 if (T.proxima < hoy) err.push(`El corte venció: la próxima revisión era el ${T.proxima}.`);

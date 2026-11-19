@@ -10,7 +10,7 @@ RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(RAIZ, "fuente"))
 from provincias import PROVINCIAS  # noqa: E402
 from ciudades import CIUDADES  # noqa: E402
-import poblacion, economia, alineamiento, influencias  # noqa: E402
+import poblacion, poblacion_ciudades, economia, alineamiento, influencias  # noqa: E402
 
 # Corte trimestral: subir en cada actualización (CORTE = hoy, PROXIMA = dentro de tres meses).
 CORTE = "2026-11-19"
@@ -39,8 +39,16 @@ def main():
         c = dict(n=n, s=s, prov=prov, dep=dep, lon=lon, lat=lat, mot=mot.split(), nota=nota)
         if fuente:
             c["fuente"] = fuente
-        if pob:
-            c["pob"] = pob
+        pc = poblacion_ciudades.CIUDADES.get(n, {})
+        if pob or pc.get("pob"):
+            c["pob"] = pob or pc["pob"]
+            c["anio"] = pc.get("anio", 2022)
+            if pc.get("estimada"):
+                c["est"] = True
+            if pc.get("fuente_pob"):
+                c["fpob"] = pc["fuente_pob"]
+        if pc.get("aglo"):
+            c.update(ag=pc["aglo"], agpob=pc["aglo_pob"], agpob10=pc.get("aglo_pob10"), fag=pc.get("fuente_aglo"))
         ciudades.append(c)
 
     cap = {c["prov"]: c["s"] for c in ciudades if "cap" in c["mot"]}

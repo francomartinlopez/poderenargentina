@@ -88,7 +88,7 @@ INFLUENCIAS = [
      "https://www.argentina.gob.ar/node/309133"),
     ("50", "Israel", "pol", 1, MK, MEKOROT),
     # Neuquén
-    ("58", "China", "pre", 3, "Estación de Espacio Lejano en Bajada del Agrio, operada por la CLTC, que depende del Ejército Popular de Liberación; acuerdo por 50 años.",
+    ("58", "China", "pre", 3, "Estación de Espacio Lejano en la Pampa de Pilmatué (paraje Quintuco, departamento Loncopué, al norte de Bajada del Agrio), operada por la CLTC, que depende del Ejército Popular de Liberación; acuerdo por 50 años.",
      "https://chequeado.com/el-explicador/que-se-sabe-sobre-la-base-espacial-china-ubicada-en-neuquen/"),
     ("58", "EE.UU.", "inv", 2, "Chevron es la primera operadora extranjera de Vaca Muerta, cuarta en producción de petróleo.",
      "https://mase.lmneuquen.com/vaca-muerta/petroleras-vaca-muerta-el-top-five-del-primer-semestre-n1248407/amp"),
