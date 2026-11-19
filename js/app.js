@@ -3,8 +3,16 @@
 const MOT={cap:["Capital","#F5F0E6"],pob:["Ciudad grande","#9A9A9A"],emp:["Empresa o cluster","#FF3B30"],pue:["Puerto","#2F6BFF"],ene:["Energía","#F2A93B"],min:["Minería","#C8743C"],fro:["Frontera","#3FB8C9"],def:["Defensa y estrategia","#9E8CFF"]};
 const ORDEN=["emp","pue","ene","min","fro","def","cap","pob"];
 const POT=["EE.UU.","China","Unión Europea","Reino Unido","Brasil","Rusia","Israel","Golfo","Canadá y Australia","Japón y Corea","FMI, BM y BID"];
-const CAN=["Comercio","Inversión","Deuda","Presencia","Política y cultura"];
-const CAPAS=[["terr","Territorio",1],["act","Actores"],["ali","Alineamiento con Nación"],["inf","Influencias mundiales"],["eco","Economía y recursos"],["zl","Zonas liberadas"],["fr","Fricción"]];
+const CK=["com","inv","deu","pre","pol"],CAN=["Comercio","Inversión","Deuda","Presencia","Política"];
+const CAPAS=[["terr","Territorio",1],["ali","Alineamiento con Nación",1],["inf","Influencias mundiales",1],["eco","Economía y recursos",1],["act","Actores"],["zl","Zonas liberadas"],["fr","Fricción"]];
+const PCOL={"EE.UU.":"#2F6BFF","China":"#D7263D","Unión Europea":"#F2C14E","Reino Unido":"#7FB3D5","Brasil":"#2EB872","Rusia":"#9E1B32","Israel":"#A0C4FF","Golfo":"#C8743C","Canadá y Australia":"#B07CFF","Japón y Corea":"#FF8FAB","FMI, BM y BID":"#BDBDBD"};
+const ACOL={A:"#8E6CFF",D:"#9A8F8C",I:"#F2A93B",O:"#3FB8C9"},ALI={A:"Aliado",D:"Dialoguista",I:"Independiente",O:"Opositor"};
+const ADESC={A:"acuerdos electorales con La Libertad Avanza",D:"negocia votos y fondos sin acuerdo electoral pleno",I:"espacio propio que compite con LLA (Provincias Unidas)",O:"opositor al Gobierno nacional"};
+let capa="terr",potSel="dom",ecoSel="exp";
+const nf=n=>Number(n).toLocaleString("es-AR");
+const host=u=>{try{return new URL(u).hostname.replace(/^www\./,"")}catch(e){return "fuente"}};
+const src=u=>`<a class="src" href="${esc(u)}" target="_blank" rel="noopener">${esc(host(u))}</a>`;
+const aliTag=a=>`<span class="tag" style="color:${ACOL[a]}">${ALI[a]}</span>`;
 const MES=["ene.","feb.","mar.","abr.","may.","jun.","jul.","ago.","sep.","oct.","nov.","dic."];
 const app=document.getElementById("app"),tip=document.getElementById("tip");
 const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
@@ -17,9 +25,13 @@ const byS={},byId={},cityS={},depInfo={};
 
 function more(h){document.getElementById("more").innerHTML=h}
 function pend(t,d){return `<div class="blk"><h2>${t}</h2><div class="pend">${d}</div></div>`}
-function influ(){return `<div class="blk"><h2>Influencias mundiales</h2><div class="pend"><b>Paso 2.</b> Cada potencia se puntúa de 0 a 3 en cinco canales, con fuente. El color del territorio en el mapa será el de la potencia dominante.</div>
-<div class="grid5" aria-hidden="true"><span class="h"></span>${CAN.map(c=>`<span class="h" title="${c}">${c.split(" ")[0]}</span>`).join("")}${POT.slice(0,6).map(p=>`<span class="r">${p}</span>`+CAN.map(()=>`<span>·</span>`).join("")).join("")}</div>
-<p class="muted" style="font-size:13px;margin:8px 0 0">También se miden: ${POT.slice(6).join(", ")}.</p></div>`}
+function infGrid(list){
+  const m={};for(const i of list){(m[i.p]=m[i.p]||{})[i.c]=Math.max(m[i.p][i.c]||0,i.n)}
+  const rows=POT.filter(p=>m[p]).sort((a,b)=>CK.reduce((s,k)=>s+(m[b][k]||0),0)-CK.reduce((s,k)=>s+(m[a][k]||0),0));
+  if(!rows.length)return `<p class="muted">Sin influencias relevantes cargadas con fuente.</p>`;
+  return `<div class="grid5"><span class="h"></span>${CAN.map(c=>`<span class="h">${c}</span>`).join("")}${rows.map(p=>`<span class="r"><i style="background:${PCOL[p]}"></i>${esc(p)}</span>`+CK.map(k=>{const n=m[p][k]||0;return `<span class="v" style="${n?`background:${PCOL[p]}${["","40","80","d0"][n]};color:#fff`:""}">${n||"·"}</span>`}).join("")).join("")}</div>`}
+function infList(list){return `<ul class="ilist">${list.map(i=>`<li><b style="color:${PCOL[i.p]}">${esc(i.p)}</b> <span class="muted">· ${esc(T.meta.canales[i.c])} · ${i.n}</span><br>${esc(i.x)} ${src(i.u)}</li>`).join("")}</ul>`}
+function influ(list,title,nota){return `<div class="blk"><h2>${title||"Influencias mundiales"}</h2>${infGrid(list)}<p class="muted" style="font-size:13px;margin:8px 0 10px">${nota||"De 0 a 3 por canal. Comercio: participación en las exportaciones (INDEC); el resto, con la fuente de cada dato."}</p><details><summary>${list.length} datos con fuente</summary>${infList(list)}</details></div>`}
 
 function setup(){
   const W=600;
@@ -33,7 +45,7 @@ function setup(){
 
 function mapShell(){
   app.innerHTML=`<div class="mapview"><div><div class="crumbs" id="crumbs"></div>
-  <div class="bar" role="group" aria-label="Capas">${CAPAS.map(([k,n,on])=>on?`<button class="chip on" aria-pressed="true">${n}</button>`:`<button class="chip" disabled title="Se carga en los próximos pasos">${n} <small>pronto</small></button>`).join("")}</div>
+  <div class="bar" id="capas" role="group" aria-label="Capas"></div><div class="bar sub" id="sub"></div>
   <div class="mapbox" id="mapbox"><svg id="map" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Mapa de la Argentina por provincias"></svg>
   <div class="ant" id="ant"><svg id="antsvg" aria-hidden="true"></svg>Antártida Argentina<br>(otra escala)</div></div>
   <div class="bar" id="filt" role="group" aria-label="Ciudades por motivo" style="margin-top:10px"></div></div>
@@ -47,9 +59,31 @@ function mapShell(){
   svg.addEventListener("click",e=>{const t=e.target.closest("[data-k]");if(!t)return;const[k,v]=t.dataset.k.split(":");
     if(k==="p"){location.hash="prov-"+byId[v].s}else if(k==="d"){location.hash="d-"+v}else if(k==="c"){location.hash="c-"+v}});
   svg.addEventListener("pointermove",e=>{const t=e.target.closest("[data-k]");if(!t||e.pointerType!=="mouse"){tip.style.display="none";return}
-    const[k,v]=t.dataset.k.split(":");const txt=k==="p"?byId[v].n:k==="d"?(depInfo[v]?.n||v):cityS[v]?.n;tip.textContent=txt;tip.style.display="block";tip.style.left=e.clientX+14+"px";tip.style.top=e.clientY+12+"px"});
+    const[k,v]=t.dataset.k.split(":");const txt=k==="p"?tipText(byId[v]):k==="d"?(depInfo[v]?.n||v):cityS[v]?.n;tip.textContent=txt;tip.style.display="block";tip.style.left=e.clientX+14+"px";tip.style.top=e.clientY+12+"px"});
   svg.addEventListener("pointerleave",()=>tip.style.display="none");
   new ResizeObserver(()=>scaleMarks()).observe(svg);
+  document.getElementById("capas").onclick=e=>{const b=e.target.closest("button[data-c]");if(!b||b.disabled)return;capa=b.dataset.c;route()};
+  document.getElementById("sub").onclick=e=>{const b=e.target.closest("button");if(!b)return;if(b.dataset.pot)potSel=b.dataset.pot;if(b.dataset.eco)ecoSel=b.dataset.eco;route()};
+}
+function tipText(p){
+  if(capa==="ali")return `${p.n}: ${ALI[p.ali.ali]}`;
+  if(capa==="inf")return potSel==="dom"?`${p.n}: ${p.dom||(p.emp.length?"empate entre "+p.emp.join(", "):"sin datos")}`:`${p.n}: ${potSel} ${p.tot[potSel]||0} puntos`;
+  if(capa==="eco")return ecoSel==="exp"?`${p.n}: USD ${nf(p.eco.exp)} M exportados`:`${p.n}: ${p.eco.propios==null?"sin datos":p.eco.propios.toLocaleString("es-AR")+"% de recursos propios"}`;
+  return p.n}
+function paint(){
+  document.getElementById("capas").innerHTML=CAPAS.map(([k,n,on])=>on?`<button class="chip ${capa===k?"on":""}" data-c="${k}" aria-pressed="${capa===k}">${n}</button>`:`<button class="chip" disabled title="Se carga en los próximos pasos">${n} <small>pronto</small></button>`).join("");
+  const P=T.provincias,sub=document.getElementById("sub");let leg="";
+  const maxPot=k=>Math.max(1,...P.map(p=>p.tot[k]||0)),maxExp=Math.max(...P.map(p=>p.eco.exp));
+  const fill=p=>{
+    if(capa==="ali")return[ACOL[p.ali.ali],.6];
+    if(capa==="inf"){if(potSel==="dom")return p.dom?[PCOL[p.dom],.62]:p.emp.length?["#6E6462",.55]:null;const v=p.tot[potSel]||0;return v?[PCOL[potSel],.18+.7*v/maxPot(potSel)]:null}
+    if(capa==="eco"){if(ecoSel==="exp")return["#FF3B30",.1+.8*Math.log10(p.eco.exp)/Math.log10(maxExp)];return p.eco.propios==null?null:["#FF3B30",.1+.8*p.eco.propios/90]}
+    return null};
+  for(const el of G.p.children){const p=byId[el.dataset.k.slice(2)],f=fill(p);el.style.fill=f?f[0]:"";el.style.fillOpacity=f?f[1]:"";el.querySelector("title").textContent=tipText(p)}
+  if(capa==="ali"){const c={};P.forEach(p=>c[p.ali.ali]=(c[p.ali.ali]||0)+1);leg=Object.keys(ALI).map(a=>`<span class="lg"><i style="background:${ACOL[a]}"></i>${ALI[a]} ${c[a]||0}</span>`).join("")}
+  else if(capa==="inf"){leg=`<button class="chip ${potSel==="dom"?"on":""}" data-pot="dom">Dominante</button>`+POT.map(k=>`<button class="chip ${potSel===k?"on":""}" data-pot="${esc(k)}"><i style="background:${PCOL[k]}"></i>${esc(k)}</button>`).join("")}
+  else if(capa==="eco"){leg=`<button class="chip ${ecoSel==="exp"?"on":""}" data-eco="exp">Exportaciones</button><button class="chip ${ecoSel==="pro"?"on":""}" data-eco="pro">Recursos propios</button><span class="lg">${ecoSel==="exp"?"USD exportados, "+esc(T.meta.periodo_exp)+" (escala logarítmica)":"Ingresos propios sobre el total, 2025 (ASAP)"}</span>`}
+  sub.innerHTML=leg;sub.style.display=leg?"":"none";
 }
 
 function filters(){
@@ -101,17 +135,24 @@ function provState(pid,did){
     for(const d of g.children){d.classList.toggle("live",id===pid);d.classList.toggle("sel",d.dataset.k.slice(2)===did)}}
 }
 function crumbs(parts){document.getElementById("crumbs").innerHTML=parts.map((p,i)=>i<parts.length-1?`<a href="#${p[1]}">${esc(p[0])}</a> ›`:`<b>${esc(p[0])}</b>`).join(" ")}
-function ensureMap(){if(!document.getElementById("map")){mapShell()}filters()}
+function ensureMap(){if(!document.getElementById("map")){mapShell()}filters();paint()}
 
 function vPais(){
   ensureMap();provState(null);drawCities(T.ciudades,false);zoomTo(FULL);crumbs([["Argentina"]]);
   document.getElementById("ant").style.display="";
   const cnt={};for(const c of T.ciudades)for(const m of c.mot)cnt[m]=(cnt[m]||0)+1;const mx=Math.max(...Object.values(cnt));
-  document.getElementById("panel").innerHTML=`<h1>Argentina</h1><p class="sub">Tocá una provincia para bajar a sus departamentos y ciudades. Tocá una ciudad para abrir su ficha.</p>
-  <div class="facts"><div><span>Jurisdicciones</span><b>24</b></div><div><span>Departamentos</span><b class="mono">${T.provincias.reduce((s,p)=>s+p.ndep,0)}</b></div><div><span>Ciudades en el mapa</span><b class="mono">${T.ciudades.length}</b></div></div>
-  <div class="blk grow"><h2>Por qué está cada ciudad</h2><div class="mbars">${Object.keys(MOT).map(m=>`<div><span>${MOT[m][0]}</span><em style="width:${cnt[m]/mx*100}%;background:${MOT[m][1]}"></em><span>${cnt[m]||0}</span></div>`).join("")}</div>
-  <p class="muted" style="font-size:13px;margin:8px 0 0">Una ciudad puede tener varios motivos. Las de empresa o cluster entran aunque sean chicas.</p></div>`;
-  more(influ()+pend("Quién manda","<b>Paso 3.</b> Unos 40 actores núcleo nacionales con sus relaciones: Casa Rosada, Economía, BCRA, Corte, Comodoro Py, SIDE, partidos, sindicatos, grandes grupos y poder externo."));
+  const P=T.provincias;let side="";
+  if(capa==="ali")side=`<h2>Alineamiento con Nación</h2><ul class="clist">${Object.keys(ALI).map(a=>`<li>${aliTag(a)}<span class="muted" style="font-size:13px">${ADESC[a]}</span><span class="nota">${P.filter(p=>p.ali.ali===a).map(p=>`<a href="#prov-${p.s}">${esc(p.c)}</a>`).join(", ")}</span></li>`).join("")}</ul><p class="muted" style="font-size:13px">Clasificación al ${esc(T.corte)}. ${src(T.meta.fuente_ali)}</p>`;
+  else if(capa==="inf"){const d={};P.forEach(p=>{if(p.dom)(d[p.dom]=d[p.dom]||[]).push(p)});const emp=P.filter(p=>!p.dom&&p.emp.length);
+    side=`<h2>Potencia dominante por provincia</h2><ul class="clist">${POT.filter(k=>d[k]).sort((a,b)=>d[b].length-d[a].length).map(k=>`<li><b style="color:${PCOL[k]}">${esc(k)}</b> <span class="mono muted">${d[k].length}</span><span class="nota">${d[k].map(p=>`<a href="#prov-${p.s}">${esc(p.c)}</a>`).join(", ")}</span></li>`).join("")}${emp.length?`<li><b>Empate</b> <span class="mono muted">${emp.length}</span><span class="nota">${emp.map(p=>`<a href="#prov-${p.s}">${esc(p.c)}</a> (${p.emp.join(", ")})`).join("; ")}</span></li>`:""}</ul>`}
+  else if(capa==="eco"){const L=P.slice().sort((a,b)=>ecoSel==="exp"?b.eco.exp-a.eco.exp:(b.eco.propios??-1)-(a.eco.propios??-1)),mx=Math.max(...P.map(p=>ecoSel==="exp"?p.eco.exp:(p.eco.propios||0)));
+    side=`<h2>${ecoSel==="exp"?"Exportaciones, "+esc(T.meta.periodo_exp):"Recursos propios, 2025"}</h2><div class="mbars">${L.map(p=>{const v=ecoSel==="exp"?p.eco.exp:p.eco.propios;return `<div><span><a href="#prov-${p.s}">${esc(p.c)}</a></span><em style="width:${(v||0)/mx*100}%;background:#FF3B30"></em><span>${v==null?"s/d":ecoSel==="exp"?nf(v):Math.round(v)+"%"}</span></div>`}).join("")}</div><p class="muted" style="font-size:13px">${ecoSel==="exp"?"Millones de USD. "+src(T.meta.fuente_exp):"Ingresos propios sobre el total. "+src(T.meta.fuente_propios)}</p>`}
+  else side=`<h2>Por qué está cada ciudad</h2><div class="mbars">${Object.keys(MOT).map(m=>`<div><span>${MOT[m][0]}</span><em style="width:${cnt[m]/mx*100}%;background:${MOT[m][1]}"></em><span>${cnt[m]||0}</span></div>`).join("")}</div>
+  <p class="muted" style="font-size:13px;margin:8px 0 0">Una ciudad puede tener varios motivos. Las de empresa o cluster entran aunque sean chicas.</p>`;
+  document.getElementById("panel").innerHTML=`<h1>Argentina</h1><p class="sub">Tocá una provincia para bajar a sus departamentos y ciudades. Cambiá la capa para ver alineamiento, influencias o economía.</p>
+  <div class="facts"><div><span>Población (Censo 2022)</span><b class="mono">${nf(T.pais.pob)}</b></div><div><span>Departamentos</span><b class="mono">${P.reduce((s,p)=>s+p.ndep,0)}</b></div><div><span>Ciudades en el mapa</span><b class="mono">${T.ciudades.length}</b></div></div>
+  <div class="blk grow">${side}</div>`;
+  more(influ(T.pais.inf,"Influencias sobre el Estado nacional","Vínculos de la Nación con cada potencia. Las de cada provincia, en su ficha.")+pend("Quién manda","<b>Paso 3.</b> Unos 40 actores núcleo nacionales con sus relaciones: Casa Rosada, Economía, BCRA, Corte, Comodoro Py, SIDE, partidos, sindicatos, grandes grupos y poder externo."));
 }
 async function vProv(p,did){
   ensureMap();document.getElementById("ant").style.display="none";
@@ -123,10 +164,13 @@ async function vProv(p,did){
   if(df){crumbs([["Argentina","inicio"],[p.n,"prov-"+p.s],[df.n]]);vDep(p,did);return}
   crumbs([["Argentina","inicio"],[p.n]]);
   document.getElementById("panel").innerHTML=`<h1>${esc(p.n)}</h1><p class="sub">${esc(p.cat)}. Capital: ${cap?`<a href="#c-${cap.s}">${esc(cap.n)}</a>`:"—"}.</p>
-  <div class="facts"><div><span>Gobierna</span><b>${esc(p.gob)}</b></div><div><span>Partido o frente</span><b style="font-size:14px">${esc(p.par)}</b></div><div><span>En el cargo desde</span><b class="mono">${fmes(p.desde)}</b></div><div><span>${p.id==="06"?"Partidos":p.id==="02"?"Comunas":"Departamentos"}</span><b class="mono">${p.ndep}</b></div></div>
+  <div class="facts"><div><span>Gobierna</span><b>${esc(p.gob)}</b></div><div><span>Partido o frente</span><b style="font-size:14px">${esc(p.par)}</b></div><div><span>En el cargo desde</span><b class="mono">${fmes(p.desde)}</b></div><div><span>Frente a la Nación</span><b>${aliTag(p.ali.ali)}</b></div><div><span>Población</span><b class="mono">${nf(p.pob)}</b></div><div><span>Potencia dominante</span><b style="font-size:14px;color:${p.dom?PCOL[p.dom]:"inherit"}">${esc(p.dom||(p.emp.length?"Empate: "+p.emp.join(", "):"—"))}</b></div></div>
   <div class="blk grow"><h2>Ciudades en el mapa · ${cs.length}</h2><ul class="clist">${cs.map(c=>`<li><a href="#c-${c.s}">${esc(c.n)}</a>${tags(c)}<span class="nota">${esc(c.nota)}</span></li>`).join("")||`<li class="muted">Ninguna todavía.</li>`}</ul></div>`;
-  const depBlk=`<div class="blk wide"><details ${deps.length<=40?"open":""}><summary><h2 style="display:inline">${deps.length} ${p.id==="06"?"partidos":p.id==="02"?"comunas":"departamentos"}</h2></summary><div class="deps">${deps.map(d=>`<a href="#d-${d.id}">${esc(d.nombre)}</a>`).join("")}</div></details></div>`;
-  more(pend("Quién manda de verdad","<b>Paso 2.</b> Poder formal frente a poder real: gobernador, familias, caudillos, intendentes fuertes, empresas y sindicatos que deciden. Alineamiento con Nación y años de permanencia.")+influ()+pend("Actores con sede","<b>Pasos 3 y 5.</b> Con su puntaje de poder en los 21 ejes y su gráfico de relaciones.")+pend("Recursos y coparticipación","<b>Paso 2.</b> Producto bruto, exportaciones y destino (INDEC), recurso dominante y dependencia de los fondos nacionales.")+depBlk);
+  const depBlk=`<div class="blk wide"><details ${deps.length<=40?"open":""}><summary><h2 style="display:inline">${deps.length} ${p.id==="06"?"partidos":p.id==="02"?"comunas":"departamentos"}</h2></summary><div class="deps">${deps.map(d=>`<a href="#d-${d.id}">${esc(d.nombre)} <span class="mono muted">${T.deppob[d.id]?nf(T.deppob[d.id]):""}</span></a>`).join("")}</div></details></div>`;
+  const a=p.ali,e=p.eco;
+  const manda=`<div class="blk"><h2>Quién manda de verdad</h2><p class="lead">${esc(a.manda)}</p><dl class="dl"><dt>Gobierna</dt><dd>${esc(a.grupo)}</dd><dt>Frente a la Nación</dt><dd>${aliTag(a.ali)} <span class="muted">${ADESC[a.ali]}</span></dd><dt>Fuentes</dt><dd>${a.fuentes.map(src).join(" · ")}</dd></dl></div>`;
+  const eco=`<div class="blk"><h2>Economía y recursos</h2><dl class="dl"><dt>Exportaciones</dt><dd><b class="mono">USD ${nf(e.exp)} M</b> en el ${esc(T.meta.periodo_exp)}</dd><dt>Rubro principal</dt><dd>${esc(e.rubro)}</dd><dt>Destinos</dt><dd>${esc(e.destx)}</dd><dt>Recursos propios</dt><dd>${e.propios==null?"Sin datos actualizados":`<b class="mono">${e.propios.toLocaleString("es-AR")}%</b> de los ingresos; el resto llega de la Nación`}</dd><dt>Fuentes</dt><dd>${src(T.meta.fuente_exp)} · ${src(T.meta.fuente_propios)} · ${src(T.meta.fuente_censo)}</dd></dl></div>`;
+  more(manda+influ(p.inf)+eco+pend("Actores con sede","<b>Pasos 3 y 5.</b> Con su puntaje de poder en los 21 ejes y su gráfico de relaciones.")+depBlk);
 }
 function bx(b,pb){let w=b[1][0]-b[0][0],h=b[1][1]-b[0][1];
   if(pb){const pw=pb[1][0]-pb[0][0],ph=pb[1][1]-pb[0][1],mw=Math.max(w,pw*.35),mh=Math.max(h,ph*.35),cx=(b[0][0]+b[1][0])/2,cy=(b[0][1]+b[1][1])/2;return[cx-mw/2,cy-mh/2,mw,mh]}
@@ -134,8 +178,9 @@ function bx(b,pb){let w=b[1][0]-b[0][0],h=b[1][1]-b[0][1];
 function vDep(p,did){
   const d=depInfo[did],cs=T.ciudades.filter(c=>c.dep===did);
   document.getElementById("panel").innerHTML=`<h1>${esc(d.n)}</h1><p class="sub">${esc(d.cat)} de <a href="#prov-${p.s}">${esc(p.n)}</a>.</p>
+  <div class="facts"><div><span>Población (Censo 2022)</span><b class="mono">${T.deppob[did]?nf(T.deppob[did]):"—"}</b></div><div><span>Peso en la provincia</span><b class="mono">${T.deppob[did]?(T.deppob[did]/p.pob*100).toLocaleString("es-AR",{maximumFractionDigits:1})+"%":"—"}</b></div></div>
   <div class="blk grow"><h2>Ciudades en el mapa</h2><ul class="clist">${cs.map(c=>`<li><a href="#c-${c.s}">${esc(c.n)}</a>${tags(c)}<span class="nota">${esc(c.nota)}</span></li>`).join("")||`<li class="muted">Ninguna de las ciudades seleccionadas está en este ${d.cat.toLowerCase()}.</li>`}</ul></div>`;
-  more(pend("Datos del "+d.cat.toLowerCase(),"<b>Paso 2.</b> Población (Censo 2022), cabecera, actividad principal, intendente o comisionado y actores con sede.")+influ());
+  more(pend("Datos del "+d.cat.toLowerCase(),"<b>Próximos pasos.</b> Cabecera, actividad principal, intendente o comisionado y actores con sede.")+`<div class="blk"><h2>Influencias mundiales</h2><p>Se miden por provincia: <a href="#prov-${p.s}">ver ${esc(p.n)}</a>${p.dom?`, donde domina <b style="color:${PCOL[p.dom]}">${esc(p.dom)}</b>`:""}.</p></div>`);
 }
 async function vCity(c){
   const p=byId[c.prov];ensureMap();document.getElementById("ant").style.display="none";
@@ -145,14 +190,15 @@ async function vCity(c){
   const d=depInfo[c.dep];
   crumbs([["Argentina","inicio"],[p.n,"prov-"+p.s],...(d&&p.id!=="02"&&d.n!==c.n?[[d.n,"d-"+c.dep]]:[]),[c.n]]);
   document.getElementById("panel").innerHTML=`<h1>${esc(c.n)}</h1><p class="sub">${esc(c.nota)}</p>
-  <div class="facts"><div><span>Provincia</span><b><a href="#prov-${p.s}">${esc(p.n)}</a></b></div>${d&&p.id!=="02"?`<div><span>${esc(d.cat)}</span><b><a href="#d-${c.dep}">${esc(d.n)}</a></b></div>`:""}<div><span>Coordenadas</span><b class="mono" style="font-size:13px">${c.lat.toFixed(3)}, ${c.lon.toFixed(3)}</b></div></div>
+  <div class="facts"><div><span>Provincia</span><b><a href="#prov-${p.s}">${esc(p.n)}</a></b></div>${d&&p.id!=="02"?`<div><span>${esc(d.cat)}</span><b><a href="#d-${c.dep}">${esc(d.n)}</a></b></div>`:""}<div><span>Población del ${d?esc(d.cat.toLowerCase()):"distrito"}</span><b class="mono">${c.dep&&T.deppob[c.dep]?nf(T.deppob[c.dep]):p.id==="02"?nf(p.pob):"—"}</b></div><div><span>Coordenadas</span><b class="mono" style="font-size:13px">${c.lat.toFixed(3)}, ${c.lon.toFixed(3)}</b></div></div>
   <div class="blk grow"><h2>Por qué está en el mapa</h2>${tags(c)}</div>`;
-  more(pend("Quién gobierna y quién manda","<b>Paso 4.</b> Intendente, concejo y alineamiento; en las ciudades de una empresa, el peso de la empresa frente al municipio.")+influ()+pend("Actores y fricciones","<b>Paso 4.</b> Empresas, sindicatos, organizaciones y conflictos con sede en la ciudad."));
+  more(pend("Quién gobierna y quién manda","<b>Paso 4.</b> Intendente, concejo y alineamiento; en las ciudades de una empresa, el peso de la empresa frente al municipio.")+`<div class="blk"><h2>Influencias mundiales</h2><p>Hoy se miden por provincia: <a href="#prov-${p.s}">ver ${esc(p.n)}</a>${p.dom?`, donde domina <b style="color:${PCOL[p.dom]}">${esc(p.dom)}</b>`:""}. Las de cada ciudad, con los mercados y socios de sus empresas, llegan en el paso 4.</p></div>`+pend("Actores y fricciones","<b>Paso 4.</b> Empresas, sindicatos, organizaciones y conflictos con sede en la ciudad."));
 }
 function vProvincias(){
-  app.innerHTML=`<div class="page"><h1>Provincias</h1><p class="sub">Las 24 jurisdicciones, con quién las gobierna. El alineamiento con Nación y el poder real de cada una se cargan en el paso 2.</p>
-  <table class="stack"><thead><tr><th>Provincia</th><th>Capital</th><th>Gobierna</th><th>Partido o frente</th><th>Desde</th><th class="n">Deptos.</th><th class="n">Ciudades</th></tr></thead><tbody>
-  ${T.provincias.map(p=>`<tr><td><a href="#prov-${p.s}">${esc(p.n)}</a></td><td>${esc(cityS[p.cap]?.n||"")}</td><td>${esc(p.gob)}</td><td>${esc(p.par)}</td><td class="mono">${fmes(p.desde)}</td><td class="n">${p.ndep}</td><td class="n">${T.ciudades.filter(c=>c.prov===p.id).length}</td></tr>`).join("")}</tbody></table></div>`;
+  app.innerHTML=`<div class="page"><h1>Provincias</h1><p class="sub">Las 24 jurisdicciones: quién las gobierna, cómo se paran frente a la Nación y qué potencia pesa más en cada una.</p>
+  <table class="stack"><thead><tr><th>Provincia</th><th>Gobierna</th><th>Partido o frente</th><th>Desde</th><th>Frente a la Nación</th><th>Potencia dominante</th><th class="n">Población</th><th class="n">Export. USD M</th><th class="n">Rec. propios</th></tr></thead><tbody>
+  ${T.provincias.map(p=>`<tr><td><a href="#prov-${p.s}">${esc(p.n)}</a></td><td>${esc(p.gob)}</td><td>${esc(p.par)}</td><td class="mono">${fmes(p.desde)}</td><td>${aliTag(p.ali.ali)}</td><td style="color:${p.dom?PCOL[p.dom]:"inherit"}">${esc(p.dom||(p.emp.length?"Empate: "+p.emp.join(", "):"—"))}</td><td class="n">${nf(p.pob)}</td><td class="n">${nf(p.eco.exp)}</td><td class="n">${p.eco.propios==null?"s/d":Math.round(p.eco.propios)+"%"}</td></tr>`).join("")}</tbody></table>
+  <p class="muted" style="font-size:13px;margin-top:12px">Exportaciones del ${esc(T.meta.periodo_exp)} (${src(T.meta.fuente_exp)}); recursos propios 2025 (${src(T.meta.fuente_propios)}); población del Censo 2022 (${src(T.meta.fuente_censo)}).</p></div>`;
 }
 let cq="",cm=null;
 function vCiudades(){
@@ -168,9 +214,10 @@ function vCiudades(){
 }
 function vPlan(){
   app.innerHTML=`<div class="page plan"><h1>Plan</h1>
-  <h2>Hecho en este paso</h2><ul><li>Mapa oficial del IGN: provincias, departamentos (partidos y comunas) y la Antártida en recuadro.</li><li>Zoom de país a provincia, departamento y ciudad, con rutas propias para cada uno.</li><li>${T.ciudades.length} ciudades ubicadas con Georef, cada una con su motivo, filtrables en el mapa.</li><li>Gobernadores al día (Corrientes y Santiago del Estero renovaron en diciembre de 2025).</li></ul>
-  <h2>Próximos pasos</h2><ol start="2"><li>Las 24 provincias: población, recursos, coparticipación, alineamiento con Nación, poder real e influencias mundiales.</li><li>Unos 40 actores núcleo nacionales con sus relaciones, medidos en los 21 ejes.</li><li>Fichas de ciudades: intendente, actores, fricciones e influencias.</li><li>Actores provinciales y municipales; puntos de fricción.</li></ol>
-  <h2>Para decidir</h2><ul><li>Lista final de potencias para las influencias mundiales.</li><li>Si los departamentos tienen ficha propia o solo el panel.</li><li>Cómo tratar Malvinas, la Antártida y el Atlántico Sur (hoy: Malvinas en el mapa, Antártida en recuadro, Georgias y Sandwich del Sur sin dibujar).</li><li>Ciudades a verificar: ubicación de la estación espacial china (Bajada del Agrio) y umbral de 100.000 habitantes con el Censo 2022.</li></ul></div>`;
+  <h2>Hecho</h2><ol><li><b>Esqueleto.</b> Mapa oficial del IGN con zoom de país a provincia, departamento y ciudad; ${T.ciudades.length} ciudades con su motivo; gobernadores al día.</li><li><b>Las 24 provincias.</b> Población del Censo 2022 por provincia y departamento; exportaciones, destinos y rubro principal (INDEC); recursos propios frente a los fondos nacionales (ASAP); quién manda de verdad y alineamiento con la Nación; influencias de 11 potencias en cinco canales, con fuente. Capas de alineamiento, influencias y economía en el mapa.</li></ol>
+  <h2>Próximos pasos</h2><ol start="3"><li>Unos 40 actores núcleo nacionales con sus relaciones, medidos en los 21 ejes.</li><li>Fichas de ciudades: intendente, actores, fricciones e influencias propias.</li><li>Actores provinciales y municipales; puntos de fricción; zonas liberadas.</li></ol>
+  <h2>Método de las influencias</h2><p>Cada potencia recibe de 0 a 3 en cinco canales. El comercio se calcula con la participación de cada destino en las exportaciones de la provincia (40% o más vale 3; de 20% a 40%, 2; de 8% a 20%, 1); cuando el INDEC informa un bloque se toma como aproximación (USMCA como EE.UU. y Mercosur como Brasil). Inversión, deuda, presencia e influencia política se cargan dato por dato con su fuente. La potencia dominante es la de mayor suma; si dos empatan, se marca el empate.</p>
+  <h2>Pendientes</h2><ul><li>Población de cada ciudad (hoy se muestra la de su departamento) y fuente de cada ciudad.</li><li>Ubicación exacta de la estación espacial china (cargada en Bajada del Agrio, a confirmar con el paraje Quintuco).</li></ul></div>`;
 }
 function route(){
   const h=decodeURIComponent(location.hash.slice(1));tip.style.display="none";let nk="inicio";
@@ -190,7 +237,7 @@ Promise.all(["data/territorio.json","data/provincias.json","data/antartida.json"
   for(const p of T.provincias){byS[p.s]=p;byId[p.id]=p}
   for(const c of T.ciudades)cityS[c.s]=c;
   const fd=d=>{const[y,m,x]=d.split("-");return +x+" "+MES[+m-1]+" "+y};
-  document.getElementById("stamp").innerHTML=`Esqueleto · paso 1 de 5<br>Corte ${fd(T.corte)} · próxima ${fd(T.proxima)}`;
+  document.getElementById("stamp").innerHTML=`Paso 2 de 5<br>Corte ${fd(T.corte)} · próxima ${fd(T.proxima)}`;
   document.getElementById("foot-date").textContent=`Corte del ${fd(T.corte)}; próxima revisión el ${fd(T.proxima)}.`;
   setup();addEventListener("hashchange",route);route();
 }).catch(e=>{app.innerHTML=`<p style="padding:40px 0">No se pudo cargar el mapa: ${esc(e.message)}</p>`});

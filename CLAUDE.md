@@ -23,6 +23,15 @@ Panel corto (población, cabecera, actividad, intendente o comisionado, actores 
 
 ## Influencias mundiales (paso 2)
 Potencias de `fuente/influencias.py` (lista aprobada por Franco el 19/11/2026: EE.UU., China, Unión Europea, Reino Unido, Brasil, Rusia, Israel, Golfo, Canadá y Australia, Japón y Corea, y FMI, BM y BID) puntuadas de 0 a 3 en cinco canales (comercio, inversión, deuda, presencia física o de seguridad, influencia política y cultural), con fuente, por país, provincia, departamento y ciudad. En las ciudades de empresa, la influencia sale sobre todo de los mercados y socios de esa empresa. El nivel país suma los vínculos del Estado nacional (FMI, Tesoro de EE.UU., swap chino).
+- Comercio no se carga a mano: lo calcula el generador con los destinos de `fuente/economia.py` (40% o más de las exportaciones = 3; 20% a 40% = 2; 8% a 20% = 1). Si el INDEC da un bloque, se aproxima: USMCA → EE.UU., Mercosur → Brasil; si da el país, vale el país.
+- Inversión, deuda, presencia e influencia política: una entrada por dato, con fuente; 3 = controla el recurso, la deuda o la presencia principal; 2 = actor de primer orden entre varios; 1 = presencia relevante pero acotada.
+- Potencia dominante = mayor suma; los empates se muestran como empate, nunca se desempatan por el orden de la lista.
+
+## Alineamiento y quién manda (paso 2)
+`fuente/alineamiento.py`: A aliado (acuerdos electorales con LLA), D dialoguista, I independiente (Provincias Unidas u otro espacio propio), O opositor; grupo que gobierna y desde cuándo; «manda» en una o dos frases; fuentes. Se revisa en cada corte y, en 2027, después de cada elección provincial.
+
+## Datos duros (paso 2)
+Población: `python3 scripts/importar_censo.py` (INDEC, Censo 2022, cuadro 2 de cada provincia). Exportaciones: informe del INDEC «Origen provincial de las exportaciones» más reciente (semestral o anual; actualizar `PERIODO_EXPORTACIONES`). Recursos propios: ASAP (o la Oficina de Presupuesto del Congreso si ASAP no publica).
 
 ## Estética
 Fondo negro, rojo de marca #E10600 para rellenos y #FF3B30 para texto. Tipografías: Big Shoulders Display, Archivo, Newsreader, JetBrains Mono. Símbolo: el del mapa global con la silueta de la Argentina dentro del círculo y el nodo rojo en Buenos Aires (img/logo.svg; reducido en img/favicon.svg). Vista previa para redes: img/og-mapa-argentino.png (1200×630); si cambian las cifras de la portada, se regenera.

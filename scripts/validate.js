@@ -16,6 +16,12 @@ for (const p of T.provincias) {
   if (!/^\d{4}-\d{2}$/.test(p.desde || "")) err.push(`${p.n}: fecha «desde» inválida`);
   if (!p.cap) err.push(`${p.n}: no tiene capital entre las ciudades`);
 }
+for (const p of T.provincias) {
+  if (!p.pob) err.push(`${p.n}: falta la población`);
+  if (!p.ali || !"ADIO".includes(p.ali.ali) || !p.ali.manda || !p.ali.fuentes.length) err.push(`${p.n}: falta el alineamiento o sus fuentes`);
+  if (!p.eco || !(p.eco.exp > 0)) err.push(`${p.n}: faltan las exportaciones`);
+  for (const i of p.inf) if (!/^https?:\/\//.test(i.u) || !(i.n >= 1 && i.n <= 3)) err.push(`${p.n}: influencia sin fuente o fuera de escala (${i.p})`);
+}
 const slugs = new Set();
 for (const c of T.ciudades) {
   if (slugs.has(c.s)) err.push(`Ciudad repetida: ${c.n}`); slugs.add(c.s);
