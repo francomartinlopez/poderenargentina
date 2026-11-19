@@ -8,8 +8,9 @@ import json, os, re, sys, unicodedata
 
 RAIZ = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(RAIZ, "fuente"))
+sys.path.insert(0, os.path.join(RAIZ, "scripts"))
 from provincias import PROVINCIAS  # noqa: E402
-from ciudades import CIUDADES  # noqa: E402
+from ciudades import CIUDADES, EXCEPCIONES  # noqa: E402
 import poblacion, poblacion_ciudades, economia, alineamiento, influencias  # noqa: E402
 
 # Corte trimestral: subir en cada actualización (CORTE = hoy, PROXIMA = dentro de tres meses).
@@ -39,6 +40,8 @@ def main():
         c = dict(n=n, s=s, prov=prov, dep=dep, lon=lon, lat=lat, mot=mot.split(), nota=nota)
         if fuente:
             c["fuente"] = fuente
+        if n in EXCEPCIONES:
+            c["exc"] = EXCEPCIONES[n]
         pc = poblacion_ciudades.CIUDADES.get(n, {})
         if pob or pc.get("pob"):
             c["pob"] = pob or pc["pob"]
@@ -103,11 +106,14 @@ def main():
     meta = dict(potencias=POT, canales=influencias.CANALES, alineamiento=alineamiento.ALINEAMIENTO,
                 fuente_censo=poblacion.FUENTE, fuente_exp=economia.FUENTE_EXPORTACIONES, periodo_exp=economia.PERIODO_EXPORTACIONES,
                 fuente_propios=economia.FUENTE_RECURSOS_PROPIOS, fuente_ali=alineamiento.FUENTE_MAPA)
+    from puntaje import calcular
+    actores, relaciones, meta_act = calcular({c["n"]: c for c in ciudades})
+    meta["act"] = meta_act
     out = dict(corte=CORTE, proxima=PROXIMA, meta=meta, pais=pais, provincias=provincias, ciudades=ciudades,
-               deppob=poblacion.DEPARTAMENTO)
+               deppob=poblacion.DEPARTAMENTO, actores=actores, relaciones=relaciones)
     with open(os.path.join(RAIZ, "data", "territorio.json"), "w") as f:
         json.dump(out, f, ensure_ascii=False, separators=(",", ":"))
-    print(f"data/territorio.json: {len(provincias)} provincias, {sum(ndep.values())} departamentos, {len(ciudades)} ciudades. Corte {CORTE}.")
+    print(f"data/territorio.json: {len(provincias)} provincias, {sum(ndep.values())} departamentos, {len(ciudades)} ciudades, {len(actores)} actores y {len(relaciones)} relaciones. Corte {CORTE}.")
 
 
 if __name__ == "__main__":

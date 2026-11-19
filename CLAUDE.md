@@ -37,5 +37,8 @@ Población: `python3 scripts/importar_censo.py` (INDEC, Censo 2022, cuadro 2 de 
 Fondo negro, rojo de marca #E10600 para rellenos y #FF3B30 para texto. Tipografías: Big Shoulders Display, Archivo, Newsreader, JetBrains Mono. Símbolo: el del mapa global con la silueta de la Argentina dentro del círculo y el nodo rojo en Buenos Aires (img/logo.svg; reducido en img/favicon.svg). Vista previa para redes: img/og-mapa-argentino.png (1200×630); si cambian las cifras de la portada, se regenera.
 En escritorio, el panel lateral mide lo mismo que el mapa y lleva lo principal; los bloques que aparecen al elegir van debajo, a lo ancho.
 
+## Actores (paso 3)
+`fuente/actores.py` (actores, fichas y relaciones) y `fuente/ejes.py` (ejes con anclas a escala nacional, pesos, categorías, alcance); el puntaje lo calcula `scripts/puntaje.py` con la fórmula del mapa global. Un actor que ya está en el mapa global usa el mismo id. El Estado no figura como bloque formal: figuran quienes ejercen el poder. Cada actor lleva ficha y fuentes; cada relación, una fuente. Las relaciones con actores del mapa global usan sus ids (`EXTERNOS`). Excepciones al criterio de ciudades: `EXCEPCIONES` en `fuente/ciudades.py` (Junín y Goya, decisión de Franco del 19/11/2026).
+
 ## Actualización trimestral
 23 de febrero, mayo, agosto y noviembre (una semana después del mapa global). Subir `CORTE` y `PROXIMA` en `scripts/generar_datos.py`, subir el sufijo `?v=` de index.html, registrar en CHANGELOG.md y etiquetar el commit (`corte-AAAA-MM`). En 2027 conviene una revisión extra después de las elecciones de octubre y otra después de las asunciones del 10 de diciembre.

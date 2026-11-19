@@ -1,7 +1,7 @@
 # Población de las ciudades del mapa (19/11/2026).
 # aglo / aglo_pob: aglomerado urbano del INDEC al que pertenece la ciudad y su población (Censo 2022; aglo_pob10 = Censo 2010).
 #   Varias ciudades comparten aglomerado (por ejemplo Neuquén-Plottier-Cipolletti o Reconquista-Avellaneda): el número es el del conjunto.
-# pob / anio: población de la localidad sola, cuando se conoce (Censo 2022 o 2010). Fuente: INDEC vía Wikipedia, salvo indicación.
+# pob / anio: población de la localidad sola, cuando se conoce, con el año del censo. Fuente: INDEC vía Wikipedia o citypopulation.de.
 # El criterio «ciudad grande» (más de 100.000 habitantes) se mide sobre el aglomerado.
 
 CIUDADES = {
@@ -44,13 +44,11 @@ CIUDADES = {
     'Concordia': {'aglo': 'Concordia', 'aglo_pob': 175683, 'aglo_pob10': 149450, 'fuente_aglo': 'https://es.wikipedia.org/wiki/Anexo:%C3%81reas_urbanas_de_Argentina_con_m%C3%A1s_de_30_000_habitantes'},
     'Gualeguaychú': {'aglo': 'Gualeguaychú-Pueblo General Belgrano', 'aglo_pob': 98174, 'aglo_pob10': 82644, 'fuente_aglo': 'https://es.wikipedia.org/wiki/Anexo:%C3%81reas_urbanas_de_Argentina_con_m%C3%A1s_de_30_000_habitantes'},
     'Tandil': {'aglo': 'Tandil', 'aglo_pob': 138549, 'aglo_pob10': 116916, 'fuente_aglo': 'https://es.wikipedia.org/wiki/Anexo:%C3%81reas_urbanas_de_Argentina_con_m%C3%A1s_de_30_000_habitantes'},
-    'Junín': {'aglo': 'Junín', 'aglo_pob': 95385, 'aglo_pob10': 87509, 'fuente_aglo': 'https://es.wikipedia.org/wiki/Anexo:%C3%81reas_urbanas_de_Argentina_con_m%C3%A1s_de_30_000_habitantes'},
     'Rafaela': {'aglo': 'Rafaela', 'aglo_pob': 101470, 'aglo_pob10': 91571, 'fuente_aglo': 'https://es.wikipedia.org/wiki/Anexo:%C3%81reas_urbanas_de_Argentina_con_m%C3%A1s_de_30_000_habitantes'},
     'Reconquista': {'aglo': 'Reconquista-Avellaneda', 'aglo_pob': 111396, 'aglo_pob10': 93890, 'fuente_aglo': 'https://es.wikipedia.org/wiki/Anexo:%C3%81reas_urbanas_de_Argentina_con_m%C3%A1s_de_30_000_habitantes'},
     'Venado Tuerto': {'aglo': 'Venado Tuerto', 'aglo_pob': 81966, 'aglo_pob10': 76432, 'fuente_aglo': 'https://es.wikipedia.org/wiki/Anexo:%C3%81reas_urbanas_de_Argentina_con_m%C3%A1s_de_30_000_habitantes'},
     'Villa Mercedes': {'aglo': 'Villa Mercedes', 'aglo_pob': 132076, 'aglo_pob10': 111391, 'fuente_aglo': 'https://es.wikipedia.org/wiki/Anexo:%C3%81reas_urbanas_de_Argentina_con_m%C3%A1s_de_30_000_habitantes'},
     'Presidencia Roque Sáenz Peña': {'aglo': 'Presidencia Roque Sáenz Peña', 'aglo_pob': 96866, 'aglo_pob10': 89882, 'fuente_aglo': 'https://es.wikipedia.org/wiki/Anexo:%C3%81reas_urbanas_de_Argentina_con_m%C3%A1s_de_30_000_habitantes'},
-    'Goya': {'aglo': 'Goya', 'aglo_pob': 88949, 'aglo_pob10': 71606, 'fuente_aglo': 'https://es.wikipedia.org/wiki/Anexo:%C3%81reas_urbanas_de_Argentina_con_m%C3%A1s_de_30_000_habitantes'},
     'San Ramón de la Nueva Orán': {'aglo': 'San Ramón de la Nueva Orán', 'aglo_pob': 88867, 'aglo_pob10': 76070, 'fuente_aglo': 'https://es.wikipedia.org/wiki/Anexo:%C3%81reas_urbanas_de_Argentina_con_m%C3%A1s_de_30_000_habitantes'},
     'Río Grande': {'aglo': 'Río Grande', 'aglo_pob': 97611, 'aglo_pob10': 66475, 'fuente_aglo': 'https://es.wikipedia.org/wiki/Anexo:%C3%81reas_urbanas_de_Argentina_con_m%C3%A1s_de_30_000_habitantes'},
     'La Banda': {'aglo': 'Santiago del Estero-La Banda', 'aglo_pob': 449688, 'aglo_pob10': 358633, 'fuente_aglo': 'https://es.wikipedia.org/wiki/Anexo:%C3%81reas_urbanas_de_Argentina_con_m%C3%A1s_de_30_000_habitantes'},
@@ -73,6 +71,7 @@ CIUDADES = {
     'Marcos Juárez': {'pob': 28485, 'anio': 2022, 'fuente_pob': 'https://es.wikipedia.org/wiki/Marcos_Juárez'},
     'San Lorenzo': {'aglo': 'Gran Rosario', 'aglo_pob': 1429292, 'aglo_pob10': 1236089, 'pob': 50719, 'anio': 2022, 'fuente_pob': 'https://es.wikipedia.org/wiki/San_Lorenzo_(Santa_Fe)', 'fuente_aglo': 'https://es.wikipedia.org/wiki/Anexo:%C3%81reas_urbanas_de_Argentina_con_m%C3%A1s_de_30_000_habitantes'},
     'Puerto General San Martín': {'aglo': 'Gran Rosario', 'aglo_pob': 1429292, 'aglo_pob10': 1236089, 'pob': 17965, 'anio': 2022, 'fuente_pob': 'https://es.wikipedia.org/wiki/Puerto_General_San_Martín', 'fuente_aglo': 'https://es.wikipedia.org/wiki/Anexo:%C3%81reas_urbanas_de_Argentina_con_m%C3%A1s_de_30_000_habitantes'},
+    'Timbúes': {'pob': 5406, 'anio': 2022, 'fuente_pob': 'https://www.citypopulation.de/en/argentina/santafe/san_lorenzo/82119140__timb%C3%BAes/'},
     'Necochea': {'aglo': 'Necochea-Quequén', 'aglo_pob': 94057, 'aglo_pob10': 84784, 'fuente_aglo': 'https://es.wikipedia.org/wiki/Anexo:%C3%81reas_urbanas_de_Argentina_con_m%C3%A1s_de_30_000_habitantes'},
     'Ensenada': {'aglo': 'Gran La Plata', 'aglo_pob': 919154, 'aglo_pob10': 787294, 'pob': 63718, 'anio': 2022, 'fuente_pob': 'https://es.wikipedia.org/wiki/Ensenada_(Argentina)', 'fuente_aglo': 'https://es.wikipedia.org/wiki/Anexo:%C3%81reas_urbanas_de_Argentina_con_m%C3%A1s_de_30_000_habitantes'},
     'Puerto Deseado': {'pob': 16812, 'anio': 2022, 'fuente_pob': 'https://es.wikipedia.org/wiki/Puerto_Deseado'},
@@ -89,17 +88,20 @@ CIUDADES = {
     'Antofagasta de la Sierra': {'pob': 730, 'anio': 2010, 'fuente_pob': 'https://es.wikipedia.org/wiki/Antofagasta_de_la_Sierra'},
     'Fiambalá': {'pob': 4693, 'anio': 2010, 'fuente_pob': 'https://es.wikipedia.org/wiki/Fiambalá'},
     'Andalgalá': {'pob': 19678, 'anio': 2022, 'fuente_pob': 'https://es.wikipedia.org/wiki/Andalgalá'},
-    'San José de Jáchal': {'pob': 10993, 'anio': 2001, 'fuente_pob': 'https://es.wikipedia.org/wiki/San_José_de_Jáchal'},
+    'San José de Jáchal': {'pob': 10940, 'anio': 2010, 'fuente_pob': 'https://www.citypopulation.de/en/argentina/sanjuan/j%C3%A1chal/70056080__san_jos%C3%A9_de_j%C3%A1chal/'},
     'Calingasta': {'pob': 2039, 'anio': 2001, 'fuente_pob': 'https://es.wikipedia.org/wiki/Calingasta'},
     'Perito Moreno': {'pob': 7808, 'anio': 2022, 'fuente_pob': 'https://es.wikipedia.org/wiki/Perito_Moreno_(Santa_Cruz)'},
     'Malargüe': {'pob': 27660, 'anio': 2022, 'fuente_pob': 'https://es.wikipedia.org/wiki/Malargüe'},
     'Puerto Iguazú': {'aglo': 'Puerto Iguazú', 'aglo_pob': 53786, 'aglo_pob10': 41062, 'fuente_aglo': 'https://es.wikipedia.org/wiki/Anexo:%C3%81reas_urbanas_de_Argentina_con_m%C3%A1s_de_30_000_habitantes'},
     'Clorinda': {'aglo': 'Clorinda', 'aglo_pob': 56528, 'aglo_pob10': 52837, 'fuente_aglo': 'https://es.wikipedia.org/wiki/Anexo:%C3%81reas_urbanas_de_Argentina_con_m%C3%A1s_de_30_000_habitantes'},
+    'Salvador Mazza': {'pob': 20670, 'anio': 2010, 'fuente_pob': 'https://en.wikipedia.org/wiki/Salvador_Mazza,_Salta'},
     'Aguas Blancas': {'pob': 3648, 'anio': 2022, 'fuente_pob': 'https://es.wikipedia.org/wiki/Aguas_Blancas_(Argentina)'},
-    'La Quiaca': {'pob': 18000, 'anio': 2023, 'fuente_pob': 'https://es.wikipedia.org/wiki/La_Quiaca', 'estimada': True},
+    'La Quiaca': {'pob': 22078, 'anio': 2022, 'fuente_pob': 'https://www.citypopulation.de/en/argentina/jujuy/38112__yavi'},
     'Paso de los Libres': {'aglo': 'Paso de los Libres', 'aglo_pob': 51442, 'aglo_pob10': 43251, 'fuente_aglo': 'https://es.wikipedia.org/wiki/Anexo:%C3%81reas_urbanas_de_Argentina_con_m%C3%A1s_de_30_000_habitantes'},
+    'Junín': {'aglo': 'Junín', 'aglo_pob': 95385, 'aglo_pob10': 87509, 'fuente_aglo': 'https://es.wikipedia.org/wiki/Anexo:%C3%81reas_urbanas_de_Argentina_con_m%C3%A1s_de_30_000_habitantes'},
+    'Goya': {'aglo': 'Goya', 'aglo_pob': 88949, 'aglo_pob10': 71606, 'fuente_aglo': 'https://es.wikipedia.org/wiki/Anexo:%C3%81reas_urbanas_de_Argentina_con_m%C3%A1s_de_30_000_habitantes'},
     'Río Tercero': {'aglo': 'Río Tercero', 'aglo_pob': 52977, 'aglo_pob10': 46421, 'fuente_aglo': 'https://es.wikipedia.org/wiki/Anexo:%C3%81reas_urbanas_de_Argentina_con_m%C3%A1s_de_30_000_habitantes'},
     'Punta Alta': {'aglo': 'Punta Alta', 'aglo_pob': 64244, 'aglo_pob10': 58315, 'fuente_aglo': 'https://es.wikipedia.org/wiki/Anexo:%C3%81reas_urbanas_de_Argentina_con_m%C3%A1s_de_30_000_habitantes'},
     'Campana': {'aglo': 'Campana', 'aglo_pob': 104235, 'aglo_pob10': 86860, 'fuente_aglo': 'https://es.wikipedia.org/wiki/Anexo:%C3%81reas_urbanas_de_Argentina_con_m%C3%A1s_de_30_000_habitantes'},
 }
-# Sin dato de población propia todavía: Timbúes y Salvador Mazza (el INDEC no publica la localidad aislada en las fuentes revisadas).
+# Con dato de 2001 todavía: Susques, San Antonio de los Cobres y Calingasta (falta el Censo 2022 de la localidad).

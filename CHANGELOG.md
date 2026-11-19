@@ -1,5 +1,13 @@
 # Cambios
 
+## 2026-11-19 (d) · Paso 3: actores núcleo nacionales
+
+- 42 actores nacionales (`fuente/actores.py`) medidos en los 21 ejes con la fórmula del mapa global (`fuente/ejes.py`, `scripts/puntaje.py`): conducción del Ejecutivo, Economía, BCRA, ARCA, Banco Nación, SIDE, Fuerzas Armadas, fuerzas federales, Corte, Comodoro Py, Congreso, los cuatro gobiernos provinciales de mayor peso nacional, partidos, Cristina Fernández de Kirchner, grandes grupos, cámaras empresarias, CGT, Camioneros, UTEP, Iglesia, AFA y Los Monos. Como en el mapa global, el Estado no figura como bloque formal sino a través de quienes ejercen el poder.
+- Cada actor con ficha (qué es, quién manda), fuentes, puntaje de poder, poder oculto, autonomía, alcance y dependencias; acción fuera de la ley solo con condena judicial (causa Vialidad, Los Monos).
+- 48 relaciones con fuente, incluidas las que cruzan con actores del mapa global (FMI, Tesoro de EE.UU., Banco Popular de China, Casa Blanca, CIA, Santa Sede, FIFA).
+- Sitio: página Actores con ranking, filtro por tipo, red de relaciones y método; ficha de cada actor (`#a-<id>`); capa Actores en el mapa; actores con sede en las fichas de provincia y ciudad. Validador ampliado. Vista previa para redes regenerada.
+- Cabos sueltos: fuente para las 67 ciudades que no la tenían; Junín y Goya vuelven por decisión de Franco (excepción al umbral de 100.000 habitantes, registrada en `fuente/ciudades.py`); población de Timbúes (5.406), La Quiaca (22.078), Salvador Mazza (2010) y Jáchal (2010).
+
 ## 2026-11-19 (c) · Población de ciudades y estación china
 
 - Población de cada ciudad (`fuente/poblacion_ciudades.py`): la del aglomerado urbano del INDEC cuando la ciudad forma parte de uno (Censo 2022, con el dato de 2010), y la de la localidad sola para las ciudades chicas, con el año del dato (2022, 2010, 2001 o estimación). Cuando un aglomerado une varias localidades (Neuquén-Plottier-Cipolletti, Gran Rosario, Santiago del Estero-La Banda y otros), la cifra es la del conjunto. Faltan Timbúes y Salvador Mazza.

@@ -11,7 +11,7 @@ Proyecto hermano de [El mapa del poder global](https://francomartinlopez.github.
 - **Plan:** qué está hecho y qué falta.
 
 ## Estado
-Paso 2 de 5: cartografía, ciudades, gobernadores y fichas de las 24 provincias (población, economía, quién manda, alineamiento e influencias mundiales). Próximos pasos: actores núcleo nacionales; fichas de ciudades; actores provinciales y municipales, puntos de fricción y zonas liberadas.
+Paso 3 de 5: cartografía, ciudades, gobernadores, fichas de las 24 provincias (población, economía, quién manda, alineamiento e influencias mundiales) y 42 actores núcleo nacionales medidos en 21 ejes, con sus relaciones. Próximos pasos: fichas de ciudades; actores provinciales y municipales, puntos de fricción y zonas liberadas.
 
 ## Datos
 - `fuente/provincias.py`: gobernadores (fuente editorial).
@@ -20,7 +20,7 @@ Paso 2 de 5: cartografía, ciudades, gobernadores y fichas de las 24 provincias 
 - `fuente/economia.py`: exportaciones, destinos y rubro (INDEC) y recursos propios (ASAP).
 - `fuente/alineamiento.py`: quién manda y alineamiento con la Nación, con fuentes.
 - `fuente/influencias.py`: influencias de 11 potencias en cinco canales, con fuentes.
-- `fuente/actores.py`: estructura del paso 3, todavía sin cargar.
+- `fuente/actores.py`: actores núcleo, fichas y relaciones; `fuente/ejes.py`: ejes, pesos y categorías; `scripts/puntaje.py`: fórmula del puntaje.
 - `scripts/generar_datos.py`: genera `data/territorio.json`.
 - `scripts/validate.js`: controla provincias, ciudades, departamentos y el vencimiento del corte.
 - `scripts/cartografia.sh`: regenera `data/provincias.json`, `data/antartida.json` y `data/dep/*.json` desde el IGN (vía Georef, datos.gob.ar).
