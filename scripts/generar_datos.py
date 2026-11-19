@@ -133,11 +133,26 @@ def main():
     from puntaje import calcular
     actores, relaciones, meta_act = calcular({c["n"]: c for c in ciudades})
     meta["act"] = meta_act
+    import friccion
+    slugs = {c["s"] for c in ciudades}
+    ids = {a["id"] for a in actores} | set(meta_act["externos"])
+    fr = []
+    for (i, n, tipo, prov, cs, lon, lat, nv, est, act, pots, x, hitos, fu) in friccion.FRICCION:
+        assert prov in ign and (cs is None or cs in slugs), f"Fricción {i}: provincia o ciudad inexistente"
+        assert all(a in ids for a in act), f"Fricción {i}: actor desconocido"
+        assert all(q in POT for q in pots), f"Fricción {i}: potencia desconocida"
+        assert nv in (1, 2, 3) and fu and all(h[2] for h in hitos), f"Fricción {i}: falta intensidad o fuente"
+        fr.append(dict(id=i, n=n, tipo=tipo, prov=prov, cs=cs, lon=lon, lat=lat, nv=nv, est=est, act=act, pot=pots, x=x,
+                       hit=[dict(f=h[0], x=h[1], u=h[2]) for h in hitos], fu=[dict(t=t, u=u) for t, u in fu]))
+    zonas = []
+    for (i, n, prov, cs, lon, lat, est, x, fu) in friccion.ZONAS:
+        assert prov in ign and (cs is None or cs in slugs) and fu, f"Zona {i}: datos o fuente faltantes"
+        zonas.append(dict(id=i, n=n, prov=prov, cs=cs, lon=lon, lat=lat, est=est, x=x, fu=[dict(t=t, u=u) for t, u in fu]))
     out = dict(corte=CORTE, proxima=PROXIMA, meta=meta, pais=pais, provincias=provincias, ciudades=ciudades,
-               deppob=poblacion.DEPARTAMENTO, actores=actores, relaciones=relaciones)
+               deppob=poblacion.DEPARTAMENTO, actores=actores, relaciones=relaciones, friccion=fr, zonas=zonas)
     with open(os.path.join(RAIZ, "data", "territorio.json"), "w") as f:
         json.dump(out, f, ensure_ascii=False, separators=(",", ":"))
-    print(f"data/territorio.json: {len(provincias)} provincias, {sum(ndep.values())} departamentos, {len(ciudades)} ciudades, {len(actores)} actores y {len(relaciones)} relaciones. Corte {CORTE}.")
+    print(f"data/territorio.json: {len(provincias)} provincias, {sum(ndep.values())} departamentos, {len(ciudades)} ciudades, {len(actores)} actores y {len(relaciones)} relaciones, {len(fr)} puntos de fricción y {len(zonas)} zona(s) liberada(s). Corte {CORTE}.")
 
 
 if __name__ == "__main__":

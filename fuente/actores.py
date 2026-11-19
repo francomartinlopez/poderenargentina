@@ -32,7 +32,7 @@ ACTORES = [
  ("gob_pba", "Gobierno de la Provincia de Buenos Aires (Axel Kicillof)", "Gobierno", "La Plata", "P", "P", 1, "121101220111102122122", "D", "", 2),
  ("gob_cordoba", "Gobierno de Córdoba (Martín Llaryora)", "Gobierno", "Córdoba", "P", "I", 1, "111101120111111122222", "D", "", 2),
  ("gob_santafe", "Gobierno de Santa Fe (Maximiliano Pullaro)", "Gobierno", "Santa Fe", "P", "I", 1, "111101120111111122222", "D", "", 2),
- ("gob_neuquen", "Gobierno del Neuquén (Rolando Figueroa)", "Gobierno", "Neuquén", "P", "I", 1, "310011110010101022222", "D", "", 2),
+ ("gob_neuquen", "Gobierno del Neuquén (Rolando Figueroa)", "Gobierno", "Neuquén", "P", "I", 1, "311111110111101122222", "D", "", 2),
  # Partidos y liderazgos
  ("lla", "La Libertad Avanza", "Partido en sistema competitivo", CABA, "N", "T", 2, "000000000012002222210", "D", "karina", 1),
  ("pj", "Partido Justicialista", "Partido en sistema competitivo", CABA, "N", "P", 1, "010000010011103222110", "D", "", 1),

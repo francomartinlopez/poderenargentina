@@ -11,7 +11,7 @@ Proyecto hermano de [El mapa del poder global](https://francomartinlopez.github.
 - **Plan:** qué está hecho y qué falta.
 
 ## Estado
-Paso 4 de 5: cartografía, ciudades, gobernadores, fichas de las 24 provincias (población, economía, quién manda, alineamiento e influencias mundiales) y 42 actores núcleo nacionales medidos en 21 ejes, con sus relaciones; fichas de ciudades con intendente, influencias propias y conflictos. Próximo paso: actores provinciales y municipales, puntos de fricción y zonas liberadas.
+Los cinco pasos están hechos: cartografía, ciudades, gobernadores, fichas de las 24 provincias (población, economía, quién manda, alineamiento e influencias mundiales) y los actores núcleo nacionales medidos en 21 ejes, con sus relaciones; fichas de ciudades con intendente, influencias propias y conflictos; actores provinciales y municipales (65 en total), puntos de fricción y zonas liberadas documentadas. Se actualiza cada trimestre.
 
 ## Datos
 - `fuente/provincias.py`: gobernadores (fuente editorial).

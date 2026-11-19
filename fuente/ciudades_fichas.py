@@ -12,7 +12,7 @@ INTENDENTES = {
  CABA: ("Jorge Macri", "PRO", "PRO", "V", W + "Jorge_Macri", "Jefe de Gobierno desde 2023."),
  # Capitales (Infobae, agosto de 2026)
  "La Plata": ("Julio Alak", "Fuerza Patria", "Peronismo", "V", IB, ""),
- "Córdoba": ("Daniel Passerini", "Hacemos Unidos por Córdoba", "Peronismo", "W", W + "Córdoba_(Argentina)", ""),
+ "Córdoba": ("Daniel Passerini", "Hacemos Unidos por Córdoba", "Peronismo", "V", "https://eduardogerman.com/wp-content/uploads/2026/04/ABRIL-2026-%E2%80%93-RANKING-CB-DE-GOBERNADORES-RANKING-FEDERAL-CB-DE-INTENDENTES.pdf", ""),
  "Santa Fe": ("Juan Pablo Poletti", "UCR (Unidos para Cambiar Santa Fe)", "Radicalismo", "V", IB, ""),
  "Mendoza": ("Ulpiano Suárez", "UCR (Cambia Mendoza)", "Radicalismo", "V", IB, ""),
  "San Miguel de Tucumán": ("Rossana Chahla", "Peronismo (Lealtad Peronista)", "Peronismo", "V", IB, ""),
@@ -21,7 +21,7 @@ INTENDENTES = {
  "Posadas": ("Leonardo Stelatto", "Frente Renovador de la Concordia", "Provincial", "V", IB, ""),
  "Resistencia": ("Roy Nikisch", "UCR", "Radicalismo", "V", IB, ""),
  "Corrientes": ("Claudio Polich", "UCR", "Radicalismo", "V", IB, ""),
- "Santiago del Estero": ("Norma Fuentes", "Frente Cívico por Santiago", "Provincial", "V", IB, ""),
+ "Santiago del Estero": ("Mario Benavente", "Frente Cívico por Santiago", "Provincial", "V", "https://www.cadena3.com/noticia/politica-y-economia/elecciones-municipales-en-santiago-benavente-gano-en-la-capital-y-el-frente-civico-sigue-al-mando_579614", "Electo el 2 de agosto de 2026 para suceder a Norma Fuentes."),
  "San Juan": ("Susana Laciar", "Producción y Trabajo (Unidos por San Juan)", "Provincial", "V", IB, ""),
  "San Salvador de Jujuy": ("Raúl Jorge", "UCR (Cambia Jujuy)", "Radicalismo", "V", IB, "Quinto mandato consecutivo."),
  "Viedma": ("Marcos Castro", "Juntos Somos Río Negro", "Provincial", "V", IB, ""),
@@ -57,11 +57,11 @@ INTENDENTES = {
  "General Deheza": ("Eduardo Pizzi", "Alternativa Vecinal", "Vecinal", "V", "https://cordobainteriorinforma.com/2026/10/13/por-diversas-causas-ya-no-gobiernan-sus-pueblos-15-intendentes-electos-en-2023/", "Asumió tras la muerte del intendente electo en 2023, Oscar Flores Ferrando."),
  "Paso de los Libres": ("Martín Ascúa", "PJ", "Peronismo", "W", "https://www.radiodos.com.ar/102065-martin-ascua-asumio-su-segundo-mandato-como-intendente-de-paso-de-los-libres", ""),
  "Río Cuarto": ("Guillermo De Rivas", "PJ (Hacemos Unidos por Córdoba)", "Peronismo", "W", W + "Río_Cuarto_(ciudad)", ""),
- "Villa María": ("Eduardo Accastello", "PJ (Hacemos Unidos por Córdoba)", "Peronismo", "W", W + "Villa_María_(Córdoba)", ""),
+ "Villa María": ("Eduardo Accastello", "PJ (Hacemos Unidos por Córdoba)", "Peronismo", "V", "https://perfil.com/cordoba/ranking-de-dirigentes-de-cordoba-un-nuevo-intendente-libertario-se-metio-en-el-podio-y-bajo-a-un-radical-aNNpL6W6OBTA", ""),
  "San Rafael": ("Omar Félix", "PJ", "Peronismo", "W", W + "San_Rafael_(Argentina)", ""),
  "Trelew": ("Gerardo Merino", "UCR", "Radicalismo", "W", W + "Trelew", ""),
- "Puerto Madryn": ("Gustavo Sastre", "PJ", "Peronismo", "W", W + "Puerto_Madryn", ""),
- "San Carlos de Bariloche": ("Walter Cortés", "Primero Río Negro", "Provincial", "W", W + "San_Carlos_de_Bariloche", ""),
+ "Puerto Madryn": ("Gustavo Sastre", "PJ", "Peronismo", "V", "https://eduardogerman.com/wp-content/uploads/2026/04/ABRIL-2026-%E2%80%93-RANKING-CB-DE-GOBERNADORES-RANKING-FEDERAL-CB-DE-INTENDENTES.pdf", ""),
+ "San Carlos de Bariloche": ("Walter Cortés", "Primero Río Negro", "Provincial", "V", "https://eduardogerman.com/wp-content/uploads/2026/04/ABRIL-2026-%E2%80%93-RANKING-CB-DE-GOBERNADORES-RANKING-FEDERAL-CB-DE-INTENDENTES.pdf", ""),
  "General Roca": ("María Emilia Soria", "PJ", "Peronismo", "W", W + "General_Roca_(Río_Negro)", ""),
  "Cipolletti": ("Rodrigo Buteler", "Juntos Somos Río Negro", "Provincial", "W", W + "Cipolletti", ""),
  "Concordia": ("Francisco Azcue", "UCR (Juntos por Entre Ríos)", "Radicalismo", "W", W + "Concordia_(Argentina)", ""),
@@ -91,20 +91,24 @@ INTENDENTES = {
  "Embalse": ("Mario Rivarola", "Hacemos Unidos por Córdoba", "Peronismo", "W", W + "Embalse_(Córdoba)", ""),
  "Ituzaingó": ("José Emilio Nicolás", "UCR", "Radicalismo", "W", W + "Ituzaingó_(Corrientes)", ""),
  "Villa El Chocón": ("Pablo Di Fonzo", "MPN", "Provincial", "W", W + "Villa_El_Chocón", "Comisión municipal."),
- "Antofagasta de la Sierra": ("Alejandro Acevedo", "UCR", "Radicalismo", "W", W + "Antofagasta_de_la_Sierra", ""),
+ "Antofagasta de la Sierra": ("Mario Cusipuma", "", "", "V", "https://www.opendemocracy.net/es/argentina-litio-mineria-rio-tinto-catamarca-gas-natural-agua-rigi/", ""),
  "Andalgalá": ("Eduardo Córdoba", "UCR", "Radicalismo", "W", W + "Andalgalá", ""),
  "San José de Jáchal": ("Matías Espejo", "Unión por la Patria", "Peronismo", "W", W + "San_José_de_Jáchal", ""),
  "Perito Moreno": ("Matías Treppo", "Por Santa Cruz", "Provincial", "W", W + "Perito_Moreno_(Santa_Cruz)", ""),
  "Malargüe": ("Celso Jaque", "PJ", "Peronismo", "W", W + "Malargüe", ""),
  "Puerto Iguazú": ("Claudio Filippa", "Frente Renovador de la Concordia", "Provincial", "W", W + "Puerto_Iguazú", ""),
  "Clorinda": ("Ariel Caniza", "PJ", "Peronismo", "W", W + "Clorinda_(ciudad)", "Electo en 2025."),
+ "La Banda": ("Llamil Abdala", "Frente Cívico por Santiago", "Provincial", "V", "https://www.contextotucuman.com/nota/402572/el-frente-c-vico-de-santiago-del-estero-reafirma-su-dominio-electoral-con-un-66-de-los-votos.html", "Electo el 2 de agosto de 2026; el Frente Cívico gobierna la ciudad por primera vez."),
+ "Libertador General San Martín": ("Oscar Jayat", "UCR (Cambia Jujuy)", "Radicalismo", "V", "https://www.todojujuy.com/intendentes-jujuy-piden-la-legislatura-que-trate-el-proyecto-incorporar-viceintendentes-2027-n298752", ""),
+ "La Quiaca": ("Dante Velázquez", "", "", "V", "https://www.todojujuy.com/intendentes-jujuy-piden-la-legislatura-que-trate-el-proyecto-incorporar-viceintendentes-2027-n298752", ""),
+ "Salvador Mazza": ("Rubén Méndez Salazar", "", "", "W", "https://viapais.com.ar/temas/ruben-mendez-salazar/", ""),
  "Puerto Piray": ("Mirtha Elizabeth Lezcano", "", "", "V", "https://tuprovincia.com/provincia/misiones", ""),
  "Goya": ("Mariano Hormaechea", "UCR", "Radicalismo", "W", W + "Goya_(Argentina)", ""),
  "Río Tercero": ("Marcos Ferrer", "UCR", "Radicalismo", "W", W + "Río_Tercero_(ciudad)", ""),
 }
 
-# Sin dato verificado todavía: La Banda, Libertador General San Martín, Timbúes, Susques, San Antonio de los Cobres,
-# Calingasta, Salvador Mazza, Aguas Blancas y La Quiaca.
+# Sin dato verificado todavía: Timbúes, Susques, San Antonio de los Cobres, Calingasta y Aguas Blancas
+# (municipio intervenido por la provincia en 2024).
 
 # Quién manda en las ciudades donde una empresa o un enclave pesa tanto como el municipio.
 MANDA = {

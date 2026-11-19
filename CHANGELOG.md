@@ -1,5 +1,13 @@
 # Cambios
 
+## 2026-11-19 (f) · Paso 5: actores locales, fricción y zonas liberadas
+
+- Cierre del paso 4: 93 ciudades con intendente (51 confirmados con fuente de 2026, 42 «a confirmar»). Nuevos confirmados: Córdoba, Santiago del Estero (Benavente), Puerto Madryn, Bariloche, Villa María, Antofagasta de la Sierra, La Banda, Libertador General San Martín, La Quiaca y Puerto Piray; Salvador Mazza, a confirmar. Siguen sin dato Timbúes, Susques, San Antonio de los Cobres, Calingasta y Aguas Blancas (intervenido).
+- Actores provinciales y municipales (`fuente/actores_provinciales.py`): los gobiernos de las otras 20 jurisdicciones, con plantilla documentada y relación con la Nación según su alineamiento; Gerardo Zamora; los intendentes de Rosario y Córdoba. 65 actores y 74 relaciones.
+- Puntos de fricción (`fuente/friccion.py`): Malvinas, estación china de Neuquén, hidrovía, Base Naval Integrada de Ushuaia, violencia narco en Rosario, Triple Frontera, litio en la Puna, CGT frente a la reforma laboral y frontera Aguas Blancas–Bermejo, con intensidad, actores, potencias, cronología y fuentes.
+- Zonas liberadas: solo las documentadas por un organismo oficial; por ahora, la ribera del Bermejo en Aguas Blancas, con su estado actual.
+- Sitio: capas Fricción y Zonas liberadas; página Fricción (`#friccion`) y ficha de cada punto (`#f-<id>`); fricción en las fichas de provincia y ciudad. Validador ampliado.
+
 ## 2026-11-19 (e) · Paso 4: fichas de ciudades
 
 - Quién gobierna (`fuente/ciudades_fichas.py`): intendente de 89 ciudades. Las capitales y los partidos bonaerenses, confirmados con fuentes de 2026 (incluidos los interinatos de Mar del Plata, San Nicolás y Junín); el resto, tomado de Wikipedia y marcado «a confirmar». Nueve localidades siguen sin dato.

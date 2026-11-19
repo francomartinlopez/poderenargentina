@@ -4,14 +4,19 @@ const MOT={cap:["Capital","#F5F0E6"],pob:["Ciudad grande","#9A9A9A"],emp:["Empre
 const ORDEN=["emp","pue","ene","min","fro","def","cap","pob"];
 const POT=["EE.UU.","China","Unión Europea","Reino Unido","Brasil","Rusia","Israel","Golfo","Canadá y Australia","Japón y Corea","FMI, BM y BID"];
 const CK=["com","inv","deu","pre","pol"],CAN=["Comercio","Inversión","Deuda","Presencia","Política"];
-const CAPAS=[["terr","Territorio",1],["ali","Alineamiento con Nación",1],["inf","Influencias mundiales",1],["eco","Economía y recursos",1],["act","Actores",1],["zl","Zonas liberadas"],["fr","Fricción"]];
+const CAPAS=[["terr","Territorio",1],["ali","Alineamiento con Nación",1],["inf","Influencias mundiales",1],["eco","Economía y recursos",1],["act","Actores",1],["fr","Fricción",1],["zl","Zonas liberadas",1]];
 const PCOL={"EE.UU.":"#2F6BFF","China":"#D7263D","Unión Europea":"#F2C14E","Reino Unido":"#7FB3D5","Brasil":"#2EB872","Rusia":"#9E1B32","Israel":"#A0C4FF","Golfo":"#C8743C","Canadá y Australia":"#B07CFF","Japón y Corea":"#FF8FAB","FMI, BM y BID":"#BDBDBD"};
 const ACOL={A:"#8E6CFF",D:"#9A8F8C",I:"#F2A93B",O:"#3FB8C9"},ALI={A:"Aliado",D:"Dialoguista",I:"Independiente",O:"Opositor"};
 const ADESC={A:"acuerdos electorales con La Libertad Avanza",D:"negocia votos y fondos sin acuerdo electoral pleno",I:"espacio propio que compite con LLA (Provincias Unidas)",O:"opositor al Gobierno nacional"};
 let capa="terr",potSel="dom",ecoSel="exp";
 const TCOL={Estado:"#FF3B30",Persona:"#F5F0E6",Capital:"#F2A93B",Influencia:"#3FB8C9",Información:"#9E8CFF",Sombra:"#8B8B8B"};
 const RCOL={Gobierna:"#FF3B30",Propiedad:"#F2A93B",Financiamiento:"#2EB872",Alianza:"#2F6BFF",Enfrentamiento:"#D7263D",Ambigua:"#9A8F8C",Contrato:"#C8743C",Abastecimiento:"#7FB3D5","Puerta giratoria":"#B07CFF"};
-const ACT={},actCity={},actProv={};
+const ACT={},actCity={},actProv={},FR={},frProv={},frCity={},zlCity={};
+const NVC={3:"#FF3B30",2:"#F2A93B",1:"#9A8F8C"},NVT={3:"Violencia o fuerza extranjera",2:"Disputa abierta",1:"Latente o local"};
+const nvTag=n=>`<span class="tag" style="color:${NVC[n]}">${NVT[n]}</span>`;
+function frList(list){return list.length?`<ul class="flist2">${list.map(f=>`<li><i style="background:${NVC[f.nv]}"></i><a href="#f-${f.id}">${esc(f.n)}</a><span class="muted">${esc(f.tipo)} · ${esc(f.est)}</span></li>`).join("")}</ul>`:`<p class="muted">Ningún punto de fricción cargado aquí.</p>`}
+function zlBlk(list,full){return `<ul class="rlist">${list.map(z=>`<li><b>${esc(z.n)}.</b> <span class="tag" style="color:#FF3B30">${esc(z.est)}</span><br>${esc(z.x)} ${z.fu.map(f=>src(f.u)).join(" · ")}${full&&z.cs?` <a href="#c-${z.cs}">Ver ${esc(cityS[z.cs].n)}</a>`:""}</li>`).join("")}</ul>`}
+const ZLNOTA="Solo entran las zonas donde un organismo oficial describió la pérdida de control del Estado o documentó pasos o circuitos ilegales operando a la vista, con fuente. Se indica si el Estado recuperó el control.";
 const aName=id=>ACT[id]?ACT[id].n:(T.meta.act.externos[id]||id);
 const aLink=id=>ACT[id]?`<a href="#a-${id}">${esc(ACT[id].n)}</a>`:`<a href="${esc(T.meta.act.global_url)}#o-${id}" target="_blank" rel="noopener">${esc(aName(id))}</a> <span class="muted" style="font-size:12px">(mapa global)</span>`;
 const ptBar=(v,c,k)=>`<span class="ptb"><em style="width:${(v*(k||1.1)).toFixed(1)}px;background:${c||"#FF3B30"}"></em><b class="mono">${v.toLocaleString("es-AR",{maximumFractionDigits:1})}</b></span>`;
@@ -48,6 +53,7 @@ function setup(){
   FULL=[b[0][0]-12,b[0][1]-12,b[1][0]-b[0][0]+24,b[1][1]-b[0][1]+24];
   for(const f of PF.features){const p=byId[f.properties.id];p.f=f;p.b=PATH.bounds(f)}
   for(const c of T.ciudades){c.xy=PROJ([c.lon,c.lat])}
+  for(const f of [...T.friccion,...T.zonas])f.xy=PROJ([f.lon,f.lat]);
 }
 
 function mapShell(){
@@ -59,14 +65,14 @@ function mapShell(){
   <aside class="panel"><div class="pin" id="panel"></div></aside></div><section class="more" id="more"></section>`;
   svg=document.getElementById("map");
   svg.setAttribute("viewBox",FULL.join(" "));cur=FULL.slice();
-  svg.innerHTML=`<g id="gp">${PF.features.map(f=>`<path class="prov" data-k="p:${f.properties.id}" d="${PATH(f)}"><title>${esc(byId[f.properties.id].n)}</title></path>`).join("")}</g><g id="gd"></g><g id="gc"></g><g id="gl"></g>`;
-  G={p:svg.querySelector("#gp"),d:svg.querySelector("#gd"),c:svg.querySelector("#gc"),l:svg.querySelector("#gl")};
+  svg.innerHTML=`<g id="gp">${PF.features.map(f=>`<path class="prov" data-k="p:${f.properties.id}" d="${PATH(f)}"><title>${esc(byId[f.properties.id].n)}</title></path>`).join("")}</g><g id="gd"></g><g id="gc"></g><g id="gl"></g><g id="gf"></g>`;
+  G={p:svg.querySelector("#gp"),d:svg.querySelector("#gd"),c:svg.querySelector("#gc"),l:svg.querySelector("#gl"),f:svg.querySelector("#gf")};
   for(const pid in DEP)depGroup(pid);
   if(ANT){const as=document.getElementById("antsvg"),pr=d3.geoAzimuthalEqualArea().rotate([50,90]).fitExtent([[4,4],[104,92]],ANT);as.setAttribute("viewBox","0 0 108 96");as.innerHTML=`<path d="${d3.geoPath(pr)(ANT)}" fill="#161414" stroke="#4A3A38"/>`}
   svg.addEventListener("click",e=>{const t=e.target.closest("[data-k]");if(!t)return;const[k,v]=t.dataset.k.split(":");
-    if(k==="p"){location.hash="prov-"+byId[v].s}else if(k==="d"){location.hash="d-"+v}else if(k==="c"){location.hash="c-"+v}});
+    if(k==="p"){location.hash="prov-"+byId[v].s}else if(k==="d"){location.hash="d-"+v}else if(k==="c"){location.hash="c-"+v}else if(k==="f"){location.hash="f-"+v}else if(k==="z"){location.hash="c-"+v}});
   svg.addEventListener("pointermove",e=>{const t=e.target.closest("[data-k]");if(!t||e.pointerType!=="mouse"){tip.style.display="none";return}
-    const[k,v]=t.dataset.k.split(":");const txt=k==="p"?tipText(byId[v]):k==="d"?(depInfo[v]?.n||v):capa==="act"&&actCity[v]?`${cityS[v].n}: ${actCity[v].length} actores`:cityS[v]?.n;tip.textContent=txt;tip.style.display="block";tip.style.left=e.clientX+14+"px";tip.style.top=e.clientY+12+"px"});
+    const[k,v]=t.dataset.k.split(":");const txt=k==="p"?tipText(byId[v]):k==="d"?(depInfo[v]?.n||v):k==="f"?FR[v].n:k==="z"?T.zonas.find(z=>z.cs===v).n:capa==="act"&&actCity[v]?`${cityS[v].n}: ${actCity[v].length} actores`:cityS[v]?.n;tip.textContent=txt;tip.style.display="block";tip.style.left=e.clientX+14+"px";tip.style.top=e.clientY+12+"px"});
   svg.addEventListener("pointerleave",()=>tip.style.display="none");
   new ResizeObserver(()=>scaleMarks()).observe(svg);
   document.getElementById("capas").onclick=e=>{const b=e.target.closest("button[data-c]");if(!b||b.disabled)return;capa=b.dataset.c;route()};
@@ -76,6 +82,8 @@ function tipText(p){
   if(capa==="ali")return `${p.n}: ${ALI[p.ali.ali]}`;
   if(capa==="inf")return potSel==="dom"?`${p.n}: ${p.dom||(p.emp.length?"empate entre "+p.emp.join(", "):"sin datos")}`:`${p.n}: ${potSel} ${p.tot[potSel]||0} puntos`;
   if(capa==="act")return `${p.n}: ${(actProv[p.id]||[]).length} actores núcleo con sede`;
+  if(capa==="fr")return `${p.n}: ${(frProv[p.id]||[]).length} puntos de fricción`;
+  if(capa==="zl")return `${p.n}: ${T.zonas.filter(z=>z.prov===p.id).length} zonas liberadas documentadas`;
   if(capa==="eco")return ecoSel==="exp"?`${p.n}: USD ${nf(p.eco.exp)} M exportados`:`${p.n}: ${p.eco.propios==null?"sin datos":p.eco.propios.toLocaleString("es-AR")+"% de recursos propios"}`;
   return p.n}
 function paint(){
@@ -85,6 +93,8 @@ function paint(){
   const fill=p=>{
     if(capa==="ali")return[ACOL[p.ali.ali],.6];
     if(capa==="inf"){if(potSel==="dom")return p.dom?[PCOL[p.dom],.62]:p.emp.length?["#6E6462",.55]:null;const v=p.tot[potSel]||0;return v?[PCOL[potSel],.18+.7*v/maxPot(potSel)]:null}
+    if(capa==="fr"){const l=frProv[p.id];return l?[NVC[Math.max(...l.map(f=>f.nv))],.32]:null}
+    if(capa==="zl")return T.zonas.some(z=>z.prov===p.id)?["#FF3B30",.3]:null;
     if(capa==="act"){const n=(actProv[p.id]||[]).length;return n?["#FF3B30",.12+.5*Math.min(1,n/6)]:null}
     if(capa==="eco"){if(ecoSel==="exp")return["#FF3B30",.1+.8*Math.log10(p.eco.exp)/Math.log10(maxExp)];return p.eco.propios==null?null:["#FF3B30",.1+.8*p.eco.propios/90]}
     return null};
@@ -92,6 +102,8 @@ function paint(){
   if(capa==="ali"){const c={};P.forEach(p=>c[p.ali.ali]=(c[p.ali.ali]||0)+1);leg=Object.keys(ALI).map(a=>`<span class="lg"><i style="background:${ACOL[a]}"></i>${ALI[a]} ${c[a]||0}</span>`).join("")}
   else if(capa==="inf"){leg=`<button class="chip ${potSel==="dom"?"on":""}" data-pot="dom">Dominante</button>`+POT.map(k=>`<button class="chip ${potSel===k?"on":""}" data-pot="${esc(k)}"><i style="background:${PCOL[k]}"></i>${esc(k)}</button>`).join("")}
   else if(capa==="act"){leg=`<span class="lg">Círculos: ciudades sede de actores núcleo, según la suma de sus puntajes. La mayoría tiene sede en la Capital.</span>`}
+  else if(capa==="fr"){leg=[3,2,1].map(n=>`<span class="lg"><i style="background:${NVC[n]}"></i>${NVT[n]}</span>`).join("")}
+  else if(capa==="zl"){leg=`<span class="lg">Zonas documentadas con fuente oficial o periodística. Ver criterio en el panel.</span>`}
   else if(capa==="eco"){leg=`<button class="chip ${ecoSel==="exp"?"on":""}" data-eco="exp">Exportaciones</button><button class="chip ${ecoSel==="pro"?"on":""}" data-eco="pro">Recursos propios</button><span class="lg">${ecoSel==="exp"?"USD exportados, "+esc(T.meta.periodo_exp)+" (escala logarítmica)":"Ingresos propios sobre el total, 2025 (ASAP)"}</span>`}
   sub.innerHTML=leg;sub.style.display=leg?"":"none";
 }
@@ -125,6 +137,7 @@ function scaleMarks(){
   if(!svg)return;const r=svg.getBoundingClientRect();if(!r.width)return;
   const px=Math.max(cur[2]/r.width,cur[3]/r.height);
   for(const c of G.c.children)c.setAttribute("r",(c.classList.contains("cap")?5.2:4.2)*px*(+c.dataset.m||1));
+  if(G.f)for(const c of G.f.children){if(c.tagName==="circle")c.setAttribute("r",(+c.dataset.m)*px);else{const q=(+c.dataset.m)*px,x=+c.dataset.x,y=+c.dataset.y;c.setAttribute("points",`${x},${y-q} ${x+q},${y} ${x},${y+q} ${x-q},${y}`)}}
   const placed=[];
   for(const l of G.l.children){const fs=12*px,x=+l.getAttribute("x")+7*px,y=+l.getAttribute("y")+4*px,w=l.textContent.length*fs*.56,bb=[x-2*px,y-fs,x+w,y+3*px];
     l.setAttribute("font-size",fs);l.setAttribute("stroke-width",3*px);l.setAttribute("dx",7*px);l.setAttribute("dy",4*px);
@@ -137,6 +150,7 @@ function drawCities(list,labels,sel){
   G.c.innerHTML=vis.map(c=>`<circle class="city ${c.mot.includes("cap")?"cap":""} ${c.s===sel?"sel":""}" cx="${c.xy[0]}" cy="${c.xy[1]}" r="3" fill="${color(c)}" data-k="c:${c.s}" ${capa==="act"&&actCity[c.s]?`data-m="${(1+Math.log1p(actCity[c.s].reduce((t,a)=>t+a.pt,0))/2.6).toFixed(2)}" style="fill:#FF3B30;fill-opacity:.75"`:""}></circle>`).join("");
   const pr=c=>c.s===sel?0:c.mot.includes("cap")?1:c.mot.includes("pob")?2:3;
   G.l.innerHTML=labels?vis.slice().sort((a,b)=>pr(a)-pr(b)).map(c=>`<text class="clbl ${c.mot.includes("cap")?"cap":""} ${c.s===sel?"keep":""}" x="${c.xy[0]}" y="${c.xy[1]}">${esc(c.n)}</text>`).join(""):"";
+  G.f.innerHTML=capa==="fr"?T.friccion.slice().sort((a,b)=>a.nv-b.nv).map(f=>`<polygon class="frm" data-k="f:${f.id}" data-x="${f.xy[0]}" data-y="${f.xy[1]}" data-m="${5+2.2*f.nv}" fill="${NVC[f.nv]}"></polygon>`).join(""):capa==="zl"?T.zonas.map(z=>`<circle class="zlm" data-k="z:${z.cs}" cx="${z.xy[0]}" cy="${z.xy[1]}" data-m="16"></circle>`).join(""):"";
   scaleMarks();
 }
 function provState(pid,did){
@@ -157,6 +171,8 @@ function vPais(){
     side=`<h2>Potencia dominante por provincia</h2><ul class="clist">${POT.filter(k=>d[k]).sort((a,b)=>d[b].length-d[a].length).map(k=>`<li><b style="color:${PCOL[k]}">${esc(k)}</b> <span class="mono muted">${d[k].length}</span><span class="nota">${d[k].map(p=>`<a href="#prov-${p.s}">${esc(p.c)}</a>`).join(", ")}</span></li>`).join("")}${emp.length?`<li><b>Empate</b> <span class="mono muted">${emp.length}</span><span class="nota">${emp.map(p=>`<a href="#prov-${p.s}">${esc(p.c)}</a> (${p.emp.join(", ")})`).join("; ")}</span></li>`:""}</ul>`}
   else if(capa==="eco"){const L=P.slice().sort((a,b)=>ecoSel==="exp"?b.eco.exp-a.eco.exp:(b.eco.propios??-1)-(a.eco.propios??-1)),mx=Math.max(...P.map(p=>ecoSel==="exp"?p.eco.exp:(p.eco.propios||0)));
     side=`<h2>${ecoSel==="exp"?"Exportaciones, "+esc(T.meta.periodo_exp):"Recursos propios, 2025"}</h2><div class="mbars">${L.map(p=>{const v=ecoSel==="exp"?p.eco.exp:p.eco.propios;return `<div><span><a href="#prov-${p.s}">${esc(p.c)}</a></span><em style="width:${(v||0)/mx*100}%;background:#FF3B30"></em><span>${v==null?"s/d":ecoSel==="exp"?nf(v):Math.round(v)+"%"}</span></div>`}).join("")}</div><p class="muted" style="font-size:13px">${ecoSel==="exp"?"Millones de USD. "+src(T.meta.fuente_exp):"Ingresos propios sobre el total. "+src(T.meta.fuente_propios)}</p>`}
+  else if(capa==="fr")side=`<h2>Puntos de fricción · ${T.friccion.length}</h2>${frList(T.friccion.slice().sort((a,b)=>b.nv-a.nv))}<p class="muted" style="font-size:13px;margin:8px 0 0">Lugares donde actores del mapa, o una potencia y el Estado, disputan un recurso, un territorio o una regla. <a href="#friccion">Ver todos con su cronología</a>.</p>`;
+  else if(capa==="zl")side=`<h2>Zonas liberadas · ${T.zonas.length}</h2>${zlBlk(T.zonas,1)}<p class="muted" style="font-size:13px;margin:8px 0 0">${ZLNOTA}</p>`;
   else if(capa==="act")side=`<h2>Los más poderosos</h2>${actList(T.actores,12)}<p class="muted" style="font-size:13px;margin:8px 0 0">Puntaje de 0 a 100, con el mismo método que el mapa global. <a href="#actores">Ver los ${T.actores.length} actores y sus relaciones</a>.</p>`;
   else side=`<h2>Por qué está cada ciudad</h2><div class="mbars">${Object.keys(MOT).map(m=>`<div><span>${MOT[m][0]}</span><em style="width:${cnt[m]/mx*100}%;background:${MOT[m][1]}"></em><span>${cnt[m]||0}</span></div>`).join("")}</div>
   <p class="muted" style="font-size:13px;margin:8px 0 0">Una ciudad puede tener varios motivos. Las de empresa o cluster entran aunque sean chicas.</p>`;
@@ -181,7 +197,7 @@ async function vProv(p,did){
   const a=p.ali,e=p.eco;
   const manda=`<div class="blk"><h2>Quién manda de verdad</h2><p class="lead">${esc(a.manda)}</p><dl class="dl"><dt>Gobierna</dt><dd>${esc(a.grupo)}</dd><dt>Frente a la Nación</dt><dd>${aliTag(a.ali)} <span class="muted">${ADESC[a.ali]}</span></dd><dt>Fuentes</dt><dd>${a.fuentes.map(src).join(" · ")}</dd></dl></div>`;
   const eco=`<div class="blk"><h2>Economía y recursos</h2><dl class="dl"><dt>Exportaciones</dt><dd><b class="mono">USD ${nf(e.exp)} M</b> en el ${esc(T.meta.periodo_exp)}</dd><dt>Rubro principal</dt><dd>${esc(e.rubro)}</dd><dt>Destinos</dt><dd>${esc(e.destx)}</dd><dt>Recursos propios</dt><dd>${e.propios==null?"Sin datos actualizados":`<b class="mono">${e.propios.toLocaleString("es-AR")}%</b> de los ingresos; el resto llega de la Nación`}</dd><dt>Fuentes</dt><dd>${src(T.meta.fuente_exp)} · ${src(T.meta.fuente_propios)} · ${src(T.meta.fuente_censo)}</dd></dl></div>`;
-  more(manda+influ(p.inf)+eco+`<div class="blk"><h2>Actores núcleo con sede</h2>${actList(actProv[p.id]||[])}<p class="muted" style="font-size:13px;margin-top:8px">Los actores provinciales y municipales llegan en el paso 5.</p></div>`+depBlk);
+  more(manda+influ(p.inf)+eco+`<div class="blk"><h2>Actores núcleo con sede</h2>${actList(actProv[p.id]||[])}</div>`+`<div class="blk"><h2>Puntos de fricción</h2>${frList(frProv[p.id]||[])}${T.zonas.some(z=>z.prov===p.id)?`<h2 style="margin-top:14px">Zonas liberadas</h2>${zlBlk(T.zonas.filter(z=>z.prov===p.id),1)}`:""}</div>`+depBlk);
 }
 function bx(b,pb){let w=b[1][0]-b[0][0],h=b[1][1]-b[0][1];
   if(pb){const pw=pb[1][0]-pb[0][0],ph=pb[1][1]-pb[0][1],mw=Math.max(w,pw*.35),mh=Math.max(h,ph*.35),cx=(b[0][0]+b[1][0])/2,cy=(b[0][1]+b[1][1])/2;return[cx-mw/2,cy-mh/2,mw,mh]}
@@ -205,8 +221,10 @@ async function vCity(c){
   <div class="blk grow"><h2>Por qué está en el mapa</h2>${tags(c)}${c.proy?`<p class="muted" style="font-size:13px">${esc(c.proyn)} ${src(c.fproy)}</p>`:""}${c.exc?`<p class="muted" style="font-size:13px">${esc(c.exc)}</p>`:""}${c.fuente?`<p class="src">Fuente: ${src(c.fuente)}</p>`:""}<p class="src">${c.ag?`Aglomerado: Censo 2022 (2010: ${nf(c.agpob10)}), ${src(c.fag)}. `:""}${c.fpob?`Localidad: ${src(c.fpob)}.`:""}${c.ag&&c.ag!==c.n?" El aglomerado une varias localidades; la cifra es la del conjunto.":""}</p></div>`;
   const it=c.int;
   const gob=`<div class="blk"><h2>Quién gobierna y quién manda</h2>${it?`<dl class="dl"><dt>${p.id==="02"?"Jefe de Gobierno":c.int.nota&&/partido/.test(c.int.nota)?"Intendente del partido":"Intendente"}</dt><dd><b>${esc(it.n)}</b>${it.par?` <span class="muted">· ${esc(it.par)}</span>`:""}${it.ver==="W"?` <span class="tag" title="Según la ficha de la ciudad en Wikipedia; se confirma en el próximo corte" style="color:#9A8F8C">a confirmar</span>`:""}</dd>${it.nota?`<dt>Nota</dt><dd>${esc(it.nota)}</dd>`:""}<dt>Fuente</dt><dd>${src(it.u)}</dd></dl>`:`<p class="muted">Intendente sin dato verificado todavía.</p>`}${c.manda?`<p class="lead" style="margin-top:12px">${esc(c.manda)}</p>`:""}</div>`;
+  const fz=(frCity[c.s]||[]),zz=T.zonas.filter(z=>z.cs===c.s);
+  const frc=fz.length||zz.length?`<div class="blk"><h2>Fricción y zonas liberadas</h2>${fz.length?frList(fz):""}${zz.length?zlBlk(zz):""}</div>`:"";
   const conf=c.conf?`<div class="blk"><h2>Conflictos</h2><ul class="rlist">${c.conf.map(f=>`<li><b>${esc(f.t)}.</b> ${esc(f.x)} ${src(f.u)}</li>`).join("")}</ul></div>`:"";
-  more(gob+(c.inf?influ(c.inf,"Influencias mundiales","Por las empresas y proyectos con sede en la ciudad, de 0 a 3 por canal. Las de la provincia, en su ficha."):`<div class="blk"><h2>Influencias mundiales</h2><p>Sin influencias propias cargadas: rigen las de la provincia, <a href="#prov-${p.s}">${esc(p.n)}</a>${p.dom?`, donde domina <b style="color:${PCOL[p.dom]}">${esc(p.dom)}</b>`:""}.</p></div>`)+conf+`<div class="blk"><h2>Actores núcleo con sede</h2>${actList(actCity[c.s]||[])}<p class="muted" style="font-size:13px;margin-top:8px">Empresas, sindicatos y actores locales, en el paso 5.</p></div>`);
+  more(gob+(c.inf?influ(c.inf,"Influencias mundiales","Por las empresas y proyectos con sede en la ciudad, de 0 a 3 por canal. Las de la provincia, en su ficha."):`<div class="blk"><h2>Influencias mundiales</h2><p>Sin influencias propias cargadas: rigen las de la provincia, <a href="#prov-${p.s}">${esc(p.n)}</a>${p.dom?`, donde domina <b style="color:${PCOL[p.dom]}">${esc(p.dom)}</b>`:""}.</p></div>`)+conf+frc+`<div class="blk"><h2>Actores núcleo con sede</h2>${actList(actCity[c.s]||[])}<p class="muted" style="font-size:13px;margin-top:8px">Empresas, sindicatos y actores locales, en el paso 5.</p></div>`);
 }
 function vProvincias(){
   app.innerHTML=`<div class="page"><h1>Provincias</h1><p class="sub">Las 24 jurisdicciones: quién las gobierna, cómo se paran frente a la Nación y qué potencia pesa más en cada una.</p>
@@ -228,15 +246,32 @@ function vCiudades(){
 }
 function vPlan(){
   app.innerHTML=`<div class="page plan"><h1>Plan</h1>
-  <h2>Hecho</h2><ol><li><b>Esqueleto.</b> Mapa oficial del IGN con zoom de país a provincia, departamento y ciudad; ${T.ciudades.length} ciudades con su motivo; gobernadores al día.</li><li><b>Las 24 provincias.</b> Población del Censo 2022 por provincia y departamento; exportaciones, destinos y rubro principal (INDEC); recursos propios frente a los fondos nacionales (ASAP); quién manda de verdad y alineamiento con la Nación; influencias de 11 potencias en cinco canales, con fuente. Capas de alineamiento, influencias y economía en el mapa.</li><li><b>Actores núcleo.</b> ${T.actores.length} actores nacionales medidos en los 21 ejes con la fórmula del mapa global, con ficha, fuentes y ${T.relaciones.length} relaciones; capa de actores en el mapa.</li><li><b>Fichas de ciudades.</b> Intendente de ${T.ciudades.filter(c=>c.int).length} ciudades, quién manda en las ciudades de empresa, influencias propias de ${T.ciudades.filter(c=>c.inf).length} ciudades y conflictos documentados.</li></ol>
-  <h2>Próximos pasos</h2><ol start="5"><li>Actores provinciales y municipales; puntos de fricción; zonas liberadas.</li></ol>
+  <h2>Hecho</h2><ol><li><b>Esqueleto.</b> Mapa oficial del IGN con zoom de país a provincia, departamento y ciudad; ${T.ciudades.length} ciudades con su motivo; gobernadores al día.</li><li><b>Las 24 provincias.</b> Población del Censo 2022 por provincia y departamento; exportaciones, destinos y rubro principal (INDEC); recursos propios frente a los fondos nacionales (ASAP); quién manda de verdad y alineamiento con la Nación; influencias de 11 potencias en cinco canales, con fuente. Capas de alineamiento, influencias y economía en el mapa.</li><li><b>Actores núcleo.</b> ${T.actores.length} actores nacionales medidos en los 21 ejes con la fórmula del mapa global, con ficha, fuentes y ${T.relaciones.length} relaciones; capa de actores en el mapa.</li><li><b>Fichas de ciudades.</b> Intendente de ${T.ciudades.filter(c=>c.int).length} ciudades, quién manda en las ciudades de empresa, influencias propias de ${T.ciudades.filter(c=>c.inf).length} ciudades y conflictos documentados.</li><li><b>Fricción y actores locales.</b> Los gobiernos de las 24 jurisdicciones como actores, con su alineamiento; Zamora en Santiago del Estero y los intendentes de Rosario y Córdoba; ${T.actores.length} actores en total. ${T.friccion.length} puntos de fricción con cronología y fuentes, y las zonas liberadas documentadas, con capas propias en el mapa.</li></ol>
+  
   <h2>Método de las influencias</h2><p>Cada potencia recibe de 0 a 3 en cinco canales. El comercio se calcula con la participación de cada destino en las exportaciones de la provincia (40% o más vale 3; de 20% a 40%, 2; de 8% a 20%, 1); cuando el INDEC informa un bloque se toma como aproximación (USMCA como EE.UU. y Mercosur como Brasil). Inversión, deuda, presencia e influencia política se cargan dato por dato con su fuente. La potencia dominante es la de mayor suma; si dos empatan, se marca el empate.</p>
-  <h2>Pendientes</h2><ul><li>Intendentes marcados «a confirmar» (tomados de Wikipedia) y los nueve sin dato: La Banda, Libertador General San Martín, Timbúes, Susques, San Antonio de los Cobres, Calingasta, Salvador Mazza, Aguas Blancas y La Quiaca.</li><li>Censo 2022 de seis localidades (Susques, San Antonio de los Cobres, Antofagasta de la Sierra, Calingasta, Jáchal y Salvador Mazza): hoy se muestra una proyección propia a 2026.</li></ul></div>`;
+  <h2>Pendientes</h2><ul><li>Confirmar con fuente del año los ${T.ciudades.filter(c=>c.int&&c.int.ver==="W").length} intendentes marcados «a confirmar» (tomados de Wikipedia) y cargar los cinco sin dato: Timbúes, Susques, San Antonio de los Cobres, Calingasta y Aguas Blancas (municipio intervenido).</li><li>Censo 2022 de las localidades que hoy muestran una proyección propia a 2026.</li><li>Próximo corte: 23 de febrero de 2027.</li></ul></div>`;
+}
+function vFriccion(){
+  const L=T.friccion.slice().sort((a,b)=>b.nv-a.nv);
+  app.innerHTML=`<div class="page"><h1>Fricción</h1><p class="sub">Dónde se disputa el poder en el territorio: ${L.length} puntos donde actores del mapa, o una potencia y el Estado argentino, chocan por un recurso, un territorio o una regla. Cada uno con su cronología y sus fuentes.</p>
+  <div class="bar">${[3,2,1].map(n=>`<span class="lg"><i style="background:${NVC[n]}"></i>${NVT[n]} <span class="mono muted">${L.filter(f=>f.nv===n).length}</span></span>`).join("")}</div>
+  <table class="stack"><thead><tr><th>Punto</th><th>Tipo</th><th>Provincia</th><th>Intensidad</th><th>Estado</th><th>Potencias</th></tr></thead><tbody>
+  ${L.map(f=>`<tr><td><a href="#f-${f.id}">${esc(f.n)}</a></td><td>${esc(f.tipo)}</td><td><a href="#prov-${byId[f.prov].s}">${esc(byId[f.prov].c)}</a></td><td>${nvTag(f.nv)}</td><td>${esc(f.est)}</td><td>${f.pot.map(q=>`<b style="color:${PCOL[q]};font-weight:500">${esc(q)}</b>`).join(", ")||`<span class="muted">—</span>`}</td></tr>`).join("")}</tbody></table>
+  <h2 class="sec">Zonas liberadas</h2>${zlBlk(T.zonas,1)}<p class="muted" style="font-size:13px">${ZLNOTA}</p>
+  <h2 class="sec">Criterio</h2><p>Intensidad 3: hay violencia, enfrentamientos con fuerzas de seguridad o presencia militar extranjera. 2: disputa abierta, judicial, diplomática, licitatoria o política. 1: disputa latente o localizada. Para vincular a alguien con delitos se exige fuente; en personas vivas, solo lo establecido por un tribunal u organismo oficial.</p></div>`;
+}
+function vFr(f){
+  const p=byId[f.prov];
+  app.innerHTML=`<div class="page actor"><p class="crumbs"><a href="#friccion">Fricción</a> › <b>${esc(f.n)}</b></p><h1>${esc(f.n)}</h1><p class="sub">${esc(f.x)}</p>
+  <div class="facts"><div><span>Tipo</span><b>${esc(f.tipo)}</b></div><div><span>Intensidad</span><b>${nvTag(f.nv)}</b></div><div><span>Estado</span><b style="font-size:14px">${esc(f.est)}</b></div><div><span>Dónde</span><b style="font-size:14px">${f.cs?`<a href="#c-${f.cs}">${esc(cityS[f.cs].n)}</a>, `:""}<a href="#prov-${p.s}">${esc(p.n)}</a></b></div></div>
+  <div class="cols"><div><h2 class="sec">Actores</h2><ul class="rlist">${f.act.map(a=>`<li>${aLink(a)}</li>`).join("")}${f.pot.map(q=>`<li><b style="color:${PCOL[q]}">${esc(q)}</b> <span class="muted">(potencia)</span></li>`).join("")}</ul></div>
+  <div><h2 class="sec">Cronología</h2><ul class="rlist">${f.hit.map(h=>`<li><span class="mono muted">${esc(h.f.length>4?fmes(h.f):h.f)}</span> ${esc(h.x)} ${src(h.u)}</li>`).join("")}</ul>
+  <h2 class="sec">Fuentes</h2><ul class="rlist">${f.fu.map(x=>`<li><a href="${esc(x.u)}" target="_blank" rel="noopener">${esc(x.t)}</a></li>`).join("")}</ul></div></div></div>`;
 }
 let atSel=null;
 function vActores(){
   const A=T.actores,tipos=[...new Set(A.map(a=>a.tipo))];
-  app.innerHTML=`<div class="page"><h1>Actores</h1><p class="sub">Quién tiene el poder real en la Argentina: ${A.length} actores núcleo nacionales medidos en 21 ejes, con el mismo método y la misma fórmula que El mapa del poder global. En este mapa, el 3 de cada eje es dominio a escala nacional.</p>
+  app.innerHTML=`<div class="page"><h1>Actores</h1><p class="sub">Quién tiene el poder real en la Argentina: ${A.length} actores núcleo, nacionales, provinciales y municipales, medidos en 21 ejes, con el mismo método y la misma fórmula que El mapa del poder global. En este mapa, el 3 de cada eje es dominio a escala nacional.</p>
   <div class="bar" id="tf"><button class="chip ${atSel?"":"on"}" data-t="">Todos</button>${tipos.map(t=>`<button class="chip ${atSel===t?"on":""}" data-t="${t}"><i style="background:${TCOL[t]}"></i>${t} <small>${A.filter(a=>a.tipo===t).length}</small></button>`).join("")}</div>
   <table class="stack"><thead><tr><th class="n">#</th><th>Actor</th><th>Categoría</th><th>Sede</th><th>Alcance</th><th>Puntaje de poder</th><th class="n" title="Poder real que no surge del cargo formal">Oculto</th></tr></thead><tbody>
   ${A.map((a,i)=>[a,i]).filter(([a])=>!atSel||a.tipo===atSel).map(([a,i])=>`<tr><td class="n mono">${i+1}</td><td><a href="#a-${a.id}">${esc(a.n)}</a></td><td style="color:${TCOL[a.tipo]}">${esc(a.cat)}</td><td><a href="#c-${a.cs}">${esc(a.sede==="Ciudad Autónoma de Buenos Aires"?"CABA":a.sede)}</a></td><td>${esc(T.meta.act.alcance[a.alc])}</td><td>${ptBar(a.pt,TCOL[a.tipo])}</td><td class="n mono">${a.oculto.toLocaleString("es-AR")}</td></tr>`).join("")}</tbody></table>
@@ -293,10 +328,12 @@ function route(){
   else if(h==="ciudades"){vCiudades();nk=h;svg=null}
   else if(h==="plan"){vPlan();nk=h;svg=null}
   else if(h==="actores"){vActores();nk=h;svg=null}
+  else if(h==="friccion"){vFriccion();nk=h;svg=null}
+  else if(h.startsWith("f-")&&FR[h.slice(2)]){vFr(FR[h.slice(2)]);nk="friccion";svg=null}
   else if(h.startsWith("a-")&&ACT[h.slice(2)]){vActor(ACT[h.slice(2)]);nk="actores";svg=null}
   else vPais();
   document.querySelectorAll("nav a").forEach(a=>a.classList.toggle("on",a.dataset.k===nk));
-  if(["provincias","ciudades","plan","actores"].includes(nk))window.scrollTo(0,0);
+  if(["provincias","ciudades","plan","actores","friccion"].includes(nk))window.scrollTo(0,0);
 }
 Promise.all(["data/territorio.json","data/provincias.json","data/antartida.json"].map(u=>fetch(u).then(r=>r.json()))).then(([t,pt,an])=>{
   T=t;ANT=an.features?an.features[0]:an;{const g=ANT.geometry||ANT;if(d3.geoArea(ANT)>2*Math.PI)(g.type==="Polygon"?[g.coordinates]:g.coordinates).forEach(pl=>pl.forEach(r=>r.reverse()))}
@@ -304,8 +341,9 @@ Promise.all(["data/territorio.json","data/provincias.json","data/antartida.json"
   for(const p of T.provincias){byS[p.s]=p;byId[p.id]=p}
   for(const c of T.ciudades)cityS[c.s]=c;
   for(const a of T.actores){ACT[a.id]=a;(actCity[a.cs]=actCity[a.cs]||[]).push(a);(actProv[a.prov]=actProv[a.prov]||[]).push(a)}
+  for(const f of T.friccion){FR[f.id]=f;(frProv[f.prov]=frProv[f.prov]||[]).push(f);if(f.cs)(frCity[f.cs]=frCity[f.cs]||[]).push(f)}
   const fd=d=>{const[y,m,x]=d.split("-");return +x+" "+MES[+m-1]+" "+y};
-  document.getElementById("stamp").innerHTML=`Paso 4 de 5<br>Corte ${fd(T.corte)} · próxima ${fd(T.proxima)}`;
+  document.getElementById("stamp").innerHTML=`Paso 5 de 5<br>Corte ${fd(T.corte)} · próxima ${fd(T.proxima)}`;
   document.getElementById("foot-date").textContent=`Corte del ${fd(T.corte)}; próxima revisión el ${fd(T.proxima)}.`;
   setup();addEventListener("hashchange",route);route();
 }).catch(e=>{app.innerHTML=`<p style="padding:40px 0">No se pudo cargar el mapa: ${esc(e.message)}</p>`});
