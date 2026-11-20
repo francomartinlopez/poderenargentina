@@ -23,7 +23,7 @@ W = "https://es.wikipedia.org/wiki/"
 #  actores, potencias, texto, hitos [(AAAA-MM, texto, url)], fuentes [(título, url)])
 FRICCION = [
     ("malvinas", "Islas Malvinas", "Soberanía", "94", None, -59.0, -51.7, 3, "Activa",
-     ["milei", "ffaa", "cancilleria"], ["Reino Unido"],
+     ["milei", "ffaa", "cancilleria", "embajada_ru"], ["Reino Unido"],
      "La Argentina reclama la soberanía de las islas, ocupadas por el Reino Unido desde 1833, que mantiene una guarnición permanente en Monte Agradable. El reclamo es política de Estado y figura en la Constitución.",
      [("1833-01", "El Reino Unido ocupa las islas.", W + "Cuesti%C3%B3n_de_las_islas_Malvinas"),
       ("1982-04", "Guerra de Malvinas; la Argentina se rinde el 14 de junio.", W + "Guerra_de_las_Malvinas"),
@@ -58,7 +58,7 @@ FRICCION = [
       ("Base Naval Ushuaia (Wikipedia)", W + "Base_Naval_Ushuaia")]),
 
     ("rosario_narco", "Violencia narco en Rosario", "Seguridad", "82", "rosario", -60.6332, -32.9472, 3, "Contenida con fuerzas federales",
-     ["los_monos", "muni_rosario", "gob_santafe", "seguridad", "comodoro_py", "banda_riquelme", "mpa_santafe", "pfa", "gendarmeria"], [],
+     ["los_monos", "muni_rosario", "gob_santafe", "seguridad", "comodoro_py", "banda_riquelme", "mpa_santafe", "pfa", "gendarmeria", "barra_newells"], [],
      "Bandas como Los Monos disputan el narcomenudeo y atacaron edificios judiciales. Desde diciembre de 2023 la Nación y la provincia despliegan fuerzas federales con el Plan Bandera; la justicia confirmó la condena de Ariel «Guille» Cantero por los ataques.",
      [("2023-12", "Comienza el Plan Bandera con fuerzas federales.", "https://www.lacapital.com.ar/policiales/confirmaron-condena-guille-cantero-ataques-contra-objetivos-judiciales-n10034583.html"),
       ("2024-11", "Guille Cantero, preso desde 2013, acumula condenas.", "https://www.lanacion.com.ar/seguridad/esta-en-prision-desde-2013-con-otra-condena-por-venta-de-drogas-guille-cantero-acumula-simbolicas-nid30112024/")],
@@ -95,7 +95,7 @@ FRICCION = [
      [("MercoPress: el Plan Güemes", "https://en.mercopress.com/2025/01/28/argentina-to-build-fence-along-bolivian-border")]),
 
     ("dock_sud", "Puerto de Dock Sud", "Infraestructura", "06", None, -58.345, -34.648, 2, "Activa; obra frenada por la Justicia",
-     ["gob_pba", "milei"], [],
+     ["gob_pba", "milei", "int_lanus", "int_avellaneda"], [],
      "Principal puerto bonaerense, administrado por un consorcio de la provincia y operado por Exolgan, que mueve más del 40% de los contenedores del país. La ampliación del muelle por iniciativa privada enfrenta a la provincia con municipios vecinos y con la Nación, que reclama la deuda por el dragado de los canales de acceso.",
      [("2026", "La Nación reclama judicialmente a la provincia la deuda por el dragado de los canales del Río de la Plata.", "https://www.letrap.com.ar/economia/javier-milei-le-apunta-otro-puerto-provincial-ahora-axel-kicillof-n5421859/amp"),
       ("2026", "El municipio de Lanús demanda a Exolgan y a las empresas del puerto por el daño del tránsito pesado.", "https://www.letrap.com.ar/economia/puertos-bonaerenses-festival-denuncias-y-reclamos-deudas-dock-sud-n5422064"),
@@ -121,7 +121,7 @@ FRICCION = [
       ("La Capital: aceiteros frenan los puertos", "https://www.lacapital.com.ar/aceiteros-lanzan-un-paro-y-se-frenan-los-puertos-del-gran-rosario-n10261479.html/amp")]),
 
     ("vaca_muerta_trabajo", "Salarios y tarifas en Vaca Muerta", "Laboral", "58", "anelo", -68.788, -38.354, 1, "Latente",
-     ["petroleros_nqn", "ypf", "vista", "gob_neuquen"], ["EE.UU."],
+     ["petroleros_nqn", "ypf", "vista", "gob_neuquen", "chevron", "tecpetrol"], ["EE.UU."],
      "El sindicato petrolero negocia con las operadoras y las empresas de servicios en cada paritaria bajo amenaza de paro. En septiembre de 2026 rechazó el pedido de Halliburton de bajar 23% las tarifas a sus proveedores locales.",
      [("2026-01", "Aumento salarial y bono; alerta por la reforma laboral.", "https://www.noticiasnqn.com.ar/noticias/2026/01/23/327062-rucci-anuncio-aumentos-salariales-un-bono-de-500000-y-alerto-por-una-posible-reforma-laboral"),
       ("2026-09", "Rechazo al recorte de tarifas de Halliburton a las pymes.", "https://www.noticiasnqn.com.ar/amp/noticias/2026/09/08/351608-rucci-rechazo-el-ajuste-de-halliburton-a-las-pymes-de-vaca-muerta")],

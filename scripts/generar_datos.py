@@ -169,6 +169,14 @@ def main():
         nom = next(x["properties"]["nombre"] for x in topo["objects"]["dep"]["geometries"] if x["properties"]["id"] == did)
         deps[did] = dict(n=nom, cab=d["cab"], act=d["act"], gob=g and dict(n=g[0], par=g[1], nota=g[2], u=g[3]),
                          ai=d["act_ids"], fr=d["fr"], fu=[dict(t=t, u=u) for t, u in d["fu"]])
+    # Actores con sede en un partido o departamento: van primeros en su ficha (y se crea la ficha si no existe).
+    for x in actores:
+        if x.get("sd"):
+            did = x["sd"]
+            if did not in deps:
+                deps[did] = dict(n=x["sede"], cab="", act="", gob=None, ai=[], fr=[], fu=[dict(t=x["fu"][0][0], u=x["fu"][0][1])])
+            if x["id"] not in deps[did]["ai"]:
+                deps[did]["ai"] = [x["id"]] + deps[did]["ai"]
     out = dict(corte=CORTE, proxima=PROXIMA, meta=meta, pais=pais, provincias=provincias, ciudades=ciudades,
                deppob=poblacion.DEPARTAMENTO, deps=deps, actores=actores, relaciones=relaciones, friccion=fr, zonas=zonas)
     with open(os.path.join(RAIZ, "data", "territorio.json"), "w") as f:

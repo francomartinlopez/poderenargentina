@@ -1,5 +1,13 @@
 # Cambios
 
+## 2026-11-19 (k) · Fútbol, barras con condena, diplomacia, bancos, cámaras, seguridad, Iglesia e intendentes
+
+- Actores (`fuente/actores_mas3.py`): 43 nuevos, hasta 254. Fútbol: Claudio Tapia y Pablo Toviggino (la investigación del FBI y la fiscalía de EE.UU. se dice como investigación, sin imputación), Estudiantes (Verón), Racing (Milito), Rosario Central (Belloso), Newell's (Boero), Talleres (Fassi) y Belgrano (Artime). Barras, solo con condena: la facción de Newell's conducida por Los Monos y La 12. Diplomacia: embajadas de Brasil (encargado de negocios desde agosto), Rusia, Reino Unido y España, Delegación de la Unión Europea, Nunciatura, Grupo BID y AmCham. Bancos Santander, BBVA e Hipotecario; Chevron, Tecpetrol, Globant, Ualá, Mirgor y La Serenísima; ADEBA, la Cámara de Comercio y la de la Construcción. Vicejefatura de Gabinete del Interior (el ministerio se eliminó en julio), Policía Bonaerense, Cáritas, curas villeros, Barrios de Pie, la CCC y siete intendentes del conurbano.
+- Nombres: la SIDE, las Fuerzas Armadas y el Ministerio de Seguridad suman a quien los conduce (Auguadra, Presti, Monteoliva).
+- Sede en un partido: un actor puede tener sede «dep:<código>» (intendentes, clubes de Avellaneda, La Serenísima en General Rodríguez); aparece en la ficha del partido y la sede enlaza al partido.
+- Relaciones: 408, todas con fuente; la Fundación Libertad suma sus vínculos con Milei, Macri, Bullrich, Pullaro y La Libertad Avanza.
+- Quedan afuera por falta de dato confirmado: Coto, La Anónima, la Embajada de Israel (sin embajador designado), Independiente y San Lorenzo (conducción en transición) y el consejo evangélico más allá de ACIERA.
+
 ## 2026-11-19 (j) · Periodistas y streaming
 
 - Once actores de medios, con programa verificado en 2026: Carlos Pagni, Joaquín Morales Solá, Hugo Alconada Mon, Eduardo Feinmann, Luis Majul, Jonatan Viale, Marcelo Longobardi (último programa confirmado, 2024), Gustavo Sylvestre, Olga, Luzu TV y Blender. Relaciones solo con hechos documentados (medio donde trabajan, cruces públicos con el Gobierno, la AFA o colegas, propiedad de Blender y Carajo). 211 actores y 328 relaciones.

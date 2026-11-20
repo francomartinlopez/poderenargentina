@@ -12,8 +12,23 @@ from actores import ACTORES as _A, FICHAS as _F, RELACIONES as _R
 import actores_provinciales as _P
 import actores_mas as _M
 import actores_mas2 as _M2
-ACTORES = _A + _P.ACTORES + _M.ACTORES + _M2.ACTORES
-FICHAS = {k: dict(v) for k, v in {**_F, **_P.FICHAS, **_M.FICHAS, **_M2.FICHAS}.items()}
+import actores_mas3 as _M3
+import json as _json
+import os as _os
+ACTORES = _A + _P.ACTORES + _M.ACTORES + _M2.ACTORES + _M3.ACTORES
+# Actores de fuente/actores.py que suman en su nombre a quien los conduce (corte del 19/11/2026).
+ACTORES = [(a[0], _M3.NOMBRES[a[0]][0]) + tuple(a[2:]) if a[0] in _M3.NOMBRES else a for a in ACTORES]
+FICHAS = {k: dict(v) for k, v in {**_F, **_P.FICHAS, **_M.FICHAS, **_M2.FICHAS, **_M3.FICHAS}.items()}
+for _i, (_n, _fu) in _M3.NOMBRES.items():
+    if _fu[1] not in [u for _, u in FICHAS[_i]["fuentes"]]:
+        FICHAS[_i]["fuentes"] = list(FICHAS[_i]["fuentes"]) + [_fu]
+
+
+def _nombre_dep(did):
+    """Nombre de un partido o departamento según la cartografía del IGN (data/dep/<prov>.json)."""
+    ruta = _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", "data", "dep", did[:2] + ".json")
+    topo = _json.load(open(ruta, encoding="utf-8"))
+    return next(x["properties"]["nombre"] for x in topo["objects"]["dep"]["geometries"] if x["properties"]["id"] == did)
 for _i, (_txt, _fu) in _M2.TEXTOS.items():
     assert _i in FICHAS, f"texto para actor inexistente: {_i}"
     FICHAS[_i]["txt"] = _txt
@@ -22,7 +37,7 @@ for _i, (_txt, _fu) in _M2.TEXTOS.items():
 # Una sola relación por par de actores y tipo (la primera que aparece manda).
 _vistos = {(frozenset((r[0], r[1])), r[2]) for r in _R}
 RELACIONES = list(_R)
-for r in _P.RELACIONES + _M.RELACIONES + _M2.RELACIONES:
+for r in _P.RELACIONES + _M.RELACIONES + _M2.RELACIONES + _M3.RELACIONES:
     k = (frozenset((r[0], r[1])), r[2])
     if k not in _vistos:
         _vistos.add(k)
@@ -42,7 +57,7 @@ def calcular(ciudades_por_nombre):
     for i, n, cat, sede, alc, blo, aut, sc, cert, dep, formal in ACTORES:
         assert len(sc) == len(ejes) and sc.isdigit() and all(c in "0123" for c in sc), i
         assert cat in TEORICO and alc in ALCANCE and blo in BLOQUES and aut in AUTONOMIA and cert in CERTEZA and formal in (0, 1, 2, 3), i
-        assert sede in ciudades_por_nombre, f"{i}: sede {sede} no está entre las ciudades"
+        assert sede in ciudades_por_nombre or (sede.startswith("dep:") and _nombre_dep(sede[4:])), f"{i}: sede {sede} no está entre las ciudades"
         assert i in FICHAS and FICHAS[i]["fuentes"], f"{i}: falta ficha o fuentes"
         A[i] = dict(id=i, n=n, cat=cat, tipo=TIPO[cat], sede=sede, alc=alc, bloque=blo, aut=aut, cert=cert, formal=formal,
                     sc=[int(c) for c in sc], dep=[d for d in dep.split(",") if d])
@@ -85,8 +100,13 @@ def calcular(ciudades_por_nombre):
         a["oculto"] = round(100 * a["pt"] * a["brecha"] / omax, 1)
         f = FICHAS[a["id"]]
         a.update(res=f["res"], manda=f["manda"], fu=[list(x) for x in f["fuentes"]], txt=f.get("txt", ""))
-        a["prov"] = ciudades_por_nombre[a["sede"]]["prov"]
-        a["cs"] = ciudades_por_nombre[a["sede"]]["s"]
+        if a["sede"].startswith("dep:"):
+            # Sede en un partido o departamento sin ciudad propia en el mapa.
+            a["sd"] = a["sede"][4:]
+            a["prov"], a["cs"], a["sede"] = a["sd"][:2], "", _nombre_dep(a["sd"])
+        else:
+            a["prov"] = ciudades_por_nombre[a["sede"]]["prov"]
+            a["cs"] = ciudades_por_nombre[a["sede"]]["s"]
         for k in ("dur", "pe"):
             a[k] = round(a[k], 3)
         a["fr"] = round(a["fr"], 3)

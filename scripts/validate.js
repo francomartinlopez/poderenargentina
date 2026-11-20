@@ -44,7 +44,7 @@ for (const a of A) {
   if (!a.fu.length || a.fu.some(([t, u]) => !t || !/^https?:/.test(u))) err.push(`${a.n}: faltan fuentes`);
   if (!a.res || !a.manda) err.push(`${a.n}: falta la ficha`);
   if (a.sc[8] > 0 && a.cert !== "D") err.push(`${a.n}: acción fuera de la ley sin documentar`);
-  if (!T.ciudades.some(c => c.s === a.cs)) err.push(`${a.n}: la sede no está en el mapa`);
+  if (a.sd ? !(T.deps[a.sd] && T.deppob[a.sd]) : !T.ciudades.some(c => c.s === a.cs)) err.push(`${a.n}: la sede no está en el mapa`);
   if (a.pt < 0 || a.pt > 100) err.push(`${a.n}: puntaje fuera de rango`);
 }
 if (A.length && Math.max(...A.map(a => a.pt)) !== 100) err.push("El mayor puntaje tiene que valer 100.");
