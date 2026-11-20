@@ -1,5 +1,10 @@
 # Cambios
 
+## 2026-11-19 (l) · Los pendientes de la tanda anterior
+
+- Seis actores más (260 y 418 relaciones): Embajada de Israel (Ahuva Spieler Reshef, credenciales en septiembre de 2026), San Lorenzo (Marcelo Culotta, hasta diciembre de 2027), Independiente (Néstor Grindetti hasta las elecciones del 13 de diciembre), Coto, La Anónima (familia Braun, con la compra de 12 hipermercados de Libertad) y la Iglesia Cristiana Internacional de Jorge Ledesma (Portal del Cielo, Resistencia). ACIERA suma su relación con Milei.
+- Sin fuente que lo sostenga, no se cargó un consejo evangélico distinto de ACIERA (la FECEP no tiene presencia pública documentada en 2026).
+
 ## 2026-11-19 (k) · Fútbol, barras con condena, diplomacia, bancos, cámaras, seguridad, Iglesia e intendentes
 
 - Actores (`fuente/actores_mas3.py`): 43 nuevos, hasta 254. Fútbol: Claudio Tapia y Pablo Toviggino (la investigación del FBI y la fiscalía de EE.UU. se dice como investigación, sin imputación), Estudiantes (Verón), Racing (Milito), Rosario Central (Belloso), Newell's (Boero), Talleres (Fassi) y Belgrano (Artime). Barras, solo con condena: la facción de Newell's conducida por Los Monos y La 12. Diplomacia: embajadas de Brasil (encargado de negocios desde agosto), Rusia, Reino Unido y España, Delegación de la Unión Europea, Nunciatura, Grupo BID y AmCham. Bancos Santander, BBVA e Hipotecario; Chevron, Tecpetrol, Globant, Ualá, Mirgor y La Serenísima; ADEBA, la Cámara de Comercio y la de la Construcción. Vicejefatura de Gabinete del Interior (el ministerio se eliminó en julio), Policía Bonaerense, Cáritas, curas villeros, Barrios de Pie, la CCC y siete intendentes del conurbano.
