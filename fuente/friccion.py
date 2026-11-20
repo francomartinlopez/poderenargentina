@@ -115,7 +115,7 @@ FRICCION = [
       ("Pan American Silver adquirió el accionista principal de MARA", "https://nuevaregion.com/la-megamineria-ha-demostrado-el-fracaso-en-toda-la-argentina")]),
 
     ("aceiteros_gr", "Paros aceiteros en el Gran Rosario", "Laboral", "82", "san-lorenzo", -60.7369, -32.7448, 2, "Acuerdo salarial vigente; conflicto latente",
-     ["soea_sl", "ciara", "cofco", "cargill", "cgt_arg"], ["China", "EE.UU."],
+     ["soea_sl", "ciara", "cofco", "cargill", "bunge", "ldc", "cgt_arg"], ["China", "EE.UU."],
      "Los gremios aceiteros pueden detener las terminales del cordón San Lorenzo-Timbúes, que despachan más de la mitad de las exportaciones agroindustriales del país (entre ellas las de Cofco, Cargill y Bunge). En mayo de 2026 lanzaron un paro por tiempo indeterminado y la Nación dictó la conciliación obligatoria.",
      [("2026-05", "Paro nacional aceitero y conciliación obligatoria.", "https://www.lacapital.com.ar/economia/paro-y-conciliacion-obligatoria-aceiteros-san-lorenzo-afirman-que-la-lucha-continua-n10261593.html/amp"),
       ("2026-06", "Acuerdo de aumento del 29,5% para todo el año.", "https://www.infocampo.com.ar/?p=609574")],
@@ -211,7 +211,7 @@ FRICCION = [
 
     # Corte del 20/11/2026
     ("glaciares", "Reforma de la Ley de Glaciares", "Recursos y ambiente", "70", "san-jose-de-jachal", -69.95, -29.37, 2, "Vigente; amparos en trámite",
-     ["milei", "congreso", "gob_sanjuan", "gob_mendoza", "gob_catamarca", "gob_lapampa", "vicuna"], ["Canadá y Australia", "China"],
+     ["milei", "congreso", "gob_sanjuan", "gob_mendoza", "gob_catamarca", "gob_lapampa", "vicuna", "barrick", "mcewen", "glencore"], ["Canadá y Australia", "China"],
      "La Ley 27.804 modificó la Ley de Glaciares de 2010: cada provincia define qué glaciares y qué ambiente periglacial se protegen, lo que habilita minería en zonas antes vedadas. La impulsaron el Gobierno y las provincias cordilleranas con proyectos de cobre y oro; La Pampa y organizaciones ambientales pidieron su inconstitucionalidad.",
      [("2026-02", "Media sanción en el Senado.", "https://publicaciones.unpaz.edu.ar/OJS/index.php/bordes/article/download/2297/2153/"),
       ("2026-04", "Diputados la sanciona por 137 votos contra 111.", "https://www.lanacion.com.ar/politica/el-gobierno-promulgo-la-ley-de-glaciares-a-dos-semanas-de-su-sancion-en-diputados-nid24042026/"),
@@ -274,7 +274,7 @@ FRICCION = [
      [("Diario Jornada: Taiano rechazó la reapertura", "https://www.diariojornada.com.ar/426952/politica/causa_libra_el_fiscal_taiano_rechazo_su_reapertura")]),
 
     ("vicentin", "Salvataje de Vicentin", "Económico", "82", "reconquista", -59.64, -29.15, 1, "Grassi controla la empresa; apelaciones de LDC y Molinos Agro",
-     ["bna", "agd", "cofco"], ["Unión Europea"],
+     ["bna", "ldc", "agd", "cofco"], ["Unión Europea"],
      "Tras el default de 2019 por más de USD 1.300 millones, el juez de Reconquista homologó el salvataje de la corredora rosarina Grassi S.A., que tomó el control de la agroexportadora como Nueva Vicentin Argentina. Louis Dreyfus y Molinos Agro, que compitieron, impugnaron el proceso.",
      [("2025-12", "El juez Lorenzini homologa el acuerdo de Grassi y ordena transferir las acciones.", "https://bichosdecampo.com/el-juez-hablo-y-le-dio-vida-a-la-nueva-vicentin-argentina-la-corredora-grassi-s-a-se-quedo-con-el-control-total-de-la-agroexportadora-santafesina/"),
       ("2025-12", "Rechaza las objeciones de Louis Dreyfus; queda la vía de apelación.", "https://www.larepublica.co/globoeconomia/grassi-supera-el-obstaculo-para-adquirir-el-gigante-argentino-de-la-soja-en-dificultades-4295220"),
