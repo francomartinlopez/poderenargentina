@@ -1,5 +1,12 @@
 # Cambios
 
+## 2026-11-19 (h) · Más actores, más fricción, selector de capas e influencias más claras
+
+- Actores (`fuente/actores_mas.py`): 41 nuevos por categoría: dirigentes políticos (Villarruel, Bullrich, Martín Menem, Macri, Massa, Máximo Kirchner, Provincias Unidas, Las Fuerzas del Cielo), ministerios de Desregulación y Capital Humano, empresas y grupos (Vista, Aluar, Werthein, Galicia, Macro, COFCO, Cargill, Ledesma), bandas criminales con condena (Alvarado, Funes), Justicia (Procuración, Consejo de la Magistratura, Casación, juzgado electoral), religiosos (Arzobispado de Buenos Aires, DAIA, AMIA, ACIERA), organizaciones sociales y ONG (CELS, Abuelas, Fundación Libertad, Fundación Mediterránea, Movimiento Evita, Polo Obrero) y medios y periodistas (Grupo América, La Nación, Infobae, C5N, Perfil, Neura, El Destape). 112 actores y 125 relaciones. Página Actores con filtro por categoría y buscador.
+- Fricción: pesca ilegal en la Milla 201, Estrecho de Magallanes y la frontera austral con Chile, conflicto territorial mapuche en Villa Mascardi y Lago Escondido (18 puntos).
+- Influencias: el país ahora mide el comercio por exportaciones e importaciones (vale el mayor puntaje), así China, primer origen de las importaciones, puntúa 2. Cuadro rediseñado: una fila por potencia con total, cinco canales con nombre y los datos y fuentes de cada potencia al tocar la fila. Se aclara que en las provincias el INDEC solo publica los destinos principales.
+- Mapa: selector «Ver en el mapa» en lugar de botones con desplazamiento lateral; selector de potencia y de indicador económico.
+
 ## 2026-11-19 (g) · Pendientes y mejoras: intendentes, censo, departamentos, actores locales y más fricción
 
 - Intendentes: 39 confirmados con fuente de 2026 o reciente (92 en total con «V»); nuevos Paso de los Libres (Miguel Arias) y Perito Moreno (Matías Trepo); se suman Calingasta, Susques (comisión municipal; municipio desde junio de 2026) y Aguas Blancas (intervenida, a confirmar). Quedan cuatro «a confirmar» (Villa Mercedes, Orán, Salvador Mazza, Aguas Blancas) y dos sin dato (Timbúes, San Antonio de los Cobres).

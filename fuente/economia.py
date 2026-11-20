@@ -81,3 +81,13 @@ PROVINCIAS = {
           destx='Resto de la ALADI (USD 96 M) y USMCA (USD 70 M)',
           rubro='Petróleo crudo (USD 135 M) y pesca', propios=42.3),
 }
+
+# Comercio del país (nivel nacional del canal comercio): participación de cada socio en las exportaciones
+# y en las importaciones de bienes. A diferencia de las provincias (donde el INDEC solo publica exportaciones),
+# en el país se mide también de dónde viene lo que se compra: vale el mayor de los dos puntajes.
+COMERCIO_NACIONAL = dict(
+    periodo="enero-septiembre de 2026",
+    fuente="https://cancilleria.gob.ar/es/cei/actualidad/intercambio-comercial-argentino-enero-septiembre-2026",
+    exp=77267, imp=56069,
+    socios={"Brasil": (12.7, 21.4), "EE.UU.": (10.0, 9.2), "Unión Europea": (9.3, 13.6), "China": (9.2, 23.3)},
+)

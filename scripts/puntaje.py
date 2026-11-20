@@ -10,10 +10,15 @@ import math
 from ejes import EJES, PESOS, AUTONOMIA_REAL, TEORICO, TIPO, PESO_FINAL, ESTIRAR, ALCANCE, AUTONOMIA, CERTEZA, BLOQUES, TIPOS_REL, PESO_REL, EXTERNOS, GLOBAL_URL
 from actores import ACTORES as _A, FICHAS as _F, RELACIONES as _R
 import actores_provinciales as _P
-ACTORES = _A + _P.ACTORES
-FICHAS = {**_F, **_P.FICHAS}
+import actores_mas as _M
+ACTORES = _A + _P.ACTORES + _M.ACTORES
+FICHAS = {**_F, **_P.FICHAS, **_M.FICHAS}
 _pares = {frozenset((r[0], r[1])) for r in _R}
-RELACIONES = _R + [r for r in _P.RELACIONES if frozenset((r[0], r[1])) not in _pares]
+RELACIONES = list(_R)
+for r in _P.RELACIONES + _M.RELACIONES:
+    if frozenset((r[0], r[1])) not in _pares:
+        _pares.add(frozenset((r[0], r[1])))
+        RELACIONES.append(r)
 
 FAC = {1: 1, 2: .75, 3: .5, 4: .25}
 

@@ -126,6 +126,14 @@ def main():
         if k.startswith("c:"):
             assert any("c:" + c["s"] == k for c in ciudades), f"Influencia para una ciudad inexistente: {k}"
 
+    cn = economia.COMERCIO_NACIONAL
+    nivel = lambda sh: 3 if sh >= 40 else 2 if sh >= 20 else 1 if sh >= 8 else 0
+    for pot, (ex, im) in cn["socios"].items():
+        assert pot in POT
+        n = max(nivel(ex), nivel(im))
+        if n:
+            inf.setdefault("AR", []).append(dict(p=pot, c="com", n=n, u=cn["fuente"],
+                x=f"{str(ex).replace('.', ',')}% de las exportaciones y {str(im).replace('.', ',')}% de las importaciones de bienes del país ({cn['periodo']}); vale el mayor de los dos puntajes."))
     pais = dict(pob=sum(poblacion.PROVINCIA.values()), inf=sorted(inf.get("AR", []), key=lambda i: (-i["n"], POT.index(i["p"]))))
     meta = dict(potencias=POT, canales=influencias.CANALES, alineamiento=alineamiento.ALINEAMIENTO,
                 fuente_censo=poblacion.FUENTE, fuente_exp=economia.FUENTE_EXPORTACIONES, periodo_exp=economia.PERIODO_EXPORTACIONES,

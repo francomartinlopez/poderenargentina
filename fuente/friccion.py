@@ -113,7 +113,7 @@ FRICCION = [
       ("Pan American Silver adquirió el accionista principal de MARA", "https://nuevaregion.com/la-megamineria-ha-demostrado-el-fracaso-en-toda-la-argentina")]),
 
     ("aceiteros_gr", "Paros aceiteros en el Gran Rosario", "Laboral", "82", "san-lorenzo", -60.7369, -32.7448, 2, "Acuerdo salarial vigente; conflicto latente",
-     ["soea_sl", "ciara", "cgt_arg"], ["China", "EE.UU."],
+     ["soea_sl", "ciara", "cofco", "cargill", "cgt_arg"], ["China", "EE.UU."],
      "Los gremios aceiteros pueden detener las terminales del cordón San Lorenzo-Timbúes, que despachan más de la mitad de las exportaciones agroindustriales del país (entre ellas las de Cofco, Cargill y Bunge). En mayo de 2026 lanzaron un paro por tiempo indeterminado y la Nación dictó la conciliación obligatoria.",
      [("2026-05", "Paro nacional aceitero y conciliación obligatoria.", "https://www.lacapital.com.ar/economia/paro-y-conciliacion-obligatoria-aceiteros-san-lorenzo-afirman-que-la-lucha-continua-n10261593.html/amp"),
       ("2026-06", "Acuerdo de aumento del 29,5% para todo el año.", "https://www.infocampo.com.ar/tag/soea/")],
@@ -121,7 +121,7 @@ FRICCION = [
       ("La Capital: aceiteros frenan los puertos", "https://www.lacapital.com.ar/aceiteros-lanzan-un-paro-y-se-frenan-los-puertos-del-gran-rosario-n10261479.html/amp")]),
 
     ("vaca_muerta_trabajo", "Salarios y tarifas en Vaca Muerta", "Laboral", "58", "anelo", -68.788, -38.354, 1, "Latente",
-     ["petroleros_nqn", "ypf", "gob_neuquen"], ["EE.UU."],
+     ["petroleros_nqn", "ypf", "vista", "gob_neuquen"], ["EE.UU."],
      "El sindicato petrolero negocia con las operadoras y las empresas de servicios en cada paritaria bajo amenaza de paro. En septiembre de 2026 rechazó el pedido de Halliburton de bajar 23% las tarifas a sus proveedores locales.",
      [("2026-01", "Aumento salarial y bono; alerta por la reforma laboral.", "https://www.noticiasnqn.com.ar/noticias/2026/01/23/327062-rucci-anuncio-aumentos-salariales-un-bono-de-500000-y-alerto-por-una-posible-reforma-laboral"),
       ("2026-09", "Rechazo al recorte de tarifas de Halliburton a las pymes.", "https://www.noticiasnqn.com.ar/amp/noticias/2026/09/08/351608-rucci-rechazo-el-ajuste-de-halliburton-a-las-pymes-de-vaca-muerta")],
@@ -133,6 +133,41 @@ FRICCION = [
      [("2026-05", "La UOM cierra un aumento y levanta el paro.", "https://www.iprofesional.com/economia/454009-aumento-salarial-en-acindar-y-suspension-del-paro-a-cuanto-se-fue-el-sueldo-promedio"),
       ("2026-06", "Acindar frena la producción por falta de ventas.", "https://www.lacapital.com.ar/economia/acindar-decidio-frenar-la-produccion-villa-constitucion-falta-ventas-n10263980.html")],
      [("La Capital: Acindar frena la producción", "https://www.lacapital.com.ar/economia/acindar-decidio-frenar-la-produccion-villa-constitucion-falta-ventas-n10263980.html")]),
+
+    ("pesca_milla201", "Pesca ilegal en la Milla 201", "Recursos marítimos", "26", None, -60.2, -45.8, 2, "Activa cada temporada",
+     ["seguridad", "ffaa", "economia"], ["China", "Unión Europea", "Japón y Corea"],
+     "Entre 400 y 600 buques extranjeros, en su gran mayoría chinos y también españoles, coreanos, taiwaneses y portugueses, pescan calamar sobre el límite de la Zona Económica Exclusiva y entran en ella de forma recurrente. La Prefectura y la Armada patrullan y capturan buques; el Gobierno multa por telemetría satelital. Además, capitales chinos controlan cerca de dos tercios de la flota calamarera argentina.",
+     [("2026-01", "El Congreso de EE.UU. alerta por la flota pesquera china frente a la Argentina.", "https://www.iprofesional.com/politica/447228-donald-trump-y-javier-milei-en-alerta-por-flota-pesquera-china-en-argentina"),
+      ("2026-02", "Unos 500 buques extranjeros en la Milla 201, 80% chinos.", "https://www.iprofesional.com/negocios/448592-pesca-ilegal-con-china-y-espana-a-la-cabeza-500-buques-extranjeros-depredan-en-el-sur"),
+      ("2026-07", "Multas a dos buques ligados a China por pescar en la ZEE.", "https://www.iprofesional.com/negocios/461046-buques-chinos-que-depredaban-el-mar-argentino-recibieron-multa-pero-seguiran-pescando.amp"),
+      ("2026-10", "Acuerdo internacional sobre el calamar sin la Argentina; Montevideo, base logística de las flotas.", "https://www.iprofesional.com/negocios/466455-pesca-china-malvinas-y-uruguay-se-unen-y-acechan-mar-argentino")],
+     [("La Nación: gobernanza en alta mar", "https://www.lanacion.com.ar/opinion/gobernanza-en-alta-mar-nid16012026/"),
+      ("iProfesional: China controla más del 60% de la flota calamarera", "https://www.iprofesional.com/negocios/459814-china-avanza-sobre-la-pesca-en-mar-argentino-y-controla-el-63-de-una-flota-clave-nacional")]),
+
+    ("magallanes", "Estrecho de Magallanes y la frontera austral con Chile", "Soberanía", "78", None, -68.35, -52.33, 2, "Contenida por la diplomacia",
+     ["milei", "ffaa"], [],
+     "Declaraciones de jefes militares argentinos sobre la boca oriental del estrecho provocaron protestas de Chile en 2026. La Cancillería argentina y los presidentes Milei y Kast ratificaron los tratados de 1881 y 1984, que dan a Chile la soberanía sobre todo el estrecho; en Chile siguen las sospechas y los reclamos por la plataforma continental austral.",
+     [("2026-01", "El jefe del Servicio de Hidrografía Naval sostiene que la boca oriental del estrecho sería argentina.", "https://www.elmostrador.cl/noticias/opinion/columnas/2026/04/17/chile-y-la-defensa-de-sus-intereses-permanentes-en-el-extremo-austral/"),
+      ("2026-04", "Chile rechaza los dichos y recuerda los tratados.", "https://www.24horas.cl/internacional/noticias/no-esta-en-discusion-chile-responde-a-dichos-de-contraalmirante"),
+      ("2026-08", "Dichos del jefe de la Fuerza Aérea; nota de protesta chilena y la Cancillería argentina ratifica la soberanía chilena.", "https://www.diarioconstitucional.cl/2026/08/25/argentina-ratifica-tratados-que-reconocen-soberania-chilena-sobre-el-estrecho-de-magallanes-tras-polemica-por-dichos-de-jefe-militar/"),
+      ("2026-09", "Declaración conjunta Milei-Kast sobre la vigencia de los tratados.", "https://www.emol.com/noticias/Nacional/2026/09/05/1210627/resumen-tension-chile-argentina.html")],
+     [("La Nación: Chile y la Argentina, ante injustificadas tensiones", "https://www.lanacion.com.ar/editoriales/chile-y-la-argentina-ante-injustificadas-tensiones-nid14102026/")]),
+
+    ("mascardi", "Conflicto territorial mapuche en Villa Mascardi", "Territorial", "62", None, -71.53, -41.35, 2, "Latente",
+     ["seguridad", "gob_rionegro"], [],
+     "Desde 2017 la comunidad Lafken Winkul Mapu ocupa tierras en Villa Mascardi, dentro del Parque Nacional Nahuel Huapi, con incendios, tomas y enfrentamientos con fuerzas federales. En 2022 la Nación y Río Negro crearon un comando conjunto y hubo un desalojo; en 2024 hubo condenas y nuevos desalojos en la región.",
+     [("2017", "Comienza la ocupación en Villa Mascardi.", "https://www.iprofesional.com/actualidad/370176-mapuches-incendian-casa-y-puesto-de-gendarmeria-en-villa-mascardi"),
+      ("2022-10", "Nación y Río Negro forman un comando de fuerzas federales en la zona.", "https://www.ambito.com/c5547814"),
+      ("2024", "Condenas y desalojos a grupos mapuches en la Patagonia.", "https://www.lanacion.com.ar/politica/fin-del-conflicto-el-nuevo-escenario-generado-por-las-condenas-y-los-desalojos-a-grupos-mapuches-nid06102024/")],
+     [("La Nación: condenas y desalojos", "https://www.lanacion.com.ar/politica/fin-del-conflicto-el-nuevo-escenario-generado-por-las-condenas-y-los-desalojos-a-grupos-mapuches-nid06102024/")]),
+
+    ("lago_escondido", "Lago Escondido", "Territorial", "62", None, -71.69, -41.75, 2, "Disputa judicial",
+     ["gob_rionegro"], ["Reino Unido"],
+     "El empresario británico Joe Lewis, a través de Hidden Lake S.A., es dueño de las tierras que rodean el lago, cuyo acceso es público por ley. Tras casi dos décadas de juicios, en 2023 el Superior Tribunal de Río Negro dejó como único acceso el camino de montaña; en 2026 se denunció un acuerdo entre el Gobierno nacional y la empresa.",
+     [("2005-04", "Amparo para garantizar el libre acceso al lago.", "https://www.noticiasnqn.com.ar/noticias/2023/08/31/282026-lago-escondido-el-fallo-favorece-a-lewis-y-dice-que-la-traza-larga-es-el-unico-camino-incluido-en-la-sentencia"),
+      ("2023-08", "El Superior Tribunal de Río Negro cierra el acceso por el camino de Tacuifí.", "https://www.noticiasnqn.com.ar/noticias/2023/08/31/282026-lago-escondido-el-fallo-favorece-a-lewis-y-dice-que-la-traza-larga-es-el-unico-camino-incluido-en-la-sentencia"),
+      ("2026-05", "Denuncia por un acuerdo entre el Gobierno y Hidden Lake.", "https://economiasustentable.com/tag/lago-escondido/")],
+     [("Diario Judicial: un lago cada vez más escondido", "https://www.diariojudicial.com/news-66693-un-lago-cada-vez-mas-escondido")]),
 ]
 
 # (id, nombre, provincia, ciudad, lon, lat, estado, texto, fuentes)

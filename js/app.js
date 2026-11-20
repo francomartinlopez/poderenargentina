@@ -37,13 +37,18 @@ const byS={},byId={},cityS={},depInfo={};
 
 function more(h){document.getElementById("more").innerHTML=h}
 function pend(t,d){return `<div class="blk"><h2>${t}</h2><div class="pend">${d}</div></div>`}
-function infGrid(list){
-  const m={};for(const i of list){(m[i.p]=m[i.p]||{})[i.c]=Math.max(m[i.p][i.c]||0,i.n)}
-  const rows=POT.filter(p=>m[p]).sort((a,b)=>CK.reduce((s,k)=>s+(m[b][k]||0),0)-CK.reduce((s,k)=>s+(m[a][k]||0),0));
+const NVI=["","Acotada","De primer orden","Dominante"];
+function infGrid(list,abierto){
+  const m={},d={};for(const i of list){(m[i.p]=m[i.p]||{})[i.c]=Math.max(m[i.p][i.c]||0,i.n);(d[i.p]=d[i.p]||[]).push(i)}
+  const tot=p=>CK.reduce((s,k)=>s+(m[p][k]||0),0);
+  const rows=POT.filter(p=>m[p]).sort((a,b)=>tot(b)-tot(a));
   if(!rows.length)return `<p class="muted">Sin influencias relevantes cargadas con fuente.</p>`;
-  return `<div class="grid5"><span class="h"></span>${CAN.map(c=>`<span class="h">${c}</span>`).join("")}${rows.map(p=>`<span class="r"><i style="background:${PCOL[p]}"></i>${esc(p)}</span>`+CK.map(k=>{const n=m[p][k]||0;return `<span class="v" style="${n?`background:${PCOL[p]}${["","40","80","d0"][n]};color:#fff`:""}">${n||"·"}</span>`}).join("")).join("")}</div>`}
-function infList(list){return `<ul class="ilist">${list.map(i=>`<li><b style="color:${PCOL[i.p]}">${esc(i.p)}</b> <span class="muted">· ${esc(T.meta.canales[i.c])} · ${i.n}</span><br>${esc(i.x)} ${src(i.u)}</li>`).join("")}</ul>`}
-function influ(list,title,nota){return `<div class="blk"><h2>${title||"Influencias mundiales"}</h2>${infGrid(list)}<p class="muted" style="font-size:13px;margin:8px 0 10px">${nota||"De 0 a 3 por canal. Comercio: participación en las exportaciones (INDEC); el resto, con la fuente de cada dato."}</p><details><summary>${list.length} ${list.length===1?"dato":"datos"} con fuente</summary>${infList(list)}</details></div>`}
+  const mx=tot(rows[0]),top=rows.filter(p=>tot(p)===mx);
+  const cel=(p,k)=>{const n=m[p][k]||0;return `<span class="v${n?"":" z"}" title="${CAN[CK.indexOf(k)]}: ${n?NVI[n]+" ("+n+")":"sin dato"}" style="${n?`background:${PCOL[p]}${["","45","8a","dd"][n]}`:""}">${n||"–"}</span>`};
+  return `<div class="itab"><div class="ih"><span>Potencia</span><span>Total</span>${CAN.map((c,i)=>`<span title="${T.meta.canales[CK[i]]}">${["Com.","Inv.","Deuda","Pres.","Pol."][i]}</span>`).join("")}</div><div class="ileg">Com. comercio · Inv. inversión · Deuda y finanzas · Pres. presencia física o de seguridad · Pol. influencia política y cultural</div>
+  ${rows.map((p,i)=>`<details class="irow"${abierto&&i===0?" open":""}><summary><span class="r"><i style="background:${PCOL[p]}"></i><span class="pn">${esc(p)}</span>${top.length===1&&top[0]===p?`<em title="Potencia dominante">dom.</em>`:top.length>1&&top.includes(p)?`<em>empate</em>`:""}</span><span class="t"><b>${tot(p)}</b><s style="width:${tot(p)/15*100}%;background:${PCOL[p]}"></s></span>${CK.map(k=>cel(p,k)).join("")}</summary>${infList(d[p])}</details>`).join("")}</div>`}
+function infList(list){return `<ul class="ilist">${list.sort((a,b)=>CK.indexOf(a.c)-CK.indexOf(b.c)).map(i=>`<li><span class="muted mono" style="font-size:12px">${esc(T.meta.canales[i.c])} · ${NVI[i.n]} (${i.n})</span><br>${esc(i.x)} ${src(i.u)}</li>`).join("")}</ul>`}
+function influ(list,title,nota){return `<div class="blk"><h2>${title||"Influencias mundiales"}</h2><p class="muted" style="font-size:13px;margin:0 0 10px">Cada potencia puntúa de 0 a 3 en cinco canales (1 acotada, 2 de primer orden, 3 dominante); el total va de 0 a 15 y manda la de mayor total. Tocá una fila para ver los datos y sus fuentes.</p>${infGrid(list)}<p class="muted" style="font-size:13px;margin:10px 0 0">${nota||"Comercio: participación de cada socio en las exportaciones de la provincia (INDEC). El INDEC solo informa los destinos principales de cada provincia: un socio que no figura entre ellos queda sin puntaje de comercio aunque compre algo. El resto de los canales, dato por dato con su fuente."}</p></div>`}
 
 function setup(){
   const W=600;
@@ -58,7 +63,7 @@ function setup(){
 
 function mapShell(){
   app.innerHTML=`<div class="mapview"><div><div class="crumbs" id="crumbs"></div>
-  <div class="bar" id="capas" role="group" aria-label="Capas"></div><div class="bar sub" id="sub"></div>
+  <div class="selrow"><label for="capasel">Ver en el mapa</label><select id="capasel" class="sel"></select><span id="subsel"></span></div><div class="bar sub" id="sub"></div>
   <div class="mapbox" id="mapbox"><svg id="map" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Mapa de la Argentina por provincias"></svg>
   <div class="ant" id="ant"><svg id="antsvg" aria-hidden="true"></svg>Antártida Argentina<br>(otra escala)</div></div>
   <div class="bar" id="filt" role="group" aria-label="Ciudades por motivo" style="margin-top:10px"></div></div>
@@ -75,8 +80,8 @@ function mapShell(){
     const[k,v]=t.dataset.k.split(":");const txt=k==="p"?tipText(byId[v]):k==="d"?(depInfo[v]?.n||v):k==="f"?FR[v].n:k==="z"?T.zonas.find(z=>z.cs===v).n:capa==="act"&&actCity[v]?`${cityS[v].n}: ${actCity[v].length} actores`:cityS[v]?.n;tip.textContent=txt;tip.style.display="block";tip.style.left=e.clientX+14+"px";tip.style.top=e.clientY+12+"px"});
   svg.addEventListener("pointerleave",()=>tip.style.display="none");
   new ResizeObserver(()=>scaleMarks()).observe(svg);
-  document.getElementById("capas").onclick=e=>{const b=e.target.closest("button[data-c]");if(!b||b.disabled)return;capa=b.dataset.c;route()};
-  document.getElementById("sub").onclick=e=>{const b=e.target.closest("button");if(!b)return;if(b.dataset.pot)potSel=b.dataset.pot;if(b.dataset.eco)ecoSel=b.dataset.eco;route()};
+  document.getElementById("capasel").onchange=e=>{capa=e.target.value;route()};
+  document.getElementById("subsel").onchange=e=>{const t=e.target;if(t.dataset.k==="pot")potSel=t.value;if(t.dataset.k==="eco")ecoSel=t.value;route()};
 }
 function tipText(p){
   if(capa==="ali")return `${p.n}: ${ALI[p.ali.ali]}`;
@@ -87,7 +92,10 @@ function tipText(p){
   if(capa==="eco")return ecoSel==="exp"?`${p.n}: USD ${nf(p.eco.exp)} M exportados`:`${p.n}: ${p.eco.propios==null?"sin datos":p.eco.propios.toLocaleString("es-AR")+"% de recursos propios"}`;
   return p.n}
 function paint(){
-  document.getElementById("capas").innerHTML=CAPAS.map(([k,n,on])=>on?`<button class="chip ${capa===k?"on":""}" data-c="${k}" aria-pressed="${capa===k}">${n}</button>`:`<button class="chip" disabled title="Se carga en los próximos pasos">${n} <small>pronto</small></button>`).join("");
+  document.getElementById("capasel").innerHTML=CAPAS.filter(c=>c[2]).map(([k,n])=>`<option value="${k}"${capa===k?" selected":""}>${n}</option>`).join("");
+  const ss=document.getElementById("subsel");
+  ss.innerHTML=capa==="inf"?`<select class="sel" data-k="pot" aria-label="Potencia"><option value="dom"${potSel==="dom"?" selected":""}>Potencia dominante</option>${POT.map(k=>`<option value="${esc(k)}"${potSel===k?" selected":""}>${esc(k)}</option>`).join("")}</select>`
+    :capa==="eco"?`<select class="sel" data-k="eco" aria-label="Indicador"><option value="exp"${ecoSel==="exp"?" selected":""}>Exportaciones</option><option value="pro"${ecoSel==="pro"?" selected":""}>Recursos propios</option></select>`:"";
   const P=T.provincias,sub=document.getElementById("sub");let leg="";
   const maxPot=k=>Math.max(1,...P.map(p=>p.tot[k]||0)),maxExp=Math.max(...P.map(p=>p.eco.exp));
   const fill=p=>{
@@ -100,11 +108,11 @@ function paint(){
     return null};
   for(const el of G.p.children){const p=byId[el.dataset.k.slice(2)],f=fill(p);el.style.fill=f?f[0]:"";el.style.fillOpacity=f?f[1]:"";el.querySelector("title").textContent=tipText(p)}
   if(capa==="ali"){const c={};P.forEach(p=>c[p.ali.ali]=(c[p.ali.ali]||0)+1);leg=Object.keys(ALI).map(a=>`<span class="lg"><i style="background:${ACOL[a]}"></i>${ALI[a]} ${c[a]||0}</span>`).join("")}
-  else if(capa==="inf"){leg=`<button class="chip ${potSel==="dom"?"on":""}" data-pot="dom">Dominante</button>`+POT.map(k=>`<button class="chip ${potSel===k?"on":""}" data-pot="${esc(k)}"><i style="background:${PCOL[k]}"></i>${esc(k)}</button>`).join("")}
+  else if(capa==="inf"){leg=potSel==="dom"?POT.filter(k=>P.some(p=>p.dom===k)).map(k=>`<span class="lg"><i style="background:${PCOL[k]}"></i>${esc(k)} ${P.filter(p=>p.dom===k).length}</span>`).join("")+(P.some(p=>!p.dom&&p.emp.length)?`<span class="lg"><i style="background:#6E6462"></i>Empate ${P.filter(p=>!p.dom&&p.emp.length).length}</span>`:""):`<span class="lg"><i style="background:${PCOL[potSel]}"></i>Más intenso, más influencia de ${esc(potSel)} (total de 0 a 15)</span>`}
   else if(capa==="act"){leg=`<span class="lg">Círculos: ciudades sede de actores núcleo, según la suma de sus puntajes. La mayoría tiene sede en la Capital.</span>`}
   else if(capa==="fr"){leg=[3,2,1].map(n=>`<span class="lg"><i style="background:${NVC[n]}"></i>${NVT[n]}</span>`).join("")}
   else if(capa==="zl"){leg=`<span class="lg">Zonas documentadas con fuente oficial o periodística. Ver criterio en el panel.</span>`}
-  else if(capa==="eco"){leg=`<button class="chip ${ecoSel==="exp"?"on":""}" data-eco="exp">Exportaciones</button><button class="chip ${ecoSel==="pro"?"on":""}" data-eco="pro">Recursos propios</button><span class="lg">${ecoSel==="exp"?"USD exportados, "+esc(T.meta.periodo_exp)+" (escala logarítmica)":"Ingresos propios sobre el total, 2025 (ASAP)"}</span>`}
+  else if(capa==="eco"){leg=`<span class="lg">${ecoSel==="exp"?"USD exportados, "+esc(T.meta.periodo_exp)+" (escala logarítmica)":"Ingresos propios sobre el total, 2025 (ASAP)"}</span>`}
   sub.innerHTML=leg;sub.style.display=leg?"":"none";
 }
 
@@ -179,7 +187,7 @@ function vPais(){
   document.getElementById("panel").innerHTML=`<h1>Argentina</h1><p class="sub">Tocá una provincia para bajar a sus departamentos y ciudades. Cambiá la capa para ver alineamiento, influencias o economía.</p>
   <div class="facts"><div><span>Población (Censo 2022)</span><b class="mono">${nf(T.pais.pob)}</b></div><div><span>Departamentos</span><b class="mono">${P.reduce((s,p)=>s+p.ndep,0)}</b></div><div><span>Ciudades en el mapa</span><b class="mono">${T.ciudades.length}</b></div></div>
   <div class="blk grow">${side}</div>`;
-  more(influ(T.pais.inf,"Influencias sobre el Estado nacional","Vínculos de la Nación con cada potencia. Las de cada provincia, en su ficha.")+`<div class="blk"><h2>Quién manda</h2>${actList(T.actores,8)}<p style="margin-top:10px"><a href="#actores">Los ${T.actores.length} actores núcleo, su puntaje y sus relaciones</a></p></div>`);
+  more(influ(T.pais.inf,"Influencias sobre el Estado nacional","Vínculos de la Nación con cada potencia. Comercio: participación de cada socio en las exportaciones y en las importaciones de bienes del país (INDEC, vía Cancillería); vale el mayor de los dos, por eso China, primer origen de las importaciones, puntúa 2. Las influencias de cada provincia, en su ficha.")+`<div class="blk"><h2>Quién manda</h2>${actList(T.actores,8)}<p style="margin-top:10px"><a href="#actores">Los ${T.actores.length} actores núcleo, su puntaje y sus relaciones</a></p></div>`);
 }
 async function vProv(p,did){
   ensureMap();document.getElementById("ant").style.display="none";
@@ -250,7 +258,7 @@ function vCiudades(){
 }
 function vPlan(){
   app.innerHTML=`<div class="page plan"><h1>Plan</h1>
-  <h2>Hecho</h2><ol><li><b>Esqueleto.</b> Mapa oficial del IGN con zoom de país a provincia, departamento y ciudad; ${T.ciudades.length} ciudades con su motivo; gobernadores al día.</li><li><b>Las 24 provincias.</b> Población del Censo 2022 por provincia y departamento; exportaciones, destinos y rubro principal (INDEC); recursos propios frente a los fondos nacionales (ASAP); quién manda de verdad y alineamiento con la Nación; influencias de 11 potencias en cinco canales, con fuente. Capas de alineamiento, influencias y economía en el mapa.</li><li><b>Actores núcleo.</b> ${T.actores.length} actores nacionales medidos en los 21 ejes con la fórmula del mapa global, con ficha, fuentes y ${T.relaciones.length} relaciones; capa de actores en el mapa.</li><li><b>Fichas de ciudades.</b> Intendente de ${T.ciudades.filter(c=>c.int).length} ciudades, quién manda en las ciudades de empresa, influencias propias de ${T.ciudades.filter(c=>c.inf).length} ciudades y conflictos documentados.</li><li><b>Fricción y actores locales.</b> Los gobiernos de las 24 jurisdicciones como actores, con su alineamiento; Zamora en Santiago del Estero, los intendentes de Rosario y Córdoba, sindicatos regionales (petroleros, aceiteros, UOM Villa Constitución, SMATA Córdoba) y empresas provinciales (GyP, JEMSE); ${T.actores.length} actores en total. ${T.friccion.length} puntos de fricción con cronología y fuentes, y las zonas liberadas documentadas, con capas propias en el mapa.</li><li><b>Departamentos relevantes.</b> Ficha propia de ${Object.keys(T.deps||{}).length} partidos y departamentos (conurbano, Rosario, San Lorenzo y Vaca Muerta): cabecera, quién gobierna, actividad, actores y fricción.</li></ol>
+  <h2>Hecho</h2><ol><li><b>Esqueleto.</b> Mapa oficial del IGN con zoom de país a provincia, departamento y ciudad; ${T.ciudades.length} ciudades con su motivo; gobernadores al día.</li><li><b>Las 24 provincias.</b> Población del Censo 2022 por provincia y departamento; exportaciones, destinos y rubro principal (INDEC); recursos propios frente a los fondos nacionales (ASAP); quién manda de verdad y alineamiento con la Nación; influencias de 11 potencias en cinco canales, con fuente. Capas de alineamiento, influencias y economía en el mapa.</li><li><b>Actores núcleo.</b> ${T.actores.length} actores nacionales medidos en los 21 ejes con la fórmula del mapa global, con ficha, fuentes y ${T.relaciones.length} relaciones; capa de actores en el mapa.</li><li><b>Fichas de ciudades.</b> Intendente de ${T.ciudades.filter(c=>c.int).length} ciudades, quién manda en las ciudades de empresa, influencias propias de ${T.ciudades.filter(c=>c.inf).length} ciudades y conflictos documentados.</li><li><b>Fricción y actores locales.</b> Los gobiernos de las 24 jurisdicciones como actores, con su alineamiento; Zamora en Santiago del Estero, los intendentes de Rosario y Córdoba, sindicatos regionales, empresas provinciales y, por categoría, dirigentes políticos, empresas y grupos económicos, bandas criminales con condena, Justicia, religiosos, organizaciones sociales y ONG, medios y periodistas; ${T.actores.length} actores en total. ${T.friccion.length} puntos de fricción con cronología y fuentes, y las zonas liberadas documentadas, con capas propias en el mapa.</li><li><b>Departamentos relevantes.</b> Ficha propia de ${Object.keys(T.deps||{}).length} partidos y departamentos (conurbano, Rosario, San Lorenzo y Vaca Muerta): cabecera, quién gobierna, actividad, actores y fricción.</li></ol>
   
   <h2>Método de las influencias</h2><p>Cada potencia recibe de 0 a 3 en cinco canales. El comercio se calcula con la participación de cada destino en las exportaciones de la provincia (40% o más vale 3; de 20% a 40%, 2; de 8% a 20%, 1); cuando el INDEC informa un bloque se toma como aproximación (USMCA como EE.UU. y Mercosur como Brasil). Inversión, deuda, presencia e influencia política se cargan dato por dato con su fuente. La potencia dominante es la de mayor suma; si dos empatan, se marca el empate.</p>
   <h2>Pendientes</h2><ul><li>Confirmar con fuente del año los ${T.ciudades.filter(c=>c.int&&c.int.ver==="W").length} intendentes marcados «a confirmar» y cargar los de Timbúes y San Antonio de los Cobres.</li><li>Censo 2022 de las localidades que todavía muestran una proyección propia a 2026 (San Antonio de los Cobres, Antofagasta de la Sierra, San José de Jáchal y Salvador Mazza).</li><li>Intendentes del conurbano como actores puntuados, cuando el mapa admita actores con sede en un partido sin ciudad propia.</li><li>Próximo corte: 23 de febrero de 2027.</li></ul></div>`;
@@ -272,18 +280,21 @@ function vFr(f){
   <div><h2 class="sec">Cronología</h2><ul class="rlist">${f.hit.map(h=>`<li><span class="mono muted">${esc(h.f.length>4?fmes(h.f):h.f)}</span> ${esc(h.x)} ${src(h.u)}</li>`).join("")}</ul>
   <h2 class="sec">Fuentes</h2><ul class="rlist">${f.fu.map(x=>`<li><a href="${esc(x.u)}" target="_blank" rel="noopener">${esc(x.t)}</a></li>`).join("")}</ul></div></div></div>`;
 }
-let atSel=null;
+let atSel=null,acSel="",aq="";
+function aRows(){const A=T.actores,q=aq.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();return A.map((a,i)=>[a,i]).filter(([a])=>(!atSel||a.tipo===atSel)&&(!acSel||a.cat===acSel)&&(!q||(a.n+" "+a.cat+" "+a.sede).normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase().includes(q))).map(([a,i])=>`<tr><td class="n mono">${i+1}</td><td><a href="#a-${a.id}">${esc(a.n)}</a></td><td style="color:${TCOL[a.tipo]}">${esc(a.cat)}</td><td><a href="#c-${a.cs}">${esc(a.sede==="Ciudad Autónoma de Buenos Aires"?"CABA":a.sede)}</a></td><td>${esc(T.meta.act.alcance[a.alc])}</td><td>${ptBar(a.pt,TCOL[a.tipo])}</td><td class="n mono">${a.oculto.toLocaleString("es-AR")}</td></tr>`).join("")||`<tr><td colspan="7" class="muted">Sin resultados.</td></tr>`}
 function vActores(){
   const A=T.actores,tipos=[...new Set(A.map(a=>a.tipo))];
   app.innerHTML=`<div class="page"><h1>Actores</h1><p class="sub">Quién tiene el poder real en la Argentina: ${A.length} actores núcleo, nacionales, provinciales y municipales, medidos en 21 ejes, con el mismo método y la misma fórmula que El mapa del poder global. En este mapa, el 3 de cada eje es dominio a escala nacional.</p>
   <div class="bar" id="tf"><button class="chip ${atSel?"":"on"}" data-t="">Todos</button>${tipos.map(t=>`<button class="chip ${atSel===t?"on":""}" data-t="${t}"><i style="background:${TCOL[t]}"></i>${t} <small>${A.filter(a=>a.tipo===t).length}</small></button>`).join("")}</div>
-  <table class="stack"><thead><tr><th class="n">#</th><th>Actor</th><th>Categoría</th><th>Sede</th><th>Alcance</th><th>Puntaje de poder</th><th class="n" title="Poder real que no surge del cargo formal">Oculto</th></tr></thead><tbody>
-  ${A.map((a,i)=>[a,i]).filter(([a])=>!atSel||a.tipo===atSel).map(([a,i])=>`<tr><td class="n mono">${i+1}</td><td><a href="#a-${a.id}">${esc(a.n)}</a></td><td style="color:${TCOL[a.tipo]}">${esc(a.cat)}</td><td><a href="#c-${a.cs}">${esc(a.sede==="Ciudad Autónoma de Buenos Aires"?"CABA":a.sede)}</a></td><td>${esc(T.meta.act.alcance[a.alc])}</td><td>${ptBar(a.pt,TCOL[a.tipo])}</td><td class="n mono">${a.oculto.toLocaleString("es-AR")}</td></tr>`).join("")}</tbody></table>
+  <div class="selrow"><label for="acsel">Categoría</label><select id="acsel" class="sel"><option value="">Todas</option>${[...new Set(A.map(a=>a.cat))].sort().map(c=>`<option${acSel===c?" selected":""}>${esc(c)}</option>`).join("")}</select><input class="search" id="aq" type="search" placeholder="Buscar actor" value="${esc(aq)}" aria-label="Buscar actor" style="flex:1;min-width:180px;margin:0"></div>
+  <table class="stack"><thead><tr><th class="n">#</th><th>Actor</th><th>Categoría</th><th>Sede</th><th>Alcance</th><th>Puntaje de poder</th><th class="n" title="Poder real que no surge del cargo formal">Oculto</th></tr></thead><tbody id="atb">${aRows()}</tbody></table>
   <h2 class="sec">Red de relaciones</h2><p class="muted" style="font-size:14px;max-width:760px">${T.relaciones.length} relaciones con fuente. Pasá el cursor por un actor para ver sus vínculos; tocalo para abrir su ficha. Los nodos grises son actores del mapa global.</p>
   <div class="bar">${Object.keys(RCOL).filter(t=>T.relaciones.some(r=>r.t===t)).map(t=>`<span class="lg"><i style="background:${RCOL[t]}"></i>${t}</span>`).join("")}</div>
   ${netSvg()}
   <h2 class="sec">Método</h2><p style="max-width:760px">Cada actor recibe de 0 a 3 en 21 ejes (materia, dinero, fuerza, información, personas y norma). Coerción, adquisición de información y acción fuera de la ley valen el doble; contactos y privilegio legal, una vez y media. El puntaje final es una media geométrica ponderada de la categoría teórica del actor (40 %), su capacidad (30 %), su alcance (20 %), su autonomía real (5 %) y el poder que hereda de quienes dependen de él (5 %); el resultado se eleva al cubo y el mayor vale 100. El poder oculto mide cuánto de ese poder no surge del cargo formal. La acción fuera de la ley solo se puntúa con un hecho establecido por un tribunal u organismo oficial.</p></div>`;
   document.getElementById("tf").onclick=e=>{const b=e.target.closest("button");if(!b)return;atSel=b.dataset.t||null;vActores()};
+  document.getElementById("acsel").onchange=e=>{acSel=e.target.value;document.getElementById("atb").innerHTML=aRows()};
+  document.getElementById("aq").oninput=e=>{aq=e.target.value;document.getElementById("atb").innerHTML=aRows()};
   netWire();
 }
 function netSvg(){
