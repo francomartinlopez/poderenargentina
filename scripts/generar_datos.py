@@ -76,6 +76,8 @@ def main():
             items = [(x, m) for x, m in items if x == pot] or items
             sh = monto / e["exp"]
             n = 3 if sh >= .40 else 2 if sh >= .20 else 1 if sh >= .08 else 0
+            if e["exp"] < 400:  # provincias que casi no exportan: el comercio vale como máximo 1 (corte del 20/11/2026)
+                n = min(n, 1)
             if n:
                 nombres = " y ".join(dict.fromkeys(x for x, _ in items))
                 aprox = "" if pot in [x for x, _ in items] or (pot == "Unión Europea") else f" ({nombres}, tomado como {pot})"
@@ -90,6 +92,9 @@ def main():
             return None, {}
         mx = max(tot.values())
         top = [p for p in POT if tot.get(p) == mx]
+        canales = {i["c"] for i in lista if i["p"] in top}
+        if mx < 3 and len(canales) < 2:  # umbral: suma de 3 o dos canales (corte del 20/11/2026)
+            return None, tot
         return (top[0] if len(top) == 1 else None), tot
     provincias = []
     for pid, (s, corto, gob, par, desde) in PROVINCIAS.items():
@@ -134,7 +139,13 @@ def main():
         if n:
             inf.setdefault("AR", []).append(dict(p=pot, c="com", n=n, u=cn["fuente"],
                 x=f"{str(ex).replace('.', ',')}% de las exportaciones y {str(im).replace('.', ',')}% de las importaciones de bienes del país ({cn['periodo']}); vale el mayor de los dos puntajes."))
-    pais = dict(pob=sum(poblacion.PROVINCIA.values()), inf=sorted(inf.get("AR", []), key=lambda i: (-i["n"], POT.index(i["p"]))))
+    pais = dict(pob=sum(poblacion.PROVINCIA.values()), inf=sorted(inf.get("AR", []), key=lambda i: (-i["n"], POT.index(i["p"]))),
+                rigi=economia.RIGI)
+    import elecciones
+    for pid, e in elecciones.PROVINCIAS.items():
+        assert pid in ign and e[1] in ("S", "N", None) and e[3].startswith("http"), f"Elecciones {pid}"
+    elec = dict(pres=dict(f=elecciones.PRESIDENCIAL[0], u=elecciones.PRESIDENCIAL[1]),
+                prov={pid: dict(f=e[0], d=e[1], x=e[2], u=e[3]) for pid, e in elecciones.PROVINCIAS.items()})
     meta = dict(potencias=POT, canales=influencias.CANALES, alineamiento=alineamiento.ALINEAMIENTO,
                 fuente_censo=poblacion.FUENTE, fuente_exp=economia.FUENTE_EXPORTACIONES, periodo_exp=economia.PERIODO_EXPORTACIONES,
                 fuente_propios=economia.FUENTE_RECURSOS_PROPIOS, fuente_ali=alineamiento.FUENTE_MAPA)
@@ -177,7 +188,7 @@ def main():
                 deps[did] = dict(n=x["sede"], cab="", act="", gob=None, ai=[], fr=[], fu=[dict(t=x["fu"][0][0], u=x["fu"][0][1])])
             if x["id"] not in deps[did]["ai"]:
                 deps[did]["ai"] = [x["id"]] + deps[did]["ai"]
-    out = dict(corte=CORTE, proxima=PROXIMA, meta=meta, pais=pais, provincias=provincias, ciudades=ciudades,
+    out = dict(corte=CORTE, proxima=PROXIMA, meta=meta, pais=pais, elecciones=elec, provincias=provincias, ciudades=ciudades,
                deppob=poblacion.DEPARTAMENTO, deps=deps, actores=actores, relaciones=relaciones, friccion=fr, zonas=zonas)
     with open(os.path.join(RAIZ, "data", "territorio.json"), "w") as f:
         json.dump(out, f, ensure_ascii=False, separators=(",", ":"))

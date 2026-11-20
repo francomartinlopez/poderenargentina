@@ -7,7 +7,7 @@ puntaje = media geométrica ponderada de categoría teórica, capacidad, alcance
 poder oculto = puntaje por la brecha entre el poder real y el formal, con el mayor en 100
 """
 import math
-from ejes import EJES, PESOS, AUTONOMIA_REAL, TEORICO, TIPO, PESO_FINAL, ESTIRAR, ALCANCE, AUTONOMIA, CERTEZA, BLOQUES, TIPOS_REL, PESO_REL, EXTERNOS, GLOBAL_URL
+from ejes import EJES, PESOS, AUTONOMIA_REAL, TEORICO, TIPO, PESO_FINAL, ESTIRAR, ALCANCE, AUTONOMIA, CERTEZA, BLOQUES, TIPOS_REL, PESO_REL, EXTERNOS, EXTERNOS_SIN_FICHA, GLOBAL_URL
 from actores import ACTORES as _A, FICHAS as _F, RELACIONES as _R
 import actores_provinciales as _P
 import actores_mas as _M
@@ -47,6 +47,22 @@ for r in _P.RELACIONES + _M.RELACIONES + _M2.RELACIONES + _M3.RELACIONES + _M4.R
 FAC = {1: 1, 2: .75, 3: .5, 4: .25}
 
 
+def sc_intendente(sede, ciudades):
+    """Regla única para los intendentes (corte del 20/11/2026): los ejes salen de la población del partido o departamento.
+    Base: dominio territorial, contactos, apoyo, cohesión y normas locales en 1.
+    300.000 habitantes o más: capital físico y miembros en 1 (presupuesto y planta municipal grandes).
+    1 millón o más: contactos en 2 y moderación de la agenda en 1."""
+    import poblacion
+    did = sede[4:] if sede.startswith("dep:") else ciudades[sede]["dep"]
+    pob = poblacion.DEPARTAMENTO[did]
+    k = dict(ter=1, red=1, apo=1, coh=1, reg=1)
+    if pob >= 300000:
+        k.update(cap=1, mie=1)
+    if pob >= 1000000:
+        k.update(red=2, mod=1)
+    return "".join(str(k.get(e[0], 0)) for e in EJES)
+
+
 def calcular(ciudades_por_nombre):
     ejes = [e[0] for e in EJES]
     ids = [a[0] for a in ACTORES]
@@ -62,6 +78,8 @@ def calcular(ciudades_por_nombre):
         assert i in FICHAS and FICHAS[i]["fuentes"], f"{i}: falta ficha o fuentes"
         A[i] = dict(id=i, n=n, cat=cat, tipo=TIPO[cat], sede=sede, alc=alc, bloque=blo, aut=aut, cert=cert, formal=formal,
                     sc=[int(c) for c in sc], dep=[d for d in dep.split(",") if d])
+        if i.startswith("int_"):
+            A[i]["sc"] = [int(c) for c in sc_intendente(sede, ciudades_por_nombre)]
     for a in A.values():
         for d in a["dep"]:
             assert d in A, f"{a['id']} depende de {d}, que no existe"
@@ -83,12 +101,54 @@ def calcular(ciudades_por_nombre):
         return v
     for i in A:
         A[i]["red"] = red(i)
+    rel = []
+    vistos = set()
+    for o, d, t, x, n, u in RELACIONES:
+        for z in (o, d):
+            assert z in A or z in EXTERNOS, f"relación con actor desconocido: {z}"
+        assert t in TIPOS_REL and n in (1, 2, 3) and u.startswith("http"), (o, d, t)
+        k = (o, d, t)
+        assert k not in vistos, f"relación repetida {k}"
+        vistos.add(k)
+        rel.append(dict(o=o, d=d, t=t, x=x, n=n, u=u))
+    # Puntaje real de categoría (informativo, no entra en la fórmula), como en el mapa global
+    sale = {i: 0.0 for i in A}
+    entra = {i: 0.0 for i in A}
+    for r in rel:
+        w = PESO_REL.get(r["t"])
+        if w and r["o"] in A:
+            sale[r["o"]] += w
+        if w and r["d"] in A:
+            entra[r["d"]] += w
+    for a in A.values():
+        for d in a["dep"]:
+            sale[d] += 1
+            entra[a["id"]] += 1
+    # Categoría relevada en el mapa argentino (corte del 20/11/2026, decisión de Franco):
+    # por actor, 50 % autonomía, 30 % dominio en sus relaciones, 20 % dependientes (tope 3) y +15 % si enfrenta a su jefe formal.
+    # El promedio de la categoría se lleva a la escala 3-9 del teórico y se promedia 50/50 con él.
+    AUTREL = {1: 1, 2: .67, 3: .33, 4: 0}
+    depn = {i: sum(1 for b in A.values() if i in b["dep"]) for i in A}
+    def releva(a):
+        s_, e_ = sale[a["id"]], entra[a["id"]]
+        dom = s_ / (s_ + e_) if s_ + e_ else .5
+        v = .5 * AUTREL[a["aut"]] + .3 * dom + .2 * min(depn[a["id"]], 3) / 3
+        if any(r["t"] in ("Enfrentamiento", "Ambigua") and {r["o"], r["d"]} == {a["id"], j} for j in a["dep"] for r in rel):
+            v += .15
+        return min(v, 1)
+    porcat = {}
+    for a in A.values():
+        porcat.setdefault(a["cat"], []).append(releva(a))
+    bruto_c = {c: 10 * sum(v) / len(v) for c, v in porcat.items()}
+    lo, hi = min(bruto_c.values()), max(bruto_c.values())
+    REL_CAT = {c: round(3 + 6 * (v - lo) / ((hi - lo) or 1), 1) for c, v in bruto_c.items()}
+    CAT_FINAL = {c: round((TEORICO[c] + REL_CAT[c]) / 2, 2) for c in REL_CAT}
     her = {i: A[i]["red"] - A[i]["pe"] for i in A}
     hmax = max(her.values()) or 1
     amax = max(v for v, _ in ALCANCE.values())
 
     def comp(a):
-        return {"ct": TEORICO[a["cat"]] / 10, "cap": max(a["cap"], .5) / capmax, "alc": ALCANCE[a["alc"]][0] / amax, "aut": a["fr"],
+        return {"ct": CAT_FINAL[a["cat"]] / 10, "cap": max(a["cap"], .5) / capmax, "alc": ALCANCE[a["alc"]][0] / amax, "aut": a["fr"],
                 "red": .5 + .5 * math.log1p(her[a["id"]]) / math.log1p(hmax)}
     bruto = {i: math.prod(v ** PESO_FINAL[k] for k, v in comp(a).items()) for i, a in A.items()}
     bmax = max(bruto.values())
@@ -113,31 +173,8 @@ def calcular(ciudades_por_nombre):
         a["fr"] = round(a["fr"], 3)
         a["red"] = round(a["red"], 2)
 
-    rel = []
-    vistos = set()
-    for o, d, t, x, n, u in RELACIONES:
-        for z in (o, d):
-            assert z in A or z in EXTERNOS, f"relación con actor desconocido: {z}"
-        assert t in TIPOS_REL and n in (1, 2, 3) and u.startswith("http"), (o, d, t)
-        k = (o, d, t)
-        assert k not in vistos, f"relación repetida {k}"
-        vistos.add(k)
-        rel.append(dict(o=o, d=d, t=t, x=x, n=n, u=u))
-    # Puntaje real de categoría (informativo, no entra en la fórmula), como en el mapa global
-    sale = {i: 0.0 for i in A}
-    entra = {i: 0.0 for i in A}
-    for r in rel:
-        w = PESO_REL.get(r["t"])
-        if w and r["o"] in A:
-            sale[r["o"]] += w
-        if w and r["d"] in A:
-            entra[r["d"]] += w
-    for a in A.values():
-        for d in a["dep"]:
-            sale[d] += 1
-            entra[a["id"]] += 1
     actores = sorted(A.values(), key=lambda a: (-a["pt"], a["n"]))
     meta = dict(ejes=[dict(k=e[0], n=e[1], g=e[2], d=e[3], a=list(e[4])) for e in EJES], pesos=PESOS, teorico=TEORICO,
                 alcance={k: v[1] for k, v in ALCANCE.items()}, autonomia=AUTONOMIA, certeza=CERTEZA, bloques=BLOQUES,
-                peso_final=PESO_FINAL, estirar=ESTIRAR, externos=EXTERNOS, global_url=GLOBAL_URL, tipos_rel=TIPOS_REL)
+                peso_final=PESO_FINAL, estirar=ESTIRAR, cat_relevada=REL_CAT, cat_final=CAT_FINAL, externos=EXTERNOS, sin_ficha=list(EXTERNOS_SIN_FICHA), global_url=GLOBAL_URL, tipos_rel=TIPOS_REL)
     return actores, rel, meta

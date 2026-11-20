@@ -4,10 +4,12 @@
 #   coerción, dominio territorial y miembros: 2 si la provincia supera 1,5 M de habitantes (policía y planta estatal grandes), 1 si no;
 #   cohesión: 3 en las provincias con hegemonía de un mismo grupo por décadas, 1 donde el oficialismo se partió;
 #   moderación de información: 2 donde el oficialismo provincial domina la agenda local por décadas;
-#   regulación y privilegio legal: 2 en todas (leyes provinciales, policía, concesiones).
+#   regulación y privilegio legal: 2 en todas (leyes provinciales, policía, concesiones);
+#   dinero: 2 si los recursos propios superan la mitad de los ingresos (ASAP, fuente/economia.py), 1 si no (corte del 20/11/2026).
 # Las relaciones con la Nación salen del alineamiento de fuente/alineamiento.py, con su fuente.
 from provincias import PROVINCIAS
 from alineamiento import PROVINCIAS as ALI
+from economia import PROVINCIAS as ECO
 
 IDS = {"02": "gob_caba", "10": "gob_catamarca", "18": "gob_corrientes", "22": "gob_chaco", "26": "gob_chubut", "30": "gob_entrerios",
        "34": "gob_formosa", "38": "gob_jujuy", "42": "gob_lapampa", "46": "gob_larioja", "50": "gob_mendoza", "54": "gob_misiones",
@@ -33,7 +35,7 @@ def plantilla(pid):
     rec = 0 if pid == "02" else (2 if pid in REC2 else 1)
     cap = 2 if pid == "02" else 1
     mov = 2 if pid == "02" else 1
-    din = 2 if pid == "02" else 1
+    din = 2 if (ECO[pid].get("propios") or 0) >= 50 else 1
     mod = 2 if pid in HEGEMONIA else 1
     coh = 3 if pid in HEGEMONIA else (1 if pid in PARTIDO else 2)
     inn = 1 if pid == "02" else 0

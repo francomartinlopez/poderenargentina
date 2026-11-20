@@ -347,7 +347,7 @@ RELACIONES = [
     ("tapia", "toviggino", "Alianza", "Conducen juntos la AFA; la investigación en EE.UU. se centra en su gestión (sin imputación).", 3, PERFIL_FBI),
     ("afa", "fifa", "Alianza", "La AFA es la federación argentina miembro de la FIFA.", 1, W + "Asociación_del_Fútbol_Argentino"),
     ("estudiantes", "afa", "Enfrentamiento", "Verón, considerado el mayor opositor a la conducción de la AFA, fue suspendido dos veces.", 3, "https://es.soccerway.com/noticias/futbol-afa-sanciona-estudiantes-dar-espalda-rosario-central/dbh9fkZI"),
-    ("estudiantes", "central", "Enfrentamiento", "El pasillo de espaldas a Rosario Central y el escándalo de la Supercopa Internacional.", 1, "https://elgrafico.com.ar/articulo/1038/103369/veron-fue-suspendido-tres-meses-por-el-escandalo-en-la-supercopa-internacional"),
+    ("estudiantes", "central", "Enfrentamiento", "El pasillo de espaldas a Rosario Central en la Supercopa Internacional terminó con la suspensión de Verón por tres meses.", 1, "https://elgrafico.com.ar/articulo/1038/103369/veron-fue-suspendido-tres-meses-por-el-escandalo-en-la-supercopa-internacional"),
     ("racing", "afa", "Ambigua", "Milito criticó a la AFA en mayo y en septiembre recibió a Tapia en el predio de Ezeiza.", 1, "https://elintransigente.com/2026/09/diego-milito-tapia-ezeiza/"),
     ("central", "afa", "Alianza", "Belloso es vocal titular del comité ejecutivo y defiende a la conducción.", 2, "https://www.lacapital.com.ar/ovacion/gonzalo-belloso-en-central-estamos-intentando-seguir-siendo-lo-mas-molestos-posible-n10235747.html/amp"),
     ("central", "massa", "Alianza", "Belloso apoyó a Massa en 2023 y le agradeció en público.", 1, "https://www.letrap.com.ar/futbol-y-politica/gonzalo-belloso-el-unico-peronista-santafesino-que-gano-con-la-ayuda-sergio-massa-n5405315"),
@@ -448,8 +448,8 @@ RELACIONES = [
 NOMBRES = {
     "side": ("SIDE (Secretaría de Inteligencia de Estado, Cristian Auguadra)",
              ("Buenos Aires Times: Auguadra reemplaza a Neiffert en la SIDE", "https://batimes.com.ar/news/amp/argentina/milei-names-argentinas-new-spy-boss-in-side-leadership-switch.phtml")),
-    "ffaa": ("Fuerzas Armadas (Ministerio de Defensa, Carlos Presti)",
+    "ffaa": ("Ministerio de Defensa (Carlos Presti) y conducción de las Fuerzas Armadas",
              ("Ministerio de Defensa: autoridades", "https://www.argentina.gob.ar/defensa")),
-    "seguridad": ("Ministerio de Seguridad (Alejandra Monteoliva) y fuerzas federales",
+    "seguridad": ("Ministerio de Seguridad (Alejandra Monteoliva)",
                   ("iProfesional: Monteoliva juró como ministra de Seguridad", "https://www.iprofesional.com/politica/443163-quien-es-la-funcionaria-cercana-a-bullrich-que-desde-hoy-dirige-el-ministerio-de-seguridad")),
 }

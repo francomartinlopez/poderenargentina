@@ -91,3 +91,7 @@ COMERCIO_NACIONAL = dict(
     exp=77267, imp=56069,
     socios={"Brasil": (12.7, 21.4), "EE.UU.": (10.0, 9.2), "Unión Europea": (9.3, 13.6), "China": (9.2, 23.3)},
 )
+
+# RIGI (Régimen de Incentivo para Grandes Inversiones): proyectos aprobados, compromisos de inversión (no desembolsos).
+RIGI = dict(proyectos=27, monto=76173, petroleo_gas=46158, mineria=27624, fecha="noviembre de 2026",
+            fuente="https://www.infobae.com/economia/2026/11/09/los-dolares-del-rigi-cuanto-tardaran-en-concretarse-los-usd-76000-millones-de-las-inversiones-aprobadas/")

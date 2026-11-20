@@ -2,10 +2,10 @@
 {
 const MOT={cap:["Capital","#F5F0E6"],pob:["Ciudad grande","#9A9A9A"],emp:["Empresa o cluster","#FF3B30"],pue:["Puerto","#2F6BFF"],ene:["Energía","#F2A93B"],min:["Minería","#C8743C"],fro:["Frontera","#3FB8C9"],def:["Defensa y estrategia","#9E8CFF"]};
 const ORDEN=["emp","pue","ene","min","fro","def","cap","pob"];
-const POT=["EE.UU.","China","Unión Europea","Reino Unido","Brasil","Rusia","Israel","Golfo","Canadá y Australia","Japón y Corea","FMI, BM y BID"];
+const POT=["EE.UU.","China","Unión Europea","Reino Unido","Brasil","Rusia","Israel","Golfo","Canadá y Australia","Japón y Corea","India","FMI, BM y BID"];
 const CK=["com","inv","deu","pre","pol"],CAN=["Comercio","Inversión","Deuda","Presencia","Política"];
 const CAPAS=[["terr","Territorio",1],["ali","Alineamiento con Nación",1],["inf","Influencias mundiales",1],["eco","Economía y recursos",1],["act","Actores",1],["fr","Fricción",1],["zl","Zonas liberadas",1]];
-const PCOL={"EE.UU.":"#2F6BFF","China":"#D7263D","Unión Europea":"#F2C14E","Reino Unido":"#7FB3D5","Brasil":"#2EB872","Rusia":"#9E1B32","Israel":"#A0C4FF","Golfo":"#C8743C","Canadá y Australia":"#B07CFF","Japón y Corea":"#FF8FAB","FMI, BM y BID":"#BDBDBD"};
+const PCOL={"EE.UU.":"#2F6BFF","China":"#D7263D","Unión Europea":"#F2C14E","Reino Unido":"#7FB3D5","Brasil":"#2EB872","Rusia":"#9E1B32","Israel":"#A0C4FF","Golfo":"#C8743C","Canadá y Australia":"#B07CFF","Japón y Corea":"#FF8FAB","India":"#FF9933","FMI, BM y BID":"#BDBDBD"};
 const ACOL={A:"#8E6CFF",D:"#9A8F8C",I:"#F2A93B",O:"#3FB8C9"},ALI={A:"Aliado",D:"Dialoguista",I:"Independiente",O:"Opositor"};
 const ADESC={A:"acuerdos electorales con La Libertad Avanza",D:"negocia votos y fondos sin acuerdo electoral pleno",I:"espacio propio que compite con LLA (Provincias Unidas)",O:"opositor al Gobierno nacional"};
 let capa="terr",potSel="dom",ecoSel="exp";
@@ -19,7 +19,7 @@ function frList(list){return list.length?`<ul class="flist2">${list.map(f=>`<li>
 function zlBlk(list,full){return `<ul class="rlist">${list.map(z=>`<li><b>${esc(z.n)}.</b> <span class="tag" style="color:#FF3B30">${esc(z.est)}</span><br>${esc(z.x)} ${z.fu.map(f=>src(f.u)).join(" · ")}${full&&z.cs?` <a href="#c-${z.cs}">Ver ${esc(cityS[z.cs].n)}</a>`:""}</li>`).join("")}</ul>`}
 const ZLNOTA="Solo entran las zonas donde un organismo oficial describió la pérdida de control del Estado o documentó pasos o circuitos ilegales operando a la vista, con fuente. Se indica si el Estado recuperó el control.";
 const aName=id=>ACT[id]?ACT[id].n:(T.meta.act.externos[id]||id);
-const aLink=id=>ACT[id]?`<a href="#a-${id}">${esc(ACT[id].n)}</a>`:`<a href="${esc(T.meta.act.global_url)}#o-${id}" target="_blank" rel="noopener">${esc(aName(id))}</a> <span class="muted" style="font-size:12px">(mapa global)</span>`;
+const aLink=id=>ACT[id]?`<a href="#a-${id}">${esc(ACT[id].n)}</a>`:(T.meta.act.sin_ficha||[]).includes(id)?esc(aName(id)):`<a href="${esc(T.meta.act.global_url)}#o-${id}" target="_blank" rel="noopener">${esc(aName(id))}</a> <span class="muted" style="font-size:12px">(mapa global)</span>`;
 const ptBar=(v,c,k)=>`<span class="ptb"><em style="width:${(v*(k||1.1)).toFixed(1)}px;background:${c||"#FF3B30"}"></em><b class="mono">${v.toLocaleString("es-AR",{maximumFractionDigits:1})}</b></span>`;
 function actList(list,lim){return list.length?`<ul class="alist">${list.slice(0,lim||99).map(a=>`<li><a href="#a-${a.id}">${esc(a.n)}</a><span class="muted">${esc(a.cat)}</span>${ptBar(a.pt,TCOL[a.tipo],.56)}</li>`).join("")}</ul>`:`<p class="muted">Ningún actor núcleo con sede aquí todavía.</p>`}
 const nf=n=>Number(n).toLocaleString("es-AR");
@@ -198,6 +198,7 @@ function vPais(){
   <p class="muted" style="font-size:13px;margin:8px 0 0">Una ciudad puede tener varios motivos. Las de empresa o cluster entran aunque sean chicas.</p>`;
   document.getElementById("panel").innerHTML=`<h1>Argentina</h1><p class="sub">Tocá una provincia para bajar a sus departamentos y ciudades. Cambiá la capa para ver alineamiento, influencias o economía.</p>
   <div class="facts"><div><span>Población (Censo 2022)</span><b class="mono">${nf(T.pais.pob)}</b></div><div><span>Departamentos</span><b class="mono">${P.reduce((s,p)=>s+p.ndep,0)}</b></div><div><span>Ciudades en el mapa</span><b class="mono">${T.ciudades.length}</b></div></div>
+  ${T.pais.rigi?`<p class="muted" style="font-size:13px;margin:6px 0 0">RIGI: ${T.pais.rigi.proyectos} proyectos aprobados por USD ${nf(T.pais.rigi.monto)} millones en compromisos (petróleo y gas ${nf(T.pais.rigi.petroleo_gas)}, minería ${nf(T.pais.rigi.mineria)}), ${esc(T.pais.rigi.fecha)}. <a href="${esc(T.pais.rigi.fuente)}" target="_blank" rel="noopener">Fuente</a></p>`:""}
   <div class="blk grow">${side}</div>`;
   more(influ(T.pais.inf,"Influencias sobre el Estado nacional","Vínculos de la Nación con cada potencia. Comercio: participación de cada socio en las exportaciones y en las importaciones de bienes del país (INDEC, vía Cancillería); vale el mayor de los dos, por eso China, primer origen de las importaciones, puntúa 2. Las influencias de cada provincia, en su ficha.")+`<div class="blk"><h2>Quién manda</h2>${actList(T.actores,8)}<p style="margin-top:10px"><a href="#actores">Los ${T.actores.length} actores núcleo, su puntaje y sus relaciones</a></p></div>`);
 }
@@ -270,10 +271,20 @@ function vCiudades(){
 }
 function vPlan(){
   app.innerHTML=`<div class="page plan"><h1>Plan</h1>
-  <h2>Hecho</h2><ol><li><b>Esqueleto.</b> Mapa oficial del IGN con zoom de país a provincia, departamento y ciudad; ${T.ciudades.length} ciudades con su motivo; gobernadores al día.</li><li><b>Las 24 provincias.</b> Población del Censo 2022 por provincia y departamento; exportaciones, destinos y rubro principal (INDEC); recursos propios frente a los fondos nacionales (ASAP); quién manda de verdad y alineamiento con la Nación; influencias de 11 potencias en cinco canales, con fuente. Capas de alineamiento, influencias y economía en el mapa.</li><li><b>Actores núcleo.</b> ${T.actores.length} actores nacionales medidos en los 21 ejes con la fórmula del mapa global, con ficha, fuentes y ${T.relaciones.length} relaciones; capa de actores en el mapa.</li><li><b>Fichas de ciudades.</b> Intendente de ${T.ciudades.filter(c=>c.int).length} ciudades, quién manda en las ciudades de empresa, influencias propias de ${T.ciudades.filter(c=>c.inf).length} ciudades y conflictos documentados.</li><li><b>Fricción y actores locales.</b> Los gobiernos de las 24 jurisdicciones como actores, con su alineamiento; Zamora en Santiago del Estero, los intendentes de Rosario y Córdoba, sindicatos regionales, empresas provinciales y, por categoría, dirigentes políticos, empresas y grupos económicos, bandas criminales con condena, Justicia, religiosos, organizaciones sociales y ONG, medios y periodistas; ${T.actores.length} actores en total. ${T.friccion.length} puntos de fricción con cronología y fuentes, y las zonas liberadas documentadas, con capas propias en el mapa.</li><li><b>Departamentos relevantes.</b> Ficha propia de ${Object.keys(T.deps||{}).length} partidos y departamentos (conurbano, Rosario, San Lorenzo y Vaca Muerta): cabecera, quién gobierna, actividad, actores y fricción.</li></ol>
+  <h2>Hecho</h2><ol><li><b>Esqueleto.</b> Mapa oficial del IGN con zoom de país a provincia, departamento y ciudad; ${T.ciudades.length} ciudades con su motivo; gobernadores al día.</li><li><b>Las 24 provincias.</b> Población del Censo 2022 por provincia y departamento; exportaciones, destinos y rubro principal (INDEC); recursos propios frente a los fondos nacionales (ASAP); quién manda de verdad y alineamiento con la Nación; influencias de 12 potencias en cinco canales, con fuente. Capas de alineamiento, influencias y economía en el mapa.</li><li><b>Actores núcleo.</b> ${T.actores.length} actores nacionales medidos en los 21 ejes con la fórmula del mapa global, con ficha, fuentes y ${T.relaciones.length} relaciones; capa de actores en el mapa.</li><li><b>Fichas de ciudades.</b> Intendente de ${T.ciudades.filter(c=>c.int).length} ciudades, quién manda en las ciudades de empresa, influencias propias de ${T.ciudades.filter(c=>c.inf).length} ciudades y conflictos documentados.</li><li><b>Fricción y actores locales.</b> Los gobiernos de las 24 jurisdicciones como actores, con su alineamiento; Zamora en Santiago del Estero, los intendentes de Rosario y Córdoba, sindicatos regionales, empresas provinciales y, por categoría, dirigentes políticos, empresas y grupos económicos, bandas criminales con condena, Justicia, religiosos, organizaciones sociales y ONG, medios y periodistas; ${T.actores.length} actores en total. ${T.friccion.length} puntos de fricción con cronología y fuentes, y las zonas liberadas documentadas, con capas propias en el mapa.</li><li><b>Departamentos relevantes.</b> Ficha propia de ${Object.keys(T.deps||{}).length} partidos y departamentos (conurbano, Rosario, San Lorenzo y Vaca Muerta): cabecera, quién gobierna, actividad, actores y fricción.</li></ol>
   
   <h2>Método de las influencias</h2><p>Cada potencia recibe de 0 a 3 en cinco canales. El comercio se calcula con la participación de cada destino en las exportaciones de la provincia (40% o más vale 3; de 20% a 40%, 2; de 8% a 20%, 1); cuando el INDEC informa un bloque se toma como aproximación (USMCA como EE.UU. y Mercosur como Brasil). Inversión, deuda, presencia e influencia política se cargan dato por dato con su fuente. La potencia dominante es la de mayor suma; si dos empatan, se marca el empate.</p>
   <h2>Pendientes</h2><ul><li>Confirmar con fuente del año los ${T.ciudades.filter(c=>c.int&&c.int.ver==="W").length} intendentes marcados «a confirmar» y cargar los de Timbúes y San Antonio de los Cobres.</li><li>Censo 2022 de las localidades que todavía muestran una proyección propia a 2026 (San Antonio de los Cobres, Antofagasta de la Sierra, San José de Jáchal y Salvador Mazza).</li><li>Más intendentes del conurbano como actores puntuados (hoy, siete) y la nueva conducción de Independiente tras las elecciones del 13 de diciembre de 2026.</li><li>Próximo corte: 23 de febrero de 2027.</li></ul></div>`;
+}
+function vElecciones(){
+  const E=T.elecciones,fd=d=>{const[y,m,x]=d.split("-");return +x+" de "+MES[+m-1]+" de "+y};
+  const L=T.provincias.slice().map(p=>({p,e:E.prov[p.id]})).sort((a,b)=>((a.e&&a.e.f)||"9")<((b.e&&b.e.f)||"9")?-1:((a.e&&a.e.f)||"9")>((b.e&&b.e.f)||"9")?1:a.p.n.localeCompare(b.p.n));
+  const D={S:"Desdobla",N:"Con la Nación"};
+  app.innerHTML=`<div class="page"><h1>Elecciones 2027</h1><p class="sub">La elección presidencial es el ${fd(E.pres.f)} (<a href="${esc(E.pres.u)}" target="_blank" rel="noopener">fuente</a>). Las provincias que separan su elección de la nacional evitan el arrastre de la boleta presidencial. ${Object.values(E.prov).filter(e=>e.d==="S").length} anunciaron que desdoblan y ${Object.values(E.prov).filter(e=>e.f).length} ya tienen fecha.</p>
+  <table class="stack"><thead><tr><th>Provincia</th><th>Fecha provincial</th><th>Calendario</th><th>Gobierna</th><th>Alineamiento</th><th>Nota</th></tr></thead><tbody>
+  ${L.map(({p,e})=>`<tr><td><a href="#prov-${p.s}">${esc(p.n)}</a></td><td class="mono">${e&&e.f?fd(e.f):"<span class=muted>sin fijar</span>"}</td><td>${e&&e.d?D[e.d]:"<span class=muted>sin definir</span>"}</td><td>${esc(p.gob)} <span class="muted">(${esc(p.par)})</span></td><td>${esc(T.meta.alineamiento[p.ali.ali]||"")}</td><td>${e?esc(e.x)+` <a href="${esc(e.u)}" target="_blank" rel="noopener">Fuente</a>`:""}</td></tr>`).join("")}
+  </tbody></table>
+  <p class="muted" style="font-size:13px">Se actualiza en cada corte y después de cada convocatoria. Solo fechas confirmadas por la provincia o publicadas con fuente.</p></div>`;
 }
 function vFriccion(){
   const L=T.friccion.slice().sort((a,b)=>b.nv-a.nv);
@@ -327,7 +338,7 @@ function netWire(){
     s.querySelectorAll(".ne").forEach(p=>p.classList.toggle("on",p.dataset.a===id||p.dataset.b===id));
     const nb=new Set([id]);s.querySelectorAll(".ne.on").forEach(p=>{nb.add(p.dataset.a);nb.add(p.dataset.b)});s.querySelectorAll(".nn").forEach(n=>n.classList.toggle("on",nb.has(n.dataset.id)))});
   s.addEventListener("pointerout",e=>{if(e.target.closest(".nn")){s.classList.remove("hl")}});
-  s.addEventListener("click",e=>{const g=e.target.closest(".nn");if(!g)return;if(g.dataset.ext)window.open(T.meta.act.global_url+"#o-"+g.dataset.id,"_blank","noopener");else location.hash="a-"+g.dataset.id});
+  s.addEventListener("click",e=>{const g=e.target.closest(".nn");if(!g)return;if(g.dataset.ext&&(T.meta.act.sin_ficha||[]).includes(g.dataset.id))return;if(g.dataset.ext)window.open(T.meta.act.global_url+"#o-"+g.dataset.id,"_blank","noopener");else location.hash="a-"+g.dataset.id});
 }
 function vActor(a){
   const M=T.meta.act,i=T.actores.indexOf(a),c=cityS[a.cs];
@@ -362,11 +373,12 @@ function route(){
   else if(h==="plan"){vPlan();nk=h;svg=null}
   else if(h==="actores"){vActores();nk=h;svg=null}
   else if(h==="friccion"){vFriccion();nk=h;svg=null}
+  else if(h==="elecciones"){vElecciones();nk=h;svg=null}
   else if(h.startsWith("f-")&&FR[h.slice(2)]){vFr(FR[h.slice(2)]);nk="friccion";svg=null}
   else if(h.startsWith("a-")&&ACT[h.slice(2)]){vActor(ACT[h.slice(2)]);nk="actores";svg=null}
   else vPais();
   document.querySelectorAll("nav a").forEach(a=>a.classList.toggle("on",a.dataset.k===nk));
-  if(["provincias","ciudades","plan","actores","friccion"].includes(nk))window.scrollTo(0,0);
+  if(["provincias","ciudades","plan","actores","friccion","elecciones"].includes(nk))window.scrollTo(0,0);
 }
 Promise.all(["data/territorio.json","data/provincias.json","data/antartida.json"].map(u=>fetch(u).then(r=>r.json()))).then(([t,pt,an])=>{
   T=t;ANT=an.features?an.features[0]:an;{const g=ANT.geometry||ANT;if(d3.geoArea(ANT)>2*Math.PI)(g.type==="Polygon"?[g.coordinates]:g.coordinates).forEach(pl=>pl.forEach(r=>r.reverse()))}

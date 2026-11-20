@@ -94,10 +94,9 @@ PCBA_HD = "https://hoydia.com.ar/politica/quinteros-y-gutierrez-recibieron-a-la-
 PCBA_OP = "https://www.lavozdesanjusto.com.ar/cordoba-desarticulo-organizacion-criminal-y-quinteros-afirmo-es-una-de-las-mas-sofisticadas-que-hemos-investigado"
 NCAPUTO_BL = "https://bloomberglinea.com/english/reports/bloomberg-linea-characters/nicolas-caputo"
 NCAPUTO_BAT = "https://www.batimes.com.ar/news/argentina/the-caputo-clan-a-family-linked-to-politics-and-power-in-argentina.phtml"
-NCAPUTO_CRON = "https://www.cronista.com/tema/nicolas-caputo/"
 SIGMAN_BL = "https://www.bloomberglinea.com/english/reports/bloomberg-linea-characters/hugo-sigman/"
-SIGMAN_CRON = "https://www.cronista.com/tema/hugo-sigman/"
-SIGMAN_LPO = "https://www.lapoliticaonline.com/etiqueta/17867-ar/"
+SIGMAN_CRON = "https://www.cronista.com/negocios/elea-compra-un-gigante-brasileno-de-medicamentos-de-venta-libre-estimado-en-us-300-millones/"
+SIGMAN_LPO = "https://www.lapoliticaonline.com/politica/hugo-sigman-aporto-4-millones-de-pesos-a-la-campana-de-milei/"
 COSTANTINI_IP = "https://www.iprofesional.com/negocios/435007-el-dueno-de-nordelta-cambia-su-estrategia-para-el-negocio-del-real-estate"
 COSTANTINI_URU = "https://www.iprofesional.com/realestate/459706-costantini-avanza-en-uruguay-con-proyecto-inmobiliario-por-1250-millones-de-dolares"
 COSTANTINI_CRON = "https://www.cronista.com/negocios/costantini-se-queda-con-otro-megaterreno-de-la-inmobiliaria-de-milei-hara-un-nuevo-quartier-en-belgrano"
@@ -133,7 +132,7 @@ ACTORES = [
      S(red=1, apo=1, coh=1, reg=1), "D", "", 1),
     ("bregman", "Myriam Bregman (diputada, Frente de Izquierda)", "Líder político", CABA, "N", "I", 1,
      S(cul=1, red=1, apo=2, coh=1), "D", "", 1),
-    ("g_morales", "Gerardo Morales (exgobernador de Jujuy)", "Líder político", "San Salvador de Jujuy", "R", "E", 1,
+    ("g_morales", "Gerardo Morales (exgobernador de Jujuy)", "Líder político", "San Salvador de Jujuy", "R", "P", 1,
      S(adq=1, red=1, coh=1), "D", "", 0),
     ("gebel", "Dante Gebel (pastor; Consolidación Argentina)", "Líder político", CABA, "N", "I", 1,
      S(cul=1, red=1, apo=1), "D", "", 0),
@@ -154,11 +153,11 @@ ACTORES = [
      S(red=1, apo=1, coh=1, reg=1), "D", "", 1),
     # Fuerzas Armadas (dependen del Ministerio de Defensa)
     ("ejercito", "Ejército Argentino (Gral. Oscar Santiago Zarich)", "Ejército", CABA, "N", "T", 3,
-     S(cap=1, coe=2, ter=1, mod=1, coh=1), "D", "ffaa", 2),
+     S(rec=1, cap=2, prd=1, mov=2, coe=3, ter=1, adq=1, con=1, mie=2, cul=1, apo=1, coh=2, pri=1), "D", "ffaa", 2),
     ("armada", "Armada Argentina (Vicealte. Juan Carlos Romay)", "Ejército", CABA, "N", "T", 3,
-     S(cap=1, coe=2, ter=1, mod=1, coh=1), "D", "ffaa", 2),
+     S(cap=2, mov=2, coe=2, ter=1, adq=1, con=1, mie=1, coh=2, pri=1), "D", "ffaa", 2),
     ("fuerza_aerea", "Fuerza Aérea Argentina (Brig. My. Gustavo Valverde)", "Ejército", CABA, "N", "T", 3,
-     S(cap=1, coe=2, mod=1, inn=1, coh=1), "D", "ffaa", 2),
+     S(cap=2, mov=2, coe=2, adq=1, con=1, inn=1, mie=1, coh=2, pri=1), "D", "ffaa", 2),
     ("emco", "Estado Mayor Conjunto (Vicealte. Marcelo Dalle Nogare)", "Ejército", CABA, "N", "T", 3,
      S(coe=1, adq=1, coh=1, reg=1), "D", "ffaa", 2),
     # Inteligencia financiera
@@ -222,9 +221,9 @@ ACTORES = [
      S(ter=1, red=1, apo=1, coh=1), "D", "", 2),
     ("int_tigre", "Julio Zamora (intendente de Tigre)", "Líder político", "dep:06805", "M", "P", 2,
      S(ter=1, red=1, apo=1, coh=1), "D", "", 2),
-    ("int_vlopez", "Soledad Martínez (intendente de Vicente López)", "Líder político", "dep:06861", "M", "P", 2,
+    ("int_vlopez", "Soledad Martínez (intendente de Vicente López)", "Líder político", "dep:06861", "M", "T", 2,
      S(ter=1, red=1, apo=1, coh=1), "D", "", 2),
-    ("int_jcpaz", "Lorena Espina (intendente de José C. Paz)", "Líder político", "dep:06412", "M", "P", 2,
+    ("int_jcpaz", "Lorena Espina (intendenta interina de José C. Paz)", "Líder político", "dep:06412", "M", "P", 2,
      S(ter=1, red=1, apo=1, coh=1), "D", "", 2),
     ("int_ezeiza", "Gastón Granados (intendente de Ezeiza)", "Líder político", "dep:06270", "M", "P", 2,
      S(ter=1, red=1, apo=1, coh=1), "D", "", 2),
@@ -232,7 +231,7 @@ ACTORES = [
      S(ter=1, red=1, apo=1, coh=1), "D", "", 2),
     ("int_merlo", "Gustavo Menéndez (intendente de Merlo)", "Líder político", "dep:06539", "M", "P", 2,
      S(ter=1, red=1, apo=1, coh=1), "D", "", 2),
-    ("int_sanisidro", "Ramón Lanús (intendente de San Isidro)", "Líder político", "dep:06756", "M", "P", 2,
+    ("int_sanisidro", "Ramón Lanús (intendente de San Isidro)", "Líder político", "dep:06756", "M", "T", 2,
      S(ter=1, red=1, apo=1, coh=1), "D", "", 2),
     ("int_sanmartin", "Fernando Moreira (intendente de General San Martín)", "Líder político", "dep:06371", "M", "P", 2,
      S(ter=1, red=1, apo=1, coh=1), "D", "", 2),
@@ -394,15 +393,15 @@ FICHAS = {
                 manda="Ministerio de Seguridad Nacional.",
                 fuentes=[("La Nación: la reforma de las cuatro fuerzas federales", REFORMA_FFSS),
                          ("El Cronista: el traspaso al Ministerio de Seguridad", REFORMA_CRON)]),
-    "n_caputo": dict(res="Empresario de la tercera generación de la constructora familiar Caputo SA (1938). En 1983 fundó Mirgor con Mauricio Macri como director; es primo del ministro de Economía Luis Caputo y tío segundo del asesor Santiago Caputo. En diciembre de 2025 creó una minera con Orlando Terranova.",
+    "n_caputo": dict(res="Empresario de la tercera generación de la constructora familiar Caputo SA (1938). En 1983 fundó Mirgor con Mauricio Macri como director; es primo del ministro de Economía Luis Caputo y tío segundo del asesor Santiago Caputo.",
                      manda="Nicolás Caputo.",
                      fuentes=[("Bloomberg Línea: perfil de Nicolás Caputo", NCAPUTO_BL),
                               ("Buenos Aires Times: el clan Caputo", NCAPUTO_BAT),
-                              ("El Cronista: la minera con Terranova", NCAPUTO_CRON)]),
-    "sigman": dict(res="Hugo Sigman y Silvia Gold conducen el Grupo Insud (Chemo, mAbxience, Exeltis), conglomerado farmacéutico con presencia en agroforestación, cine y edición. Insud produce vacunas y biosimilares para laboratorios globales; en 2026 su laboratorio Elea compró una firma brasileña de venta libre. Según la rendición de campaña, Sigman aportó $4 millones a la de Milei en 2023.",
+                              ("La Nación: el amigo de Macri desde el colegio", "https://www.lanacion.com.ar/opinion/nicolas-caputo-el-asesor-que-mas-influye-en-las-decisiones-de-macri-nid1330758")]),
+    "sigman": dict(res="Hugo Sigman y Silvia Gold conducen el Grupo Insud (Chemo, mAbxience, Exeltis), conglomerado farmacéutico con presencia en agroforestación, cine y edición. Insud produce vacunas y biosimilares para laboratorios globales; en 2026 su laboratorio Elea compró una firma brasileña de venta libre. Según La Política Online, Sigman aportó $4 millones a la campaña de Milei de 2023 a través de Chemotécnica.",
                    manda="Hugo Sigman y Silvia Gold.",
                    fuentes=[("Bloomberg Línea: perfil de Hugo Sigman", SIGMAN_BL),
-                            ("El Cronista: Insud y Elea en 2026", SIGMAN_CRON),
+                            ("El Cronista: los dueños de Elea compran Cellera Farma (2026)", SIGMAN_CRON),
                             ("La Política Online: el aporte a la campaña de Milei", SIGMAN_LPO)]),
     "costantini": dict(res="Fundador y accionista mayoritario de Consultatio (1991), la desarrolladora de Nordelta en Tigre, con proyectos en la Argentina, Uruguay y EE.UU.; también fundó el MALBA. En 2025 sumó a Argencons (Quartier), que compró terrenos subastados por el Estado nacional; en 2026 lanzó un proyecto de US$ 1.250 millones en Montevideo.",
                        manda="Eduardo Costantini.",
@@ -459,10 +458,11 @@ FICHAS = {
                 manda="Soledad Martínez.",
                 fuentes=[("Perfil: ranking de intendentes del conurbano, octubre de 2026", RANK_INT),
                          ("Perfil: el peso de los intendentes en 2027", PESO_INT)]),
-    "int_jcpaz": dict(res="Intendente de José C. Paz, uno de los 24 partidos del conurbano bonaerense, que reúnen cerca de una cuarta parte de los votos del país. Figura en la medición mensual de imagen de los intendentes del GBA (octubre de 2026).",
-                manda="Lorena Espina.",
-                fuentes=[("Perfil: ranking de intendentes del conurbano, octubre de 2026", RANK_INT),
-                         ("Perfil: el peso de los intendentes en 2027", PESO_INT)]),
+    "int_jcpaz": dict(res="Intendenta interina de José C. Paz desde diciembre de 2025, cuando Mario Ishii juró como senador bonaerense por Fuerza Patria y pidió licencia. Licenciada en Salud Pública, era directora de Epidemiología del municipio. Ishii no puede volver a ser candidato a intendente en 2027 por el tope a las reelecciones; Roberto Caggiano y Mansilla se disputan la sucesión.",
+                manda="Lorena Espina, a cargo; Mario Ishii sigue como referente del distrito.",
+                fuentes=[("Letra P: Ishii eligió a una sanitarista en su reemplazo", "https://www.letrap.com.ar/politica/buenos-aires-mario-ishii-eligio-una-sanitarista-su-reemplazo-y-congelo-la-pelea-la-sucesion-n5420710"),
+                         ("Letra P: quiénes reemplazan a los intendentes que asumieron bancas", "https://www.letrap.com.ar/politica/sucesiones-buenos-aires-quienes-reemplazan-los-intendentes-que-asumieron-cargos-legislativos-n5420690"),
+                         ("Perfil: ranking de intendentes del conurbano, octubre de 2026", RANK_INT)]),
     "int_ezeiza": dict(res="Intendente de Ezeiza, uno de los 24 partidos del conurbano bonaerense, que reúnen cerca de una cuarta parte de los votos del país. Figura en la medición mensual de imagen de los intendentes del GBA (octubre de 2026).",
                 manda="Gastón Granados.",
                 fuentes=[("Perfil: ranking de intendentes del conurbano, octubre de 2026", RANK_INT),
@@ -553,9 +553,9 @@ RELACIONES = [
     ("seguridad", "psa", "Gobierna", "El Decreto 456/2025 la pone bajo el Ministerio de Seguridad.", 3, REFORMA_FFSS),
     ("seguridad", "spf", "Gobierna", "El Decreto 455/2025 confirma su traspaso desde Justicia.", 3, REFORMA_CRON),
     # Empresarios
-    ("n_caputo", "macri", "Alianza", "Amigo y socio histórico: fundaron juntos Mirgor en 1983.", 3, NCAPUTO_BL),
+    ("n_caputo", "macri", "Alianza", "Compañeros de colegio desde los seis años y socios: fundaron juntos Mirgor en 1983.", 3, NCAPUTO_BL),
     ("n_caputo", "mirgor", "Propiedad", "Fundador y accionista de Mirgor.", 3, NCAPUTO_BL),
-    ("sigman", "milei", "Financiamiento", "Aporte de $4 millones a la campaña de 2023.", 1, SIGMAN_LPO),
+    ("sigman", "milei", "Financiamiento", "Aportó $4 millones a la campaña de 2023 a través de Chemotécnica S.A.", 1, SIGMAN_LPO),
     # Grupo Neuss, bancos e intendentes
     ("neuss", "brito", "Alianza", "Edison y Genneia (familia Brito) compraron juntos el paquete de Transener.", 2, NEUSS_IP),
     ("economia", "neuss", "Contrato", "Ganaron la privatización de la participación estatal en Transener (US$ 356 millones).", 2, NEUSS_PERFIL),
@@ -648,4 +648,10 @@ RELACIONES += [
     ("int_sanisidro", "pro", "Alianza", "Intendente del PRO, alineado con el Gobierno nacional.", 2, LANUS_PRO),
     ("int_hurlingham", "la_campora", "Alianza", "Dirigente de La Cámpora.", 3, SELCI_LP),
     ("int_sanfernando", "massa", "Alianza", "Una de las apuestas de Massa en la Primera sección.", 2, ANDREOTTI_LP),
+]
+
+# José C. Paz (corte del 20/11/2026)
+RELACIONES += [
+    ("int_jcpaz", "gob_pba", "Ambigua", "Del mismo frente, Espina le exigió a Kicillof reforzar la seguridad en el distrito tras un homicidio; Ishii cuestiona al gobernador en la Legislatura.", 1,
+     "https://www.lapoliticaonline.com/conurbano/ishii-volvio-a-cruzar-a-kicillof-por-la-inseguridad-y-reclama-que-se-trate-su-proyecto/"),
 ]

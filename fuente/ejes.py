@@ -93,4 +93,17 @@ GLOBAL_URL = "https://francomartinlopez.github.io/podermundial/"
 EXTERNOS = {
     "fmi": "Fondo Monetario Internacional", "tesoro_eeuu": "Tesoro de EE.UU.", "casablanca": "Casa Blanca (EE.UU.)",
     "pboc": "Banco Popular de China", "cia": "CIA", "santasede": "Santa Sede", "fifa": "FIFA",
+    # Sumados el 20/11/2026 (mismos ids que el mapa global)
+    "pentagono": "Pentágono (Departamento de Guerra de EE.UU.)", "jpmorgan": "JPMorgan Chase", "blackrock": "BlackRock",
+    "openai": "OpenAI", "glencore": "Glencore", "spacex": "SpaceX (con xAI y Starlink)", "shell": "Shell", "bp": "BP",
+    "totalenergies": "TotalEnergies", "bhp": "BHP", "bm": "Banco Mundial", "eni": "ENI", "doj": "Departamento de Justicia de EE.UU.",
+    "huawei": "Huawei", "icbc_china": "ICBC (Banco Industrial y Comercial de China)",
 }
+# Externos que no están en el mapa global: se nombran sin enlace (corte del 20/11/2026).
+EXTERNOS_SIN_FICHA = {
+    "burford": "Burford Capital (fondo de litigios, EE.UU.)", "navitas": "Navitas Petroleum (Israel; operadora de Sea Lion)",
+    "rockhopper": "Rockhopper Exploration (Reino Unido; socia de Sea Lion)", "gezhouba": "China Gezhouba Group",
+    "welspun": "Welspun (India; caños del gasoducto de GNL)", "tether": "Tether (emisora de la stablecoin USDT)",
+    "ustr": "Representante Comercial de EE.UU.", "cnooc": "CNOOC (petrolera estatal china)", "sur_energy": "Sur Energy (Stargate Argentina)",
+}
+EXTERNOS.update(EXTERNOS_SIN_FICHA)

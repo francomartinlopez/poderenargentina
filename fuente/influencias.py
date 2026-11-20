@@ -5,7 +5,11 @@
 # Comercio («com») no se carga a mano: lo calcula scripts/generar_datos.py con los destinos de fuente/economia.py
 # (participación en las exportaciones de la provincia: 40% o más = 3; 20% a 40% = 2; 8% a 20% = 1).
 # Cuando el INDEC informa un bloque, se toma como aproximación: USMCA → EE.UU. y Mercosur → Brasil.
-# India, ASEAN, Chile, Suiza y el resto de la ALADI no están en la lista de potencias y no suman.
+# India se suma a la lista el 20/11/2026 (decisión de Franco): es el primer destino de Santa Fe y de San Juan.
+# ASEAN, Chile, Suiza y el resto de la ALADI no están en la lista de potencias y no suman.
+#
+# Potencia dominante: la de mayor suma, siempre que sume 3 o más o esté en dos canales; si no, «sin potencia dominante».
+# En las provincias que exportan menos de USD 400 M en el semestre, el comercio vale como máximo 1.
 #
 # Escala de los otros canales:
 #   3 = la potencia controla el recurso, la deuda o la presencia principal de la provincia.
@@ -13,7 +17,7 @@
 #   1 = presencia relevante pero acotada.
 
 POTENCIAS = ["EE.UU.", "China", "Unión Europea", "Reino Unido", "Brasil", "Rusia", "Israel", "Golfo",
-             "Canadá y Australia", "Japón y Corea", "FMI, BM y BID"]
+             "Canadá y Australia", "Japón y Corea", "India", "FMI, BM y BID"]
 CANALES = {
     "com": "Comercio",
     "inv": "Inversión",
@@ -22,10 +26,10 @@ CANALES = {
     "pol": "Influencia política y cultural",
 }
 APROX_COMERCIO = {"EE.UU.": "EE.UU.", "USMCA": "EE.UU.", "China": "China", "UE": "Unión Europea",
-                  "Mercosur": "Brasil", "Brasil": "Brasil"}
+                  "Mercosur": "Brasil", "Brasil": "Brasil", "India": "India"}
 
 MEKOROT = "https://www.iprofesional.com/actualidad/453665-soberania-hidrica-en-riesgo-firma-mekorot-hizo-acuerdos-con-12-provincias-sin-control"
-MK = "Mekorot, la empresa estatal de agua de Israel, elabora el plan maestro hídrico o da asistencia técnica a la provincia."
+MK = "Firmó acuerdos con Mekorot, la empresa estatal de agua de Israel; según iProfesional, doce provincias lo hicieron."
 BONOS = "https://www.iprofesional.com/finanzas/460685-neuquen-regreso-wall-street-ola-inversiones-dolares.amp"
 
 # (territorio, potencia, canal, intensidad 0-3, descripción, fuente)
@@ -39,12 +43,14 @@ INFLUENCIAS = [
      "https://www.iprofesional.com/finanzas/454968-javier-milei-pago-deuda-swap-china-y-dejo-en-minimos-historicos-por-presion-donald-trump"),
     ("AR", "China", "deu", 2, "Swap de monedas por 130.000 millones de yuanes (unos USD 20.000 millones) renovado en agosto de 2026 hasta 2031.",
      "https://www.forbesargentina.com/money/el-banco-central-extendio-swap-china-otros-5-anos-n94855"),
-    ("AR", "Unión Europea", "inv", 2, "La belga Jan De Nul, con la argentina Servimagnus, ganó la concesión por 25 años de la Hidrovía Paraná-Paraguay, por donde sale cerca del 80% del comercio exterior.",
+    ("AR", "Unión Europea", "inv", 2, "España (14 %) y Países Bajos (12 %) son el segundo y el tercer origen del stock de inversión extranjera directa a diciembre de 2025, según el BCRA.",
+     "https://www.bcra.gob.ar/publicaciones/informe-de-inversion-extranjera-directa-cuarto-trimestre-de-2025/"),
+    ("AR", "Unión Europea", "pre", 1, "La belga Jan De Nul, con la argentina Servimagnus, ganó la concesión por 25 años de la Hidrovía Paraná-Paraguay, por donde sale cerca del 80% del comercio exterior.",
      "https://eleconomista.com.ar/economia/la-privatizacion-mas-grande-era-milei-ya-tiene-dueno-cambia-ahora-hidrovia-n95924"),
     ("AR", "China", "deu", 1, "ICBC, banco del Estado chino, tiene en la Argentina su mayor operación fuera de China: más de un millón de hogares y 40.000 empresas, y un plan de financiamiento de proyectos por US$ 2.000 millones.",
      "https://www.bloomberglinea.com/latinoamerica/argentina/exclusiva-china-fuera-de-argentina-habla-el-ceo-local-de-icbc-tras-criticas-de-bessent-y-quirno/"),
-    ("AR", "EE.UU.", "inv", 1, "JetSMART, controlada por el fondo estadounidense Indigo Partners, es la segunda aerolínea del país e invierte US$ 550 millones.",
-     "https://www.emol.com/noticias/Economia/2026/06/18/1203245/jetsmart-inversion-argentina.html"),
+    ("AR", "EE.UU.", "inv", 2, "Primer origen del stock de inversión extranjera directa (17 % del total a marzo de 2025, según el BCRA) y primer origen de los ingresos del primer trimestre de 2026.",
+     "https://www.bcra.gob.ar/publicaciones/informe-sobre-inversion-extranjera-directa-primer-trimestre-de-2025/"),
     ("AR", "Reino Unido", "pre", 3, "Ocupa las Islas Malvinas, cuya soberanía reclama la Argentina, con una guarnición permanente en Monte Agradable.",
      "https://www.baenegocios.com/mundo/Reino-Unido-ratifica-la-presencia-militar-en-las-Malvinas-tras-las-crecientes-amenazas-20250624-0075.html"),
 
@@ -150,6 +156,10 @@ INFLUENCIAS = [
     # Santiago del Estero
     ("86", "Israel", "pol", 1, "Firmó acuerdos con Mekorot.", MEKOROT),
     # Tierra del Fuego
+    ("94", "Unión Europea", "inv", 2, "La francesa TotalEnergies opera la concesión Cuenca Marina Austral 1 (37,5 %), con el yacimiento costa afuera Fénix y las plantas de Río Cullen y Cañadón Alfa.",
+     "https://totalenergies.com/node/25251"),
+    ("94", "Reino Unido", "inv", 1, "Harbour Energy tiene el 37,5 % de la Cuenca Marina Austral 1, junto a TotalEnergies y Pan American.",
+     "https://totalenergies.com/node/25251"),
     ("94", "EE.UU.", "pre", 2, "El Comando Sur visitó Ushuaia en 2024 y 2025 y EE.UU. busca participar en la Base Naval Integrada; el Gobierno gestiona su financiamiento con Washington.",
      "https://www.perfil.com/noticias/politica/la-base-naval-integrada-de-ushuaia-el-proyecto-que-defensa-impulsa-desde-hace-decadas-y-que-milei-busca-reactivar.phtml"),
     ("94", "Reino Unido", "pre", 3, "Las Islas Malvinas, parte de la provincia según la ley argentina, están ocupadas por el Reino Unido, con presencia militar permanente.",
