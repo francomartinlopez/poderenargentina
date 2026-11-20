@@ -1,5 +1,16 @@
 # Cambios
 
+## 2026-11-19 (m) · Categorías chicas completas, referentes que faltaban, Neuss, bancos e intendentes
+
+- Actores (`fuente/actores_mas4.py`): 54 nuevos, hasta 314, con 479 relaciones con fuente.
+- Referentes: Elisa Carrió, Horacio Rodríguez Larreta, Martín Lousteau, Luis Juez, Myriam Bregman, Gerardo Morales (hoy en Shenzhen), Dante Gebel y Jorge Ferraresi. Macri, Massa, Bullrich, Cristina y Máximo Kirchner ya estaban.
+- Partidos: Coalición Cívica, Fuerza Patria, Movimiento Derecho al Futuro, Consolidación Argentina, MPN y Encuentro Misionero (7 a 13).
+- Fuerzas Armadas: Ejército (Zarich), Armada (Romay), Fuerza Aérea (Valverde) y Estado Mayor Conjunto (Dalle Nogare), dependientes del Ministerio de Defensa (1 a 5). Inteligencia: la UIF (Matías Álvarez, Decreto 291/2026).
+- Logística: Jan De Nul y Servimagnus (hidrovía por 25 años), Belgrano Cargas (apertura de ofertas el 21/12/2026), JetSMART y Flybondi (en concurso) (2 a 6). Tecnología: Mercado Pago, Satellogic y Bioceres (en quiebra) (5 a 8).
+- Fuerzas de seguridad: policías de la Ciudad, Santa Fe y Córdoba, PSA y Servicio Penitenciario Federal (5 a 10). Empresarios: Nicolás Caputo, Hugo Sigman y Silvia Gold, Eduardo Costantini y los hermanos Neuss (Edison Energía, Transener) (5 a 9).
+- Bancos: ICBC, Credicoop, Banco Ciudad y Supervielle (BBVA ya estaba). Intendentes del conurbano: 15 más (Echeverría, Escobar, Malvinas Argentinas, San Miguel, Almirante Brown, Tigre, Vicente López, José C. Paz, Ezeiza, Florencio Varela, Merlo, San Isidro, San Martín, Morón y Tres de Febrero), cada uno en la ficha de su partido.
+- Quedan afuera, sin cargo ni estructura propia hoy: Facundo Manes, Florencio Randazzo y Manuel Adorni.
+
 ## 2026-11-19 (l) · Los pendientes de la tanda anterior
 
 - Seis actores más (260 y 418 relaciones): Embajada de Israel (Ahuva Spieler Reshef, credenciales en septiembre de 2026), San Lorenzo (Marcelo Culotta, hasta diciembre de 2027), Independiente (Néstor Grindetti hasta las elecciones del 13 de diciembre), Coto, La Anónima (familia Braun, con la compra de 12 hipermercados de Libertad) y la Iglesia Cristiana Internacional de Jorge Ledesma (Portal del Cielo, Resistencia). ACIERA suma su relación con Milei.
