@@ -565,3 +565,87 @@ RELACIONES = [
     ("int_ezeiza", "gob_pba", "Alianza", "Granados integra la Liga de Intendentes del peronismo bonaerense.", 2, LIGA_INT),
     ("int_3f", "lla", "Alianza", "Reemplaza a Valenzuela, que encabezó la lista libertaria en la Primera sección.", 2, SUCESIONES_LP),
 ]
+
+# --- Intendentes del conurbano: espacio político de cada uno y los cuatro que faltaban (pedido del 19/11/2026) ---
+CARTOGRAFIA_PJ = "https://www.letrap.com.ar/politica/la-nueva-cartografia-del-peronismo-bonaerense-cuatro-espacios-disputan-la-sucesion-axel-kicillof-n5425393"
+PRIMERA_SECCION = "https://www.letrap.com.ar/politica/primera-seccion-mano-mano-ocho-bancas-del-senado-y-un-peronista-al-que-javier-milei-le-prende-velas-n5418299"
+LIGA_LP = "https://www.letrap.com.ar/intendentes-vienen-marchando-el-peronismo-antigrieta-se-amplia-mientras-cfk-y-kicillof-siguen-guerra-n5423629"
+UNION_FEDERAL = "https://www.iprofesional.com/politica/435449-los-barones-del-conurbano-rompen-con-cristina-kirchner-y-arman-lista-propia"
+CFK_PJ_LP = "https://www.letrap.com.ar/politica/cfk-vs-quintela-como-se-reparten-los-apoyos-los-intendentes-del-conurbano-n5411778"
+NARDINI_MDF = "https://www.letrap.com.ar/politica/intendentes-del-mdf-ceden-el-desdoblamiento-favorecer-kicillof-su-estrategia-nacional-n5427767"
+ZAMORA_SOMOS = "https://www.letrap.com.ar/politica/san-fernando-la-disputa-local-replica-la-pulseada-julio-zamora-y-malena-galmarini-tigre-n5417685"
+MENENDEZ_CRON = "https://www.cronista.com/economia-politica/la-otra-cara-de-la-interna-peronista-a-quien-responden-los-intendentes-con-peores-resultados"
+PRO_BASTIONES = "https://www.lapoliticaonline.com/provincia/vicente-lopez-y-san-isidro-los-bastiones-del-pro-que-resistieron-la-ola-peronista/"
+LANUS_PRO = "https://www.letrap.com.ar/conurbano/rebelion-el-pro-intendentes-pegan-el-portazo-y-abandonan-el-frente-libertario-n5417262"
+SELCI_LP = "https://www.letrap.com.ar/politica/hurlingham-el-peronismo-se-encamina-una-nueva-disputa-selci-zabaleta-n5427352"
+SELCI_GBA = "https://www.gba.gob.ar/node/52345"
+DESCALZO_PERFIL = "https://www.perfil.com/noticias/modo-fontevecchia/intendente-de-ituzaingo-explica-por-que-defiende-la-candidatura-de-kicillof-modf.phtml"
+BALOR_C26 = "https://www.canal26.com/politica/2025/11/25/muerte-de-juan-jose-mussi-quien-sera-el-nuevo-intendente-de-berazategui/"
+BALOR_BO = "https://berazategui.gob.ar/descargas/boletin/boletin-158.pdf"
+ANDREOTTI_LP = "https://www.letrap.com.ar/politica/sergio-massa-lo-empuja-la-carrera-la-gobernacion-pero-andreotti-no-se-mueve-san-fernando-n5424565"
+ANDREOTTI_SUC = "https://www.letrap.com.ar/politica/san-fernando-eva-andreotti-se-encamina-suceder-su-hermano-n5425156"
+
+ESPACIO = {
+    "int_echeverria": ("En 2025 encabezó Unión Federal, una lista propia de intendentes por fuera de Fuerza Patria y del PJ conducido por Cristina Kirchner.", "iProfesional: los intendentes arman lista propia (Unión Federal)", UNION_FEDERAL),
+    "int_escobar": ("Integra el Movimiento Derecho al Futuro de Kicillof.", "Letra P: la nueva cartografía del peronismo bonaerense", CARTOGRAFIA_PJ),
+    "int_malvinas": ("Peronista; no integra el MDF, pero acompaña actos de Kicillof; en 2024 apoyó la candidatura de Cristina Kirchner a la presidencia del PJ.", "Letra P: Nardini y el MDF", NARDINI_MDF),
+    "int_sanmiguel": ("Vecinalista.", "Letra P: los intendentes de la Primera sección", PRIMERA_SECCION),
+    "int_brown": ("A cargo mientras Mariano Cascallares, del MDF, está en uso de licencia como legislador bonaerense.", "Letra P: la nueva cartografía del peronismo bonaerense", CARTOGRAFIA_PJ),
+    "int_tigre": ("Peronista; en 2025 jugó con Somos Buenos Aires y mantiene una rivalidad con el massismo (le ganó la interna de 2023 a Malena Galmarini).", "Letra P: Zamora, Somos y la pulseada con Galmarini", ZAMORA_SOMOS),
+    "int_vlopez": ("PRO, alineada con Jorge Macri; vicepresidenta del partido.", "La Política Online: los bastiones del PRO", PRO_BASTIONES),
+    "int_ezeiza": ("Integra la Liga de Intendentes peronistas, que juega entre Cristina Kirchner y Kicillof.", "Letra P: crece la Liga de Intendentes", LIGA_LP),
+    "int_varela": ("Integra el Movimiento Derecho al Futuro de Kicillof.", "Letra P: la nueva cartografía del peronismo bonaerense", CARTOGRAFIA_PJ),
+    "int_merlo": ("Peronista cercano a Cristina y Máximo Kirchner; se acercó a la Liga de Intendentes y aspira a la gobernación.", "El Cronista: a quién responden los intendentes", MENENDEZ_CRON),
+    "int_sanisidro": ("PRO, alineado con el Gobierno nacional.", "Letra P: los intendentes del PRO y el frente libertario", LANUS_PRO),
+    "int_sanmartin": ("Integra el Movimiento Derecho al Futuro de Kicillof.", "Letra P: la nueva cartografía del peronismo bonaerense", CARTOGRAFIA_PJ),
+    "int_moron": ("Integra el Movimiento Derecho al Futuro de Kicillof.", "Letra P: la nueva cartografía del peronismo bonaerense", CARTOGRAFIA_PJ),
+}
+for _i, (_txt, _t, _u) in ESPACIO.items():
+    FICHAS[_i] = dict(FICHAS[_i], res=FICHAS[_i]["res"] + " " + _txt, fuentes=list(FICHAS[_i]["fuentes"]) + [(_t, _u)])
+
+ACTORES += [
+    ("int_hurlingham", "Damián Selci (intendente de Hurlingham)", "Líder político", "dep:06408", "M", "P", 2,
+     S(ter=1, red=1, apo=1, coh=1), "D", "", 2),
+    ("int_ituzaingo", "Pablo Descalzo (intendente de Ituzaingó)", "Líder político", "dep:06410", "M", "P", 2,
+     S(ter=1, red=1, apo=1, coh=1), "D", "", 2),
+    ("int_berazategui", "Carlos Balor (intendente de Berazategui)", "Líder político", "dep:06091", "M", "P", 2,
+     S(ter=1, red=1, apo=1, coh=1), "D", "", 2),
+    ("int_sanfernando", "Juan Andreotti (intendente de San Fernando)", "Líder político", "dep:06749", "M", "P", 2,
+     S(ter=1, red=1, apo=1, coh=1), "D", "", 2),
+]
+FICHAS.update({
+    "int_hurlingham": dict(res="Intendente de Hurlingham desde diciembre de 2023 y dirigente de La Cámpora; le ganó la interna de 2023 al entonces intendente Juan Zabaleta, con quien la disputa sigue rumbo a 2027.",
+                           manda="Damián Selci.",
+                           fuentes=[("Letra P: Selci y Zabaleta, nueva disputa", SELCI_LP),
+                                    ("Gobierno bonaerense: Katopodis y Selci recorren obras", SELCI_GBA)]),
+    "int_ituzaingo": dict(res="Intendente de Ituzaingó desde diciembre de 2023; sucedió a su padre, Alberto Descalzo, que gobernó el distrito desde su creación en 1995. Integra el Movimiento Derecho al Futuro y defiende la candidatura presidencial de Kicillof.",
+                          manda="Pablo Descalzo.",
+                          fuentes=[("Perfil: Descalzo defiende la candidatura de Kicillof", DESCALZO_PERFIL),
+                                   ("Letra P: la nueva cartografía del peronismo bonaerense", CARTOGRAFIA_PJ)]),
+    "int_berazategui": dict(res="Completa hasta 2027 el mandato de Juan José Mussi, intendente durante seis períodos, que murió en noviembre de 2025. Integra el Movimiento Derecho al Futuro.",
+                            manda="Carlos «Turco» Balor.",
+                            fuentes=[("Canal 26: quién reemplaza a Mussi", BALOR_C26),
+                                     ("Boletín Oficial de Berazategui: autoridades (agosto de 2026)", BALOR_BO),
+                                     ("Letra P: la nueva cartografía del peronismo bonaerense", CARTOGRAFIA_PJ)]),
+    "int_sanfernando": dict(res="Intendente de San Fernando desde 2019, sucesor de su padre, Luis Andreotti, y dirigente del Frente Renovador de Sergio Massa. No puede ir por un tercer mandato en 2027; su hermana Eva aparece como posible sucesora.",
+                            manda="Juan Andreotti.",
+                            fuentes=[("Letra P: Massa lo empuja a la gobernación", ANDREOTTI_LP),
+                                     ("Letra P: Eva Andreotti se encamina a suceder a su hermano", ANDREOTTI_SUC)]),
+})
+RELACIONES += [
+    ("int_escobar", "mdf", "Alianza", "Integra el MDF.", 2, CARTOGRAFIA_PJ),
+    ("int_varela", "mdf", "Alianza", "Integra el MDF.", 2, CARTOGRAFIA_PJ),
+    ("int_sanmartin", "mdf", "Alianza", "Integra el MDF.", 2, CARTOGRAFIA_PJ),
+    ("int_moron", "mdf", "Alianza", "Integra el MDF.", 2, CARTOGRAFIA_PJ),
+    ("int_ituzaingo", "mdf", "Alianza", "Integra el MDF y defiende la candidatura de Kicillof.", 2, DESCALZO_PERFIL),
+    ("int_berazategui", "mdf", "Alianza", "Integra el MDF.", 2, CARTOGRAFIA_PJ),
+    ("int_echeverria", "fuerza_patria", "Enfrentamiento", "En 2025 encabezó Unión Federal, por fuera de Fuerza Patria.", 2, UNION_FEDERAL),
+    ("int_malvinas", "cfk", "Alianza", "Apoyó su candidatura a la presidencia del PJ en 2024.", 1, CFK_PJ_LP),
+    ("int_merlo", "maximo", "Alianza", "Uno de los dirigentes territoriales más cercanos a Máximo Kirchner.", 2, CFK_PJ_LP),
+    ("int_tigre", "massa", "Enfrentamiento", "Rivalidad con el massismo; le ganó la interna de 2023 a Malena Galmarini.", 2, ZAMORA_SOMOS),
+    ("int_vlopez", "pro", "Alianza", "Intendenta y vicepresidenta del PRO.", 3, PRO_BASTIONES),
+    ("int_vlopez", "gob_caba", "Alianza", "Alineada con Jorge Macri.", 2, PRO_BASTIONES),
+    ("int_sanisidro", "pro", "Alianza", "Intendente del PRO, alineado con el Gobierno nacional.", 2, LANUS_PRO),
+    ("int_hurlingham", "la_campora", "Alianza", "Dirigente de La Cámpora.", 3, SELCI_LP),
+    ("int_sanfernando", "massa", "Alianza", "Una de las apuestas de Massa en la Primera sección.", 2, ANDREOTTI_LP),
+]

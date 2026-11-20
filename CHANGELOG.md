@@ -1,5 +1,10 @@
 # Cambios
 
+## 2026-11-19 (n) · Intendentes del conurbano: espacio político y los que faltaban
+
+- Cuatro intendentes más (318 actores y 494 relaciones): Damián Selci (Hurlingham, La Cámpora), Pablo Descalzo (Ituzaingó, MDF), Carlos Balor (Berazategui, completa el mandato de Juan José Mussi, MDF) y Juan Andreotti (San Fernando, Frente Renovador).
+- Cada intendente cargado en la tanda (m) suma su espacio con fuente: MDF (Sujarchuk, Watson, Moreira, Ghi), Liga de Intendentes (Granados), Unión Federal (Gray), cercanos a Cristina y Máximo Kirchner (Nardini, Menéndez), Somos Buenos Aires (Zamora), PRO (Soledad Martínez, Ramón Lanús) y vecinalismo (Jaime Méndez); en Almirante Brown, Fabiani está a cargo por la licencia de Cascallares. Sin dato de espacio: Lorena Espina (José C. Paz).
+
 ## 2026-11-19 (m) · Categorías chicas completas, referentes que faltaban, Neuss, bancos e intendentes
 
 - Actores (`fuente/actores_mas4.py`): 54 nuevos, hasta 314, con 479 relaciones con fuente.
