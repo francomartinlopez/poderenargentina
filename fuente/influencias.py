@@ -41,6 +41,10 @@ INFLUENCIAS = [
      "https://www.forbesargentina.com/money/el-banco-central-extendio-swap-china-otros-5-anos-n94855"),
     ("AR", "Unión Europea", "inv", 2, "La belga Jan De Nul, con la argentina Servimagnus, ganó la concesión por 25 años de la Hidrovía Paraná-Paraguay, por donde sale cerca del 80% del comercio exterior.",
      "https://eleconomista.com.ar/economia/la-privatizacion-mas-grande-era-milei-ya-tiene-dueno-cambia-ahora-hidrovia-n95924"),
+    ("AR", "China", "deu", 1, "ICBC, banco del Estado chino, tiene en la Argentina su mayor operación fuera de China: más de un millón de hogares y 40.000 empresas, y un plan de financiamiento de proyectos por US$ 2.000 millones.",
+     "https://www.bloomberglinea.com/latinoamerica/argentina/exclusiva-china-fuera-de-argentina-habla-el-ceo-local-de-icbc-tras-criticas-de-bessent-y-quirno/"),
+    ("AR", "EE.UU.", "inv", 1, "JetSMART, controlada por el fondo estadounidense Indigo Partners, es la segunda aerolínea del país e invierte US$ 550 millones.",
+     "https://www.emol.com/noticias/Economia/2026/06/18/1203245/jetsmart-inversion-argentina.html"),
     ("AR", "Reino Unido", "pre", 3, "Ocupa las Islas Malvinas, cuya soberanía reclama la Argentina, con una guarnición permanente en Monte Agradable.",
      "https://www.baenegocios.com/mundo/Reino-Unido-ratifica-la-presencia-militar-en-las-Malvinas-tras-las-crecientes-amenazas-20250624-0075.html"),
 
@@ -139,6 +143,8 @@ INFLUENCIAS = [
      "https://www.ellitoral.com/campolitoral/bunge-cargill-cofco-maiz-soja-trigo-girasol-bolsa-comercio-rosario-secretaria-agricultura-declaraciones-juradas-ventas-exterior_0_cq6O9cMO0q.html"),
     ("82", "Unión Europea", "inv", 1, "La francesa Louis Dreyfus Company está entre las cuatro mayores agroexportadoras.",
      "https://www.infocampo.com.ar/?p=594711"),
+    ("82", "Unión Europea", "pre", 1, "La belga Jan De Nul draga y opera por 25 años el tramo santafesino de la hidrovía, frente a las terminales del Gran Rosario.",
+     "https://eleconomista.com.ar/economia/la-privatizacion-mas-grande-era-milei-ya-tiene-dueno-cambia-ahora-hidrovia-n95924"),
     ("82", "EE.UU.", "deu", 1, "Colocó USD 800 millones a nueve años en diciembre de 2025.", BONOS),
     ("82", "Israel", "pol", 1, "Firmó acuerdos con Mekorot.", MEKOROT),
     # Santiago del Estero

@@ -23,7 +23,7 @@ W = "https://es.wikipedia.org/wiki/"
 #  actores, potencias, texto, hitos [(AAAA-MM, texto, url)], fuentes [(título, url)])
 FRICCION = [
     ("malvinas", "Islas Malvinas", "Soberanía", "94", None, -59.0, -51.7, 3, "Activa",
-     ["milei", "ffaa", "cancilleria", "embajada_ru"], ["Reino Unido"],
+     ["milei", "ffaa", "armada", "fuerza_aerea", "emco", "cancilleria", "embajada_ru"], ["Reino Unido"],
      "La Argentina reclama la soberanía de las islas, ocupadas por el Reino Unido desde 1833, que mantiene una guarnición permanente en Monte Agradable. El reclamo es política de Estado y figura en la Constitución.",
      [("1833-01", "El Reino Unido ocupa las islas.", W + "Cuesti%C3%B3n_de_las_islas_Malvinas"),
       ("1982-04", "Guerra de Malvinas; la Argentina se rinde el 14 de junio.", W + "Guerra_de_las_Malvinas"),
@@ -40,7 +40,7 @@ FRICCION = [
       ("A24: inspección técnica", "https://www.a24.com/politica/el-gobierno-analiza-pedir-una-inspeccion-tecnica-la-base-espacial-china-neuquen-n1308479/amp")]),
 
     ("hidrovia", "Hidrovía Paraná-Paraguay", "Geopolítica", "82", "rosario", -60.45, -33.25, 2, "Adjudicada; con reclamos",
-     ["milei", "economia", "gob_santafe", "ciara", "prefectura"], ["EE.UU.", "China", "Unión Europea"],
+     ["milei", "economia", "jan_de_nul", "gob_santafe", "ciara", "prefectura"], ["EE.UU.", "China", "Unión Europea"],
      "Por el Paraná sale la mayor parte de las exportaciones argentinas. La licitación del dragado excluyó a empresas controladas por Estados, lo que dejó fuera a la china CCCC. La ganó la belga Jan De Nul con la argentina Servimagnus; la competidora DEME, con socios estadounidenses, denunció sesgo ante el gobierno de EE.UU.",
      [("2025-02", "El Gobierno anula la primera licitación, con una sola oferta.", "https://elheraldo.com.ar/noticias/interes-general/el-estado-nacional-anulo-la-licitacion-de-la-hidrovia"),
       ("2026-06", "Preadjudicación a Jan De Nul (66,20 puntos) frente a DEME (42,14).", "https://www.lacapital.com.ar/economia/la-licitacion-la-hidrovia-entro-la-recta-final-y-se-anuncio-la-preadjudicacion-n10262951.html/amp"),
@@ -50,7 +50,7 @@ FRICCION = [
       ("El Economista: la privatización ya tiene dueño", "https://eleconomista.com.ar/economia/la-privatizacion-mas-grande-era-milei-ya-tiene-dueno-cambia-ahora-hidrovia-n95924")]),
 
     ("ushuaia_base", "Base Naval Integrada de Ushuaia", "Geopolítica", "94", "ushuaia", -68.3038, -54.8074, 2, "En obra",
-     ["milei", "ffaa", "gob_tdf"], ["EE.UU.", "China", "Reino Unido"],
+     ["milei", "ffaa", "armada", "gob_tdf"], ["EE.UU.", "China", "Reino Unido"],
      "Base proyectada sobre el canal Beagle como puerta a la Antártida. El Gobierno busca financiamiento y participación de EE.UU.; antes, una propuesta de polo logístico con fondos chinos había quedado sin avanzar.",
      [("2024-04", "Milei anuncia en Ushuaia, con la jefa del Comando Sur, que la base será un proyecto conjunto con EE.UU.", "https://www.perfil.com/noticias/politica/la-base-naval-integrada-de-ushuaia-el-proyecto-que-defensa-impulsa-desde-hace-decadas-y-que-milei-busca-reactivar.phtml"),
       ("2026-09", "Defensa reactiva el proyecto.", "https://www.perfil.com/noticias/politica/la-base-naval-integrada-de-ushuaia-el-proyecto-que-defensa-impulsa-desde-hace-decadas-y-que-milei-busca-reactivar.phtml")],
@@ -58,7 +58,7 @@ FRICCION = [
       ("Base Naval Ushuaia (Wikipedia)", W + "Base_Naval_Ushuaia")]),
 
     ("rosario_narco", "Violencia narco en Rosario", "Seguridad", "82", "rosario", -60.6332, -32.9472, 3, "Contenida con fuerzas federales",
-     ["los_monos", "muni_rosario", "gob_santafe", "seguridad", "comodoro_py", "banda_riquelme", "mpa_santafe", "pfa", "gendarmeria", "barra_newells"], [],
+     ["los_monos", "muni_rosario", "gob_santafe", "seguridad", "comodoro_py", "banda_riquelme", "mpa_santafe", "pfa", "gendarmeria", "barra_newells", "policia_santafe"], [],
      "Bandas como Los Monos disputan el narcomenudeo y atacaron edificios judiciales. Desde diciembre de 2023 la Nación y la provincia despliegan fuerzas federales con el Plan Bandera; la justicia confirmó la condena de Ariel «Guille» Cantero por los ataques.",
      [("2023-12", "Comienza el Plan Bandera con fuerzas federales.", "https://www.lacapital.com.ar/policiales/confirmaron-condena-guille-cantero-ataques-contra-objetivos-judiciales-n10034583.html"),
       ("2024-11", "Guille Cantero, preso desde 2013, acumula condenas.", "https://www.lanacion.com.ar/seguridad/esta-en-prision-desde-2013-con-otra-condena-por-venta-de-drogas-guille-cantero-acumula-simbolicas-nid30112024/")],
@@ -135,7 +135,7 @@ FRICCION = [
      [("La Capital: Acindar frena la producción", "https://www.lacapital.com.ar/economia/acindar-decidio-frenar-la-produccion-villa-constitucion-falta-ventas-n10263980.html")]),
 
     ("pesca_milla201", "Pesca ilegal en la Milla 201", "Recursos marítimos", "26", None, -60.2, -45.8, 2, "Activa cada temporada",
-     ["seguridad", "ffaa", "economia", "prefectura"], ["China", "Unión Europea", "Japón y Corea"],
+     ["seguridad", "ffaa", "armada", "economia", "prefectura"], ["China", "Unión Europea", "Japón y Corea"],
      "Entre 400 y 600 buques extranjeros, en su gran mayoría chinos y también españoles, coreanos, taiwaneses y portugueses, pescan calamar sobre el límite de la Zona Económica Exclusiva y entran en ella de forma recurrente. La Prefectura y la Armada patrullan y capturan buques; el Gobierno multa por telemetría satelital. Además, capitales chinos controlan cerca de dos tercios de la flota calamarera argentina.",
      [("2026-01", "El Congreso de EE.UU. alerta por la flota pesquera china frente a la Argentina.", "https://www.iprofesional.com/politica/447228-donald-trump-y-javier-milei-en-alerta-por-flota-pesquera-china-en-argentina"),
       ("2026-02", "Unos 500 buques extranjeros en la Milla 201, 80% chinos.", "https://www.iprofesional.com/negocios/448592-pesca-ilegal-con-china-y-espana-a-la-cabeza-500-buques-extranjeros-depredan-en-el-sur"),
@@ -170,7 +170,7 @@ FRICCION = [
      [("Diario Judicial: un lago cada vez más escondido", "https://www.diariojudicial.com/news-66693-un-lago-cada-vez-mas-escondido")]),
 
     ("antartida", "Antártida: tres reclamos superpuestos", "Soberanía", "94", None, -60.0, -72.0, 2, "Congelada por el Tratado Antártico",
-     ["ffaa", "cancilleria"], ["Reino Unido", "Rusia"],
+     ["ffaa", "armada", "fuerza_aerea", "cancilleria"], ["Reino Unido", "Rusia"],
      "La Argentina reclama el sector antártico entre los meridianos 25° y 74° Oeste. El Reino Unido reclama desde 1908 el sector entre 20° y 80° Oeste, y Chile desde 1940 el que va de 53° a 90° Oeste: la península antártica queda dentro de los tres. El artículo IV del Tratado Antártico (1959), firmado por los tres países, congela los reclamos sin resolverlos, y el Protocolo de Madrid prohíbe la minería. La Argentina sostiene en las Orcadas del Sur la estación de ocupación permanente más antigua del continente, desde 1904.",
      [("1904", "La Argentina instala la estación de las Orcadas del Sur, con presencia ininterrumpida desde entonces.", "https://www.elespectador.com/mundo/mas-paises/el-ultimo-territorio-sin-dueno-la-antartida-ante-la-ventana-de-2048/"),
       ("1908", "El Reino Unido formaliza su reclamo, que se superpone con el argentino.", "https://elordenmundial.com/mapas-y-graficos/de-quien-es-la-antartida/"),
@@ -180,6 +180,31 @@ FRICCION = [
      [("El Orden Mundial: reclamaciones territoriales sobre la Antártida", "https://elordenmundial.com/mapas-y-graficos/de-quien-es-la-antartida/"),
       ("Canal 26: cómo se fundamenta el reclamo argentino", "https://www.canal26.com/general/2026/01/22/antartida-argentina-como-se-fundamenta-el-reclamo-de-soberania-y-que-es-el-tratado-antartico/"),
       ("El Espectador: la Antártida ante la ventana de 2048", "https://www.elespectador.com/mundo/mas-paises/el-ultimo-territorio-sin-dueno-la-antartida-ante-la-ventana-de-2048/")]),
+    ("belgrano_cargas_priv", "Privatización del Belgrano Cargas", "Infraestructura", "82", "san-lorenzo", -60.7357, -32.7473, 2, "Licitación abierta; ofertas el 21/12/2026",
+     ["economia", "belgrano_cargas", "cargill", "agd", "riotinto"], ["EE.UU.", "China", "Canadá y Australia"],
+     "El Estado licita por 50 años las líneas de carga Belgrano, San Martín y Urquiza (7.594 km), que llevan granos del norte a los puertos del Gran Rosario. Las cerealeras del Gran Rosario preparan una oferta conjunta y Rio Tinto sigue el proceso por el litio. El pliego dejó afuera a las empresas chinas tras el lobby estadounidense, según especialistas consultados por la prensa. Grupo México se retiró en octubre.",
+     [("2026-08", "Se convoca la licitación por 50 años; especialistas objetan el pliego (lobby estadounidense y exclusión de empresas chinas).", "https://eleconomista.com.ar/economia/licitacion-belgrano-cargas-podra-multiplicarse-transporte-carga-trenes-condiciones-pliego-n97790"),
+      ("2026-10", "Grupo México se retira de la licitación.", "https://bichosdecampo.com/se-ilusionan-las-cerealeras-la-sorpresiva-salida-del-grupo-mexico-deja-al-holding-agroexportador-en-carrera-para-controlar-el-belgrano-cargas-por-el-proximo-medio-siglo/"),
+      ("2026-11", "La apertura de ofertas se posterga al 21 de diciembre (Resolución 1914/2026).", "https://perfil.com/economia/el-gobierno-postergo-la-licitacion-de-belgrano-cargas-y-flexibilizo-los-requisitos-aHMoh4T4QfoX")],
+     [("El Cronista: oferta conjunta de las cerealeras", "https://www.cronista.com/economia-politica/privatizaciones-asoma-un-gigante-mexicano-y-se-calienta-la-disputa-por-trenes-de-carga"),
+      ("LM Neuquén: cerealeras, Rio Tinto y el litio", "https://mase.lmneuquen.com/privatizacion-belgrano-cargas-mineria-litio-licitacion-2026/amp")]),
+
+    ("energia_privatizaciones", "Privatizaciones eléctricas: Transener y Los Nihuiles", "Infraestructura", "50", "san-rafael", -68.3356, -34.6178, 2, "Disputa licitatoria abierta",
+     ["economia", "neuss", "brito", "mindlin", "pampa"], [],
+     "En 2026 el Estado vendió su participación en Transener, la mayor transportadora eléctrica, a Edison Energía (hermanos Neuss) y Genneia (familia Brito) por US$ 356 millones; tres meses después el nuevo directorio repartió dividendos acumulados por $253.536 millones, lo que generó cuestionamientos en la prensa. En Mendoza, Edison y Pampa Energía (Marcelo Mindlin) disputan la concesión de las centrales de Los Nihuiles.",
+     [("2026-04", "Edison y Genneia se encaminan a quedarse con Transener.", "https://www.iprofesional.com/negocios/453530-por-que-la-familia-neuss-se-encamina-a-quedarse-con-la-privatizacion-de-transener"),
+      ("2026-08", "Se concreta la venta del paquete estatal por US$ 356 millones.", "https://www.iprofesional.com/energia/453654-transener-cambio-manos-falta-inversores-extranjeros-energia"),
+      ("2026", "Reparto de dividendos por $253.536 millones tras el cambio de manos.", "https://www.perfil.com/noticias/sociedad/a-solo-3-meses-de-comprar-transener-los-neuss-ya-lograron-recuperar-mas-del-66-de-lo-que-pagaron-por-la-empresa.phtml"),
+      ("2026", "Pampa y Edison disputan Los Nihuiles.", "https://www.lapoliticaonline.com/energia/mindlin-y-los-neuss-se-disputan-los-nihuiles-en-una-licitacion-rodeada-de-sospechas/")],
+     [("Letra P: los nuevos dueños de la energía eléctrica", "https://www.letrap.com.ar/economia/los-hermanos-neuss-los-nuevos-duenos-la-energia-electrica-n5424183")]),
+
+    ("policia_sf_protesta", "Protesta salarial de la Policía de Santa Fe", "Seguridad", "82", "rosario", -60.6332, -32.9472, 2, "Resuelta con aumento salarial",
+     ["policia_santafe", "gob_santafe"], [],
+     "En febrero de 2026 efectivos de la Policía y del Servicio Penitenciario de Santa Fe protestaron por salarios frente a la Jefatura de Rosario y la Casa de Gobierno, con patrulleros fuera de servicio y sirenazos en varias ciudades. El ministro Cococcioni pasó a disponibilidad a unos 20 efectivos y luego levantó las sanciones; el gobernador Pullaro fijó un piso salarial.",
+     [("2026-02", "Comienza la protesta; 20 efectivos pasan a disponibilidad.", "https://www.c5n.com/politica/protesta-policial-santa-fe-sanciones-efectivos-10-febrero-2026"),
+      ("2026-02", "Se levantan las sanciones.", "https://www.baenegocios.com/amp/protesta-policial-en-santa-fe-levantan-sanciones-y-prometen-mejoras-salariales-7992/"),
+      ("2026-02", "Pullaro anuncia un piso salarial de $1.350.000 y se levanta la protesta.", "https://www.iprofesional.com/politica/448016-maximiliano-pullaro-anuncio-aumento-sueldo-para-policia-y-se-levanto-protesta-en-provincia")],
+     [("Infobae: la protesta frente a la Unidad Regional II", "https://www.infobae.com/sociedad/2026/02/11/el-gobernador-no-puede-venir-a-hablar-una-familiar-de-policia-suplico-de-rodillas-por-aumento-en-la-protesta/")]),
 ]
 
 # (id, nombre, provincia, ciudad, lon, lat, estado, texto, fuentes)

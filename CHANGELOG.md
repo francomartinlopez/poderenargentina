@@ -1,5 +1,11 @@
 # Cambios
 
+## 2026-11-19 (o) · Conexiones: fricción, influencias y fichas del conurbano
+
+- Fricción (22 puntos): tres nuevos con cronología y fuente: privatización del Belgrano Cargas (cerealeras, Rio Tinto, exclusión de empresas chinas, salida de Grupo México), privatizaciones eléctricas (Transener y Los Nihuiles: Neuss, Brito y Mindlin) y la protesta salarial de la Policía de Santa Fe (febrero de 2026). Los actores nuevos se suman a Malvinas, la Antártida, la Base Naval de Ushuaia, la Milla 201 (Armada, Fuerza Aérea, Estado Mayor Conjunto), la hidrovía (Jan De Nul) y Rosario (Policía de Santa Fe).
+- Influencias: ICBC suma a China en deuda y finanzas y JetSMART a EE.UU. en inversión, en el nivel país; Jan De Nul suma a la Unión Europea en presencia en Santa Fe. EE.UU. sigue como potencia dominante en el nivel país (7 contra 5 de China).
+- Fichas de partido: doce nuevas (Esteban Echeverría, Escobar, Malvinas Argentinas, San Miguel, Vicente López, San Isidro, San Fernando, José C. Paz, Morón, Hurlingham, Ituzaingó y Berazategui) con cabecera, actividad, intendente, espacio político y fuente. Correcciones: Tigre (Zamora jugó con Somos Buenos Aires en 2025, no con Fuerza Patria), Tres de Febrero (Rodrigo Aybar a cargo), Florencio Varela, San Martín y Merlo con su espacio; Rosario, el cordón de San Lorenzo, Tigre y Ezeiza suman sus actores nuevos.
+
 ## 2026-11-19 (n) · Intendentes del conurbano: espacio político y los que faltaban
 
 - Cuatro intendentes más (318 actores y 494 relaciones): Damián Selci (Hurlingham, La Cámpora), Pablo Descalzo (Ituzaingó, MDF), Carlos Balor (Berazategui, completa el mandato de Juan José Mussi, MDF) y Juan Andreotti (San Fernando, Frente Renovador).
