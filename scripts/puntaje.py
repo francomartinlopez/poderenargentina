@@ -11,13 +11,21 @@ from ejes import EJES, PESOS, AUTONOMIA_REAL, TEORICO, TIPO, PESO_FINAL, ESTIRAR
 from actores import ACTORES as _A, FICHAS as _F, RELACIONES as _R
 import actores_provinciales as _P
 import actores_mas as _M
-ACTORES = _A + _P.ACTORES + _M.ACTORES
-FICHAS = {**_F, **_P.FICHAS, **_M.FICHAS}
-_pares = {frozenset((r[0], r[1])) for r in _R}
+import actores_mas2 as _M2
+ACTORES = _A + _P.ACTORES + _M.ACTORES + _M2.ACTORES
+FICHAS = {k: dict(v) for k, v in {**_F, **_P.FICHAS, **_M.FICHAS, **_M2.FICHAS}.items()}
+for _i, (_txt, _fu) in _M2.TEXTOS.items():
+    assert _i in FICHAS, f"texto para actor inexistente: {_i}"
+    FICHAS[_i]["txt"] = _txt
+    if _fu[1] not in [u for _, u in FICHAS[_i]["fuentes"]]:
+        FICHAS[_i]["fuentes"] = list(FICHAS[_i]["fuentes"]) + [_fu]
+# Una sola relación por par de actores y tipo (la primera que aparece manda).
+_vistos = {(frozenset((r[0], r[1])), r[2]) for r in _R}
 RELACIONES = list(_R)
-for r in _P.RELACIONES + _M.RELACIONES:
-    if frozenset((r[0], r[1])) not in _pares:
-        _pares.add(frozenset((r[0], r[1])))
+for r in _P.RELACIONES + _M.RELACIONES + _M2.RELACIONES:
+    k = (frozenset((r[0], r[1])), r[2])
+    if k not in _vistos:
+        _vistos.add(k)
         RELACIONES.append(r)
 
 FAC = {1: 1, 2: .75, 3: .5, 4: .25}
@@ -76,7 +84,7 @@ def calcular(ciudades_por_nombre):
     for a in A.values():
         a["oculto"] = round(100 * a["pt"] * a["brecha"] / omax, 1)
         f = FICHAS[a["id"]]
-        a.update(res=f["res"], manda=f["manda"], fu=[list(x) for x in f["fuentes"]])
+        a.update(res=f["res"], manda=f["manda"], fu=[list(x) for x in f["fuentes"]], txt=f.get("txt", ""))
         a["prov"] = ciudades_por_nombre[a["sede"]]["prov"]
         a["cs"] = ciudades_por_nombre[a["sede"]]["s"]
         for k in ("dur", "pe"):

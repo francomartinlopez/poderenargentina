@@ -165,7 +165,9 @@ def main():
         assert all(f in frids for f in d["fr"]), f"Departamento {did}: punto de fricción desconocido"
         assert d["gob"] is None or d["gob"][3].startswith("http"), f"Departamento {did}: gobierno sin fuente"
         g = d["gob"]
-        deps[did] = dict(cab=d["cab"], act=d["act"], gob=g and dict(n=g[0], par=g[1], nota=g[2], u=g[3]),
+        topo = json.load(open(os.path.join(RAIZ, "data", "dep", did[:2] + ".json"), encoding="utf-8"))
+        nom = next(x["properties"]["nombre"] for x in topo["objects"]["dep"]["geometries"] if x["properties"]["id"] == did)
+        deps[did] = dict(n=nom, cab=d["cab"], act=d["act"], gob=g and dict(n=g[0], par=g[1], nota=g[2], u=g[3]),
                          ai=d["act_ids"], fr=d["fr"], fu=[dict(t=t, u=u) for t, u in d["fu"]])
     out = dict(corte=CORTE, proxima=PROXIMA, meta=meta, pais=pais, provincias=provincias, ciudades=ciudades,
                deppob=poblacion.DEPARTAMENTO, deps=deps, actores=actores, relaciones=relaciones, friccion=fr, zonas=zonas)

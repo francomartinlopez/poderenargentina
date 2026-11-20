@@ -11,6 +11,7 @@ const ADESC={A:"acuerdos electorales con La Libertad Avanza",D:"negocia votos y 
 let capa="terr",potSel="dom",ecoSel="exp";
 const TCOL={Estado:"#FF3B30",Persona:"#F5F0E6",Capital:"#F2A93B",Influencia:"#3FB8C9",Información:"#9E8CFF",Sombra:"#8B8B8B"};
 const RCOL={Gobierna:"#FF3B30",Propiedad:"#F2A93B",Financiamiento:"#2EB872",Alianza:"#2F6BFF",Enfrentamiento:"#D7263D",Ambigua:"#9A8F8C",Contrato:"#C8743C",Abastecimiento:"#7FB3D5","Puerta giratoria":"#B07CFF"};
+let ANTP=null;
 const ACT={},actCity={},actProv={},FR={},frProv={},frCity={},zlCity={};
 const NVC={3:"#FF3B30",2:"#F2A93B",1:"#9A8F8C"},NVT={3:"Violencia o fuerza extranjera",2:"Disputa abierta",1:"Latente o local"};
 const nvTag=n=>`<span class="tag" style="color:${NVC[n]}">${NVT[n]}</span>`;
@@ -65,7 +66,7 @@ function mapShell(){
   app.innerHTML=`<div class="mapview"><div><div class="crumbs" id="crumbs"></div>
   <div class="selrow"><label for="capasel">Ver en el mapa</label><select id="capasel" class="sel"></select><span id="subsel"></span></div><div class="bar sub" id="sub"></div>
   <div class="mapbox" id="mapbox"><svg id="map" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Mapa de la Argentina por provincias"></svg>
-  <div class="ant" id="ant"><svg id="antsvg" aria-hidden="true"></svg>Antártida Argentina<br>(otra escala)</div></div>
+  <div class="ant" id="ant"><svg id="antsvg" aria-label="Antártida"></svg><span id="antlb">Antártida Argentina<br>(otra escala)</span></div></div>
   <div class="bar" id="filt" role="group" aria-label="Ciudades por motivo" style="margin-top:10px"></div></div>
   <aside class="panel"><div class="pin" id="panel"></div></aside></div><section class="more" id="more"></section>`;
   svg=document.getElementById("map");
@@ -73,7 +74,8 @@ function mapShell(){
   svg.innerHTML=`<g id="gp">${PF.features.map(f=>`<path class="prov" data-k="p:${f.properties.id}" d="${PATH(f)}"><title>${esc(byId[f.properties.id].n)}</title></path>`).join("")}</g><g id="gd"></g><g id="gc"></g><g id="gl"></g><g id="gf"></g>`;
   G={p:svg.querySelector("#gp"),d:svg.querySelector("#gd"),c:svg.querySelector("#gc"),l:svg.querySelector("#gl"),f:svg.querySelector("#gf")};
   for(const pid in DEP)depGroup(pid);
-  if(ANT){const as=document.getElementById("antsvg"),pr=d3.geoAzimuthalEqualArea().rotate([50,90]).fitExtent([[4,4],[104,92]],ANT);as.setAttribute("viewBox","0 0 108 96");as.innerHTML=`<path d="${d3.geoPath(pr)(ANT)}" fill="#161414" stroke="#4A3A38"/>`}
+  if(ANT){const as=document.getElementById("antsvg");ANTP=d3.geoAzimuthalEqualArea().rotate([50,90]).fitExtent([[4,4],[104,92]],ANT);as.setAttribute("viewBox","0 0 108 96");
+    as.addEventListener("click",e=>{const t=e.target.closest("[data-k]");if(t)location.hash="f-"+t.dataset.k.split(":")[1]})}
   svg.addEventListener("click",e=>{const t=e.target.closest("[data-k]");if(!t)return;const[k,v]=t.dataset.k.split(":");
     if(k==="p"){location.hash="prov-"+byId[v].s}else if(k==="d"){location.hash="d-"+v}else if(k==="c"){location.hash="c-"+v}else if(k==="f"){location.hash="f-"+v}else if(k==="z"){location.hash="c-"+v}});
   svg.addEventListener("pointermove",e=>{const t=e.target.closest("[data-k]");if(!t||e.pointerType!=="mouse"){tip.style.display="none";return}
@@ -152,14 +154,24 @@ function scaleMarks(){
     const hit=!l.classList.contains("keep")&&placed.some(o=>bb[0]<o[2]&&bb[2]>o[0]&&bb[1]<o[3]&&bb[3]>o[1]);
     l.style.display=hit?"none":"";if(!hit)placed.push(bb)}
 }
+// Reclamos antárticos superpuestos (meridianos oeste): Argentina 25°-74°, Reino Unido 20°-80°, Chile 53°-90°.
+const CLAIMS=[["Reino Unido",20,80,"#7FB3D5"],["Chile",53,90,"#E0B341"],["Argentina",25,74,"#FF3B30"]];
+function wedge(pr,a,b,lat){const c=pr([0,-90]),pts=[];for(let l=a;l<=b;l+=1)pts.push(pr([-l,lat]));return `M${c[0].toFixed(1)},${c[1].toFixed(1)}`+pts.map(q=>`L${q[0].toFixed(1)},${q[1].toFixed(1)}`).join("")+"Z"}
+function antDraw(){const as=document.getElementById("antsvg");if(!as||!ANTP)return;
+  const base=`<path d="${d3.geoPath(ANTP)(ANT)}" fill="#161414" stroke="#4A3A38"/>`,fa=T.friccion.filter(f=>f.lat<-58);
+  as.innerHTML=base+(capa==="fr"?CLAIMS.map(([n,a,b,c])=>`<path d="${wedge(ANTP,a,b,-62)}" fill="${c}" fill-opacity=".14" stroke="${c}" stroke-width=".8" stroke-dasharray="2 1.5"><title>${n}: ${a}° a ${b}° O</title></path>`).join("")+fa.map(f=>{const[x,y]=ANTP([f.lon,f.lat]);return `<polygon class="frm" data-k="f:${f.id}" points="${x},${y-6} ${x+6},${y} ${x},${y+6} ${x-6},${y}" fill="${NVC[f.nv]}" style="cursor:pointer"><title>${esc(f.n)}</title></polygon>`}).join(""):"");
+  const lb=document.getElementById("antlb");if(lb)lb.innerHTML=capa==="fr"?`Antártida: reclamos de <b style="color:#FF3B30">Argentina</b>, <b style="color:#E0B341">Chile</b> y <b style="color:#7FB3D5">Reino Unido</b>`:"Antártida Argentina<br>(otra escala)"}
+function claimSvg(){if(!ANT)return "";const w=420,h=380,pr=d3.geoAzimuthalEqualArea().rotate([50,90]).fitExtent([[10,10],[w-10,h-10]],ANT);
+  return `<figure class="claims"><svg viewBox="0 0 ${w} ${h}" role="img" aria-label="Sectores antárticos reclamados por la Argentina, Chile y el Reino Unido"><path d="${d3.geoPath(pr)(ANT)}" fill="#161414" stroke="#4A3A38"/>${CLAIMS.map(([n,a,b,c])=>`<path d="${wedge(pr,a,b,-62)}" fill="${c}" fill-opacity=".16" stroke="${c}" stroke-width="1.4" stroke-dasharray="6 4"></path>`).join("")}</svg>
+  <figcaption>${CLAIMS.slice().reverse().map(([n,a,b,c])=>`<span class="lg"><i style="background:${c}"></i>${n}: ${a}° a ${b}° O</span>`).join("")}<br><span class="muted">Sectores aproximados, del polo al paralelo 62° S. Los tres reclamos se superponen en la península antártica; el Tratado Antártico los congela.</span></figcaption></figure>`}
 function drawCities(list,labels,sel){
   const vis=capa==="act"?list.filter(c=>actCity[c.s]||c.s===sel):list.filter(c=>c.mot.some(m=>filt.has(m))||c.s===sel);
   vis.sort((a,b)=>(a.mot.includes("cap")-b.mot.includes("cap")));
   G.c.innerHTML=vis.map(c=>`<circle class="city ${c.mot.includes("cap")?"cap":""} ${c.s===sel?"sel":""}" cx="${c.xy[0]}" cy="${c.xy[1]}" r="3" fill="${color(c)}" data-k="c:${c.s}" ${capa==="act"&&actCity[c.s]?`data-m="${(1+Math.log1p(actCity[c.s].reduce((t,a)=>t+a.pt,0))/2.6).toFixed(2)}" style="fill:#FF3B30;fill-opacity:.75"`:""}></circle>`).join("");
   const pr=c=>c.s===sel?0:c.mot.includes("cap")?1:c.mot.includes("pob")?2:3;
   G.l.innerHTML=labels?vis.slice().sort((a,b)=>pr(a)-pr(b)).map(c=>`<text class="clbl ${c.mot.includes("cap")?"cap":""} ${c.s===sel?"keep":""}" x="${c.xy[0]}" y="${c.xy[1]}">${esc(c.n)}</text>`).join(""):"";
-  G.f.innerHTML=capa==="fr"?T.friccion.slice().sort((a,b)=>a.nv-b.nv).map(f=>`<polygon class="frm" data-k="f:${f.id}" data-x="${f.xy[0]}" data-y="${f.xy[1]}" data-m="${5+2.2*f.nv}" fill="${NVC[f.nv]}"></polygon>`).join(""):capa==="zl"?T.zonas.map(z=>`<circle class="zlm" data-k="z:${z.cs}" cx="${z.xy[0]}" cy="${z.xy[1]}" data-m="16"></circle>`).join(""):"";
-  scaleMarks();
+  G.f.innerHTML=capa==="fr"?T.friccion.filter(f=>f.lat>-58).sort((a,b)=>a.nv-b.nv).map(f=>`<polygon class="frm" data-k="f:${f.id}" data-x="${f.xy[0]}" data-y="${f.xy[1]}" data-m="${5+2.2*f.nv}" fill="${NVC[f.nv]}"></polygon>`).join(""):capa==="zl"?T.zonas.map(z=>`<circle class="zlm" data-k="z:${z.cs}" cx="${z.xy[0]}" cy="${z.xy[1]}" data-m="16"></circle>`).join(""):"";
+  scaleMarks();antDraw();
 }
 function provState(pid,did){
   for(const el of G.p.children){const id=el.dataset.k.slice(2);el.classList.toggle("sel",id===pid);el.classList.toggle("dim",!!pid&&id!==pid)}
@@ -276,6 +288,7 @@ function vFr(f){
   const p=byId[f.prov];
   app.innerHTML=`<div class="page actor"><p class="crumbs"><a href="#friccion">Fricción</a> › <b>${esc(f.n)}</b></p><h1>${esc(f.n)}</h1><p class="sub">${esc(f.x)}</p>
   <div class="facts"><div><span>Tipo</span><b>${esc(f.tipo)}</b></div><div><span>Intensidad</span><b>${nvTag(f.nv)}</b></div><div><span>Estado</span><b style="font-size:14px">${esc(f.est)}</b></div><div><span>Dónde</span><b style="font-size:14px">${f.cs?`<a href="#c-${f.cs}">${esc(cityS[f.cs].n)}</a>, `:""}<a href="#prov-${p.s}">${esc(p.n)}</a></b></div></div>
+  ${f.id==="antartida"?claimSvg():""}
   <div class="cols"><div><h2 class="sec">Actores</h2><ul class="rlist">${f.act.map(a=>`<li>${aLink(a)}</li>`).join("")}${f.pot.map(q=>`<li><b style="color:${PCOL[q]}">${esc(q)}</b> <span class="muted">(potencia)</span></li>`).join("")}</ul></div>
   <div><h2 class="sec">Cronología</h2><ul class="rlist">${f.hit.map(h=>`<li><span class="mono muted">${esc(h.f.length>4?fmes(h.f):h.f)}</span> ${esc(h.x)} ${src(h.u)}</li>`).join("")}</ul>
   <h2 class="sec">Fuentes</h2><ul class="rlist">${f.fu.map(x=>`<li><a href="${esc(x.u)}" target="_blank" rel="noopener">${esc(x.t)}</a></li>`).join("")}</ul></div></div></div>`;
@@ -318,16 +331,21 @@ function netWire(){
 }
 function vActor(a){
   const M=T.meta.act,i=T.actores.indexOf(a),c=cityS[a.cs];
-  const rel=T.relaciones.filter(r=>r.o===a.id||r.d===a.id),deps=T.actores.filter(x=>x.dep.includes(a.id));
+  const rel=T.relaciones.filter(r=>r.o===a.id||r.d===a.id).sort((x,y)=>y.n-x.n||x.t.localeCompare(y.t)),deps=T.actores.filter(x=>x.dep.includes(a.id));
+  const afr=T.friccion.filter(f=>f.act.includes(a.id)),adp=Object.entries(T.deps).filter(([,d])=>d.ai.includes(a.id)),vec=a.cs!=="ciudad-autonoma-de-buenos-aires"?T.actores.filter(x=>x.cs===a.cs&&x.id!==a.id):[];
   const grupos=[...new Set(M.ejes.map(e=>e.g))];
   const ejes=grupos.map(g=>`<div class="axg"><h3>${g}</h3>${M.ejes.map((e,k)=>[e,k]).filter(([e])=>e.g===g).map(([e,k])=>{const v=a.sc[k];return `<div class="axr" title="${esc(e.d)}${v?" · "+v+": "+esc(e.a[3-v]):""}"><span>${esc(e.n)}${M.pesos[e.k]?` <small class="muted">×${String(M.pesos[e.k]).replace(".",",")}</small>`:""}</span><span class="dots">${[1,2,3].map(n=>`<i class="${n<=v?"on":""}"></i>`).join("")}</span><b class="mono">${v}</b></div>`}).join("")}</div>`).join("");
   const compN={ct:"Categoría teórica",cap:"Capacidad",alc:"Alcance",aut:"Autonomía real",red:"Red heredada"};
   app.innerHTML=`<div class="page actor"><p class="crumbs"><a href="#actores">Actores</a> › <b>${esc(a.n)}</b></p>
-  <h1>${esc(a.n)}</h1><p class="sub">${esc(a.res)}</p>
+  <h1>${esc(a.n)}</h1><p class="sub">${esc(a.res)}</p>${a.txt?`<p class="atxt">${esc(a.txt)}</p>`:""}
   <div class="facts"><div><span>Puntaje de poder</span><b class="mono">${a.pt.toLocaleString("es-AR")} <small class="muted">· n.º ${i+1}</small></b></div><div><span>Poder oculto</span><b class="mono">${a.oculto.toLocaleString("es-AR")}</b></div><div><span>Categoría</span><b style="color:${TCOL[a.tipo]};font-size:15px">${esc(a.cat)}</b></div><div><span>Sede</span><b style="font-size:15px">${c?`<a href="#c-${c.s}">${esc(c.n)}</a>`:esc(a.sede)}</b></div><div><span>Alcance</span><b style="font-size:15px">${esc(M.alcance[a.alc])}</b></div><div><span>Autonomía</span><b style="font-size:15px">${esc(M.autonomia[a.aut])}</b></div><div><span>Depende de</span><b style="font-size:15px">${a.dep.length?a.dep.map(aLink).join(", "):"Nadie en el mapa"}</b></div><div><span>Bloque</span><b style="font-size:15px">${esc(M.bloques[a.bloque])}</b></div></div>
   <div class="cols"><div><h2 class="sec">Quién manda</h2><p class="lead">${esc(a.manda)}</p>
   <h2 class="sec">Relaciones · ${rel.length}</h2>${rel.length?`<ul class="rlist">${rel.map(r=>{const o=r.o===a.id?r.d:r.o,dir=r.o===a.id?"→":"←";return `<li><span class="tag" style="color:${RCOL[r.t]}">${r.t} ${dir}</span> ${aLink(o)} <span class="mono muted">${"●".repeat(r.n)}</span><br><span class="muted">${esc(r.x)}</span> ${src(r.u)}</li>`}).join("")}</ul>`:`<p class="muted">Sin relaciones cargadas todavía.</p>`}
   ${deps.length?`<h2 class="sec">Dependen de este actor</h2><p>${deps.map(d=>aLink(d.id)).join(" · ")}</p>`:""}
+  ${a.dep.length?`<h2 class="sec">Depende de</h2><p>${a.dep.map(aLink).join(" · ")}</p>`:""}
+  ${afr.length?`<h2 class="sec">Puntos de fricción · ${afr.length}</h2>${frList(afr)}`:""}
+  ${adp.length?`<h2 class="sec">Departamentos donde pesa</h2><ul class="rlist">${adp.map(([id,d])=>`<li><a href="#d-${id}">${esc(d.n)}</a> <span class="muted">(${esc(byId[id.slice(0,2)].c)})</span></li>`).join("")}</ul>`:""}
+  ${vec.length?`<h2 class="sec">Con sede en la misma ciudad</h2><p>${vec.map(x=>aLink(x.id)).join(" · ")}</p>`:""}
   <h2 class="sec">Fuentes</h2><ul class="flist">${a.fu.map(([t,u])=>`<li><a href="${esc(u)}" target="_blank" rel="noopener">${esc(t)}</a></li>`).join("")}</ul>
   <p class="muted" style="font-size:13px">Certeza: ${esc(M.certeza[a.cert])}. Corte del ${esc(T.corte)}.</p></div>
   <div><h2 class="sec">21 ejes</h2><div class="axes">${ejes}</div>

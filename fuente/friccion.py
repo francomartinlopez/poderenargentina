@@ -23,7 +23,7 @@ W = "https://es.wikipedia.org/wiki/"
 #  actores, potencias, texto, hitos [(AAAA-MM, texto, url)], fuentes [(título, url)])
 FRICCION = [
     ("malvinas", "Islas Malvinas", "Soberanía", "94", None, -59.0, -51.7, 3, "Activa",
-     ["milei", "ffaa"], ["Reino Unido"],
+     ["milei", "ffaa", "cancilleria"], ["Reino Unido"],
      "La Argentina reclama la soberanía de las islas, ocupadas por el Reino Unido desde 1833, que mantiene una guarnición permanente en Monte Agradable. El reclamo es política de Estado y figura en la Constitución.",
      [("1833-01", "El Reino Unido ocupa las islas.", W + "Cuesti%C3%B3n_de_las_islas_Malvinas"),
       ("1982-04", "Guerra de Malvinas; la Argentina se rinde el 14 de junio.", W + "Guerra_de_las_Malvinas"),
@@ -40,7 +40,7 @@ FRICCION = [
       ("A24: inspección técnica", "https://www.a24.com/politica/el-gobierno-analiza-pedir-una-inspeccion-tecnica-la-base-espacial-china-neuquen-n1308479/amp")]),
 
     ("hidrovia", "Hidrovía Paraná-Paraguay", "Geopolítica", "82", "rosario", -60.45, -33.25, 2, "Adjudicada; con reclamos",
-     ["milei", "economia", "gob_santafe", "ciara"], ["EE.UU.", "China", "Unión Europea"],
+     ["milei", "economia", "gob_santafe", "ciara", "prefectura"], ["EE.UU.", "China", "Unión Europea"],
      "Por el Paraná sale la mayor parte de las exportaciones argentinas. La licitación del dragado excluyó a empresas controladas por Estados, lo que dejó fuera a la china CCCC. La ganó la belga Jan De Nul con la argentina Servimagnus; la competidora DEME, con socios estadounidenses, denunció sesgo ante el gobierno de EE.UU.",
      [("2025-02", "El Gobierno anula la primera licitación, con una sola oferta.", "https://elheraldo.com.ar/noticias/interes-general/el-estado-nacional-anulo-la-licitacion-de-la-hidrovia"),
       ("2026-06", "Preadjudicación a Jan De Nul (66,20 puntos) frente a DEME (42,14).", "https://www.lacapital.com.ar/economia/la-licitacion-la-hidrovia-entro-la-recta-final-y-se-anuncio-la-preadjudicacion-n10262951.html/amp"),
@@ -58,7 +58,7 @@ FRICCION = [
       ("Base Naval Ushuaia (Wikipedia)", W + "Base_Naval_Ushuaia")]),
 
     ("rosario_narco", "Violencia narco en Rosario", "Seguridad", "82", "rosario", -60.6332, -32.9472, 3, "Contenida con fuerzas federales",
-     ["los_monos", "muni_rosario", "gob_santafe", "seguridad", "comodoro_py"], [],
+     ["los_monos", "muni_rosario", "gob_santafe", "seguridad", "comodoro_py", "banda_riquelme", "mpa_santafe", "pfa", "gendarmeria"], [],
      "Bandas como Los Monos disputan el narcomenudeo y atacaron edificios judiciales. Desde diciembre de 2023 la Nación y la provincia despliegan fuerzas federales con el Plan Bandera; la justicia confirmó la condena de Ariel «Guille» Cantero por los ataques.",
      [("2023-12", "Comienza el Plan Bandera con fuerzas federales.", "https://www.lacapital.com.ar/policiales/confirmaron-condena-guille-cantero-ataques-contra-objetivos-judiciales-n10034583.html"),
       ("2024-11", "Guille Cantero, preso desde 2013, acumula condenas.", "https://www.lanacion.com.ar/seguridad/esta-en-prision-desde-2013-con-otra-condena-por-venta-de-drogas-guille-cantero-acumula-simbolicas-nid30112024/")],
@@ -72,21 +72,21 @@ FRICCION = [
       ("ABC Color: recompensa de EE.UU.", "https://www.abc.com.py/internacionales/2025/05/19/eeuu-ofrece-hasta-us-10-millones-por-informacion-sobre-hizbula-en-triple-frontera/")]),
 
     ("litio_puna", "Litio en la Puna", "Recursos y ambiente", "10", "fiambala", -67.6191, -27.6895, 1, "Activa",
-     ["gob_catamarca", "gob_salta", "gob_jujuy"], ["China", "Reino Unido", "EE.UU."],
+     ["gob_catamarca", "gob_salta", "gob_jujuy", "riotinto"], ["China", "Reino Unido", "EE.UU."],
      "Catamarca, Salta y Jujuy concentran los proyectos de litio, con capitales chinos, angloaustralianos (Rio Tinto) y estadounidenses. Las comunidades discuten el uso del agua; en Fiambalá, un vuelco de salmuera de Zijin-Liex en 2026 terminó en multa provincial y reclamo vecinal.",
      [("2026-03", "Vuelco de salmuera de Zijin-Liex cerca de Fiambalá; multa del Ministerio de Minería de Catamarca.", "https://www.iprofesional.com/negocios/453064-litio-toxico-minera-china-provoco-desastre-ambiental-en-argentina-y-afecto-a-un-pueblo")],
      [("Chequeado: los proyectos de litio", "https://chequeado.com/el-explicador/litio-en-jujuy-salta-y-catamarca-cuales-son-los-proyectos-mas-importantes-en-esta-region/"),
       ("openDemocracy: litio, agua y RIGI", "https://www.opendemocracy.net/es/argentina-litio-mineria-rio-tinto-catamarca-gas-natural-agua-rigi/")]),
 
     ("reforma_laboral", "CGT frente a la reforma laboral", "Laboral", "02", "ciudad-autonoma-de-buenos-aires", -58.39, -34.62, 2, "Ley vigente; disputa judicial y sindical",
-     ["milei", "congreso", "cgt_arg", "camioneros", "gob_pba"], [],
+     ["milei", "congreso", "cgt_arg", "camioneros", "gob_pba", "fresu", "uom", "ate", "aceiteros"], [],
      "El Congreso sancionó en febrero de 2026 la reforma laboral (Ley 27.802). La CGT, con nueva conducción, busca revertirla junto a Kicillof.",
      [("2026-02", "Sanción de la Ley 27.802.", "https://abogados.com.ar/argentina-sanciona-la-ley-de-modernizacion-laboral/38623"),
       ("2026", "La CGT elige nueva conducción y se pone en alerta.", "https://www.lacapital.com.ar/politica/la-cgt-eligio-nueva-conduccion-y-se-pone-alerta-la-reforma-laboral-milei-n10228233.html/amp")],
      [("Letra P: la hoja de ruta de la CGT", "https://www.letrap.com.ar/politica/la-hoja-ruta-la-cgt-torcer-la-reforma-laboral-y-volver-al-centro-del-ring-junto-axel-kicillof-n5420929")]),
 
     ("aguas_blancas", "Frontera Aguas Blancas–Bermejo", "Seguridad", "66", "aguas-blancas", -64.3533, -22.7371, 3, "Bajo el Plan Güemes",
-     ["seguridad", "gob_salta"], [],
+     ["seguridad", "gob_salta", "gendarmeria"], [],
      "Paso con Bolivia sobre el río Bermejo, con contrabando y narcotráfico por pasos no habilitados. El municipio está intervenido; la Nación y Salta lanzaron el Plan Güemes, levantaron un cerco en la ribera y Prefectura patrulla el río.",
      [("2024-12", "Lanzamiento del Plan Güemes en Aguas Blancas.", "https://en.mercopress.com/2024/12/09/argentine-pna-to-patrol-bolivia-bordering-river"),
       ("2025-01", "Convenio para un cerco de 200 metros en la ribera del Bermejo.", "https://misionesonline.net/2025/01/27/respaldo-del-gobierno-nacional-construccion-del-alambrado-en-salta/"),
@@ -128,14 +128,14 @@ FRICCION = [
      [("LM Neuquén: Rucci y las paritarias", "https://mase.lmneuquen.com/marcelo-rucci-a9825/2")]),
 
     ("acindar_vc", "Acindar en Villa Constitución", "Industrial", "82", "villa-constitucion", -60.3297, -33.2273, 1, "Latente",
-     ["uom_vc"], ["Unión Europea"],
+     ["uom_vc", "acindar"], ["Unión Europea"],
      "La planta principal de Acindar (ArcelorMittal, con sede en Luxemburgo) produce la mitad que en 2024; la empresa alterna paradas y suspensiones y el gremio local negocia salarios con amenazas de paro.",
      [("2026-05", "La UOM cierra un aumento y levanta el paro.", "https://www.iprofesional.com/economia/454009-aumento-salarial-en-acindar-y-suspension-del-paro-a-cuanto-se-fue-el-sueldo-promedio"),
       ("2026-06", "Acindar frena la producción por falta de ventas.", "https://www.lacapital.com.ar/economia/acindar-decidio-frenar-la-produccion-villa-constitucion-falta-ventas-n10263980.html")],
      [("La Capital: Acindar frena la producción", "https://www.lacapital.com.ar/economia/acindar-decidio-frenar-la-produccion-villa-constitucion-falta-ventas-n10263980.html")]),
 
     ("pesca_milla201", "Pesca ilegal en la Milla 201", "Recursos marítimos", "26", None, -60.2, -45.8, 2, "Activa cada temporada",
-     ["seguridad", "ffaa", "economia"], ["China", "Unión Europea", "Japón y Corea"],
+     ["seguridad", "ffaa", "economia", "prefectura"], ["China", "Unión Europea", "Japón y Corea"],
      "Entre 400 y 600 buques extranjeros, en su gran mayoría chinos y también españoles, coreanos, taiwaneses y portugueses, pescan calamar sobre el límite de la Zona Económica Exclusiva y entran en ella de forma recurrente. La Prefectura y la Armada patrullan y capturan buques; el Gobierno multa por telemetría satelital. Además, capitales chinos controlan cerca de dos tercios de la flota calamarera argentina.",
      [("2026-01", "El Congreso de EE.UU. alerta por la flota pesquera china frente a la Argentina.", "https://www.iprofesional.com/politica/447228-donald-trump-y-javier-milei-en-alerta-por-flota-pesquera-china-en-argentina"),
       ("2026-02", "Unos 500 buques extranjeros en la Milla 201, 80% chinos.", "https://www.iprofesional.com/negocios/448592-pesca-ilegal-con-china-y-espana-a-la-cabeza-500-buques-extranjeros-depredan-en-el-sur"),
@@ -168,6 +168,18 @@ FRICCION = [
       ("2023-08", "El Superior Tribunal de Río Negro cierra el acceso por el camino de Tacuifí.", "https://www.noticiasnqn.com.ar/noticias/2023/08/31/282026-lago-escondido-el-fallo-favorece-a-lewis-y-dice-que-la-traza-larga-es-el-unico-camino-incluido-en-la-sentencia"),
       ("2026-05", "Denuncia por un acuerdo entre el Gobierno y Hidden Lake.", "https://economiasustentable.com/tag/lago-escondido/")],
      [("Diario Judicial: un lago cada vez más escondido", "https://www.diariojudicial.com/news-66693-un-lago-cada-vez-mas-escondido")]),
+
+    ("antartida", "Antártida: tres reclamos superpuestos", "Soberanía", "94", None, -60.0, -72.0, 2, "Congelada por el Tratado Antártico",
+     ["ffaa", "cancilleria"], ["Reino Unido", "Rusia"],
+     "La Argentina reclama el sector antártico entre los meridianos 25° y 74° Oeste. El Reino Unido reclama desde 1908 el sector entre 20° y 80° Oeste, y Chile desde 1940 el que va de 53° a 90° Oeste: la península antártica queda dentro de los tres. El artículo IV del Tratado Antártico (1959), firmado por los tres países, congela los reclamos sin resolverlos, y el Protocolo de Madrid prohíbe la minería. La Argentina sostiene en las Orcadas del Sur la estación de ocupación permanente más antigua del continente, desde 1904.",
+     [("1904", "La Argentina instala la estación de las Orcadas del Sur, con presencia ininterrumpida desde entonces.", "https://www.elespectador.com/mundo/mas-paises/el-ultimo-territorio-sin-dueno-la-antartida-ante-la-ventana-de-2048/"),
+      ("1908", "El Reino Unido formaliza su reclamo, que se superpone con el argentino.", "https://elordenmundial.com/mapas-y-graficos/de-quien-es-la-antartida/"),
+      ("1959", "El Tratado Antártico, firmado por la Argentina, Chile y el Reino Unido, congela los reclamos (artículo IV).", "https://www.unidiversidad.com.ar/la-antartida-es-una-zona-de-paz-y-ciencia"),
+      ("2024-05", "Informes sobre reservas de hidrocarburos detectadas por un buque ruso en el sector que reclaman los tres países; la Cancillería pidió información a Rusia.", "https://www.cronista.com/economia-politica/argentina-investiga-el-hallazgo-de-rusia-y-evalua-un-planteo-en-la-cumbre-de-tratado-antartico"),
+      ("2026-02", "Chile y el Reino Unido hacen ejercicios coordinados en la zona sin participación argentina.", "https://www.canal26.com/politica/2026/02/10/chile-refuerza-su-presencia-en-la-antartida-mientras-argentina-queda-al-margen-que-paso-y-por-que-importa/")],
+     [("El Orden Mundial: reclamaciones territoriales sobre la Antártida", "https://elordenmundial.com/mapas-y-graficos/de-quien-es-la-antartida/"),
+      ("Canal 26: cómo se fundamenta el reclamo argentino", "https://www.canal26.com/general/2026/01/22/antartida-argentina-como-se-fundamenta-el-reclamo-de-soberania-y-que-es-el-tratado-antartico/"),
+      ("El Espectador: la Antártida ante la ventana de 2048", "https://www.elespectador.com/mundo/mas-paises/el-ultimo-territorio-sin-dueno-la-antartida-ante-la-ventana-de-2048/")]),
 ]
 
 # (id, nombre, provincia, ciudad, lon, lat, estado, texto, fuentes)
