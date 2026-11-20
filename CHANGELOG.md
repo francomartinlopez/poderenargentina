@@ -1,5 +1,11 @@
 # Cambios
 
+## 2026-11-20 (r) · Séptima tanda: energía, salud, sindicatos, Justicia y presencia por provincia
+
+- Actores (394, con 617 relaciones): Central Puerto, TGS, Pecom, OSDE, Swiss Medical, CILFA, Claro, UATRE, CONADU, SOMU, IDEA, ADEFA, Fundación Faro, Observatorio de la Deuda Social (UCA), Cámara Federal porteña, Corte Suprema de Santa Fe y Procuración del Tesoro (`fuente/actores_mas7.py`). Externos sin ficha nuevos: América Móvil, Empresas Copec y Moolec.
+- Relaciones con fuente para Globant, San Lorenzo, Supervielle, Arauco y Bioceres. Siguen sin relación Cadena 3, CIPPEC y Sancor Seguros.
+- Presencia (`fuente/presencia.py`): las provincias donde opera cada actor fuera de la de su sede, a partir de los puntos de fricción, de las relaciones con actores provinciales y municipales y de una lista con fuente. Los líderes, gobiernos y organismos nacionales no reciben presencia derivada. Se ve en el panel de cada provincia («Con presencia en la provincia») y en la ficha del actor.
+
 ## 2026-11-20 (q) · Sexta tanda: Estado, Justicia, sindicatos, cámaras y RIGI por provincia
 
 - Actores (377, con 583 relaciones): Secretaría Legal y Técnica, PAMI, CAMMESA, Enarsa, Agencia Nacional de Puertos y Navegación, Cámara Nacional Electoral, Suprema Corte bonaerense, Procuraduría de Investigaciones Administrativas, UTA, SMATA, SUTEBA, UTHGRA, CAME, CAEM y Greenpeace (`fuente/actores_mas6.py`). Seaboard entra como externo sin ficha.

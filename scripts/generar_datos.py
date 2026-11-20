@@ -188,6 +188,29 @@ def main():
                 deps[did] = dict(n=x["sede"], cab="", act="", gob=None, ai=[], fr=[], fu=[dict(t=x["fu"][0][0], u=x["fu"][0][1])])
             if x["id"] not in deps[did]["ai"]:
                 deps[did]["ai"] = [x["id"]] + deps[did]["ai"]
+    # Presencia: provincias donde opera cada actor fuera de la de su sede (fuente/presencia.py).
+    import presencia
+    A = {a["id"]: a for a in actores}
+    for a in actores:
+        a["pres"] = []
+    def poner(aid, pid, x, u=None, f=None):
+        a = A.get(aid)
+        if not a or pid not in ign or pid == a["prov"] or any(p["p"] == pid for p in a["pres"]):
+            return
+        a["pres"].append(dict(p=pid, x=x, u=u, f=f))
+    for aid, lista in presencia.PRESENCIA.items():
+        assert aid in A, f"Presencia: actor desconocido {aid}"
+        for pid, x, u in lista:
+            assert pid in ign and u.startswith("http"), f"Presencia {aid} {pid}"
+            poner(aid, pid, x, u)
+    for f in fr:
+        for aid in f["act"]:
+            if aid in A and A[aid]["cat"] not in presencia.EXCLUIDAS:
+                poner(aid, f["prov"], "Punto de fricción: " + f["n"], f=f["id"])
+    for r in relaciones:
+        for x, y in ((r["o"], r["d"]), (r["d"], r["o"])):
+            if x in A and y in A and A[x]["cat"] not in presencia.EXCLUIDAS and A[y]["alc"] in ("P", "M"):
+                poner(x, A[y]["prov"], f"{r['t']} con {A[y]['n']}", u=r["u"])
     out = dict(corte=CORTE, proxima=PROXIMA, meta=meta, pais=pais, elecciones=elec, provincias=provincias, ciudades=ciudades,
                deppob=poblacion.DEPARTAMENTO, deps=deps, actores=actores, relaciones=relaciones, friccion=fr, zonas=zonas)
     with open(os.path.join(RAIZ, "data", "territorio.json"), "w") as f:
