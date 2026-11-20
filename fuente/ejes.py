@@ -105,5 +105,6 @@ EXTERNOS_SIN_FICHA = {
     "rockhopper": "Rockhopper Exploration (Reino Unido; socia de Sea Lion)", "gezhouba": "China Gezhouba Group",
     "welspun": "Welspun (India; caños del gasoducto de GNL)", "tether": "Tether (emisora de la stablecoin USDT)",
     "ustr": "Representante Comercial de EE.UU.", "cnooc": "CNOOC (petrolera estatal china)", "sur_energy": "Sur Energy (Stargate Argentina)",
+    "seaboard": "Seaboard Corporation (EE.UU.; dueña del ingenio El Tabacal)",
 }
 EXTERNOS.update(EXTERNOS_SIN_FICHA)

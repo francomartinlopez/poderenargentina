@@ -102,7 +102,7 @@ def main():
             id=pid, s=s, n=ign[pid], c=corto, gob=gob, par=par, desde=desde,
             cat="Ciudad Autónoma" if pid == "02" else "Provincia",
             ndep=ndep[pid], cap=cap.get(pid), pob=poblacion.PROVINCIA[pid],
-            eco=economia.PROVINCIAS[pid], ali=alineamiento.PROVINCIAS[pid],
+            eco=economia.PROVINCIAS[pid], rigi=economia.RIGI_PROVINCIA.get(pid), ali=alineamiento.PROVINCIAS[pid],
             inf=sorted(inf.get(pid, []), key=lambda i: (-i["n"], POT.index(i["p"]))),
             dom=dominante(inf.get(pid, []))[0], tot=dominante(inf.get(pid, []))[1],
             emp=[q for q in POT if dominante(inf.get(pid, []))[1] and dominante(inf.get(pid, []))[1].get(q) == max(dominante(inf.get(pid, []))[1].values())],
@@ -140,7 +140,7 @@ def main():
             inf.setdefault("AR", []).append(dict(p=pot, c="com", n=n, u=cn["fuente"],
                 x=f"{str(ex).replace('.', ',')}% de las exportaciones y {str(im).replace('.', ',')}% de las importaciones de bienes del país ({cn['periodo']}); vale el mayor de los dos puntajes."))
     pais = dict(pob=sum(poblacion.PROVINCIA.values()), inf=sorted(inf.get("AR", []), key=lambda i: (-i["n"], POT.index(i["p"]))),
-                rigi=economia.RIGI)
+                rigi=dict(economia.RIGI, prov_fecha=economia.RIGI_PROVINCIA_FUENTE[0], prov_u=economia.RIGI_PROVINCIA_FUENTE[1]))
     import elecciones
     for pid, e in elecciones.PROVINCIAS.items():
         assert pid in ign and e[1] in ("S", "N", None) and e[3].startswith("http"), f"Elecciones {pid}"
@@ -162,7 +162,7 @@ def main():
         assert all(q in POT for q in pots), f"Fricción {i}: potencia desconocida"
         assert nv in (1, 2, 3) and fu and all(h[2] for h in hitos), f"Fricción {i}: falta intensidad o fuente"
         fr.append(dict(id=i, n=n, tipo=tipo, prov=prov, cs=cs, lon=lon, lat=lat, nv=nv, est=est, act=act, pot=pots, x=x,
-                       hit=[dict(f=h[0], x=h[1], u=h[2]) for h in hitos], fu=[dict(t=t, u=u) for t, u in fu]))
+                       hit=[dict(f=h[0], x=h[1], u=h[2]) for h in sorted(hitos, key=lambda h: h[0])], fu=[dict(t=t, u=u) for t, u in fu]))
     zonas = []
     for (i, n, prov, cs, lon, lat, est, x, fu) in friccion.ZONAS:
         assert prov in ign and (cs is None or cs in slugs) and fu, f"Zona {i}: datos o fuente faltantes"

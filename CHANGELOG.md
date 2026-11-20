@@ -1,5 +1,13 @@
 # Cambios
 
+## 2026-11-20 (q) · Sexta tanda: Estado, Justicia, sindicatos, cámaras y RIGI por provincia
+
+- Actores (377, con 583 relaciones): Secretaría Legal y Técnica, PAMI, CAMMESA, Enarsa, Agencia Nacional de Puertos y Navegación, Cámara Nacional Electoral, Suprema Corte bonaerense, Procuraduría de Investigaciones Administrativas, UTA, SMATA, SUTEBA, UTHGRA, CAME, CAEM y Greenpeace (`fuente/actores_mas6.py`). Seaboard entra como externo sin ficha.
+- Relaciones con fuente para 14 actores que estaban aislados (intendentes de Neuquén, Salta, San Luis, Posadas, San Miguel y Almirante Brown; Ford, Volkswagen, Yacyretá, Costantini, Perfil, Fundación Mediterránea, Credicoop y Tabacal).
+- Fricción: fecha con mes en los hitos que solo tenían año (base china, hidrovía, Dock Sud, Andalgalá, Los Nihuiles); los hitos de Andalgalá eran de 2022 y se corrigió el texto. Las cronologías se ordenan por fecha.
+- Intendentes del conurbano: la ficha dice la población del partido (Censo 2022) en lugar de la frase repetida.
+- RIGI por provincia en el panel de economía (Neuquén, Río Negro, San Juan, Catamarca, Buenos Aires y Salta).
+
 ## 2026-11-20 (p) · Sugerencias aplicadas: puntaje, influencias, fricción, Elecciones 2027 y 44 actores
 
 - Puntaje: el componente de categoría promedia el teórico del mapa global con el relevado en las relaciones argentinas. El Ministerio de Defensa y el de Seguridad pasan a ser «Organismo de gobierno» y la capacidad material queda en el Ejército, la Armada, la Fuerza Aérea y las fuerzas federales. Los intendentes usan una regla única por población. Los gobiernos de Buenos Aires, Córdoba y Santa Fe se ajustan a su población y a sus recursos propios. Mercado Libre baja de 3 a 2 en dinero (la parte financiera está en Mercado Pago).

@@ -15,12 +15,13 @@ import actores_mas2 as _M2
 import actores_mas3 as _M3
 import actores_mas4 as _M4
 import actores_mas5 as _M5
+import actores_mas6 as _M6
 import json as _json
 import os as _os
-ACTORES = _A + _P.ACTORES + _M.ACTORES + _M2.ACTORES + _M3.ACTORES + _M4.ACTORES + _M5.ACTORES
+ACTORES = _A + _P.ACTORES + _M.ACTORES + _M2.ACTORES + _M3.ACTORES + _M4.ACTORES + _M5.ACTORES + _M6.ACTORES
 # Actores de fuente/actores.py que suman en su nombre a quien los conduce (corte del 19/11/2026).
 ACTORES = [(a[0], _M3.NOMBRES[a[0]][0]) + tuple(a[2:]) if a[0] in _M3.NOMBRES else a for a in ACTORES]
-FICHAS = {k: dict(v) for k, v in {**_F, **_P.FICHAS, **_M.FICHAS, **_M2.FICHAS, **_M3.FICHAS, **_M4.FICHAS, **_M5.FICHAS}.items()}
+FICHAS = {k: dict(v) for k, v in {**_F, **_P.FICHAS, **_M.FICHAS, **_M2.FICHAS, **_M3.FICHAS, **_M4.FICHAS, **_M5.FICHAS, **_M6.FICHAS}.items()}
 for _i, (_n, _fu) in _M3.NOMBRES.items():
     if _fu[1] not in [u for _, u in FICHAS[_i]["fuentes"]]:
         FICHAS[_i]["fuentes"] = list(FICHAS[_i]["fuentes"]) + [_fu]
@@ -39,7 +40,7 @@ for _i, (_txt, _fu) in _M2.TEXTOS.items():
 # Una sola relación por par de actores y tipo (la primera que aparece manda).
 _vistos = {(frozenset((r[0], r[1])), r[2]) for r in _R}
 RELACIONES = list(_R)
-for r in _P.RELACIONES + _M.RELACIONES + _M2.RELACIONES + _M3.RELACIONES + _M4.RELACIONES + _M5.RELACIONES:
+for r in _P.RELACIONES + _M.RELACIONES + _M2.RELACIONES + _M3.RELACIONES + _M4.RELACIONES + _M5.RELACIONES + _M6.RELACIONES:
     k = (frozenset((r[0], r[1])), r[2])
     if k not in _vistos:
         _vistos.add(k)
