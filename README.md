@@ -20,7 +20,7 @@ Los cinco pasos están hechos: cartografía, ciudades, gobernadores, fichas de l
 - `fuente/economia.py`: exportaciones, destinos y rubro (INDEC) y recursos propios (ASAP).
 - `fuente/alineamiento.py`: quién manda y alineamiento con la Nación, con fuentes.
 - `fuente/influencias.py`: influencias de 11 potencias en cinco canales, con fuentes.
-- `fuente/actores_mas.py` y `fuente/actores_mas2.py`: actores por categoría (políticos, empresas, familias, sindicatos, bandas con condena, Justicia, fuerzas, religiosos, ONG, medios, clubes); 200 en total, con 305 relaciones con fuente.
+- `fuente/actores_mas.py` y `fuente/actores_mas2.py`: actores por categoría (políticos, empresas, familias, sindicatos, bandas con condena, Justicia, fuerzas, religiosos, ONG, medios, clubes); 211 en total, con 328 relaciones con fuente, incluidos periodistas y canales de streaming.
 - `fuente/departamentos.py`: fichas de los partidos y departamentos relevantes.
 - `fuente/actores.py`: actores núcleo, fichas y relaciones; `fuente/ejes.py`: ejes, pesos y categorías; `scripts/puntaje.py`: fórmula del puntaje.
 - `scripts/generar_datos.py`: genera `data/territorio.json`.

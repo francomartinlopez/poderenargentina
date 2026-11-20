@@ -1,5 +1,9 @@
 # Cambios
 
+## 2026-11-19 (j) · Periodistas y streaming
+
+- Once actores de medios, con programa verificado en 2026: Carlos Pagni, Joaquín Morales Solá, Hugo Alconada Mon, Eduardo Feinmann, Luis Majul, Jonatan Viale, Marcelo Longobardi (último programa confirmado, 2024), Gustavo Sylvestre, Olga, Luzu TV y Blender. Relaciones solo con hechos documentados (medio donde trabajan, cruces públicos con el Gobierno, la AFA o colegas, propiedad de Blender y Carajo). 211 actores y 328 relaciones.
+
 ## 2026-11-19 (i) · 200 actores, relaciones con fuente, fichas ampliadas y la Antártida
 
 - Actores (`fuente/actores_mas2.py`): 88 nuevos, hasta llegar a 200. Estado nacional (Cancillería, Justicia, Salud, ANSES, INDEC, CNV, ENACOM, AGN, ARSAT, FAdeA, Nucleoeléctrica, Yacyretá, Aerolíneas, INVAP, Banco Provincia), Gendarmería, Prefectura y Policía Federal, Fiscalía de Santa Fe, Rosatti, Lorenzetti y Lijo, UBA y CIN, embajadas de EE.UU. y China, dirigentes (Mayans, Germán Martínez, Ritondo, Pareja, «Lule» Menem, Grabois, Pichetto, La Cámpora, Frente de Izquierda, Fundación Pensar), sindicatos (UOM, ATE, Aceiteros, La Bancaria, UOCRA, UPCN, Sanidad, CTA, CTERA, FreSU, APLA, Comercio, La Fraternidad), agro (Federación Agraria, CRA, Coninagro, Bolsa de Comercio de Rosario), empresas (Telecom, Pluspetrol, Rio Tinto, Vicuña, Southern Energy, Acindar, Molinos, IRSA, BYMA), familias y empresarios (Pérez Companc, Bulgheroni, Galperin, Mindlin, Rocca, Magnetto, Elsztain, Vila-Manzano, Brito, Galicia, Pagani, Urquía, Blaquier), bandas con condena (Fran Riquelme, Delfín Zacarías, Pupito Avalle, Los Picudos), Boca y River, Madres, Chequeado, CIPPEC, Poder Ciudadano, Página/12, Cadena 3 y La Capital.
