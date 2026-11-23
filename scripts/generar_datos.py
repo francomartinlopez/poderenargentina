@@ -14,7 +14,7 @@ from ciudades import CIUDADES, EXCEPCIONES  # noqa: E402
 import poblacion, poblacion_ciudades, economia, alineamiento, influencias, ciudades_fichas  # noqa: E402
 
 # Corte trimestral: subir en cada actualización (CORTE = hoy, PROXIMA = dentro de tres meses).
-CORTE = "2026-11-19"
+CORTE = "2026-11-23"
 PROXIMA = "2027-02-23"
 
 

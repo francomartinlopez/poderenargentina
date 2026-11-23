@@ -189,4 +189,11 @@ RELACIONES = [
      "https://www.iprofesional.com/negocios/467460-arauco-habilita-venta-de-activos-en-argentina-y-reordena-sus-negocios.amp"),
     ("moolec", "bioceres", "Enfrentamiento", "Su controlante Moolec pidió y obtuvo la quiebra de Bioceres SA (marzo de 2026).", 2,
      "https://www.iprofesional.com/negocios/449354-la-justicia-decreto-la-quiebra-de-bioceres-un-gigante-del-agro-argentino"),
+    # Corte del 23/11/2026
+    ("economia", "ypf", "Contrato", "El Comité Evaluador aprobó el 20/11/2026 el ingreso de Argentina LNG (YPF, Eni y XRG) al RIGI: USD 25.000 millones entre 2027 y 2030 y USD 50.750 millones hasta 2050.", 2,
+     "https://www.infobae.com/economia/2026/11/20/caputo-anuncio-el-ingreso-al-rigi-de-la-mayor-inversion-de-la-historia-argentina/"),
+    ("eni", "ypf", "Alianza", "Socia de YPF en Argentina LNG, junto con la emiratí XRG (noviembre de 2026).", 2,
+     "https://www.infobae.com/economia/2026/11/20/caputo-anuncio-el-ingreso-al-rigi-de-la-mayor-inversion-de-la-historia-argentina/"),
+    ("tenaris", "ypf", "Contrato", "Elegida para proveer los caños de 24 pulgadas de Argentina LNG (noviembre de 2026).", 1,
+     "https://www.infobae.com/economia/2026/11/20/caputo-anuncio-el-ingreso-al-rigi-de-la-mayor-inversion-de-la-historia-argentina/"),
 ]

@@ -1,5 +1,13 @@
 # Cambios
 
+## 2026-11-23 · Actualización trimestral 2026-11
+
+- Corte al 23/11/2026; próxima revisión el 23/2/2027. Sin cambios de gobernadores ni de ciudades (99); el validador no deja avisos pendientes y la lista VERIFICAR está vacía.
+- Elecciones 2027: Chubut convocó a elecciones provinciales para el 21 de marzo de 2027, sin primarias y con nuevo Código Electoral (decreto del 20/11/2026). Son cinco las provincias con fecha.
+- Fricción: Presupuesto 2027 con el decreto que modifica el presupuesto vigente (recorte de $200.000 millones a Coordinación Fiscal con las Provincias) y la sesión prevista el 25 o el 26/11; desdoblamiento con el hito de Chubut.
+- Relaciones (620): Argentina LNG (YPF, Eni y XRG) aprobado en el RIGI el 20/11/2026 (Economía–YPF, Eni–YPF y Tenaris–YPF por los caños). Máximo Kirchner y Kicillof pasan de enfrentamiento a relación ambigua tras el acuerdo por el PJ bonaerense.
+- Sitio: sufijo de caché `?v=20261123`.
+
 ## 2026-11-20 (r) · Séptima tanda: energía, salud, sindicatos, Justicia y presencia por provincia
 
 - Actores (394, con 617 relaciones): Central Puerto, TGS, Pecom, OSDE, Swiss Medical, CILFA, Claro, UATRE, CONADU, SOMU, IDEA, ADEFA, Fundación Faro, Observatorio de la Deuda Social (UCA), Cámara Federal porteña, Corte Suprema de Santa Fe y Procuración del Tesoro (`fuente/actores_mas7.py`). Externos sin ficha nuevos: América Móvil, Empresas Copec y Moolec.

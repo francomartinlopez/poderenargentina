@@ -1,4 +1,4 @@
-# Elecciones de 2027 (corte del 20/11/2026).
+# Elecciones de 2027 (corte del 23/11/2026).
 # Presidenciales: 24 de octubre de 2027. Por provincia: fecha de la elección provincial si está fijada, si se separa
 # de la nacional (S = desdobla, N = vota con la Nación, None = sin definir), qué se elige y la fuente.
 # Se revisa en cada corte y después de cada convocatoria; solo fechas confirmadas por la provincia o por la prensa con fuente.
@@ -20,7 +20,7 @@ PROVINCIAS = {
     "30": (None, "S", "Según trascendidos, Frigerio convocaría para el 6 de junio; sin confirmación oficial.", UNO),
     "54": (None, "S", "Passalacqua resolvió desdoblar; la fecha sería en abril o mayo.", MIRADOR),
     "18": (None, "S", "Desdobla, pero no elige gobernador: lo hizo en 2025.", MIRADOR),
-    "26": (None, "S", "Torres anunció elecciones provinciales y municipales separadas.", EQS),
+    "26": ("2027-03-21", "S", "Gobernador, Legislatura e intendentes; sin primarias y con nuevo Código Electoral (decreto del 20/11/2026).", "https://www.diariodecuyo.com.ar/politica/chubut-convoco-elecciones-el-21-marzo-2027-se-vota-paso-y-nuevo-codigo-electoral-n6589187"),
     "62": (None, "S", "Anunció el desdoblamiento; fecha sin fijar.", EQS),
     "22": (None, "S", "Anunció el desdoblamiento; fecha sin fijar.", EQS),
     "50": (None, "S", "Cornejo anticipó elecciones desdobladas; fecha sin fijar.", EQS),
