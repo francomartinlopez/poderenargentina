@@ -1,5 +1,8 @@
 # Cambios
 
+## 25/11/2026 (funcionarios, segunda ronda)
+- Ocho funcionarios más (39 en total): Producción de CABA (Lombardi), Catamarca (Zeballos), Chubut (Kresteff), Santa Cruz (Ricci) y Jujuy (el ministerio); Energía de Jujuy (Pizarro); Rentas de Chubut y San Juan.
+
 ## 25/11/2026 (tarde)
 - RIGI: total confirmado con Argentina LNG (aprobada el 20/11/2026): 28 proyectos y unos USD 126.900 M. Es suma propia (27 aprobados al 9/11 más Argentina LNG) hasta que haya un total oficial; la portada lo aclara.
 - Normas: se completan los números de la ley del GNL de Neuquén (3566) y la de hidrocarburos de Mendoza (9744); se suman Río Negro (Ley 5848, Argentina LNG), Neuquén (Ley 3542), Córdoba (leyes 11089 y 11090), San Juan (Ley 2803-I), Santa Cruz (Ley 3996), Chubut (Código Fiscal), Avellaneda (Impositiva 2026), Neuquén capital (Parque Industrial) y San Martín de los Andes (baja de la tasa comercial). 62 normas.
