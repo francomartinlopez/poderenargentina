@@ -1,5 +1,9 @@
 # Cambios
 
+## 25/11/2026 (datos para informes, fechas)
+- Ley 5956 de Catamarca (CAMYEN): fecha de publicación completa, 25/8/2026, según el Digesto provincial (Decreto 890). Con esa fecha queda fuera de la ventana de 90 días de `datos-informe.json`.
+- `scripts/datos_informe.py` ya no publica fechas sin día: si una norma reciente tiene solo el mes, avisa y la deja afuera hasta completarla; y controla que todas las fechas del archivo sean AAAA-MM-DD.
+
 ## 25/11/2026 (datos para informes, versión 1.3)
 - `datos-informe.json` pasa a la versión 1.3 de la especificación: grupo «Normas nuevas para empresas por provincia» (13 provincias relevadas, último mes completo), con `tipo_valor`, `frecuencia` y `comparar`. Sin serie hasta tener 13 meses completos de relevamiento.
 

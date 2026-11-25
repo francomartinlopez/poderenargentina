@@ -76,6 +76,10 @@ def escribir(T, raiz, hoy=None):
     for n in T["normas"]:
         if not (desde <= fecha(n["f"]) <= hoy):
             continue
+        if not re.fullmatch(r"\d{4}-\d{2}-\d{2}", n["f"]):
+            # La web de informes descarta fechas incompletas: la norma queda afuera hasta completar el día.
+            print(f"AVISO datos-informe: {n['id']} tiene fecha sin día ({n['f']}); no se publica como novedad.")
+            continue
         nom, alc = lugar(n["l"])
         if n["em"].startswith("Concejo Deliberante de ") and alc["nivel"] == "localidad":
             nom = alc["localidad"] = n["em"][len("Concejo Deliberante de "):]  # el municipio que dictó la norma
@@ -127,6 +131,12 @@ def escribir(T, raiz, hoy=None):
             url=f"{SITIO}#normas-{q}~todo", tipo_valor="nivel", frecuencia="mensual", comparar=[],
             grupo=dict(id="normas-mes-por-provincia", nombre="Normas nuevas para empresas por provincia", dimension="provincia", clave=prov[q])))
     assert len(indicadores) >= 3
+
+    iso = re.compile(r"\d{4}-\d{2}-\d{2}")
+    for x in novedades + indicadores:
+        assert iso.fullmatch(x["fecha_dato"]), f"Fecha incompleta en {x['id']}"
+    for x in agenda:
+        assert iso.fullmatch(x["fecha"]), f"Fecha incompleta en la agenda: {x['evento']}"
 
     out = dict(web=WEB, version="1.3", generado=ahora.isoformat(), indicadores=indicadores, novedades=novedades, agenda=agenda, faltantes=[])
     with open(os.path.join(raiz, "datos-informe.json"), "w", encoding="utf-8") as fh:

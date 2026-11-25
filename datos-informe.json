@@ -1,7 +1,7 @@
 {
  "web": "Mapa del Poder Argentino",
  "version": "1.3",
- "generado": "2026-11-25T14:06:15-03:00",
+ "generado": "2026-11-25T14:21:50-03:00",
  "indicadores": [
   {
    "id": "normas-mes-buenos-aires",
@@ -832,26 +832,6 @@
    "subrubros": [],
    "exposicion": [],
    "url": "https://www.anbariloche.com.ar/noticias/2026/09/01/115810-entro-en-vigencia-el-paquete-de-alivio-fiscal-en-san-martin-de-los-andes"
-  },
-  {
-   "id": "2026-08-10-ley-5956",
-   "fecha_dato": "2026-08",
-   "titulo": "Catamarca: Ley 5956",
-   "resumen": "Transforma a la minera estatal CAMYEN en sociedad anónima unipersonal. Emisor: Legislatura de Catamarca.",
-   "tipo": "norma",
-   "eje": "Política nacional",
-   "alcance": {
-    "nivel": "provincia",
-    "provincia": "Catamarca",
-    "localidad": "",
-    "pais": "Argentina"
-   },
-   "rubros": [
-    "Minería"
-   ],
-   "subrubros": [],
-   "exposicion": [],
-   "url": "https://www.elancasti.com.ar/edicion-impresa/camyen-sera-una-sociedad-anonima-unipersonal-n619815"
   }
  ],
  "agenda": [],

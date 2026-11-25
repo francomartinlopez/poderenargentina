@@ -205,9 +205,9 @@ NORMAS = [
     ("10-ley-5940", "Ley 5940", "2026-05-22", "Legislatura de Catamarca", "10", ["min"],
      "Ratifica el acuerdo de facilitación del proyecto minero Diablillos (AbraSilver), compartido con Salta.",
      "https://www.marval.com/Publicacion/mining-news-mayo-2026-17634"),
-    ("10-ley-5956", "Ley 5956", "2026-08", "Legislatura de Catamarca", "10", ["min"],
-     "Transforma a la minera estatal CAMYEN en sociedad anónima unipersonal.",
-     "https://www.elancasti.com.ar/edicion-impresa/camyen-sera-una-sociedad-anonima-unipersonal-n619815"),
+    ("10-ley-5956", "Ley 5956", "2026-08-25", "Legislatura de Catamarca", "10", ["min"],
+     "Transforma a la minera estatal CAMYEN en sociedad anónima unipersonal (promulgada por el Decreto 890; publicada el 25/8/2026).",
+     "https://digesto.catamarca.gob.ar/ley/gestion_detail/60"),
     # Salta
     ("66-ley-8524", "Ley 8524", "2025-12", "Legislatura de Salta", "66", ["min"],
      "Ratifica el acuerdo de facilitación del proyecto minero Diablillos (AbraSilver), compartido con Catamarca.",
