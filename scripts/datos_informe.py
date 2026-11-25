@@ -1,6 +1,6 @@
 """Arma datos-informe.json (raíz del sitio) para la web de informes de Plexum.
 
-Especificación: «Datos que cada web publica para la web de informes de Plexum», versión 1.2 (25/11/2026),
+Especificación: «Datos que cada web publica para la web de informes de Plexum», versión 1.3 (25/11/2026),
 parte común y apartado 4 (Mapa del Poder Argentino, eje «Política nacional»).
 Lo llama scripts/generar_datos.py con los mismos datos de data/territorio.json; no cambia nada visible del sitio.
 
@@ -8,7 +8,10 @@ Lo llama scripts/generar_datos.py con los mismos datos de data/territorio.json; 
 - novedades «otro»: cambios de autoridades de fuente/normas.py (ASUNCIONES) en los últimos 90 días.
 - agenda: elecciones provinciales confirmadas de fuente/elecciones.py en los próximos 60 días. El sitio no muestra
   sesiones del Congreso, legislaturas ni concejos, así que no se publican.
-- indicadores y faltantes: el apartado 4 no pide indicadores; van vacíos.
+- indicadores (1.3): grupo «normas-mes-por-provincia», la cantidad de normas provinciales y municipales para empresas
+  del último mes completo, por provincia relevada (las que tienen al menos una norma cargada). Sin serie ni comparación:
+  el relevamiento empezó el 25/11/2026 y los meses anteriores no están completos.
+- faltantes: vacío mientras el grupo se publique.
 """
 import datetime as dt
 import json
@@ -102,7 +105,30 @@ def escribir(T, raiz, hoy=None):
                                alcance=_alcance("provincia", prov[pid]), rubros=[], url=e["u"]))
     agenda.sort(key=lambda z: z["fecha"])
 
-    out = dict(web=WEB, version="1.0", generado=ahora.isoformat(), indicadores=[], novedades=novedades, agenda=agenda, faltantes=[])
+    # Grupo 1.3: normas nuevas del último mes completo por provincia relevada.
+    def pid_de(l):
+        if l == "AR":
+            return None
+        if l.startswith("c:"):
+            return ciu[l[2:]]["prov"]
+        return l[2:4] if l.startswith("d:") else l
+    fin = hoy.replace(day=1) - dt.timedelta(days=1)
+    mes = fin.strftime("%Y-%m")
+    relevadas = sorted({pid_de(n["l"]) for n in T["normas"]} - {None}, key=lambda q: prov[q])
+    indicadores = []
+    for q in relevadas:
+        cant = sum(1 for n in T["normas"] if pid_de(n["l"]) == q and n["f"][:7] == mes)
+        slug = re.sub(r"[^a-z0-9]+", "-", prov[q].lower().translate(str.maketrans("áéíóúñ", "aeioun"))).strip("-")
+        indicadores.append(dict(
+            id=f"normas-mes-{slug}", nombre=f"Normas nuevas para empresas: {prov[q]}", valor=cant, unidad="normas",
+            fecha_dato=fin.isoformat(), periodo=mes,
+            fuente_original="Mapa del Poder Argentino, relevamiento de boletines oficiales (normas provinciales y municipales)",
+            eje=EJE, alcance=_alcance("provincia", prov[q]), rubros=[], subrubros=[], exposicion=[],
+            url=f"{SITIO}#normas-{q}~todo", tipo_valor="nivel", frecuencia="mensual", comparar=[],
+            grupo=dict(id="normas-mes-por-provincia", nombre="Normas nuevas para empresas por provincia", dimension="provincia", clave=prov[q])))
+    assert len(indicadores) >= 3
+
+    out = dict(web=WEB, version="1.3", generado=ahora.isoformat(), indicadores=indicadores, novedades=novedades, agenda=agenda, faltantes=[])
     with open(os.path.join(raiz, "datos-informe.json"), "w", encoding="utf-8") as fh:
         json.dump(out, fh, ensure_ascii=False, indent=1)
-    print(f"datos-informe.json: {len(novedades)} novedades y {len(agenda)} eventos de agenda.")
+    print(f"datos-informe.json (v1.3): {len(indicadores)} indicadores en 1 grupo ({mes}), {len(novedades)} novedades y {len(agenda)} eventos de agenda.")

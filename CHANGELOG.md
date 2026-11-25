@@ -1,5 +1,8 @@
 # Cambios
 
+## 25/11/2026 (datos para informes, versión 1.3)
+- `datos-informe.json` pasa a la versión 1.3 de la especificación: grupo «Normas nuevas para empresas por provincia» (13 provincias relevadas, último mes completo), con `tipo_valor`, `frecuencia` y `comparar`. Sin serie hasta tener 13 meses completos de relevamiento.
+
 ## 25/11/2026 (datos para informes)
 - Nuevo `datos-informe.json` en la raíz para la web de informes de Plexum (especificación v1.2, apartado 4): normas de los últimos 90 días y cambios de autoridades como novedades; agenda con elecciones provinciales de los próximos 60 días. Lo genera `scripts/datos_informe.py` junto con el resto de los datos.
 - La ficha de provincia muestra desde cuándo está un funcionario cuando la fecha tiene fuente (por ahora, Kresteff en Chubut).

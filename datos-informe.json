@@ -1,8 +1,386 @@
 {
  "web": "Mapa del Poder Argentino",
- "version": "1.0",
- "generado": "2026-11-25T11:54:52-03:00",
- "indicadores": [],
+ "version": "1.3",
+ "generado": "2026-11-25T14:06:15-03:00",
+ "indicadores": [
+  {
+   "id": "normas-mes-buenos-aires",
+   "nombre": "Normas nuevas para empresas: Buenos Aires",
+   "valor": 0,
+   "unidad": "normas",
+   "fecha_dato": "2026-10-31",
+   "periodo": "2026-10",
+   "fuente_original": "Mapa del Poder Argentino, relevamiento de boletines oficiales (normas provinciales y municipales)",
+   "eje": "Política nacional",
+   "alcance": {
+    "nivel": "provincia",
+    "provincia": "Buenos Aires",
+    "localidad": "",
+    "pais": "Argentina"
+   },
+   "rubros": [],
+   "subrubros": [],
+   "exposicion": [],
+   "url": "https://francomartinlopez.github.io/poderenargentina/#normas-06~todo",
+   "tipo_valor": "nivel",
+   "frecuencia": "mensual",
+   "comparar": [],
+   "grupo": {
+    "id": "normas-mes-por-provincia",
+    "nombre": "Normas nuevas para empresas por provincia",
+    "dimension": "provincia",
+    "clave": "Buenos Aires"
+   }
+  },
+  {
+   "id": "normas-mes-caba",
+   "nombre": "Normas nuevas para empresas: CABA",
+   "valor": 0,
+   "unidad": "normas",
+   "fecha_dato": "2026-10-31",
+   "periodo": "2026-10",
+   "fuente_original": "Mapa del Poder Argentino, relevamiento de boletines oficiales (normas provinciales y municipales)",
+   "eje": "Política nacional",
+   "alcance": {
+    "nivel": "provincia",
+    "provincia": "CABA",
+    "localidad": "",
+    "pais": "Argentina"
+   },
+   "rubros": [],
+   "subrubros": [],
+   "exposicion": [],
+   "url": "https://francomartinlopez.github.io/poderenargentina/#normas-02~todo",
+   "tipo_valor": "nivel",
+   "frecuencia": "mensual",
+   "comparar": [],
+   "grupo": {
+    "id": "normas-mes-por-provincia",
+    "nombre": "Normas nuevas para empresas por provincia",
+    "dimension": "provincia",
+    "clave": "CABA"
+   }
+  },
+  {
+   "id": "normas-mes-catamarca",
+   "nombre": "Normas nuevas para empresas: Catamarca",
+   "valor": 0,
+   "unidad": "normas",
+   "fecha_dato": "2026-10-31",
+   "periodo": "2026-10",
+   "fuente_original": "Mapa del Poder Argentino, relevamiento de boletines oficiales (normas provinciales y municipales)",
+   "eje": "Política nacional",
+   "alcance": {
+    "nivel": "provincia",
+    "provincia": "Catamarca",
+    "localidad": "",
+    "pais": "Argentina"
+   },
+   "rubros": [],
+   "subrubros": [],
+   "exposicion": [],
+   "url": "https://francomartinlopez.github.io/poderenargentina/#normas-10~todo",
+   "tipo_valor": "nivel",
+   "frecuencia": "mensual",
+   "comparar": [],
+   "grupo": {
+    "id": "normas-mes-por-provincia",
+    "nombre": "Normas nuevas para empresas por provincia",
+    "dimension": "provincia",
+    "clave": "Catamarca"
+   }
+  },
+  {
+   "id": "normas-mes-chubut",
+   "nombre": "Normas nuevas para empresas: Chubut",
+   "valor": 0,
+   "unidad": "normas",
+   "fecha_dato": "2026-10-31",
+   "periodo": "2026-10",
+   "fuente_original": "Mapa del Poder Argentino, relevamiento de boletines oficiales (normas provinciales y municipales)",
+   "eje": "Política nacional",
+   "alcance": {
+    "nivel": "provincia",
+    "provincia": "Chubut",
+    "localidad": "",
+    "pais": "Argentina"
+   },
+   "rubros": [],
+   "subrubros": [],
+   "exposicion": [],
+   "url": "https://francomartinlopez.github.io/poderenargentina/#normas-26~todo",
+   "tipo_valor": "nivel",
+   "frecuencia": "mensual",
+   "comparar": [],
+   "grupo": {
+    "id": "normas-mes-por-provincia",
+    "nombre": "Normas nuevas para empresas por provincia",
+    "dimension": "provincia",
+    "clave": "Chubut"
+   }
+  },
+  {
+   "id": "normas-mes-cordoba",
+   "nombre": "Normas nuevas para empresas: Córdoba",
+   "valor": 0,
+   "unidad": "normas",
+   "fecha_dato": "2026-10-31",
+   "periodo": "2026-10",
+   "fuente_original": "Mapa del Poder Argentino, relevamiento de boletines oficiales (normas provinciales y municipales)",
+   "eje": "Política nacional",
+   "alcance": {
+    "nivel": "provincia",
+    "provincia": "Córdoba",
+    "localidad": "",
+    "pais": "Argentina"
+   },
+   "rubros": [],
+   "subrubros": [],
+   "exposicion": [],
+   "url": "https://francomartinlopez.github.io/poderenargentina/#normas-14~todo",
+   "tipo_valor": "nivel",
+   "frecuencia": "mensual",
+   "comparar": [],
+   "grupo": {
+    "id": "normas-mes-por-provincia",
+    "nombre": "Normas nuevas para empresas por provincia",
+    "dimension": "provincia",
+    "clave": "Córdoba"
+   }
+  },
+  {
+   "id": "normas-mes-jujuy",
+   "nombre": "Normas nuevas para empresas: Jujuy",
+   "valor": 0,
+   "unidad": "normas",
+   "fecha_dato": "2026-10-31",
+   "periodo": "2026-10",
+   "fuente_original": "Mapa del Poder Argentino, relevamiento de boletines oficiales (normas provinciales y municipales)",
+   "eje": "Política nacional",
+   "alcance": {
+    "nivel": "provincia",
+    "provincia": "Jujuy",
+    "localidad": "",
+    "pais": "Argentina"
+   },
+   "rubros": [],
+   "subrubros": [],
+   "exposicion": [],
+   "url": "https://francomartinlopez.github.io/poderenargentina/#normas-38~todo",
+   "tipo_valor": "nivel",
+   "frecuencia": "mensual",
+   "comparar": [],
+   "grupo": {
+    "id": "normas-mes-por-provincia",
+    "nombre": "Normas nuevas para empresas por provincia",
+    "dimension": "provincia",
+    "clave": "Jujuy"
+   }
+  },
+  {
+   "id": "normas-mes-mendoza",
+   "nombre": "Normas nuevas para empresas: Mendoza",
+   "valor": 0,
+   "unidad": "normas",
+   "fecha_dato": "2026-10-31",
+   "periodo": "2026-10",
+   "fuente_original": "Mapa del Poder Argentino, relevamiento de boletines oficiales (normas provinciales y municipales)",
+   "eje": "Política nacional",
+   "alcance": {
+    "nivel": "provincia",
+    "provincia": "Mendoza",
+    "localidad": "",
+    "pais": "Argentina"
+   },
+   "rubros": [],
+   "subrubros": [],
+   "exposicion": [],
+   "url": "https://francomartinlopez.github.io/poderenargentina/#normas-50~todo",
+   "tipo_valor": "nivel",
+   "frecuencia": "mensual",
+   "comparar": [],
+   "grupo": {
+    "id": "normas-mes-por-provincia",
+    "nombre": "Normas nuevas para empresas por provincia",
+    "dimension": "provincia",
+    "clave": "Mendoza"
+   }
+  },
+  {
+   "id": "normas-mes-neuquen",
+   "nombre": "Normas nuevas para empresas: Neuquén",
+   "valor": 1,
+   "unidad": "normas",
+   "fecha_dato": "2026-10-31",
+   "periodo": "2026-10",
+   "fuente_original": "Mapa del Poder Argentino, relevamiento de boletines oficiales (normas provinciales y municipales)",
+   "eje": "Política nacional",
+   "alcance": {
+    "nivel": "provincia",
+    "provincia": "Neuquén",
+    "localidad": "",
+    "pais": "Argentina"
+   },
+   "rubros": [],
+   "subrubros": [],
+   "exposicion": [],
+   "url": "https://francomartinlopez.github.io/poderenargentina/#normas-58~todo",
+   "tipo_valor": "nivel",
+   "frecuencia": "mensual",
+   "comparar": [],
+   "grupo": {
+    "id": "normas-mes-por-provincia",
+    "nombre": "Normas nuevas para empresas por provincia",
+    "dimension": "provincia",
+    "clave": "Neuquén"
+   }
+  },
+  {
+   "id": "normas-mes-rio-negro",
+   "nombre": "Normas nuevas para empresas: Río Negro",
+   "valor": 0,
+   "unidad": "normas",
+   "fecha_dato": "2026-10-31",
+   "periodo": "2026-10",
+   "fuente_original": "Mapa del Poder Argentino, relevamiento de boletines oficiales (normas provinciales y municipales)",
+   "eje": "Política nacional",
+   "alcance": {
+    "nivel": "provincia",
+    "provincia": "Río Negro",
+    "localidad": "",
+    "pais": "Argentina"
+   },
+   "rubros": [],
+   "subrubros": [],
+   "exposicion": [],
+   "url": "https://francomartinlopez.github.io/poderenargentina/#normas-62~todo",
+   "tipo_valor": "nivel",
+   "frecuencia": "mensual",
+   "comparar": [],
+   "grupo": {
+    "id": "normas-mes-por-provincia",
+    "nombre": "Normas nuevas para empresas por provincia",
+    "dimension": "provincia",
+    "clave": "Río Negro"
+   }
+  },
+  {
+   "id": "normas-mes-salta",
+   "nombre": "Normas nuevas para empresas: Salta",
+   "valor": 0,
+   "unidad": "normas",
+   "fecha_dato": "2026-10-31",
+   "periodo": "2026-10",
+   "fuente_original": "Mapa del Poder Argentino, relevamiento de boletines oficiales (normas provinciales y municipales)",
+   "eje": "Política nacional",
+   "alcance": {
+    "nivel": "provincia",
+    "provincia": "Salta",
+    "localidad": "",
+    "pais": "Argentina"
+   },
+   "rubros": [],
+   "subrubros": [],
+   "exposicion": [],
+   "url": "https://francomartinlopez.github.io/poderenargentina/#normas-66~todo",
+   "tipo_valor": "nivel",
+   "frecuencia": "mensual",
+   "comparar": [],
+   "grupo": {
+    "id": "normas-mes-por-provincia",
+    "nombre": "Normas nuevas para empresas por provincia",
+    "dimension": "provincia",
+    "clave": "Salta"
+   }
+  },
+  {
+   "id": "normas-mes-san-juan",
+   "nombre": "Normas nuevas para empresas: San Juan",
+   "valor": 0,
+   "unidad": "normas",
+   "fecha_dato": "2026-10-31",
+   "periodo": "2026-10",
+   "fuente_original": "Mapa del Poder Argentino, relevamiento de boletines oficiales (normas provinciales y municipales)",
+   "eje": "Política nacional",
+   "alcance": {
+    "nivel": "provincia",
+    "provincia": "San Juan",
+    "localidad": "",
+    "pais": "Argentina"
+   },
+   "rubros": [],
+   "subrubros": [],
+   "exposicion": [],
+   "url": "https://francomartinlopez.github.io/poderenargentina/#normas-70~todo",
+   "tipo_valor": "nivel",
+   "frecuencia": "mensual",
+   "comparar": [],
+   "grupo": {
+    "id": "normas-mes-por-provincia",
+    "nombre": "Normas nuevas para empresas por provincia",
+    "dimension": "provincia",
+    "clave": "San Juan"
+   }
+  },
+  {
+   "id": "normas-mes-santa-cruz",
+   "nombre": "Normas nuevas para empresas: Santa Cruz",
+   "valor": 0,
+   "unidad": "normas",
+   "fecha_dato": "2026-10-31",
+   "periodo": "2026-10",
+   "fuente_original": "Mapa del Poder Argentino, relevamiento de boletines oficiales (normas provinciales y municipales)",
+   "eje": "Política nacional",
+   "alcance": {
+    "nivel": "provincia",
+    "provincia": "Santa Cruz",
+    "localidad": "",
+    "pais": "Argentina"
+   },
+   "rubros": [],
+   "subrubros": [],
+   "exposicion": [],
+   "url": "https://francomartinlopez.github.io/poderenargentina/#normas-78~todo",
+   "tipo_valor": "nivel",
+   "frecuencia": "mensual",
+   "comparar": [],
+   "grupo": {
+    "id": "normas-mes-por-provincia",
+    "nombre": "Normas nuevas para empresas por provincia",
+    "dimension": "provincia",
+    "clave": "Santa Cruz"
+   }
+  },
+  {
+   "id": "normas-mes-santa-fe",
+   "nombre": "Normas nuevas para empresas: Santa Fe",
+   "valor": 0,
+   "unidad": "normas",
+   "fecha_dato": "2026-10-31",
+   "periodo": "2026-10",
+   "fuente_original": "Mapa del Poder Argentino, relevamiento de boletines oficiales (normas provinciales y municipales)",
+   "eje": "Política nacional",
+   "alcance": {
+    "nivel": "provincia",
+    "provincia": "Santa Fe",
+    "localidad": "",
+    "pais": "Argentina"
+   },
+   "rubros": [],
+   "subrubros": [],
+   "exposicion": [],
+   "url": "https://francomartinlopez.github.io/poderenargentina/#normas-82~todo",
+   "tipo_valor": "nivel",
+   "frecuencia": "mensual",
+   "comparar": [],
+   "grupo": {
+    "id": "normas-mes-por-provincia",
+    "nombre": "Normas nuevas para empresas por provincia",
+    "dimension": "provincia",
+    "clave": "Santa Fe"
+   }
+  }
+ ],
  "novedades": [
   {
    "id": "2026-11-25-ar-rg-5928",
