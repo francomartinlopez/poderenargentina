@@ -211,11 +211,35 @@ def main():
         for x, y in ((r["o"], r["d"]), (r["d"], r["o"])):
             if x in A and y in A and A[x]["cat"] not in presencia.EXCLUIDAS and A[y]["alc"] in ("P", "M"):
                 poner(x, A[y]["prov"], f"{r['t']} con {A[y]['n']}", u=r["u"])
+    # Normas que afectan a las empresas (fuente/normas.py), en tres niveles: Nación, provincias y localidades.
+    import normas
+    nor, vistos = [], set()
+    for (i, num, f, em, lug, rub, x, u) in normas.NORMAS:
+        assert i not in vistos, f"Norma repetida: {i}"
+        vistos.add(i)
+        assert re.fullmatch(r"\d{4}-\d{2}(-\d{2})?", f), f"Norma {i}: fecha inválida"
+        assert rub and all(r in normas.RUBROS for r in rub), f"Norma {i}: rubro inválido"
+        assert u.startswith("http") and num and em and x, f"Norma {i}: faltan datos o fuente"
+        if lug.startswith("c:"):
+            assert lug[2:] in slugs, f"Norma {i}: ciudad inexistente"
+        elif lug.startswith("d:"):
+            assert lug[2:] in poblacion.DEPARTAMENTO, f"Norma {i}: departamento inexistente"
+        else:
+            assert lug == "AR" or lug in ign, f"Norma {i}: lugar inválido"
+        nor.append(dict(id=i, num=num, f=f, em=em, l=lug, r=rub, x=x, u=u))
+    nor.sort(key=lambda n: n["f"], reverse=True)
+    fun = {}
+    for pid, lista in normas.FUNCIONARIOS.items():
+        assert pid in ign, f"Funcionarios: provincia inexistente {pid}"
+        for (a, c, n, u) in lista:
+            assert a in normas.AREAS and c and u.startswith("http"), f"Funcionarios {pid}: dato o fuente faltante"
+        fun[pid] = [dict(a=a, c=c, n=n, u=u) for (a, c, n, u) in sorted(lista, key=lambda z: normas.AREAS.index(z[0]))]
+    meta["rubros"] = normas.RUBROS
     out = dict(corte=CORTE, proxima=PROXIMA, meta=meta, pais=pais, elecciones=elec, provincias=provincias, ciudades=ciudades,
-               deppob=poblacion.DEPARTAMENTO, deps=deps, actores=actores, relaciones=relaciones, friccion=fr, zonas=zonas)
+               deppob=poblacion.DEPARTAMENTO, deps=deps, actores=actores, relaciones=relaciones, friccion=fr, zonas=zonas, normas=nor, funcionarios=fun)
     with open(os.path.join(RAIZ, "data", "territorio.json"), "w") as f:
         json.dump(out, f, ensure_ascii=False, separators=(",", ":"))
-    print(f"data/territorio.json: {len(provincias)} provincias, {sum(ndep.values())} departamentos, {len(ciudades)} ciudades, {len(actores)} actores y {len(relaciones)} relaciones, {len(fr)} puntos de fricción, {len(zonas)} zona(s) liberada(s) y {len(deps)} fichas de departamento. Corte {CORTE}.")
+    print(f"data/territorio.json: {len(provincias)} provincias, {sum(ndep.values())} departamentos, {len(ciudades)} ciudades, {len(actores)} actores y {len(relaciones)} relaciones, {len(fr)} puntos de fricción, {len(zonas)} zona(s) liberada(s), {len(deps)} fichas de departamento y {len(nor)} normas. Corte {CORTE}.")
 
 
 if __name__ == "__main__":

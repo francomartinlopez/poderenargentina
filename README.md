@@ -20,6 +20,7 @@ Los cinco pasos están hechos: cartografía, ciudades, gobernadores, fichas de l
 - `fuente/economia.py`: exportaciones, destinos y rubro (INDEC) y recursos propios (ASAP).
 - `fuente/alineamiento.py`: quién manda y alineamiento con la Nación, con fuentes.
 - `fuente/elecciones.py`: calendario de las elecciones de 2027 por provincia (página «Elecciones»).
+- `fuente/normas.py`: normas que afectan a las empresas en Nación, provincias y localidades (página «Normas», con filtros por lugar y rubro) y los funcionarios que regulan cada rubro por provincia.
 - `fuente/influencias.py`: influencias de 12 potencias en cinco canales, con fuentes.
 - `fuente/actores_mas.py`, `fuente/actores_mas2.py`, `fuente/actores_mas3.py`, `fuente/actores_mas4.py`, `fuente/actores_mas5.py`, `fuente/actores_mas6.py` y `fuente/actores_mas7.py`; `fuente/presencia.py`: provincias donde opera cada actor fuera de su sede: actores por categoría (políticos, empresas, familias, sindicatos, bandas y barras con condena, Justicia, fuerzas armadas y de seguridad, inteligencia, religiosos, ONG, medios, clubes, embajadas, bancos, cámaras, intendentes del conurbano); 362 en total, con 543 relaciones con fuente. Un actor puede tener sede en un partido («dep:<código>»).
 - `fuente/departamentos.py`: fichas de los partidos y departamentos relevantes.

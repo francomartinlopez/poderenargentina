@@ -68,5 +68,17 @@ for (const [id, d] of Object.entries(T.deps || {})) {
   if (!d.gob && !d.fu.length) err.push(`Departamento ${id}: sin fuente.`);
   for (const a of d.ai) if (!AID.has(a) && !EXT[a]) err.push(`Departamento ${id}: actor desconocido ${a}.`);
 }
+// Normas para empresas
+const NR = T.normas || [], RUB = Object.keys((T.meta && T.meta.rubros) || {});
+if (!NR.length) err.push("Faltan las normas para empresas.");
+for (const n of NR) {
+  if (!/^https?:\/\//.test(n.u)) err.push(`Norma ${n.id}: sin fuente`);
+  if (!n.r.length || n.r.some(r => !RUB.includes(r))) err.push(`Norma ${n.id}: rubro inválido`);
+  if (!/^\d{4}-\d{2}(-\d{2})?$/.test(n.f) || n.f > hoy) err.push(`Norma ${n.id}: fecha inválida`);
+  if (n.l.startsWith("c:") && !slugs.has(n.l.slice(2))) err.push(`Norma ${n.id}: ciudad inexistente`);
+}
+const sinNum = NR.filter(n => /sin número publicado/.test(n.num)).length;
+if (sinNum) console.log(`Avisos: ${sinNum} normas sin número publicado (se completan en la carga semanal).`);
+for (const [pid, L] of Object.entries(T.funcionarios || {})) for (const f of L) if (!/^https?:/.test(f.u)) err.push(`Funcionario ${pid} ${f.c}: sin fuente`);
 if (err.length) { console.error("ERRORES:\n- " + err.join("\n- ")); process.exit(1); }
-console.log(`OK: ${T.provincias.length} jurisdicciones, ${Object.keys(deps).length} departamentos, ${T.ciudades.length} ciudades, ${A.length} actores, ${(T.relaciones || []).length} relaciones, ${(T.friccion || []).length} puntos de fricción, ${(T.zonas || []).length} zona(s) liberada(s), ${Object.keys(T.deps || {}).length} fichas de departamento. Corte ${T.corte}, próxima revisión ${T.proxima}.`);
+console.log(`OK: ${T.provincias.length} jurisdicciones, ${Object.keys(deps).length} departamentos, ${T.ciudades.length} ciudades, ${A.length} actores, ${(T.relaciones || []).length} relaciones, ${(T.friccion || []).length} puntos de fricción, ${(T.zonas || []).length} zona(s) liberada(s), ${Object.keys(T.deps || {}).length} fichas de departamento, ${NR.length} normas. Corte ${T.corte}, próxima revisión ${T.proxima}.`);

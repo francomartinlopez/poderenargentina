@@ -1,5 +1,10 @@
 # Cambios
 
+## 2026-11-25 · Normas para empresas
+- Nueva página «Normas»: 52 normas que afectan a las empresas en tres niveles (20 nacionales, 23 provinciales y 9 de localidades), con número, fecha, emisor, lugar, rubro, resumen y fuente; filtros por lugar y por rubro.
+- Las fichas de provincia, ciudad y partido muestran sus normas; las de provincia, además, los funcionarios que regulan producción, energía, minería y recaudación (`fuente/normas.py`).
+- Carga semanal de normas nacionales y provinciales y mensual de municipales (tareas programadas).
+
 ## 2026-11-23 · Actualización trimestral 2026-11
 
 - Corte al 23/11/2026; próxima revisión el 23/2/2027. Sin cambios de gobernadores ni de ciudades (99); el validador no deja avisos pendientes y la lista VERIFICAR está vacía.

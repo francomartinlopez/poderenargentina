@@ -165,3 +165,4 @@ h2.sec{font:800 22px/1.1 var(--f-d);text-transform:uppercase;letter-spacing:.02e
 .claims{margin:8px 0 18px;max-width:460px}.claims svg{width:100%;height:auto;display:block;background:#0B0A0A;border:1px solid var(--ls);border-radius:4px}
 .claims figcaption{font-size:13px;margin-top:6px;line-height:1.6}.claims .lg{margin-right:12px}
 #antlb b{font-weight:600}
+.h3n{font:600 12px var(--f-m);text-transform:uppercase;color:var(--muted);margin:12px 0 6px;letter-spacing:.06em}

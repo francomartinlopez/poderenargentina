@@ -12,7 +12,7 @@ let capa="terr",potSel="dom",ecoSel="exp";
 const TCOL={Estado:"#FF3B30",Persona:"#F5F0E6",Capital:"#F2A93B",Influencia:"#3FB8C9",Información:"#9E8CFF",Sombra:"#8B8B8B"};
 const RCOL={Gobierna:"#FF3B30",Propiedad:"#F2A93B",Financiamiento:"#2EB872",Alianza:"#2F6BFF",Enfrentamiento:"#D7263D",Ambigua:"#9A8F8C",Contrato:"#C8743C",Abastecimiento:"#7FB3D5","Puerta giratoria":"#B07CFF"};
 let ANTP=null;
-const ACT={},actCity={},actProv={},actPres={},FR={},frProv={},frCity={},zlCity={};
+const ACT={},actCity={},actProv={},actPres={},FR={},frProv={},frCity={},zlCity={},NRL={};
 const NVC={3:"#FF3B30",2:"#F2A93B",1:"#9A8F8C"},NVT={3:"Violencia o fuerza extranjera",2:"Disputa abierta",1:"Latente o local"};
 const nvTag=n=>`<span class="tag" style="color:${NVC[n]}">${NVT[n]}</span>`;
 function frList(list){return list.length?`<ul class="flist2">${list.map(f=>`<li><i style="background:${NVC[f.nv]}"></i><a href="#f-${f.id}">${esc(f.n)}</a><span class="muted">${esc(f.tipo)} · ${esc(f.est)}</span></li>`).join("")}</ul>`:`<p class="muted">Ningún punto de fricción cargado aquí.</p>`}
@@ -37,6 +37,32 @@ const DEP={},depLoad={};
 const byS={},byId={},cityS={},depInfo={};
 
 function more(h){document.getElementById("more").innerHTML=h}
+// Normas para empresas
+const nrProv=n=>n.l==="AR"?"AR":n.l.startsWith("c:")?(cityS[n.l.slice(2)]||{}).prov:n.l.startsWith("d:")?n.l.slice(2,4):n.l;
+const nrFecha=f=>f.length===7?fmes(f):(([y,m,d])=>+d+" "+MES[+m-1]+" "+y)(f.split("-"));
+function nrLugar(n){if(n.l==="AR")return"Nación";if(n.l.startsWith("c:")){const c=cityS[n.l.slice(2)];return c?`<a href="#c-${c.s}">${esc(c.n)}</a>`:""}
+  if(n.l.startsWith("d:")){const id=n.l.slice(2),d=(T.deps||{})[id];return`<a href="#d-${id}">${esc(d?d.n:id)}</a>`}const p=byId[n.l];return p?`<a href="#prov-${p.s}">${esc(p.n)}</a>`:""}
+const nrRub=n=>n.r.length===Object.keys(T.meta.rubros).length?`<span class="tag">Todos los rubros</span>`:n.r.map(r=>`<span class="tag">${esc(T.meta.rubros[r])}</span>`).join(" ");
+function nrList(L,lug){return L.length?`<ul class="rlist">${L.map(n=>`<li><b>${esc(n.num)}</b> <span class="muted mono" style="font-size:12px">${nrFecha(n.f)}</span>${lug?` · ${nrLugar(n)}`:""}<br>${esc(n.x)} <span class="muted">${esc(n.em)}.</span> ${src(n.u)}<br>${nrRub(n)}</li>`).join("")}</ul>`:`<p class="muted">Sin normas cargadas todavía.</p>`}
+function nrAut(pid){const F=(T.funcionarios||{})[pid]||[];return F.length?`<dl class="dl">${F.map(f=>`<dt>${esc(f.a)}</dt><dd>${f.n?`<b>${esc(f.n)}</b> <span class="muted">· ${esc(f.c)}</span>`:esc(f.c)} ${src(f.u)}</dd>`).join("")}</dl>`:`<p class="muted">Funcionarios por rubro: pendientes de carga.</p>`}
+function nrBlk(titulo,L,aut,pie){return`<div class="blk"><h2>${titulo}</h2>${aut?`<h3 class="h3n">Autoridades que regulan</h3>${aut}<h3 class="h3n">Normas</h3>`:""}${nrList(L)}${pie?`<p class="muted" style="font-size:13px;margin-top:8px">${pie}</p>`:""}</div>`}
+function vNormas(q){
+  const R=T.meta.rubros,N=T.normas,provs=[...new Set(N.map(nrProv).filter(x=>x&&x!=="AR"))].sort((a,b)=>byId[a].n.localeCompare(byId[b].n,"es"));
+  let [lu,ru]=(q||"").split("~");lu=lu||"todo";ru=ru||"todo";
+  const ok=n=>(ru==="todo"||n.r.includes(ru))&&(lu==="todo"||(lu==="AR"?n.l==="AR":lu==="prov"?/^\d\d$/.test(n.l):lu==="loc"?/^[cd]:/.test(n.l):nrProv(n)===lu));
+  const L=N.filter(ok),nv={AR:N.filter(n=>n.l==="AR").length,prov:N.filter(n=>/^\d\d$/.test(n.l)).length,loc:N.filter(n=>/^[cd]:/.test(n.l)).length};
+  app.innerHTML=`<div class="page"><h1>Normas para empresas</h1><p class="sub">Lo que regula a las empresas en tres niveles: Nación (${nv.AR}: Congreso, decretos, ARCA, BCRA, Comercio, Energía y Minería), provincias (${nv.prov}: impuestos, promoción industrial, compre local, ambiente y minería) y localidades de más de 10.000 habitantes (${nv.loc}: tasas, habilitaciones, zonificación y parques industriales). Cada norma con su número, fecha, emisor, rubro y fuente.</p>
+  <div class="selrow"><label for="nrlug">Lugar</label><select id="nrlug" class="sel"><option value="todo">Todos</option><option value="AR">Nación</option><option value="prov">Todas las provincias</option><option value="loc">Todas las localidades</option>${provs.map(p=>`<option value="${p}">${esc(byId[p].n)} (provincia y localidades)</option>`).join("")}</select>
+  <label for="nrrub">Rubro</label><select id="nrrub" class="sel"><option value="todo">Todos</option>${Object.entries(R).map(([k,v])=>`<option value="${k}">${esc(v)}</option>`).join("")}</select></div>
+  <p class="muted mono" style="font-size:12px">${L.length} de ${N.length} normas</p>
+  <table class="stack"><thead><tr><th>Fecha</th><th>Norma</th><th>Lugar</th><th>Emisor</th><th>Rubros</th><th>Qué dice</th></tr></thead><tbody>
+  ${L.map(n=>`<tr><td data-l="Fecha" class="mono" style="white-space:nowrap">${nrFecha(n.f)}</td><td data-l="Norma"><b>${esc(n.num)}</b></td><td data-l="Lugar">${nrLugar(n)}</td><td data-l="Emisor">${esc(n.em)}</td><td data-l="Rubros">${nrRub(n)}</td><td data-l="Qué dice">${esc(n.x)} ${src(n.u)}</td></tr>`).join("")||`<tr><td colspan="6" class="muted">Ninguna norma con ese filtro todavía.</td></tr>`}</tbody></table>
+  <h2 class="sec">Criterio</h2><p>Entran las normas vigentes o sancionadas en el último año que cambian impuestos, tasas, regímenes de promoción, compre local, reglas ambientales, mineras o energéticas, acceso a divisas o habilitaciones. Una línea por norma, sin opinión, con enlace al Boletín Oficial o, si no está disponible, a una fuente que la cite. Las normas sin número publicado se completan en la carga siguiente. Primera etapa de cobertura: Santa Fe (Rosario, Gran Rosario y cordón industrial), Córdoba y Gran Córdoba, AMBA y las provincias de energía y minería. Carga semanal para Nación y provincias y mensual para municipios.</p></div>`;
+  document.getElementById("nrlug").value=lu;document.getElementById("nrrub").value=ru;
+  const go=()=>{location.hash="normas-"+document.getElementById("nrlug").value+"~"+document.getElementById("nrrub").value};
+  document.getElementById("nrlug").onchange=go;document.getElementById("nrrub").onchange=go;
+}
+
 function pend(t,d){return `<div class="blk"><h2>${t}</h2><div class="pend">${d}</div></div>`}
 const NVI=["","Acotada","De primer orden","Dominante"];
 function infGrid(list,abierto){
@@ -218,7 +244,9 @@ async function vProv(p,did){
   const a=p.ali,e=p.eco;
   const manda=`<div class="blk"><h2>Quién manda de verdad</h2><p class="lead">${esc(a.manda)}</p><dl class="dl"><dt>Gobierna</dt><dd>${esc(a.grupo)}</dd><dt>Frente a la Nación</dt><dd>${aliTag(a.ali)} <span class="muted">${ADESC[a.ali]}</span></dd><dt>Fuentes</dt><dd>${a.fuentes.map(src).join(" · ")}</dd></dl></div>`;
   const eco=`<div class="blk"><h2>Economía y recursos</h2><dl class="dl"><dt>Exportaciones</dt><dd><b class="mono">USD ${nf(e.exp)} M</b> en el ${esc(T.meta.periodo_exp)}</dd><dt>Rubro principal</dt><dd>${esc(e.rubro)}</dd><dt>Destinos</dt><dd>${esc(e.destx)}</dd>${p.rigi?`<dt>RIGI</dt><dd><b class="mono">USD ${nf(p.rigi)} M</b> en compromisos de proyectos aprobados (${esc(T.pais.rigi.prov_fecha)}) ${src(T.pais.rigi.prov_u)}</dd>`:""}<dt>Recursos propios</dt><dd>${e.propios==null?"Sin datos actualizados":`<b class="mono">${e.propios.toLocaleString("es-AR")}%</b> de los ingresos; el resto llega de la Nación`}</dd><dt>Fuentes</dt><dd>${src(T.meta.fuente_exp)} · ${src(T.meta.fuente_propios)} · ${src(T.meta.fuente_censo)}</dd></dl></div>`;
-  more(manda+influ(p.inf)+eco+`<div class="blk"><h2>Actores núcleo con sede</h2>${actList(actProv[p.id]||[])}${(actPres[p.id]||[]).length?`<h2 style="margin-top:14px">Con presencia en la provincia</h2><ul class="alist">${actPres[p.id].slice().sort((x,y)=>y[0].pt-x[0].pt).map(([a,q])=>`<li><a href="#a-${a.id}">${esc(a.n)}</a><span class="muted">${q.f?`<a href="#f-${q.f}">${esc(q.x)}</a>`:esc(q.x)}${q.u?" "+src(q.u):""}</span>${ptBar(a.pt,TCOL[a.tipo],.56)}</li>`).join("")}</ul>`:""}</div>`+`<div class="blk"><h2>Puntos de fricción</h2>${frList(frProv[p.id]||[])}${T.zonas.some(z=>z.prov===p.id)?`<h2 style="margin-top:14px">Zonas liberadas</h2>${zlBlk(T.zonas.filter(z=>z.prov===p.id),1)}`:""}</div>`+depBlk);
+  const nrP=(NRL[p.id]||[]),nrLoc=T.normas.filter(n=>n.l!==p.id&&n.l!=="AR"&&nrProv(n)===p.id);
+  const nrb=nrBlk("Normas para empresas",nrP,nrAut(p.id),`${nrLoc.length?`${nrLoc.length} normas de localidades de la provincia: <a href="#normas-${p.id}~todo">ver todas</a>. `:""}Rigen también las ${(NRL.AR||[]).length} normas nacionales: <a href="#normas-AR~todo">ver</a>.`);
+  more(manda+nrb+influ(p.inf)+eco+`<div class="blk"><h2>Actores núcleo con sede</h2>${actList(actProv[p.id]||[])}${(actPres[p.id]||[]).length?`<h2 style="margin-top:14px">Con presencia en la provincia</h2><ul class="alist">${actPres[p.id].slice().sort((x,y)=>y[0].pt-x[0].pt).map(([a,q])=>`<li><a href="#a-${a.id}">${esc(a.n)}</a><span class="muted">${q.f?`<a href="#f-${q.f}">${esc(q.x)}</a>`:esc(q.x)}${q.u?" "+src(q.u):""}</span>${ptBar(a.pt,TCOL[a.tipo],.56)}</li>`).join("")}</ul>`:""}</div>`+`<div class="blk"><h2>Puntos de fricción</h2>${frList(frProv[p.id]||[])}${T.zonas.some(z=>z.prov===p.id)?`<h2 style="margin-top:14px">Zonas liberadas</h2>${zlBlk(T.zonas.filter(z=>z.prov===p.id),1)}`:""}</div>`+depBlk);
 }
 function bx(b,pb){let w=b[1][0]-b[0][0],h=b[1][1]-b[0][1];
   if(pb){const pw=pb[1][0]-pb[0][0],ph=pb[1][1]-pb[0][1],mw=Math.max(w,pw*.35),mh=Math.max(h,ph*.35),cx=(b[0][0]+b[1][0])/2,cy=(b[0][1]+b[1][1])/2;return[cx-mw/2,cy-mh/2,mw,mh]}
@@ -232,7 +260,8 @@ function vDep(p,did){
   const ficha=F?`${F.cab?`<div class="blk"><h2>Quién gobierna y qué pesa</h2><dl class="dl"><dt>Cabecera</dt><dd>${esc(F.cab)}</dd>${F.gob?`<dt>${p.id==="06"?"Intendente":"Gobierno local"}</dt><dd><b>${esc(F.gob.n)}</b> <span class="muted">· ${esc(F.gob.par)}</span>${F.gob.nota?`<br><span class="muted" style="font-size:13px">${esc(F.gob.nota)}</span>`:""} ${src(F.gob.u)}</dd>`:`<dt>Gobierno local</dt><dd class="muted">Varios municipios y comunas, sin un gobierno único del ${esc(dc)}.</dd>`}</dl><p class="lead" style="margin-top:12px">${esc(F.act)}</p>${F.fu.length?`<p class="src">Fuentes: ${F.fu.map(f=>`<a href="${esc(f.u)}" target="_blank" rel="noopener">${esc(f.t)}</a>`).join(" · ")}</p>`:""}</div>`:""}
   <div class="blk"><h2>Actores con sede o peso aquí</h2>${actList(F.ai.map(i=>ACT[i]).filter(Boolean))}</div>${F.fr.length?`<div class="blk"><h2>Fricción</h2>${frList(F.fr.map(i=>FR[i]).filter(Boolean))}</div>`:""}`
    :pend("Datos del "+dc,"Panel corto. Ficha propia solo para los "+(p.id==="06"?"partidos":"departamentos")+" relevantes (conurbano, Rosario, San Lorenzo, Vaca Muerta).");
-  more(ficha+`<div class="blk"><h2>Influencias mundiales</h2><p>Se miden por provincia: <a href="#prov-${p.s}">ver ${esc(p.n)}</a>${p.dom?`, donde domina <b style="color:${PCOL[p.dom]}">${esc(p.dom)}</b>`:""}.</p></div>`);
+  const nrD=[...(NRL["d:"+did]||[]),...cs.flatMap(c=>NRL["c:"+c.s]||[])];
+  more(ficha+(nrD.length?nrBlk("Normas para empresas",nrD,"",`Rigen también las normas de <a href="#prov-${p.s}">${esc(p.n)}</a> y las nacionales.`):"")+`<div class="blk"><h2>Influencias mundiales</h2><p>Se miden por provincia: <a href="#prov-${p.s}">ver ${esc(p.n)}</a>${p.dom?`, donde domina <b style="color:${PCOL[p.dom]}">${esc(p.dom)}</b>`:""}.</p></div>`);
 }
 async function vCity(c){
   const p=byId[c.prov];ensureMap();document.getElementById("ant").style.display="none";
@@ -249,7 +278,9 @@ async function vCity(c){
   const fz=(frCity[c.s]||[]),zz=T.zonas.filter(z=>z.cs===c.s);
   const frc=fz.length||zz.length?`<div class="blk"><h2>Fricción y zonas liberadas</h2>${fz.length?frList(fz):""}${zz.length?zlBlk(zz):""}</div>`:"";
   const conf=c.conf?`<div class="blk"><h2>Conflictos</h2><ul class="rlist">${c.conf.map(f=>`<li><b>${esc(f.t)}.</b> ${esc(f.x)} ${src(f.u)}</li>`).join("")}</ul></div>`:"";
-  more(gob+(c.inf?influ(c.inf,"Influencias mundiales","Por las empresas y proyectos con sede en la ciudad, de 0 a 3 por canal. Las de la provincia, en su ficha."):`<div class="blk"><h2>Influencias mundiales</h2><p>Sin influencias propias cargadas: rigen las de la provincia, <a href="#prov-${p.s}">${esc(p.n)}</a>${p.dom?`, donde domina <b style="color:${PCOL[p.dom]}">${esc(p.dom)}</b>`:""}.</p></div>`)+conf+frc+`<div class="blk"><h2>Actores núcleo con sede</h2>${actList(actCity[c.s]||[])}</div>`);
+  const nrC=[...(NRL["c:"+c.s]||[]),...(c.dep&&p.id==="06"?NRL["d:"+c.dep]||[]:[])];
+  const nrc=nrBlk("Normas para empresas",nrC,"",`Las autoridades locales, arriba. Rigen también las ${(NRL[p.id]||[]).length} normas de <a href="#prov-${p.s}">${esc(p.n)}</a> y las nacionales: <a href="#normas-${p.id}~todo">ver todas</a>.`);
+  more(gob+nrc+(c.inf?influ(c.inf,"Influencias mundiales","Por las empresas y proyectos con sede en la ciudad, de 0 a 3 por canal. Las de la provincia, en su ficha."):`<div class="blk"><h2>Influencias mundiales</h2><p>Sin influencias propias cargadas: rigen las de la provincia, <a href="#prov-${p.s}">${esc(p.n)}</a>${p.dom?`, donde domina <b style="color:${PCOL[p.dom]}">${esc(p.dom)}</b>`:""}.</p></div>`)+conf+frc+`<div class="blk"><h2>Actores núcleo con sede</h2>${actList(actCity[c.s]||[])}</div>`);
 }
 function vProvincias(){
   app.innerHTML=`<div class="page"><h1>Provincias</h1><p class="sub">Las 24 jurisdicciones: quién las gobierna, cómo se paran frente a la Nación y qué potencia pesa más en cada una.</p>
@@ -374,11 +405,13 @@ function route(){
   else if(h==="actores"){vActores();nk=h;svg=null}
   else if(h==="friccion"){vFriccion();nk=h;svg=null}
   else if(h==="elecciones"){vElecciones();nk=h;svg=null}
+  else if(h==="normas"||h.startsWith("normas-")){vNormas(h.slice(7));nk="normas";svg=null}
   else if(h.startsWith("f-")&&FR[h.slice(2)]){vFr(FR[h.slice(2)]);nk="friccion";svg=null}
   else if(h.startsWith("a-")&&ACT[h.slice(2)]){vActor(ACT[h.slice(2)]);nk="actores";svg=null}
   else vPais();
   document.querySelectorAll("nav a").forEach(a=>a.classList.toggle("on",a.dataset.k===nk));
-  if(["provincias","ciudades","plan","actores","friccion","elecciones"].includes(nk))window.scrollTo(0,0);
+  if(["provincias","ciudades","plan","actores","friccion","elecciones"].includes(nk)||(nk==="normas"&&route.prev!=="normas"))window.scrollTo(0,0);
+  route.prev=nk;
 }
 Promise.all(["data/territorio.json","data/provincias.json","data/antartida.json"].map(u=>fetch(u).then(r=>r.json()))).then(([t,pt,an])=>{
   T=t;ANT=an.features?an.features[0]:an;{const g=ANT.geometry||ANT;if(d3.geoArea(ANT)>2*Math.PI)(g.type==="Polygon"?[g.coordinates]:g.coordinates).forEach(pl=>pl.forEach(r=>r.reverse()))}
@@ -386,6 +419,7 @@ Promise.all(["data/territorio.json","data/provincias.json","data/antartida.json"
   for(const p of T.provincias){byS[p.s]=p;byId[p.id]=p}
   for(const c of T.ciudades)cityS[c.s]=c;
   for(const a of T.actores){ACT[a.id]=a;(actCity[a.cs]=actCity[a.cs]||[]).push(a);(actProv[a.prov]=actProv[a.prov]||[]).push(a);for(const q of a.pres||[])(actPres[q.p]=actPres[q.p]||[]).push([a,q])}
+  for(const n of T.normas||[])(NRL[n.l]=NRL[n.l]||[]).push(n);
   for(const f of T.friccion){FR[f.id]=f;(frProv[f.prov]=frProv[f.prov]||[]).push(f);if(f.cs)(frCity[f.cs]=frCity[f.cs]||[]).push(f)}
   const fd=d=>{const[y,m,x]=d.split("-");return +x+" "+MES[+m-1]+" "+y};
   document.getElementById("stamp").innerHTML=`Paso 5 de 5<br>Corte ${fd(T.corte)} · próxima ${fd(T.proxima)}`;
