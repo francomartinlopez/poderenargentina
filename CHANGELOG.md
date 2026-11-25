@@ -1,6 +1,7 @@
 # Cambios
 
 ## 25/11/2026 (funcionarios, segunda ronda)
+- Energía de Córdoba (Ministerio de Infraestructura, Fabián López) y de Salta (Secretaría de Minería del Ministerio de Producción y Minería); Minería de Chubut (Dirección General de Minas y Geología). 42 funcionarios.
 - Ocho funcionarios más (39 en total): Producción de CABA (Lombardi), Catamarca (Zeballos), Chubut (Kresteff), Santa Cruz (Ricci) y Jujuy (el ministerio); Energía de Jujuy (Pizarro); Rentas de Chubut y San Juan.
 
 ## 25/11/2026 (tarde)
