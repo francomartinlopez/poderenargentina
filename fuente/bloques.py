@@ -61,5 +61,5 @@ MOTIVOS = {
     "claro": ("I", "Capital mexicano (América Móvil); México no integra ninguno de los dos bloques en el mapa global.", None),
 }
 
-# Criterio pendiente de Franco (anotado en el plan): los intendentes y dirigentes peronistas figuran como Pendular por su partido,
-# pero varios gobernadores peronistas figuran como Independientes, y el mapa global tiene al PJ como Transoceánico.
+# Decisión de Franco (25/11/2026): queda como está. Los dirigentes, sindicatos e intendentes peronistas siguen como
+# pendulares por su partido; los gobernadores, según su propia posición (varios peronistas, independientes). No se unifica.
