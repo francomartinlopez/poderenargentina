@@ -51,6 +51,8 @@ MOTIVOS = {
     "embajada_espana": ("T", "Representa a España, miembro de la OTAN y la Unión Europea.", None),
     "edesur": ("T", "Capital italiano: la controla el grupo Enel.",
                "https://www.iprofesional.com/negocios/402320-la-italiana-enel-suspendio-la-venta-de-edesur-que-pasara-con-la-distribuidora"),
+    "la_voz": ("T", "Lleva el bloque del Grupo Clarín, que la controla.",
+               "https://argentina.mom-rsf.org/en/media/detail/outlet/la-voz-del-interior/"),
     # Pendular
     "cgt_arg": ("P", "Así figura en el mapa global.", None),
     # Transnacional (mapa global)

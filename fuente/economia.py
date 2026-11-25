@@ -93,8 +93,10 @@ COMERCIO_NACIONAL = dict(
 )
 
 # RIGI (Régimen de Incentivo para Grandes Inversiones): proyectos aprobados, compromisos de inversión (no desembolsos).
-RIGI = dict(proyectos=27, monto=76173, petroleo_gas=46158, mineria=27624, fecha="noviembre de 2026",
-            fuente="https://www.infobae.com/economia/2026/11/09/los-dolares-del-rigi-cuanto-tardaran-en-concretarse-los-usd-76000-millones-de-las-inversiones-aprobadas/")
+RIGI = dict(proyectos=28, monto=126923, petroleo_gas=96908, mineria=27624, fecha="20 de noviembre de 2026",
+            fuente="https://www.infobae.com/economia/2026/11/20/caputo-anuncio-el-ingreso-al-rigi-de-la-mayor-inversion-de-la-historia-argentina/",
+            nota="Suma propia: los 27 proyectos aprobados al 9/11/2026 (USD 76.173 M, Infobae) más Argentina LNG (USD 50.750 M hasta 2050), que el Comité Evaluador aprobó el 20/11/2026. No hay todavía un total oficial que lo incluya.",
+            base_u="https://www.infobae.com/economia/2026/11/09/los-dolares-del-rigi-cuanto-tardaran-en-concretarse-los-usd-76000-millones-de-las-inversiones-aprobadas/")
 
 # RIGI por provincia: compromisos de inversión de los proyectos aprobados (millones de USD), según la nota del
 # 9/11/2026 sobre el informe de los USD 76.000 millones. Solo las seis provincias con cifra publicada; un proyecto
