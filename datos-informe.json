@@ -1,14 +1,93 @@
 {
  "web": "Mapa del Poder Argentino",
  "version": "1.0",
- "generado": "2026-11-25T10:49:19-03:00",
+ "generado": "2026-11-25T11:54:52-03:00",
  "indicadores": [],
  "novedades": [
   {
-   "id": "2026-11-18-58-impositiva-2027",
+   "id": "2026-11-25-ar-rg-5928",
+   "fecha_dato": "2026-11-25",
+   "titulo": "Nación: RG ARCA 5928/2026",
+   "resumen": "Redefine las condiciones para que un empleador cuente como mipyme en el Fondo de Asistencia Laboral e incorpora a las cooperativas (sustituye el art. 2 de la RG 5907). Emisor: ARCA.",
+   "tipo": "norma",
+   "eje": "Política nacional",
+   "alcance": {
+    "nivel": "nacional",
+    "provincia": "",
+    "localidad": "",
+    "pais": "Argentina"
+   },
+   "rubros": [],
+   "subrubros": [],
+   "exposicion": [],
+   "url": "https://www.cira.org.ar/es/servicios/normativas-servicios/resolucion-general/resolucion-general-5928-2026/"
+  },
+  {
+   "id": "2026-11-25-ar-res-sicypyme-500-2026",
+   "fecha_dato": "2026-11-25",
+   "titulo": "Nación: Resolución SICyPyME 500/2026",
+   "resumen": "Prorroga por tres años, desde el 15/12/2026, la excepción para importar y vender lámparas halógenas de uso industrial, comercial y técnico. Emisor: Secretaría de Industria, Comercio y PyME.",
+   "tipo": "norma",
+   "eje": "Política nacional",
+   "alcance": {
+    "nivel": "nacional",
+    "provincia": "",
+    "localidad": "",
+    "pais": "Argentina"
+   },
+   "rubros": [
+    "Industria",
+    "Comercio y servicios"
+   ],
+   "subrubros": [],
+   "exposicion": [],
+   "url": "https://www.cira.org.ar/es/servicios/normativas-servicios/resolucion/resolucion-500-2026/"
+  },
+  {
+   "id": "2026-11-20-ar-res-senasa-957-2026",
+   "fecha_dato": "2026-11-20",
+   "titulo": "Nación: Resolución SENASA 957/2026",
+   "resumen": "Hace obligatorio el sistema SIG-APP para certificar el ajo de Mendoza y San Juan que se exporta a Brasil. Emisor: SENASA.",
+   "tipo": "norma",
+   "eje": "Política nacional",
+   "alcance": {
+    "nivel": "nacional",
+    "provincia": "",
+    "localidad": "",
+    "pais": "Argentina"
+   },
+   "rubros": [
+    "Agro"
+   ],
+   "subrubros": [],
+   "exposicion": [],
+   "url": "https://www.cira.org.ar/es/servicios/normativas-servicios/resolucion/resolucion-957-2026/"
+  },
+  {
+   "id": "2026-11-19-58-ley-tierras-riego",
+   "fecha_dato": "2026-11-19",
+   "titulo": "Neuquén: Ley de protección de tierras productivas bajo riego",
+   "resumen": "Crea las Áreas Productivas Bajo Riego Protegidas y las Áreas de Reserva para Expansión Productiva, y limita su uso urbano. Emisor: Legislatura de Neuquén. Sin número publicado todavía.",
+   "tipo": "norma",
+   "eje": "Política nacional",
+   "alcance": {
+    "nivel": "provincia",
+    "provincia": "Neuquén",
+    "localidad": "",
+    "pais": "Argentina"
+   },
+   "rubros": [
+    "Agro"
+   ],
+   "subrubros": [],
+   "exposicion": [],
+   "url": "https://www.noticiasnqn.com.ar/noticias/2026/11/19/361440-la-legislatura-aprobo-seis-leyes-y-avanzo-con-la-creacion-de-medidas-vinculadas-a-la-proteccion-de-tierras-productivas"
+  },
+  {
+   "id": "2026-11-18-58-ley-3588",
    "fecha_dato": "2026-11-18",
-   "titulo": "Neuquén: Ley Impositiva 2027",
-   "resumen": "Ley Impositiva y Código Fiscal para 2027. Emisor: Legislatura de Neuquén. Sin número publicado todavía.",
+   "titulo": "Neuquén: Ley 3588",
+   "resumen": "Modifica nueve artículos del Código Fiscal (multas por mora y reducción de sanciones según la etapa del allanamiento), desde el 1/1/2027. Emisor: Legislatura de Neuquén.",
    "tipo": "norma",
    "eje": "Política nacional",
    "alcance": {
@@ -20,7 +99,25 @@
    "rubros": [],
    "subrubros": [],
    "exposicion": [],
-   "url": "https://www.noticiasnqn.com.ar/noticias/2026/11/18/361395-neuquen-aprobo-la-ley-impositiva-y-el-codigo-fiscal-para-2027"
+   "url": "https://www.rionegro.com.ar/politica/neuquen-aprobo-la-reforma-tributaria-que-cambia-en-2027-4806184/"
+  },
+  {
+   "id": "2026-11-18-58-impositiva-2027",
+   "fecha_dato": "2026-11-18",
+   "titulo": "Neuquén: Ley Impositiva 2027",
+   "resumen": "Ley Impositiva 2027: elimina las alícuotas de Ingresos Brutos de 2,5% y 3,5%, da un crédito fiscal de hasta 20% a los cumplidores y exime de Sellos a préstamos personales y microcréditos. Emisor: Legislatura de Neuquén. Sin número publicado todavía.",
+   "tipo": "norma",
+   "eje": "Política nacional",
+   "alcance": {
+    "nivel": "provincia",
+    "provincia": "Neuquén",
+    "localidad": "",
+    "pais": "Argentina"
+   },
+   "rubros": [],
+   "subrubros": [],
+   "exposicion": [],
+   "url": "https://www.neuqueninforma.gob.ar/amp/noticias/2026/11/20/267591-se-aprobo-la-reforma-tributaria-impulsada-por-figueroa-con-mas-beneficios-para-quienes-cumplen"
   },
   {
    "id": "2026-11-18-14-ley-11160",
@@ -45,6 +142,106 @@
    "url": "https://web.cpcecba.org.ar/?p=70936"
   },
   {
+   "id": "2026-11-16-ar-dec-1366-2026",
+   "fecha_dato": "2026-11-16",
+   "titulo": "Nación: Decreto 1366/2026",
+   "resumen": "Modifica la reglamentación del RIGI (Decreto 749/2024): proveedor local, plazo del monto mínimo, cesiones y reorganizaciones, y acceso al mercado de cambios. Emisor: Poder Ejecutivo Nacional.",
+   "tipo": "norma",
+   "eje": "Política nacional",
+   "alcance": {
+    "nivel": "nacional",
+    "provincia": "",
+    "localidad": "",
+    "pais": "Argentina"
+   },
+   "rubros": [
+    "Industria",
+    "Minería",
+    "Energía"
+   ],
+   "subrubros": [],
+   "exposicion": [],
+   "url": "https://www.cira.org.ar/?p=27118"
+  },
+  {
+   "id": "2026-11-13-ar-res-me-1977-2026",
+   "fecha_dato": "2026-11-13",
+   "titulo": "Nación: Resolución ME 1977/2026",
+   "resumen": "Aprueba la adhesión al RIGI de Procesadora de Gas del Sur SA (procesamiento de gas), por USD 1.394,7 millones. Emisor: Ministerio de Economía.",
+   "tipo": "norma",
+   "eje": "Política nacional",
+   "alcance": {
+    "nivel": "nacional",
+    "provincia": "",
+    "localidad": "",
+    "pais": "Argentina"
+   },
+   "rubros": [
+    "Energía"
+   ],
+   "subrubros": [],
+   "exposicion": [],
+   "url": "https://www.cira.org.ar/?p=27113"
+  },
+  {
+   "id": "2026-11-13-ar-res-me-1976-2026",
+   "fecha_dato": "2026-11-13",
+   "titulo": "Nación: Resolución ME 1976/2026",
+   "resumen": "Aprueba la adhesión al RIGI de Midstream de Gas del Sur SA (transporte, fraccionamiento y almacenamiento de gas), por USD 1.849,6 millones. Emisor: Ministerio de Economía.",
+   "tipo": "norma",
+   "eje": "Política nacional",
+   "alcance": {
+    "nivel": "nacional",
+    "provincia": "",
+    "localidad": "",
+    "pais": "Argentina"
+   },
+   "rubros": [
+    "Energía"
+   ],
+   "subrubros": [],
+   "exposicion": [],
+   "url": "https://www.cira.org.ar/?p=27115"
+  },
+  {
+   "id": "2026-11-12-ar-rg-5927",
+   "fecha_dato": "2026-11-12",
+   "titulo": "Nación: RG ARCA 5927/2026",
+   "resumen": "Reglamenta la reducción de 50% de las multas por deberes formales de la Ley 27.826, con regularización hasta el 18/12/2026; excluye a los grandes contribuyentes. Emisor: ARCA.",
+   "tipo": "norma",
+   "eje": "Política nacional",
+   "alcance": {
+    "nivel": "nacional",
+    "provincia": "",
+    "localidad": "",
+    "pais": "Argentina"
+   },
+   "rubros": [],
+   "subrubros": [],
+   "exposicion": [],
+   "url": "https://www.boletinoficial.gob.ar/pdf/aviso/primera/350245/20261112"
+  },
+  {
+   "id": "2026-11-11-ar-res-sicypyme-461-2026",
+   "fecha_dato": "2026-11-11",
+   "titulo": "Nación: Resolución SICyPyME 461/2026",
+   "resumen": "Fija trámite previo y requisitos para importar ropa usada y prohíbe la importación de calzado y ropa interior usados. Emisor: Secretaría de Industria, Comercio y PyME.",
+   "tipo": "norma",
+   "eje": "Política nacional",
+   "alcance": {
+    "nivel": "nacional",
+    "provincia": "",
+    "localidad": "",
+    "pais": "Argentina"
+   },
+   "rubros": [
+    "Comercio y servicios"
+   ],
+   "subrubros": [],
+   "exposicion": [],
+   "url": "https://www.cira.org.ar/es/servicios/normativas-servicios/resolucion/resolucion-461-2026-2/"
+  },
+  {
    "id": "2026-11-10-50-ley-hidrocarburos",
    "fecha_dato": "2026-11-10",
    "titulo": "Mendoza: Ley 9744",
@@ -65,6 +262,103 @@
    "url": "https://abogados.com.ar/la-nueva-ley-de-hidrocarburos-de-mendoza-y-el-regimen-federal/40496"
   },
   {
+   "id": "2026-11-06-ar-rg-5922",
+   "fecha_dato": "2026-11-06",
+   "titulo": "Nación: RG ARCA 5922/2026",
+   "resumen": "Reglamenta el recupero del IVA de las inversiones del RIMI mediante un cupo fiscal trimestral. Emisor: ARCA.",
+   "tipo": "norma",
+   "eje": "Política nacional",
+   "alcance": {
+    "nivel": "nacional",
+    "provincia": "",
+    "localidad": "",
+    "pais": "Argentina"
+   },
+   "rubros": [],
+   "subrubros": [],
+   "exposicion": [],
+   "url": "https://www.cira.org.ar/?p=27042"
+  },
+  {
+   "id": "2026-11-05-ar-rg-5924",
+   "fecha_dato": "2026-11-05",
+   "titulo": "Nación: RG ARCA 5924/2026",
+   "resumen": "Amplía el plan de facilidades de la RG 5875 a deudas vencidas al 31/10/2026, con adhesión hasta el 30/06/2027. Emisor: ARCA.",
+   "tipo": "norma",
+   "eje": "Política nacional",
+   "alcance": {
+    "nivel": "nacional",
+    "provincia": "",
+    "localidad": "",
+    "pais": "Argentina"
+   },
+   "rubros": [],
+   "subrubros": [],
+   "exposicion": [],
+   "url": "https://www.cira.org.ar/?p=27030"
+  },
+  {
+   "id": "2026-11-05-ar-rg-5923",
+   "fecha_dato": "2026-11-05",
+   "titulo": "Nación: RG ARCA 5923/2026",
+   "resumen": "Extiende al 30/06/2027 la suspensión de ejecuciones fiscales y embargos para mipymes de los tramos 1 y 2, pequeños contribuyentes y entidades de salud sin fines de lucro. Emisor: ARCA.",
+   "tipo": "norma",
+   "eje": "Política nacional",
+   "alcance": {
+    "nivel": "nacional",
+    "provincia": "",
+    "localidad": "",
+    "pais": "Argentina"
+   },
+   "rubros": [],
+   "subrubros": [],
+   "exposicion": [],
+   "url": "https://www.cira.org.ar/?p=27028"
+  },
+  {
+   "id": "2026-11-05-06-ley-sudoeste",
+   "fecha_dato": "2026-11-05",
+   "titulo": "Buenos Aires: Ley de beneficios fiscales del sudoeste bonaerense",
+   "resumen": "Vuelve permanentes las exenciones de Inmobiliario, Ingresos Brutos y Sellos en Patagones, Villarino, Puan, Tornquist y parte de Saavedra (modifica las leyes 12.322 y 12.323). Emisor: Legislatura de Buenos Aires. Sin número publicado todavía.",
+   "tipo": "norma",
+   "eje": "Política nacional",
+   "alcance": {
+    "nivel": "provincia",
+    "provincia": "Buenos Aires",
+    "localidad": "",
+    "pais": "Argentina"
+   },
+   "rubros": [
+    "Agro",
+    "Industria",
+    "Comercio y servicios"
+   ],
+   "subrubros": [],
+   "exposicion": [],
+   "url": "https://www.parlamentario.com/2026/11/05/sancionan-la-permanencia-por-ley-de-beneficios-fiscales-para-el-sudoeste-bonaerense-y-patagones/"
+  },
+  {
+   "id": "2026-11-04-ar-res-se-311-2026",
+   "fecha_dato": "2026-11-04",
+   "titulo": "Nación: Resolución SE 311/2026",
+   "resumen": "Aprueba la lista de bienes de alta eficiencia energética que acceden al RIMI sin monto mínimo de inversión. Emisor: Secretaría de Energía.",
+   "tipo": "norma",
+   "eje": "Política nacional",
+   "alcance": {
+    "nivel": "nacional",
+    "provincia": "",
+    "localidad": "",
+    "pais": "Argentina"
+   },
+   "rubros": [
+    "Industria",
+    "Energía"
+   ],
+   "subrubros": [],
+   "exposicion": [],
+   "url": "https://www.cira.org.ar/?p=26992"
+  },
+  {
    "id": "2026-10-29-c-neuquen-parque-industrial",
    "fecha_dato": "2026-10-29",
    "titulo": "Neuquén: Régimen de incentivos del Parque Industrial Capital",
@@ -83,26 +377,6 @@
    "subrubros": [],
    "exposicion": [],
    "url": "https://www.noticiasnqn.com.ar/noticias/2026/10/29/358707-el-concejo-deliberante-de-neuquen-aprobo-incentivos-tributarios-para-el-parque-industrial-capital"
-  },
-  {
-   "id": "2026-10-10-ley-5956",
-   "fecha_dato": "2026-10",
-   "titulo": "Catamarca: Ley 5956",
-   "resumen": "Transforma a la minera estatal CAMYEN en sociedad anónima unipersonal. Emisor: Legislatura de Catamarca.",
-   "tipo": "norma",
-   "eje": "Política nacional",
-   "alcance": {
-    "nivel": "provincia",
-    "provincia": "Catamarca",
-    "localidad": "",
-    "pais": "Argentina"
-   },
-   "rubros": [
-    "Minería"
-   ],
-   "subrubros": [],
-   "exposicion": [],
-   "url": "https://www.elancasti.com.ar/edicion-impresa/camyen-sera-una-sociedad-anonima-unipersonal-n619815"
   },
   {
    "id": "2026-09-28-ar-dec-1107-2026",
@@ -180,6 +454,26 @@
    "subrubros": [],
    "exposicion": [],
    "url": "https://www.anbariloche.com.ar/noticias/2026/09/01/115810-entro-en-vigencia-el-paquete-de-alivio-fiscal-en-san-martin-de-los-andes"
+  },
+  {
+   "id": "2026-08-10-ley-5956",
+   "fecha_dato": "2026-08",
+   "titulo": "Catamarca: Ley 5956",
+   "resumen": "Transforma a la minera estatal CAMYEN en sociedad anónima unipersonal. Emisor: Legislatura de Catamarca.",
+   "tipo": "norma",
+   "eje": "Política nacional",
+   "alcance": {
+    "nivel": "provincia",
+    "provincia": "Catamarca",
+    "localidad": "",
+    "pais": "Argentina"
+   },
+   "rubros": [
+    "Minería"
+   ],
+   "subrubros": [],
+   "exposicion": [],
+   "url": "https://www.elancasti.com.ar/edicion-impresa/camyen-sera-una-sociedad-anonima-unipersonal-n619815"
   }
  ],
  "agenda": [],

@@ -3,6 +3,7 @@
 ## 25/11/2026 (datos para informes)
 - Nuevo `datos-informe.json` en la raíz para la web de informes de Plexum (especificación v1.2, apartado 4): normas de los últimos 90 días y cambios de autoridades como novedades; agenda con elecciones provinciales de los próximos 60 días. Lo genera `scripts/datos_informe.py` junto con el resto de los datos.
 - La ficha de provincia muestra desde cuándo está un funcionario cuando la fecha tiene fuente (por ahora, Kresteff en Chubut).
+- Normas, carga semanal: 15 normas nuevas (12 nacionales: RG ARCA 5922, 5923, 5924, 5927 y 5928, Decreto 1366/2026 del RIGI, resoluciones ME 1976 y 1977 de adhesiones al RIGI, SE 311, SICyPyME 461 y 500 y SENASA 957; Buenos Aires, ley del sudoeste; Neuquén, Ley 3588 y ley de tierras bajo riego). San Juan: Ley 2827-M. Recaudación: Neuquén (Lavaggi), Río Negro (Palmieri) y Chubut (ARECH, Asnaghi). 77 normas.
 
 ## 25/11/2026 (funcionarios, segunda ronda)
 - Energía de Córdoba (Ministerio de Infraestructura, Fabián López) y de Salta (Secretaría de Minería del Ministerio de Producción y Minería); Minería de Chubut (Dirección General de Minas y Geología). 42 funcionarios.
