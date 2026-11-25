@@ -248,12 +248,17 @@ def main():
         assert pid in ign, f"Funcionarios: provincia inexistente {pid}"
         for (a, c, n, u) in lista:
             assert a in normas.AREAS and c and u.startswith("http"), f"Funcionarios {pid}: dato o fuente faltante"
-        fun[pid] = [dict(a=a, c=c, n=n, u=u) for (a, c, n, u) in sorted(lista, key=lambda z: normas.AREAS.index(z[0]))]
+        fun[pid] = [dict(a=a, c=c, n=n, u=u, **({"d": normas.ASUNCIONES[(pid, a)][0], "dn": normas.ASUNCIONES[(pid, a)][1]} if (pid, a) in normas.ASUNCIONES else {}))
+                    for (a, c, n, u) in sorted(lista, key=lambda z: normas.AREAS.index(z[0]))]
+    for (pid, a), (d, _) in normas.ASUNCIONES.items():
+        assert any(f["a"] == a for f in fun.get(pid, [])) and re.fullmatch(r"\d{4}-\d{2}-\d{2}", d), f"Asunción sin funcionario o fecha inválida: {pid} {a}"
     meta["rubros"] = normas.RUBROS
     out = dict(corte=CORTE, proxima=PROXIMA, meta=meta, pais=pais, elecciones=elec, provincias=provincias, ciudades=ciudades,
                deppob=poblacion.DEPARTAMENTO, deps=deps, actores=actores, relaciones=relaciones, friccion=fr, zonas=zonas, normas=nor, funcionarios=fun)
     with open(os.path.join(RAIZ, "data", "territorio.json"), "w") as f:
         json.dump(out, f, ensure_ascii=False, separators=(",", ":"))
+    import datos_informe
+    datos_informe.escribir(out, RAIZ)
     print(f"data/territorio.json: {len(provincias)} provincias, {sum(ndep.values())} departamentos, {len(ciudades)} ciudades, {len(actores)} actores y {len(relaciones)} relaciones, {len(fr)} puntos de fricción, {len(zonas)} zona(s) liberada(s), {len(deps)} fichas de departamento y {len(nor)} normas. Corte {CORTE}.")
 
 

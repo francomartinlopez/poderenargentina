@@ -283,3 +283,9 @@ FUNCIONARIOS = {
            ("Recaudación", "Agencia Santacruceña de Ingresos Públicos (ASIP)", None, "https://siap.blogdelcontador.com.ar/organismo/asip-agencia-santacrucena-de-ingresos-publicos/")],
 }
 AREAS = ["Producción", "Energía", "Minería", "Recaudación"]
+
+# Cambios de autoridades con fecha conocida (con fuente en FUNCIONARIOS): (provincia, área) -> (fecha ISO, nota).
+# La ficha de la provincia muestra «desde» y datos-informe.json los publica como novedad «otro» durante 90 días.
+ASUNCIONES = {
+    ("26", "Producción"): ("2026-09-01", "Reemplazó a Juan Manuel Pavón."),
+}

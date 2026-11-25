@@ -1,0 +1,187 @@
+{
+ "web": "Mapa del Poder Argentino",
+ "version": "1.0",
+ "generado": "2026-11-25T10:49:19-03:00",
+ "indicadores": [],
+ "novedades": [
+  {
+   "id": "2026-11-18-58-impositiva-2027",
+   "fecha_dato": "2026-11-18",
+   "titulo": "Neuquén: Ley Impositiva 2027",
+   "resumen": "Ley Impositiva y Código Fiscal para 2027. Emisor: Legislatura de Neuquén. Sin número publicado todavía.",
+   "tipo": "norma",
+   "eje": "Política nacional",
+   "alcance": {
+    "nivel": "provincia",
+    "provincia": "Neuquén",
+    "localidad": "",
+    "pais": "Argentina"
+   },
+   "rubros": [],
+   "subrubros": [],
+   "exposicion": [],
+   "url": "https://www.noticiasnqn.com.ar/noticias/2026/11/18/361395-neuquen-aprobo-la-ley-impositiva-y-el-codigo-fiscal-para-2027"
+  },
+  {
+   "id": "2026-11-18-14-ley-11160",
+   "fecha_dato": "2026-11-18",
+   "titulo": "Córdoba: Ley 11.160",
+   "resumen": "Régimen de incentivo a la inversión, la innovación y el empleo: exención de Ingresos Brutos, Sellos e Inmobiliario por diez años. Emisor: Legislatura de Córdoba.",
+   "tipo": "norma",
+   "eje": "Política nacional",
+   "alcance": {
+    "nivel": "provincia",
+    "provincia": "Córdoba",
+    "localidad": "",
+    "pais": "Argentina"
+   },
+   "rubros": [
+    "Industria",
+    "Comercio y servicios",
+    "Agro"
+   ],
+   "subrubros": [],
+   "exposicion": [],
+   "url": "https://web.cpcecba.org.ar/?p=70936"
+  },
+  {
+   "id": "2026-11-10-50-ley-hidrocarburos",
+   "fecha_dato": "2026-11-10",
+   "titulo": "Mendoza: Ley 9744",
+   "resumen": "Nueva ley de hidrocarburos, que deroga las leyes 7526 y 9137: regalía de referencia de 15% con oferta de los interesados, incentivos para campos maduros y no convencionales, y más multas ambientales. Emisor: Legislatura de Mendoza.",
+   "tipo": "norma",
+   "eje": "Política nacional",
+   "alcance": {
+    "nivel": "provincia",
+    "provincia": "Mendoza",
+    "localidad": "",
+    "pais": "Argentina"
+   },
+   "rubros": [
+    "Energía"
+   ],
+   "subrubros": [],
+   "exposicion": [],
+   "url": "https://abogados.com.ar/la-nueva-ley-de-hidrocarburos-de-mendoza-y-el-regimen-federal/40496"
+  },
+  {
+   "id": "2026-10-29-c-neuquen-parque-industrial",
+   "fecha_dato": "2026-10-29",
+   "titulo": "Neuquén: Régimen de incentivos del Parque Industrial Capital",
+   "resumen": "Incentivos tributarios para las empresas que se radiquen en el Parque Industrial Capital. Emisor: Concejo Deliberante de Neuquén. Sin número publicado todavía.",
+   "tipo": "norma",
+   "eje": "Política nacional",
+   "alcance": {
+    "nivel": "localidad",
+    "provincia": "Neuquén",
+    "localidad": "Neuquén",
+    "pais": "Argentina"
+   },
+   "rubros": [
+    "Industria"
+   ],
+   "subrubros": [],
+   "exposicion": [],
+   "url": "https://www.noticiasnqn.com.ar/noticias/2026/10/29/358707-el-concejo-deliberante-de-neuquen-aprobo-incentivos-tributarios-para-el-parque-industrial-capital"
+  },
+  {
+   "id": "2026-10-10-ley-5956",
+   "fecha_dato": "2026-10",
+   "titulo": "Catamarca: Ley 5956",
+   "resumen": "Transforma a la minera estatal CAMYEN en sociedad anónima unipersonal. Emisor: Legislatura de Catamarca.",
+   "tipo": "norma",
+   "eje": "Política nacional",
+   "alcance": {
+    "nivel": "provincia",
+    "provincia": "Catamarca",
+    "localidad": "",
+    "pais": "Argentina"
+   },
+   "rubros": [
+    "Minería"
+   ],
+   "subrubros": [],
+   "exposicion": [],
+   "url": "https://www.elancasti.com.ar/edicion-impresa/camyen-sera-una-sociedad-anonima-unipersonal-n619815"
+  },
+  {
+   "id": "2026-09-28-ar-dec-1107-2026",
+   "fecha_dato": "2026-09-28",
+   "titulo": "Nación: Decreto 1107/2026",
+   "resumen": "Autoriza la venta de la participación de Enarsa en las centrales térmicas Manuel Belgrano (Campana) y San Martín (Timbúes). Emisor: Poder Ejecutivo Nacional.",
+   "tipo": "norma",
+   "eje": "Política nacional",
+   "alcance": {
+    "nivel": "nacional",
+    "provincia": "",
+    "localidad": "",
+    "pais": "Argentina"
+   },
+   "rubros": [
+    "Energía"
+   ],
+   "subrubros": [],
+   "exposicion": [],
+   "url": "https://eleconomista.com.ar/energia/el-gobierno-pone-venta-dos-gigantes-electricos-centrales-privatizara-cuanto-controla-estado-n98462"
+  },
+  {
+   "id": "2026-09-14-ar-bcra-a8481",
+   "fecha_dato": "2026-09-14",
+   "titulo": "Nación: Comunicación A 8481",
+   "resumen": "Actualiza el texto ordenado de Exterior y Cambios. Emisor: BCRA.",
+   "tipo": "norma",
+   "eje": "Política nacional",
+   "alcance": {
+    "nivel": "nacional",
+    "provincia": "",
+    "localidad": "",
+    "pais": "Argentina"
+   },
+   "rubros": [],
+   "subrubros": [],
+   "exposicion": [],
+   "url": "https://www.bcra.gob.ar/archivos/Pdfs/comytexord/A8481.pdf"
+  },
+  {
+   "id": "2026-09-01-autoridad-26-producción",
+   "fecha_dato": "2026-09-01",
+   "titulo": "Chubut: cambio en Producción",
+   "resumen": "Julio Kresteff asumió como ministro de Producción de Chubut. Reemplazó a Juan Manuel Pavón.",
+   "tipo": "otro",
+   "eje": "Política nacional",
+   "alcance": {
+    "nivel": "provincia",
+    "provincia": "Chubut",
+    "localidad": "",
+    "pais": "Argentina"
+   },
+   "rubros": [],
+   "subrubros": [],
+   "exposicion": [],
+   "url": "https://diariojornada.com.ar/422809/politica/julio_kresteff_es_el_nuevo_ministro_de_produccion"
+  },
+  {
+   "id": "2026-08-31-d-lacar-ord-15714",
+   "fecha_dato": "2026-08-31",
+   "titulo": "San Martín de los Andes: Ordenanza 15.714/26",
+   "resumen": "Baja de 35% de la tasa de Comercio, Industria y Servicios de agosto a diciembre de 2026. Emisor: Concejo Deliberante de San Martín de los Andes.",
+   "tipo": "norma",
+   "eje": "Política nacional",
+   "alcance": {
+    "nivel": "localidad",
+    "provincia": "Neuquén",
+    "localidad": "San Martín de los Andes",
+    "pais": "Argentina"
+   },
+   "rubros": [
+    "Comercio y servicios",
+    "Industria"
+   ],
+   "subrubros": [],
+   "exposicion": [],
+   "url": "https://www.anbariloche.com.ar/noticias/2026/09/01/115810-entro-en-vigencia-el-paquete-de-alivio-fiscal-en-san-martin-de-los-andes"
+  }
+ ],
+ "agenda": [],
+ "faltantes": []
+}

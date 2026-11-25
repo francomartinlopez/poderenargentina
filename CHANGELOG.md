@@ -1,5 +1,9 @@
 # Cambios
 
+## 25/11/2026 (datos para informes)
+- Nuevo `datos-informe.json` en la raíz para la web de informes de Plexum (especificación v1.2, apartado 4): normas de los últimos 90 días y cambios de autoridades como novedades; agenda con elecciones provinciales de los próximos 60 días. Lo genera `scripts/datos_informe.py` junto con el resto de los datos.
+- La ficha de provincia muestra desde cuándo está un funcionario cuando la fecha tiene fuente (por ahora, Kresteff en Chubut).
+
 ## 25/11/2026 (funcionarios, segunda ronda)
 - Energía de Córdoba (Ministerio de Infraestructura, Fabián López) y de Salta (Secretaría de Minería del Ministerio de Producción y Minería); Minería de Chubut (Dirección General de Minas y Geología). 42 funcionarios.
 - Ocho funcionarios más (39 en total): Producción de CABA (Lombardi), Catamarca (Zeballos), Chubut (Kresteff), Santa Cruz (Ricci) y Jujuy (el ministerio); Energía de Jujuy (Pizarro); Rentas de Chubut y San Juan.

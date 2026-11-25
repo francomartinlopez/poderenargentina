@@ -27,6 +27,7 @@ Los cinco pasos están hechos: cartografía, ciudades, gobernadores, fichas de l
 - `fuente/departamentos.py`: fichas de los partidos y departamentos relevantes.
 - `fuente/actores.py`: actores núcleo, fichas y relaciones; `fuente/ejes.py`: ejes, pesos y categorías; `scripts/puntaje.py`: fórmula del puntaje.
 - `scripts/generar_datos.py`: genera `data/territorio.json`.
+- `scripts/datos_informe.py`: genera `datos-informe.json` (raíz) para la web de informes de Plexum; lo llama `generar_datos.py`.
 - `scripts/validate.js`: controla provincias, ciudades, departamentos y el vencimiento del corte.
 - `scripts/cartografia.sh`: regenera `data/provincias.json`, `data/antartida.json` y `data/dep/*.json` desde el IGN (vía Georef, datos.gob.ar).
 - `scripts/ubicar_ciudad.py`: ubica una localidad en Georef para sumarla a `fuente/ciudades.py`.
