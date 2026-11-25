@@ -1,5 +1,11 @@
 # Cambios
 
+## 2026-11-25 (b) · Bloques internacionales, paso austral y octava tanda
+- Actores divididos por bloque (transoceánico, pendular, euroasiático, independiente y transnacional): columnas y filtro en la página «Actores», motivo y vínculos con potencias en cada ficha, reparto por bloque en cada provincia (`fuente/bloques.py`).
+- Diez actores alineados con el bloque que tienen en el mapa global (Cargill, Bunge, COFCO, Rio Tinto, Toyota, BBVA, Santander, AEA, Corporación América y Los Monos) y Fundación Faro corregida a transoceánico.
+- Nuevo punto de fricción: paso interoceánico austral (Drake, Beagle y Magallanes). La estación china de Neuquén suma a la CLTC, la embajada china y la de EE.UU.
+- Octava tanda: CLTC, Edesur (Enel), El Tribuno (Salta) y Fundar, con seis relaciones con fuente (398 actores, 626 relaciones).
+
 ## 2026-11-25 · Normas para empresas
 - Nueva página «Normas»: 52 normas que afectan a las empresas en tres niveles (20 nacionales, 23 provinciales y 9 de localidades), con número, fecha, emisor, lugar, rubro, resumen y fuente; filtros por lugar y por rubro.
 - Las fichas de provincia, ciudad y partido muestran sus normas; las de provincia, además, los funcionarios que regulan producción, energía, minería y recaudación (`fuente/normas.py`).

@@ -211,6 +211,21 @@ def main():
         for x, y in ((r["o"], r["d"]), (r["d"], r["o"])):
             if x in A and y in A and A[x]["cat"] not in presencia.EXCLUIDAS and A[y]["alc"] in ("P", "M"):
                 poner(x, A[y]["prov"], f"{r['t']} con {A[y]['n']}", u=r["u"])
+    # Inclinación internacional (fuente/bloques.py): motivo y vínculos con actores del mapa global de bloque conocido.
+    import bloques
+    EXN = meta["act"]["externos"]
+    for a in actores:
+        m = bloques.MOTIVOS.get(a["id"])
+        a["blm"] = None
+        if m:
+            a["blm"] = dict(x=m[1], u=m[2] or (bloques.GLOBAL_URL + a["id"] if a["id"] in bloques.GLOBAL else a["fu"][0][1]))
+        elif a["id"] in bloques.GLOBAL:
+            a["blm"] = dict(x="Así figura en el mapa global.", u=bloques.GLOBAL_URL + a["id"])
+        a["blv"] = []
+    for r in relaciones:
+        for x, y in ((r["o"], r["d"]), (r["d"], r["o"])):
+            if x in A and y in bloques.EXT_BLOQUE and r["t"] != "Enfrentamiento":
+                A[x]["blv"].append(dict(e=EXN.get(y, y), b=bloques.EXT_BLOQUE[y], t=r["t"], u=r["u"]))
     # Normas que afectan a las empresas (fuente/normas.py), en tres niveles: Nación, provincias y localidades.
     import normas
     nor, vistos = [], set()

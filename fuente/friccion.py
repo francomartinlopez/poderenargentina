@@ -33,7 +33,7 @@ FRICCION = [
      [("Cuestión de las islas Malvinas (Wikipedia)", W + "Cuesti%C3%B3n_de_las_islas_Malvinas")]),
 
     ("estacion_china", "Estación de Espacio Lejano (Neuquén)", "Geopolítica", "58", "estacion-de-espacio-lejano-quintuco", -70.1495, -38.1914, 2, "Activa",
-     ["milei", "gob_neuquen", "ffaa"], ["China", "EE.UU."],
+     ["milei", "gob_neuquen", "ffaa", "cltc", "embajada_china", "embajada_eeuu"], ["China", "EE.UU."],
      "Estación de seguimiento espacial operada por la agencia china CLTC, dependiente del Ejército Popular de Liberación, en un predio cedido por 50 años. EE.UU. objeta su posible uso militar y el Gobierno nacional evaluó pedir una inspección técnica.",
      [("2014-04", "Acuerdo entre la Argentina y China para instalar la estación, con cesión del predio por 50 años.", "https://chequeado.com/el-explicador/que-se-sabe-sobre-la-base-espacial-china-ubicada-en-neuquen/"),
       ("2024-04", "El Gobierno analiza pedir una inspección técnica de la base.", "https://www.a24.com/politica/el-gobierno-analiza-pedir-una-inspeccion-tecnica-la-base-espacial-china-neuquen-n1308479/amp")],
@@ -145,6 +145,18 @@ FRICCION = [
       ("2026-10", "Acuerdo internacional sobre el calamar sin la Argentina; Montevideo, base logística de las flotas.", "https://www.iprofesional.com/negocios/466455-pesca-china-malvinas-y-uruguay-se-unen-y-acechan-mar-argentino")],
      [("La Nación: gobernanza en alta mar", "https://www.lanacion.com.ar/opinion/gobernanza-en-alta-mar-nid16012026/"),
       ("iProfesional: China controla más del 60% de la flota calamarera", "https://www.iprofesional.com/negocios/459814-china-avanza-sobre-la-pesca-en-mar-argentino-y-controla-el-63-de-una-flota-clave-nacional")]),
+
+    ("paso_austral", "Paso interoceánico austral: Drake, Beagle y Magallanes", "Geopolítica", "94", "ushuaia", -66.9, -55.2, 1, "Latente: competencia estratégica",
+     ["armada", "embajada_eeuu", "embajada_china", "gob_tdf", "pentagono"], ["EE.UU.", "China"],
+     "El Estrecho de Magallanes (aguas chilenas), el canal Beagle y el Pasaje de Drake son las únicas conexiones naturales entre el Atlántico y el Pacífico. Ganan valor cuando el Canal de Panamá se restringe y para los buques que no pasan por él: en 2024 un portaaviones de EE.UU. cruzó por Magallanes al rodear Sudamérica. El Comando Sur advirtió sobre la influencia china en esos pasos, y la Argentina proyecta sobre el Beagle, en Ushuaia, una base naval con participación de EE.UU.",
+     [("2024-04", "Milei anuncia en Ushuaia, con la jefa del Comando Sur, que la base naval será un proyecto conjunto con EE.UU.", "https://www.perfil.com/noticias/politica/la-base-naval-integrada-de-ushuaia-el-proyecto-que-defensa-impulsa-desde-hace-decadas-y-que-milei-busca-reactivar.phtml"),
+      ("2024-06", "El portaaviones USS George Washington cruza el Estrecho de Magallanes en el despliegue Southern Seas 2024.", "https://allhands.navy.mil/Media/Gallery/igphoto/2003481246"),
+      ("2026-08", "Un jefe militar argentino llama a Magallanes, el sur y el Drake «llave bioceánica»; Chile protesta.", "https://www.emol.com/noticias/Nacional/2026/08/25/1209480/magallanes-molestia-chile-soberania-argentina.html"),
+      ("2026-09", "Defensa reactiva el proyecto de la Base Naval Integrada de Ushuaia.", "https://www.perfil.com/noticias/politica/la-base-naval-integrada-de-ushuaia-el-proyecto-que-defensa-impulsa-desde-hace-decadas-y-que-milei-busca-reactivar.phtml")],
+     [("Encrucijada Americana: los pasos interoceánicos australes", "https://encrucijadaamericana.uahurtado.cl/index.php/ea/article/download/293/247/981"),
+      ("Defensa.com: el Comando Sur y la influencia china en Magallanes y el Drake", "https://www.defensa.com/chile/estados-unidos-alerta-chile-sobre-influencia-china-estrecho-2025"),
+      ("Canal 26: Magallanes ante la crisis del Canal de Panamá", "https://www.canal26.com/internacionales/2026/08/27/estrecho-de-magallanes-por-que-vuelve-a-ser-clave-ante-la-crisis-del-canal-de-panama/"),
+      ("Radio U. de Chile: Magallanes, el Beagle, el Drake y la Antártida como sistema", "https://radio.uchile.cl/2026/09/13/estrecho-de-magallanes-la-creciente-relevancia-geopolitica-de-la-ruta-chilena/")]),
 
     ("magallanes", "Estrecho de Magallanes y la frontera austral con Chile", "Soberanía", "78", None, -68.35, -52.33, 2, "Contenida por la diplomacia",
      ["milei", "ffaa"], [],
