@@ -146,6 +146,12 @@ def main():
         assert pid in ign and e[1] in ("S", "N", None) and e[3].startswith("http"), f"Elecciones {pid}"
     elec = dict(pres=dict(f=elecciones.PRESIDENCIAL[0], u=elecciones.PRESIDENCIAL[1]),
                 prov={pid: dict(f=e[0], d=e[1], x=e[2], u=e[3]) for pid, e in elecciones.PROVINCIAS.items()})
+    import participacion as pa
+    for (y, t, v, af) in pa.SERIE:
+        assert t in pa.TIPOS and 40 < af <= v < 100, f"Participación {y}"
+    assert set(pa.NOTAS) <= {y for y, *_ in pa.SERIE} and all(u.startswith("http") for _, u in pa.FUENTES)
+    elec["part"] = dict(serie=[dict(y=y, t=t, v=v, a=af) for (y, t, v, af) in pa.SERIE], tipos=pa.TIPOS, notas=pa.NOTAS,
+                        salv=pa.SALVEDADES, fuentes=[dict(n=n, u=u) for n, u in pa.FUENTES])
     meta = dict(potencias=POT, canales=influencias.CANALES, alineamiento=alineamiento.ALINEAMIENTO,
                 fuente_censo=poblacion.FUENTE, fuente_exp=economia.FUENTE_EXPORTACIONES, periodo_exp=economia.PERIODO_EXPORTACIONES,
                 fuente_propios=economia.FUENTE_RECURSOS_PROPIOS, fuente_ali=alineamiento.FUENTE_MAPA)

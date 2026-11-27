@@ -315,7 +315,34 @@ function vElecciones(){
   <table class="stack"><thead><tr><th>Provincia</th><th>Fecha provincial</th><th>Calendario</th><th>Gobierna</th><th>Alineamiento</th><th>Nota</th></tr></thead><tbody>
   ${L.map(({p,e})=>`<tr><td><a href="#prov-${p.s}">${esc(p.n)}</a></td><td class="mono">${e&&e.f?fd(e.f):"<span class=muted>sin fijar</span>"}</td><td>${e&&e.d?D[e.d]:"<span class=muted>sin definir</span>"}</td><td>${esc(p.gob)} <span class="muted">(${esc(p.par)})</span></td><td>${esc(T.meta.alineamiento[p.ali.ali]||"")}</td><td>${e?esc(e.x)+` <a href="${esc(e.u)}" target="_blank" rel="noopener">Fuente</a>`:""}</td></tr>`).join("")}
   </tbody></table>
-  <p class="muted" style="font-size:13px">Se actualiza en cada corte y después de cada convocatoria. Solo fechas confirmadas por la provincia o publicadas con fuente.</p></div>`;
+  <p class="muted" style="font-size:13px">Se actualiza en cada corte y después de cada convocatoria. Solo fechas confirmadas por la provincia o publicadas con fuente.</p>
+  ${E.part?partHTML(E.part):""}</div>`;
+}
+function partHTML(P){
+  const S=P.serie,W=1000,H=450,ml=46,mr=14,mt=14,mb=98,y0=50,y1=95,n=S.length;
+  const X=i=>ml+(i+.5)*(W-ml-mr)/n,Y=v=>mt+(y1-v)*(H-mt-mb)/(y1-y0),f=v=>v.toFixed(1).replace(".",",");
+  const C={P:"#E10600",B:"#FF3B30",L:"#C9C0BD",PP:"#E10600",PL:"#C9C0BD"},hol=t=>t==="PP"||t==="PL";
+  const nk=Object.keys(P.notas),num=y=>nk.indexOf(y)+1;
+  const mk=(t,x,y)=>{const c=C[t],fl=hol(t)?"#000":c,sw=hol(t)?2:1.5,st=hol(t)?c:"#000";
+    if(t==="P"||t==="PP")return `<circle cx="${x}" cy="${y}" r="5" fill="${fl}" stroke="${st}" stroke-width="${sw}"/>`;
+    if(t==="B")return `<rect x="${x-5}" y="${y-5}" width="10" height="10" fill="${fl}" stroke="${st}" stroke-width="${sw}"/>`;
+    return `<rect x="${x-4.5}" y="${y-4.5}" width="9" height="9" fill="${fl}" stroke="${st}" stroke-width="${sw}" transform="rotate(45 ${x} ${y})"/>`};
+  let g="";for(let v=y0;v<=y1;v+=5)g+=`<line x1="${ml}" x2="${W-mr}" y1="${Y(v)}" y2="${Y(v)}" stroke="#2A1414"/><text x="${ml-8}" y="${Y(v)+4}" text-anchor="end" class="pt">${v}%</text>`;
+  const pts=S.map((d,i)=>{const x=X(i),c=C[d.t],k=num(d.y);
+    return `<g><title>${esc(d.y)} · ${esc(P.tipos[d.t])}: votó el ${f(d.v)}% del padrón; por algún candidato, ${f(d.a)}%</title>
+    <line x1="${x}" x2="${x}" y1="${Y(d.v)}" y2="${Y(d.a)}" stroke="${c}" stroke-width="2" opacity=".55"${hol(d.t)?' stroke-dasharray="3 3"':""}/>
+    <line x1="${x-3}" x2="${x+3}" y1="${Y(d.a)}" y2="${Y(d.a)}" stroke="${c}" stroke-width="2" opacity=".7"/>${mk(d.t,x,Y(d.v))}
+    ${k?`<circle cx="${x}" cy="${Y(d.a)+13}" r="7" fill="#000" stroke="${c}"/><text x="${x}" y="${Y(d.a)+16.5}" text-anchor="middle" class="pn">${k}</text>`:""}
+    <text transform="translate(${x+3.5},${H-mb+8}) rotate(-90)" text-anchor="end" class="pt">${esc(d.y)}</text></g>`}).join("");
+  const lg=Object.keys(P.tipos).map(t=>`<span><svg width="14" height="14" viewBox="-7 -7 14 14">${mk(t,0,0)}</svg>${esc(P.tipos[t])}</span>`).join("")+`<span><svg width="14" height="14"><line x1="7" x2="7" y1="1" y2="13" stroke="#9A8F8C" stroke-width="2"/></svg>Hasta la marca: sin blanco ni nulo</span>`;
+  return `<h2 class="sec">Participación electoral, 1946–2025</h2>
+  <p style="max-width:70ch">Porcentaje del padrón que votó en cada elección nacional (marca) y, con la línea vertical, el que votó por algún candidato, descontados los votos en blanco y nulos. Entre 1946 y 1989 votó en torno al 85 % del padrón; desde entonces la participación baja en todos los tipos de elección. Las legislativas de 2025 tuvieron la más baja de todas las generales de la serie.</p>
+  <div class="plg">${lg}</div>
+  <div class="pbox"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Participación electoral en la Argentina por elección, 1946 a 2025">${g}${pts}</svg></div>
+  <ol class="pnotes">${nk.map(y=>`<li><b>${esc(y)}.</b> ${esc(P.notas[y])}</li>`).join("")}</ol>
+  <details class="ptab"><summary>Ver los datos</summary><table><thead><tr><th>Elección</th><th>Tipo</th><th>Votó (% padrón)</th><th>Blanco y nulo (% emitidos)</th><th>Por algún candidato (% padrón)</th></tr></thead><tbody>
+  ${S.map(d=>`<tr><td>${esc(d.y)}</td><td>${esc(P.tipos[d.t])}</td><td class="mono">${f(d.v)}%</td><td class="mono">${f((1-d.a/d.v)*100)}%</td><td class="mono">${f(d.a)}%</td></tr>`).join("")}</tbody></table></details>
+  <p class="muted" style="font-size:13px">${esc(P.salv)} Fuentes: ${P.fuentes.map(x=>`<a href="${esc(x.u)}" target="_blank" rel="noopener">${esc(x.n)}</a>`).join("; ")}.</p>`;
 }
 function vFriccion(){
   const L=T.friccion.slice().sort((a,b)=>b.nv-a.nv);

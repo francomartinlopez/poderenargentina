@@ -35,6 +35,9 @@ Potencias de `fuente/influencias.py` (lista aprobada por Franco el 19/11/2026: E
 ## Elecciones 2027
 `fuente/elecciones.py`: fecha de la elección provincial, si desdobla (S/N/None), nota y fuente; página «Elecciones». Solo fechas confirmadas o publicadas con fuente; se revisa en cada corte.
 
+## Participación electoral
+`fuente/participacion.py`: serie de participación en las elecciones nacionales desde 1946 (tipo, % del padrón que votó y % que votó por algún candidato), notas, salvedades y fuentes; se muestra como gráfico en la página «Elecciones». Cada elección nacional nueva se agrega en el corte siguiente, con su fuente.
+
 ## Datos duros (paso 2)
 Población: `python3 scripts/importar_censo.py` (INDEC, Censo 2022, cuadro 2 de cada provincia). Exportaciones: informe del INDEC «Origen provincial de las exportaciones» más reciente (semestral o anual; actualizar `PERIODO_EXPORTACIONES`). Recursos propios: ASAP (o la Oficina de Presupuesto del Congreso si ASAP no publica).
 
