@@ -1,7 +1,12 @@
 # Cambios
 
-## 27/11/2026 (Elecciones: participación electoral)
-- Página «Elecciones»: gráfico de la participación electoral en las elecciones nacionales de 1946 a 2025 (presidenciales, balotajes, legislativas y primarias), con el porcentaje del padrón que votó y el que votó por algún candidato, notas de las elecciones clave, tabla de datos, salvedades y fuentes. Serie armada por Franco en `fuente/participacion.py`; el generador la publica en `elecciones.part` de `data/territorio.json`.
+## 27/11/2026 (Marco)
+- Página nueva «Marco» en el menú: el texto completo (el eje internacional desde 1991, la Argentina en ese marco, el largo plazo, lo que se le discute, la tesis, cómo se gobierna, el marco teórico, cómo se mide, resguardos y cómo se lee), editable en `fuente/marco.md`; el generador lo convierte en `data/marco.html`.
+- El gráfico de participación electoral 1946–2025 va dentro del texto del Marco, en «El padrón que se va», y sale de la página «Elecciones».
+- «Plan» sale del menú: es de uso interno. La página sigue disponible en `#plan`.
+
+## 27/11/2026 (participación electoral)
+- Gráfico de la participación electoral en las elecciones nacionales de 1946 a 2025 (presidenciales, balotajes, legislativas y primarias), con el porcentaje del padrón que votó y el que votó por algún candidato, notas de las elecciones clave, tabla de datos, salvedades y fuentes. Serie armada por Franco en `fuente/participacion.py`; el generador la publica en `elecciones.part` de `data/territorio.json`.
 
 ## 25/11/2026 (datos para informes, fechas)
 - Ley 5956 de Catamarca (CAMYEN): fecha de publicación completa, 25/8/2026, según el Digesto provincial (Decreto 890). Con esa fecha queda fuera de la ventana de 90 días de `datos-informe.json`.

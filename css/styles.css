@@ -173,3 +173,8 @@ h2.sec{font:800 22px/1.1 var(--f-d);text-transform:uppercase;letter-spacing:.02e
 .pbox .pt{fill:var(--muted);font:11px var(--f-m)}.pbox .pn{fill:var(--text);font:600 11px var(--f-m)}
 .pnotes{font-size:14px;color:var(--soft);padding-left:22px;margin:12px 0}.pnotes li{margin:4px 0}.pnotes b{color:var(--text);font-weight:600}
 .ptab summary{cursor:pointer;color:var(--rt);margin:6px 0 10px}
+.marco .mtext{max-width:76ch}.marco .mtext p,.marco .mtext li{font:18px/1.62 var(--f-r);color:var(--text)}.marco .mtext p{margin:0 0 14px}
+.marco .mtext h3{font:800 18px/1.2 var(--f-d);text-transform:uppercase;letter-spacing:.03em;color:var(--rt);margin:28px 0 10px}
+.marco .mtext ul{padding-left:20px;margin:0 0 14px}.marco .mtext li{margin:5px 0}.marco .mtext b{font-family:var(--f-u);font-weight:600;font-size:.92em}
+.pfig{margin:22px 0 26px;max-width:none;width:min(1240px,calc(100vw - 2*max(16px,2vw)))}.pfig figcaption{font:15px/1.5 var(--f-u);color:var(--soft);margin-bottom:6px}.pfig figcaption b{color:var(--text)}
+.pfig .pnotes li{font:14px/1.5 var(--f-u)}.pfig p.muted{font:13px/1.5 var(--f-u)!important}

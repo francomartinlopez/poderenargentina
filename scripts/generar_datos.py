@@ -261,11 +261,39 @@ def main():
     meta["rubros"] = normas.RUBROS
     out = dict(corte=CORTE, proxima=PROXIMA, meta=meta, pais=pais, elecciones=elec, provincias=provincias, ciudades=ciudades,
                deppob=poblacion.DEPARTAMENTO, deps=deps, actores=actores, relaciones=relaciones, friccion=fr, zonas=zonas, normas=nor, funcionarios=fun)
+    with open(os.path.join(RAIZ, "fuente", "marco.md")) as f:
+        mh = marco_html(f.read())
+    assert "**" not in mh and mh.count('class="part-slot"') == 1, "Marco: negrita sin cerrar o falta el lugar del gráfico"
+    with open(os.path.join(RAIZ, "data", "marco.html"), "w") as f:
+        f.write(mh + "\n")
     with open(os.path.join(RAIZ, "data", "territorio.json"), "w") as f:
         json.dump(out, f, ensure_ascii=False, separators=(",", ":"))
     import datos_informe
     datos_informe.escribir(out, RAIZ)
     print(f"data/territorio.json: {len(provincias)} provincias, {sum(ndep.values())} departamentos, {len(ciudades)} ciudades, {len(actores)} actores y {len(relaciones)} relaciones, {len(fr)} puntos de fricción, {len(zonas)} zona(s) liberada(s), {len(deps)} fichas de departamento y {len(nor)} normas. Corte {CORTE}.")
+
+
+def marco_html(md):
+    """Convierte fuente/marco.md (títulos ##/###, párrafos, listas con «- », **negrita**, *cursiva* y bloques HTML) en HTML."""
+    import html as H
+    def inl(t):
+        t = H.escape(t, quote=False)
+        t = re.sub(r"\*\*(.+?)\*\*", r"<b>\1</b>", t)
+        return re.sub(r"(?<![\w*])\*(?!\s)(.+?)(?<!\s)\*(?![\w*])", r"<i>\1</i>", t)
+    out = []
+    md = re.sub(r"<!--.*?-->", "", md, flags=re.S)
+    for b in [x.strip() for x in md.split("\n\n") if x.strip()]:
+        if b.startswith("<"):
+            out.append(b)
+        elif b.startswith("### "):
+            out.append(f"<h3>{inl(b[4:])}</h3>")
+        elif b.startswith("## "):
+            out.append(f'<h2 class="sec">{inl(b[3:])}</h2>')
+        elif b.startswith("- "):
+            out.append("<ul>" + "".join(f"<li>{inl(l[2:])}</li>" for l in b.split("\n") if l.startswith("- ")) + "</ul>")
+        else:
+            out.append(f"<p>{inl(' '.join(b.split(chr(10))))}</p>")
+    return "\n".join(out)
 
 
 if __name__ == "__main__":

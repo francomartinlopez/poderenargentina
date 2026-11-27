@@ -35,8 +35,11 @@ Potencias de `fuente/influencias.py` (lista aprobada por Franco el 19/11/2026: E
 ## Elecciones 2027
 `fuente/elecciones.py`: fecha de la elección provincial, si desdobla (S/N/None), nota y fuente; página «Elecciones». Solo fechas confirmadas o publicadas con fuente; se revisa en cada corte.
 
+## Marco
+`fuente/marco.md`: texto de la página «Marco» (títulos ##/###, párrafos, listas con «- », **negrita** y *cursiva*). El generador lo convierte en `data/marco.html`; no se edita el HTML a mano. Las ideas propias de Franco figuran como «estimación propia», sin su nombre ni títulos de sus obras. Lo que está en curso (leyes en trámite, reformas) se escribe en términos potenciales. Mismo trato para oficialismo y oposición. La página «Plan» es de uso interno y no va en el menú.
+
 ## Participación electoral
-`fuente/participacion.py`: serie de participación en las elecciones nacionales desde 1946 (tipo, % del padrón que votó y % que votó por algún candidato), notas, salvedades y fuentes; se muestra como gráfico en la página «Elecciones». Cada elección nacional nueva se agrega en el corte siguiente, con su fuente.
+`fuente/participacion.py`: serie de participación en las elecciones nacionales desde 1946 (tipo, % del padrón que votó y % que votó por algún candidato), notas, salvedades y fuentes; se muestra como gráfico dentro del texto del Marco (en el lugar de `<div class="part-slot"></div>`). Cada elección nacional nueva se agrega en el corte siguiente, con su fuente.
 
 ## Datos duros (paso 2)
 Población: `python3 scripts/importar_censo.py` (INDEC, Censo 2022, cuadro 2 de cada provincia). Exportaciones: informe del INDEC «Origen provincial de las exportaciones» más reciente (semestral o anual; actualizar `PERIODO_EXPORTACIONES`). Recursos propios: ASAP (o la Oficina de Presupuesto del Congreso si ASAP no publica).

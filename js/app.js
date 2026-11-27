@@ -1,3 +1,4 @@
+const VERSION=(document.currentScript&&new URL(document.currentScript.src).searchParams.get("v"))||"";
 // El mapa del poder argentino · aplicación
 {
 const MOT={cap:["Capital","#F5F0E6"],pob:["Ciudad grande","#9A9A9A"],emp:["Empresa o cluster","#FF3B30"],pue:["Puerto","#2F6BFF"],ene:["Energía","#F2A93B"],min:["Minería","#C8743C"],fro:["Frontera","#3FB8C9"],def:["Defensa y estrategia","#9E8CFF"]};
@@ -315,8 +316,7 @@ function vElecciones(){
   <table class="stack"><thead><tr><th>Provincia</th><th>Fecha provincial</th><th>Calendario</th><th>Gobierna</th><th>Alineamiento</th><th>Nota</th></tr></thead><tbody>
   ${L.map(({p,e})=>`<tr><td><a href="#prov-${p.s}">${esc(p.n)}</a></td><td class="mono">${e&&e.f?fd(e.f):"<span class=muted>sin fijar</span>"}</td><td>${e&&e.d?D[e.d]:"<span class=muted>sin definir</span>"}</td><td>${esc(p.gob)} <span class="muted">(${esc(p.par)})</span></td><td>${esc(T.meta.alineamiento[p.ali.ali]||"")}</td><td>${e?esc(e.x)+` <a href="${esc(e.u)}" target="_blank" rel="noopener">Fuente</a>`:""}</td></tr>`).join("")}
   </tbody></table>
-  <p class="muted" style="font-size:13px">Se actualiza en cada corte y después de cada convocatoria. Solo fechas confirmadas por la provincia o publicadas con fuente.</p>
-  ${E.part?partHTML(E.part):""}</div>`;
+  <p class="muted" style="font-size:13px">Se actualiza en cada corte y después de cada convocatoria. Solo fechas confirmadas por la provincia o publicadas con fuente.</p></div>`;
 }
 function partHTML(P){
   const S=P.serie,W=1000,H=450,ml=46,mr=14,mt=14,mb=98,y0=50,y1=95,n=S.length;
@@ -335,14 +335,21 @@ function partHTML(P){
     ${k?`<circle cx="${x}" cy="${Y(d.a)+13}" r="7" fill="#000" stroke="${c}"/><text x="${x}" y="${Y(d.a)+16.5}" text-anchor="middle" class="pn">${k}</text>`:""}
     <text transform="translate(${x+3.5},${H-mb+8}) rotate(-90)" text-anchor="end" class="pt">${esc(d.y)}</text></g>`}).join("");
   const lg=Object.keys(P.tipos).map(t=>`<span><svg width="14" height="14" viewBox="-7 -7 14 14">${mk(t,0,0)}</svg>${esc(P.tipos[t])}</span>`).join("")+`<span><svg width="14" height="14"><line x1="7" x2="7" y1="1" y2="13" stroke="#9A8F8C" stroke-width="2"/></svg>Hasta la marca: sin blanco ni nulo</span>`;
-  return `<h2 class="sec">Participación electoral, 1946–2025</h2>
-  <p style="max-width:70ch">Porcentaje del padrón que votó en cada elección nacional (marca) y, con la línea vertical, el que votó por algún candidato, descontados los votos en blanco y nulos. Entre 1946 y 1989 votó en torno al 85 % del padrón; desde entonces la participación baja en todos los tipos de elección. Las legislativas de 2025 tuvieron la más baja de todas las generales de la serie.</p>
+  return `<figure class="pfig"><figcaption><b>Participación electoral en las elecciones nacionales, 1946–2025.</b> Porcentaje del padrón que votó en cada elección (marca) y, con la línea vertical, el que votó por algún candidato, descontados los votos en blanco y nulos.</figcaption>
   <div class="plg">${lg}</div>
   <div class="pbox"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Participación electoral en la Argentina por elección, 1946 a 2025">${g}${pts}</svg></div>
   <ol class="pnotes">${nk.map(y=>`<li><b>${esc(y)}.</b> ${esc(P.notas[y])}</li>`).join("")}</ol>
   <details class="ptab"><summary>Ver los datos</summary><table><thead><tr><th>Elección</th><th>Tipo</th><th>Votó (% padrón)</th><th>Blanco y nulo (% emitidos)</th><th>Por algún candidato (% padrón)</th></tr></thead><tbody>
   ${S.map(d=>`<tr><td>${esc(d.y)}</td><td>${esc(P.tipos[d.t])}</td><td class="mono">${f(d.v)}%</td><td class="mono">${f((1-d.a/d.v)*100)}%</td><td class="mono">${f(d.a)}%</td></tr>`).join("")}</tbody></table></details>
-  <p class="muted" style="font-size:13px">${esc(P.salv)} Fuentes: ${P.fuentes.map(x=>`<a href="${esc(x.u)}" target="_blank" rel="noopener">${esc(x.n)}</a>`).join("; ")}.</p>`;
+  <p class="muted" style="font-size:13px">${esc(P.salv)} Fuentes: ${P.fuentes.map(x=>`<a href="${esc(x.u)}" target="_blank" rel="noopener">${esc(x.n)}</a>`).join("; ")}.</p></figure>`;
+}
+let MARCO=null;
+function vMarco(){
+  const pinta=h=>{app.innerHTML=`<div class="page marco"><h1>Marco</h1><p class="sub">La lectura del orden internacional y de la Argentina desde la que se arma el mapa, la teoría que usa y cómo mide el poder.</p><div class="mtext">${h}</div></div>`;
+    const sl=app.querySelector(".part-slot");if(sl&&T.elecciones.part)sl.outerHTML=partHTML(T.elecciones.part)};
+  if(MARCO)return pinta(MARCO);
+  app.innerHTML=`<p class="muted" style="padding:40px 0">Cargando el marco…</p>`;
+  fetch("data/marco.html?v="+encodeURIComponent(T.corte+"-"+VERSION)).then(r=>r.text()).then(h=>{MARCO=h;if(location.hash==="#marco")pinta(h)});
 }
 function vFriccion(){
   const L=T.friccion.slice().sort((a,b)=>b.nv-a.nv);
@@ -439,12 +446,13 @@ function route(){
   else if(h==="actores"){vActores();nk=h;svg=null}
   else if(h==="friccion"){vFriccion();nk=h;svg=null}
   else if(h==="elecciones"){vElecciones();nk=h;svg=null}
+  else if(h==="marco"){vMarco();nk=h;svg=null}
   else if(h==="normas"||h.startsWith("normas-")){vNormas(h.slice(7));nk="normas";svg=null}
   else if(h.startsWith("f-")&&FR[h.slice(2)]){vFr(FR[h.slice(2)]);nk="friccion";svg=null}
   else if(h.startsWith("a-")&&ACT[h.slice(2)]){vActor(ACT[h.slice(2)]);nk="actores";svg=null}
   else vPais();
   document.querySelectorAll("nav a").forEach(a=>a.classList.toggle("on",a.dataset.k===nk));
-  if(["provincias","ciudades","plan","actores","friccion","elecciones"].includes(nk)||(nk==="normas"&&route.prev!=="normas"))window.scrollTo(0,0);
+  if(["provincias","ciudades","plan","actores","friccion","elecciones","marco"].includes(nk)||(nk==="normas"&&route.prev!=="normas"))window.scrollTo(0,0);
   route.prev=nk;
 }
 Promise.all(["data/territorio.json","data/provincias.json","data/antartida.json"].map(u=>fetch(u).then(r=>r.json()))).then(([t,pt,an])=>{
